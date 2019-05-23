@@ -16,6 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let swiftVC = IPViewController(fetcher: SwiftIPFetcher())
+        swiftVC.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
+        let ocVC = IPViewController(fetcher: OCIPFetcher())
+        ocVC.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 1)
+        let tabBarVC = UITabBarController()
+        tabBarVC.viewControllers = [UINavigationController(rootViewController: swiftVC),
+                                    UINavigationController(rootViewController: ocVC)]
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        self.window = window
+        window.rootViewController = tabBarVC
+        window.makeKeyAndVisible()
         return true
     }
 

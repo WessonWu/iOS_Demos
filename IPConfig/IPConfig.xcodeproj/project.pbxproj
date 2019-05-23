@@ -8,24 +8,92 @@
 
 /* Begin PBXBuildFile section */
 		0A027B1D22968DF9004C0350 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B1C22968DF9004C0350 /* AppDelegate.swift */; };
-		0A027B1F22968DF9004C0350 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B1E22968DF9004C0350 /* ViewController.swift */; };
-		0A027B2222968DF9004C0350 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A027B2022968DF9004C0350 /* Main.storyboard */; };
+		0A027B1F22968DF9004C0350 /* IPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B1E22968DF9004C0350 /* IPViewController.swift */; };
 		0A027B2422968DFB004C0350 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A027B2322968DFB004C0350 /* Assets.xcassets */; };
 		0A027B2722968DFB004C0350 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A027B2522968DFB004C0350 /* LaunchScreen.storyboard */; };
+		0A027B5A22968F47004C0350 /* IPConfig_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A027B5822968F47004C0350 /* IPConfig_Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A027B5D22968F47004C0350 /* IPConfig_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A027B5622968F46004C0350 /* IPConfig_Swift.framework */; };
+		0A027B5E22968F47004C0350 /* IPConfig_Swift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A027B5622968F46004C0350 /* IPConfig_Swift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A027B6C22968F5E004C0350 /* IPConfig_OC.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A027B6A22968F5E004C0350 /* IPConfig_OC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A027B6F22968F5E004C0350 /* IPConfig_OC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A027B6822968F5E004C0350 /* IPConfig_OC.framework */; };
+		0A027B7022968F5E004C0350 /* IPConfig_OC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A027B6822968F5E004C0350 /* IPConfig_OC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A027B7522968F91004C0350 /* IPConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B7422968F91004C0350 /* IPConfig.swift */; };
+		0A027B77229692B5004C0350 /* IPValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B76229692B5004C0350 /* IPValue.swift */; };
+		0A027B7B2296C75E004C0350 /* IPItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B7A2296C75E004C0350 /* IPItem.swift */; };
+		0A027B7D2296C8C6004C0350 /* SwiftIPFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B7C2296C8C6004C0350 /* SwiftIPFetcher.swift */; };
+		0A027B7F2296CB09004C0350 /* OCIPFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B7E2296CB09004C0350 /* OCIPFetcher.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0A027B5B22968F47004C0350 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A027B1122968DF9004C0350 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A027B5522968F46004C0350;
+			remoteInfo = IPConfig_Swift;
+		};
+		0A027B6D22968F5E004C0350 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A027B1122968DF9004C0350 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A027B6722968F5E004C0350;
+			remoteInfo = IPConfig_OC;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0A027B6222968F47004C0350 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0A027B5E22968F47004C0350 /* IPConfig_Swift.framework in Embed Frameworks */,
+				0A027B7022968F5E004C0350 /* IPConfig_OC.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0A027B1922968DF9004C0350 /* IPConfig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IPConfig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A027B1C22968DF9004C0350 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0A027B1E22968DF9004C0350 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0A027B2122968DF9004C0350 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0A027B1E22968DF9004C0350 /* IPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPViewController.swift; sourceTree = "<group>"; };
 		0A027B2322968DFB004C0350 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A027B2622968DFB004C0350 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A027B2822968DFB004C0350 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A027B5622968F46004C0350 /* IPConfig_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IPConfig_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A027B5822968F47004C0350 /* IPConfig_Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPConfig_Swift.h; sourceTree = "<group>"; };
+		0A027B5922968F47004C0350 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A027B6822968F5E004C0350 /* IPConfig_OC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IPConfig_OC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A027B6A22968F5E004C0350 /* IPConfig_OC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPConfig_OC.h; sourceTree = "<group>"; };
+		0A027B6B22968F5E004C0350 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A027B7422968F91004C0350 /* IPConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPConfig.swift; sourceTree = "<group>"; };
+		0A027B76229692B5004C0350 /* IPValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPValue.swift; sourceTree = "<group>"; };
+		0A027B7A2296C75E004C0350 /* IPItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPItem.swift; sourceTree = "<group>"; };
+		0A027B7C2296C8C6004C0350 /* SwiftIPFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftIPFetcher.swift; sourceTree = "<group>"; };
+		0A027B7E2296CB09004C0350 /* OCIPFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCIPFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		0A027B1622968DF9004C0350 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A027B5D22968F47004C0350 /* IPConfig_Swift.framework in Frameworks */,
+				0A027B6F22968F5E004C0350 /* IPConfig_OC.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A027B5322968F46004C0350 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A027B6522968F5E004C0350 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				0A027B1B22968DF9004C0350 /* IPConfig */,
+				0A027B5722968F47004C0350 /* IPConfig_Swift */,
+				0A027B6922968F5E004C0350 /* IPConfig_OC */,
 				0A027B1A22968DF9004C0350 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				0A027B1922968DF9004C0350 /* IPConfig.app */,
+				0A027B5622968F46004C0350 /* IPConfig_Swift.framework */,
+				0A027B6822968F5E004C0350 /* IPConfig_OC.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,16 +127,57 @@
 			isa = PBXGroup;
 			children = (
 				0A027B1C22968DF9004C0350 /* AppDelegate.swift */,
-				0A027B1E22968DF9004C0350 /* ViewController.swift */,
-				0A027B2022968DF9004C0350 /* Main.storyboard */,
+				0A027B1E22968DF9004C0350 /* IPViewController.swift */,
 				0A027B2322968DFB004C0350 /* Assets.xcassets */,
 				0A027B2522968DFB004C0350 /* LaunchScreen.storyboard */,
 				0A027B2822968DFB004C0350 /* Info.plist */,
+				0A027B7A2296C75E004C0350 /* IPItem.swift */,
+				0A027B7C2296C8C6004C0350 /* SwiftIPFetcher.swift */,
+				0A027B7E2296CB09004C0350 /* OCIPFetcher.swift */,
 			);
 			path = IPConfig;
 			sourceTree = "<group>";
 		};
+		0A027B5722968F47004C0350 /* IPConfig_Swift */ = {
+			isa = PBXGroup;
+			children = (
+				0A027B5822968F47004C0350 /* IPConfig_Swift.h */,
+				0A027B5922968F47004C0350 /* Info.plist */,
+				0A027B7422968F91004C0350 /* IPConfig.swift */,
+				0A027B76229692B5004C0350 /* IPValue.swift */,
+			);
+			path = IPConfig_Swift;
+			sourceTree = "<group>";
+		};
+		0A027B6922968F5E004C0350 /* IPConfig_OC */ = {
+			isa = PBXGroup;
+			children = (
+				0A027B6A22968F5E004C0350 /* IPConfig_OC.h */,
+				0A027B6B22968F5E004C0350 /* Info.plist */,
+			);
+			path = IPConfig_OC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0A027B5122968F46004C0350 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A027B5A22968F47004C0350 /* IPConfig_Swift.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A027B6322968F5E004C0350 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A027B6C22968F5E004C0350 /* IPConfig_OC.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		0A027B1822968DF9004C0350 /* IPConfig */ = {
@@ -74,15 +187,54 @@
 				0A027B1522968DF9004C0350 /* Sources */,
 				0A027B1622968DF9004C0350 /* Frameworks */,
 				0A027B1722968DF9004C0350 /* Resources */,
+				0A027B6222968F47004C0350 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0A027B5C22968F47004C0350 /* PBXTargetDependency */,
+				0A027B6E22968F5E004C0350 /* PBXTargetDependency */,
 			);
 			name = IPConfig;
 			productName = IPConfig;
 			productReference = 0A027B1922968DF9004C0350 /* IPConfig.app */;
 			productType = "com.apple.product-type.application";
+		};
+		0A027B5522968F46004C0350 /* IPConfig_Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A027B6122968F47004C0350 /* Build configuration list for PBXNativeTarget "IPConfig_Swift" */;
+			buildPhases = (
+				0A027B5122968F46004C0350 /* Headers */,
+				0A027B5222968F46004C0350 /* Sources */,
+				0A027B5322968F46004C0350 /* Frameworks */,
+				0A027B5422968F46004C0350 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IPConfig_Swift;
+			productName = IPConfig_Swift;
+			productReference = 0A027B5622968F46004C0350 /* IPConfig_Swift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0A027B6722968F5E004C0350 /* IPConfig_OC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A027B7122968F5E004C0350 /* Build configuration list for PBXNativeTarget "IPConfig_OC" */;
+			buildPhases = (
+				0A027B6322968F5E004C0350 /* Headers */,
+				0A027B6422968F5E004C0350 /* Sources */,
+				0A027B6522968F5E004C0350 /* Frameworks */,
+				0A027B6622968F5E004C0350 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IPConfig_OC;
+			productName = IPConfig_OC;
+			productReference = 0A027B6822968F5E004C0350 /* IPConfig_OC.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -95,6 +247,13 @@
 				ORGANIZATIONNAME = cn.wessonwu;
 				TargetAttributes = {
 					0A027B1822968DF9004C0350 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					0A027B5522968F46004C0350 = {
+						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
+					};
+					0A027B6722968F5E004C0350 = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
 				};
@@ -113,6 +272,8 @@
 			projectRoot = "";
 			targets = (
 				0A027B1822968DF9004C0350 /* IPConfig */,
+				0A027B5522968F46004C0350 /* IPConfig_Swift */,
+				0A027B6722968F5E004C0350 /* IPConfig_OC */,
 			);
 		};
 /* End PBXProject section */
@@ -124,7 +285,20 @@
 			files = (
 				0A027B2722968DFB004C0350 /* LaunchScreen.storyboard in Resources */,
 				0A027B2422968DFB004C0350 /* Assets.xcassets in Resources */,
-				0A027B2222968DF9004C0350 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A027B5422968F46004C0350 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A027B6622968F5E004C0350 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,22 +309,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A027B1F22968DF9004C0350 /* ViewController.swift in Sources */,
+				0A027B7F2296CB09004C0350 /* OCIPFetcher.swift in Sources */,
+				0A027B7B2296C75E004C0350 /* IPItem.swift in Sources */,
+				0A027B7D2296C8C6004C0350 /* SwiftIPFetcher.swift in Sources */,
+				0A027B1F22968DF9004C0350 /* IPViewController.swift in Sources */,
 				0A027B1D22968DF9004C0350 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A027B5222968F46004C0350 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A027B77229692B5004C0350 /* IPValue.swift in Sources */,
+				0A027B7522968F91004C0350 /* IPConfig.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A027B6422968F5E004C0350 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		0A027B2022968DF9004C0350 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0A027B2122968DF9004C0350 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
+/* Begin PBXTargetDependency section */
+		0A027B5C22968F47004C0350 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0A027B5522968F46004C0350 /* IPConfig_Swift */;
+			targetProxy = 0A027B5B22968F47004C0350 /* PBXContainerItemProxy */;
 		};
+		0A027B6E22968F5E004C0350 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0A027B6722968F5E004C0350 /* IPConfig_OC */;
+			targetProxy = 0A027B6D22968F5E004C0350 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
 		0A027B2522968DFB004C0350 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -281,6 +479,7 @@
 		0A027B2C22968DFB004C0350 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S5VDKR9N5R;
@@ -299,6 +498,7 @@
 		0A027B2D22968DFB004C0350 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S5VDKR9N5R;
@@ -311,6 +511,123 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0A027B5F22968F47004C0350 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S5VDKR9N5R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = IPConfig_Swift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.wessonwu.demos.IPConfig-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0A027B6022968F47004C0350 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S5VDKR9N5R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = IPConfig_Swift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.wessonwu.demos.IPConfig-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0A027B7222968F5E004C0350 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S5VDKR9N5R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = IPConfig_OC/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.wessonwu.demos.IPConfig-OC";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0A027B7322968F5E004C0350 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S5VDKR9N5R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = IPConfig_OC/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.wessonwu.demos.IPConfig-OC";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -331,6 +648,24 @@
 			buildConfigurations = (
 				0A027B2C22968DFB004C0350 /* Debug */,
 				0A027B2D22968DFB004C0350 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A027B6122968F47004C0350 /* Build configuration list for PBXNativeTarget "IPConfig_Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A027B5F22968F47004C0350 /* Debug */,
+				0A027B6022968F47004C0350 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A027B7122968F5E004C0350 /* Build configuration list for PBXNativeTarget "IPConfig_OC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A027B7222968F5E004C0350 /* Debug */,
+				0A027B7322968F5E004C0350 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
