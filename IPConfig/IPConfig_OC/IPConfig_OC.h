@@ -16,4 +16,5 @@ FOUNDATION_EXPORT const unsigned char IPConfig_OCVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <IPConfig_OC/PublicHeader.h>
 
+#import <IPConfig_OC/WXIPConfig.h>
 

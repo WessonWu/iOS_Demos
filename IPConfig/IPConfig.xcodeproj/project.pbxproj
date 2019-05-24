@@ -22,6 +22,9 @@
 		0A027B7B2296C75E004C0350 /* IPItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B7A2296C75E004C0350 /* IPItem.swift */; };
 		0A027B7D2296C8C6004C0350 /* SwiftIPFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B7C2296C8C6004C0350 /* SwiftIPFetcher.swift */; };
 		0A027B7F2296CB09004C0350 /* OCIPFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B7E2296CB09004C0350 /* OCIPFetcher.swift */; };
+		0A027B82229779CA004C0350 /* WXIPConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A027B80229779CA004C0350 /* WXIPConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A027B83229779CA004C0350 /* WXIPConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A027B81229779CA004C0350 /* WXIPConfig.m */; };
+		0A027B852297923E004C0350 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A027B842297923E004C0350 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +77,9 @@
 		0A027B7A2296C75E004C0350 /* IPItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPItem.swift; sourceTree = "<group>"; };
 		0A027B7C2296C8C6004C0350 /* SwiftIPFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftIPFetcher.swift; sourceTree = "<group>"; };
 		0A027B7E2296CB09004C0350 /* OCIPFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCIPFetcher.swift; sourceTree = "<group>"; };
+		0A027B80229779CA004C0350 /* WXIPConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXIPConfig.h; sourceTree = "<group>"; };
+		0A027B81229779CA004C0350 /* WXIPConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WXIPConfig.m; sourceTree = "<group>"; };
+		0A027B842297923E004C0350 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +140,7 @@
 				0A027B7A2296C75E004C0350 /* IPItem.swift */,
 				0A027B7C2296C8C6004C0350 /* SwiftIPFetcher.swift */,
 				0A027B7E2296CB09004C0350 /* OCIPFetcher.swift */,
+				0A027B842297923E004C0350 /* Main.storyboard */,
 			);
 			path = IPConfig;
 			sourceTree = "<group>";
@@ -154,6 +161,8 @@
 			children = (
 				0A027B6A22968F5E004C0350 /* IPConfig_OC.h */,
 				0A027B6B22968F5E004C0350 /* Info.plist */,
+				0A027B80229779CA004C0350 /* WXIPConfig.h */,
+				0A027B81229779CA004C0350 /* WXIPConfig.m */,
 			);
 			path = IPConfig_OC;
 			sourceTree = "<group>";
@@ -174,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A027B6C22968F5E004C0350 /* IPConfig_OC.h in Headers */,
+				0A027B82229779CA004C0350 /* WXIPConfig.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A027B852297923E004C0350 /* Main.storyboard in Resources */,
 				0A027B2722968DFB004C0350 /* LaunchScreen.storyboard in Resources */,
 				0A027B2422968DFB004C0350 /* Assets.xcassets in Resources */,
 			);
@@ -330,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A027B83229779CA004C0350 /* WXIPConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

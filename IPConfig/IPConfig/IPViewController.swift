@@ -11,43 +11,35 @@ import UIKit
 protocol IPFetcher {
     var title: String? { get }
     func fetch() -> [IPItem]
+    var text: String? { get }
 }
 
 class IPViewController: UIViewController {
     
-    lazy var tableView: UITableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var textView: UITextView!
+    
     var items: [IPItem] = []
     var fetcher: IPFetcher?
     
-    convenience init(fetcher: IPFetcher) {
-        self.init()
-        self.fetcher = fetcher
-    }
-    
-    override func loadView() {
-        super.loadView()
-        self.view.backgroundColor = UIColor.groupTableViewBackground
-        tableView.backgroundColor = UIColor.groupTableViewBackground
-        tableView.frame = self.view.bounds
-        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.view.addSubview(tableView)
+    class func newInstanceWithFetcher(_ fetcher: IPFetcher) -> IPViewController {
+        let sb = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = sb.instantiateInitialViewController() as! IPViewController
+        vc.fetcher = fetcher
+        return vc
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = fetcher?.title
-        tableView.dataSource = self
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
-                                                                 target: self,
-                                                                 action: #selector(reloadData))
         reloadData()
     }
     
     
-    @objc
-    private func reloadData() {
+    @IBAction func reloadData() {
         if let items = fetcher?.fetch() {
             self.items = items
+            self.textView.text = fetcher?.text
             self.tableView.reloadData()
         }
     }

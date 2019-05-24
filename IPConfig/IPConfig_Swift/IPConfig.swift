@@ -9,6 +9,10 @@
 import Foundation
 
 public class IPConfig {
+    public static let Wifi = "en0"
+    public static let Cellular = "pdp_ip0"
+    public static let VPN = "utun0"
+    
     public class func getAllIPs() -> IPMap {
         var ips: IPMap = [:]
         var interfaces: UnsafeMutablePointer<ifaddrs>? = nil
@@ -36,5 +40,9 @@ public class IPConfig {
             temp_interface = interface.pointee.ifa_next
         }
         return ips
+    }
+    
+    public class func getIPWithKey(_ key: IPMapKey) -> IPValue? {
+        return getAllIPs()[key]
     }
 }
