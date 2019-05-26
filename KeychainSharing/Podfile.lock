@@ -1,0 +1,16 @@
+PODS:
+  - KeychainAccess (3.2.0)
+
+DEPENDENCIES:
+  - KeychainAccess (~> 3.2.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - KeychainAccess
+
+SPEC CHECKSUMS:
+  KeychainAccess: 3b1bf8a77eb4c6ea1ce9404c292e48f948954c6b
+
+PODFILE CHECKSUM: 8fbeb37426b1945e1f70971207153b32a5db15d8
+
+COCOAPODS: 1.6.1

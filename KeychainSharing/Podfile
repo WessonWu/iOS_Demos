@@ -1,0 +1,7 @@
+platform :ios, '10.0'
+
+abstract_target 'Keychain' do
+   pod 'KeychainAccess', '~> 3.2.0'
+   target 'KeychainShareApp1'
+   target 'KeychainShareApp2'
+end
