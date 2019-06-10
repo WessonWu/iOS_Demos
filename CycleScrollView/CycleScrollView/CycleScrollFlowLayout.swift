@@ -31,7 +31,7 @@ class CycleScrollFlowLayout: UICollectionViewFlowLayout {
         let virtualSpacing = self.itemSize.width * deltaScale * 0.5 - visibleSpacing
         self.minimumInteritemSpacing = 0
         self.minimumLineSpacing = -virtualSpacing
-        self.sectionInset = .zero
+        self.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: minimumLineSpacing)
     }
     
     
@@ -72,7 +72,7 @@ class CycleScrollFlowLayout: UICollectionViewFlowLayout {
         let contentInset = cv.contentInset
         let contentOffset = cv.contentOffset
         let totalWidth = itemSize.width + minimumLineSpacing
-        let numberOfItems = cv.numberOfItems(inSection: 0)
+        let numberOfItems: Int = (0 ..< cv.numberOfSections).reduce(0) { $0 + cv.numberOfItems(inSection: $1) }
         let index = max(0, min((contentOffset.x + contentInset.left) / totalWidth, CGFloat(numberOfItems - 1)))
         
         let rule: FloatingPointRoundingRule
