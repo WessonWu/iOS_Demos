@@ -14,145 +14,53 @@ class ViewController: UIViewController {
     var images: [URL] = []
     
     
-    lazy var collectionView: UICollectionView = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: CycleScrollFlowLayout())
-    
-    var autoScrollTimer: Timer?
+    lazy var carouselView: CarouselView = CarouselView()
     
     override func loadView() {
         super.loadView()
         
-        collectionView.frame = CGRect(x: 0, y: 88, width: self.view.bounds.width, height: 200)
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
-        self.view.addSubview(collectionView)
+        carouselView.frame = CGRect(x: 0, y: 88, width: self.view.bounds.width, height: 200)
+        carouselView.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+        self.view.addSubview(carouselView)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        collectionView.backgroundColor = UIColor.cyan
-        collectionView.register(CycleScrollViewItemCell.self, forCellWithReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier)
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.decelerationRate = .fast
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        
-        
+        carouselView.backgroundColor = UIColor.cyan
         images = [URL(string: "http://pic37.nipic.com/20140113/8800276_184927469000_2.png")!,
                   URL(string: "http://k.zol-img.com.cn/sjbbs/7692/a7691515_s.jpg")!,
                   URL(string: "http://pic15.nipic.com/20110628/1369025_192645024000_2.jpg")!,
                   URL(string: "http://pic18.nipic.com/20120204/8339340_144203764154_2.jpg")!,
                   URL(string: "http://pic40.nipic.com/20140331/9469669_142840860000_2.jpg")!]
-        
-        scrollToCenterAt(index: 0, animated: false)
+        carouselView.collectionView.register(CycleScrollViewItemCell.self,
+                                             forCellWithReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier)
+        carouselView.dataSource = self
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fireAutoScrollTimer()
+        carouselView.startAutoScroller()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        invalidateAutoScrollTimer()
-    }
-    
-    
-    func scrollToCenterAt(index: Int, animated: Bool) {
-        let indexPath = IndexPath(item: index, section: collectionView.numberOfSections / 2)
-        guard indexPath.section < collectionView.numberOfSections
-            && indexPath.item < collectionView.numberOfItems(inSection: indexPath.section) else {
-            return
-        }
-        
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
-    }
-    
-    
-    @objc
-    private func autoScrollTick() {
-        let bounds = collectionView.bounds
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        guard let indexPath = collectionView.indexPathForItem(at: center) else {
-            return
-        }
-        
-        let numberOfSections = collectionView.numberOfSections
-        let numberOfItems = collectionView.numberOfItems(inSection: indexPath.section)
-        let section = (indexPath.section + (indexPath.item + 1) / numberOfItems) % numberOfSections
-        let item = (indexPath.item + 1) % collectionView.numberOfItems(inSection: section)
-        
-        collectionView.scrollToItem(at: IndexPath(item: item, section: section), at: .centeredHorizontally, animated: true)
-    }
-    
-    
-    private func fireAutoScrollTimer() {
-        guard self.autoScrollTimer == nil else {
-            return
-        }
-        let timer = Timer(timeInterval: 3,
-                         target: self,
-                         selector: #selector(autoScrollTick),
-                         userInfo: nil,
-                         repeats: true)
-        self.autoScrollTimer = timer
-        timer.fireDate = Date(timeIntervalSinceNow: 3)
-        RunLoop.main.add(timer, forMode: .common)
-    }
-    
-    private func invalidateAutoScrollTimer() {
-        self.autoScrollTimer?.invalidate()
-        self.autoScrollTimer = nil
-    }
-    
-    
-    private func pauseAutoScrollTimer() {
-        self.autoScrollTimer?.fireDate = .distantFuture
-    }
-    
-    private func resumeAutoScrollTimer() {
-        self.autoScrollTimer?.fireDate = Date(timeIntervalSinceNow: 3)
-    }
+        carouselView.stopAutoScroller()
+    } 
 }
 
-extension ViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension ViewController: CarouselDataSource {
+    func numberOfItems(in carouselView: CarouselView) -> Int {
         return images.count
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier, for: indexPath) as! CycleScrollViewItemCell
-        let imageURL = images[indexPath.item]
+    func carouselView(_ carouselView: CarouselView, cellForItemAt index: Int) -> UICollectionViewCell {
+        let cell = carouselView.dequeueReusableCell(withReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier, for: index) as! CycleScrollViewItemCell
+        let imageURL = images[index]
         cell.imageView.kf.setImage(with: imageURL)
         return cell
-    }
-}
-
-extension ViewController: UICollectionViewDelegateFlowLayout {
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        let bounds = scrollView.bounds
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        guard let indexPath = collectionView.indexPathForItem(at: center) else {
-            return
-        }
-        scrollToCenterAt(index: indexPath.item, animated: false)
-        
-        resumeAutoScrollTimer()
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        scrollViewDidEndScrollingAnimation(scrollView)
-    }
-    
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        pauseAutoScrollTimer()
     }
 }
 

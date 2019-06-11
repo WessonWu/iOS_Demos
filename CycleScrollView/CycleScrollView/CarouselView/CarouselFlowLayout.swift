@@ -1,21 +1,21 @@
 //
-//  CycleScrollFlowLayout.swift
+//  CarouselFlowLayout.swift
 //  CycleScrollView
 //
-//  Created by wuweixin on 2019/6/10.
+//  Created by wuweixin on 2019/6/11.
 //  Copyright © 2019 cn.wessonwu. All rights reserved.
 //
 
 import UIKit
 
-class CycleScrollFlowLayout: UICollectionViewFlowLayout {
+/// 不要试图去修改原来UICollectionViewFlowLayout的属性，因为会失效
+public class CarouselFlowLayout: UICollectionViewFlowLayout {
+    public var minimumScale: CGFloat = 0.85
+    public var maximumScale: CGFloat = 1
+    public var contentInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+    public var visibleSpacing: CGFloat = 12
     
-    var minimumScale: CGFloat = 0.8
-    var maximumScale: CGFloat = 1
-    var contentInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
-    var visibleSpacing: CGFloat = 12
-    
-    override func prepare() {
+    public override func prepare() {
         super.prepare()
         
         guard let cv = collectionView else {
@@ -31,11 +31,11 @@ class CycleScrollFlowLayout: UICollectionViewFlowLayout {
         let virtualSpacing = self.itemSize.width * deltaScale * 0.5 - visibleSpacing
         self.minimumInteritemSpacing = 0
         self.minimumLineSpacing = -virtualSpacing
-        self.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: minimumLineSpacing)
+        self.sectionInset = .zero
     }
     
     
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    public override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let layoutAttributes = super.layoutAttributesForElements(in: rect) else {
             return nil
         }
@@ -56,15 +56,15 @@ class CycleScrollFlowLayout: UICollectionViewFlowLayout {
         return layoutAttributes
     }
     
-    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+    public override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
     
-    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+    public override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
         return self.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: .zero)
     }
     
-    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+    public override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let cv = collectionView else {
             return super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity)
         }
@@ -86,3 +86,4 @@ class CycleScrollFlowLayout: UICollectionViewFlowLayout {
         return CGPoint(x: index.rounded(rule) * totalWidth - contentInset.left, y: contentOffset.y)
     }
 }
+
