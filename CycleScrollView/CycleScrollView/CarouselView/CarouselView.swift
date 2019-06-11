@@ -14,7 +14,7 @@ public protocol CarouselDataSource: AnyObject {
 }
 
 public class CarouselView: UIView {
-    public let collectionView: UICollectionView
+    private let collectionView: UICollectionView
     private var autoScrollTimer: Timer?
     
     /// 自动滚动时间间隔
@@ -60,6 +60,10 @@ public class CarouselView: UIView {
         }
         let indexPath = IndexPath(item: index, section: listView.numberOfSections / 2)
         listView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+    }
+    
+    public func setupCollectionView(_ setter: (UICollectionView) -> Void) {
+        setter(collectionView)
     }
 }
 

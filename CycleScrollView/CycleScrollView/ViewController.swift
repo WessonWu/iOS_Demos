@@ -34,8 +34,17 @@ class ViewController: UIViewController {
                   URL(string: "http://pic15.nipic.com/20110628/1369025_192645024000_2.jpg")!,
                   URL(string: "http://pic18.nipic.com/20120204/8339340_144203764154_2.jpg")!,
                   URL(string: "http://pic40.nipic.com/20140331/9469669_142840860000_2.jpg")!]
-        carouselView.collectionView.register(CycleScrollViewItemCell.self,
-                                             forCellWithReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier)
+        
+        carouselView.setupCollectionView { (collectionView) in
+            guard let flowLayout = collectionView.collectionViewLayout as? CarouselFlowLayout else {
+                return
+            }
+            
+            flowLayout.padding = UIEdgeInsets(top: 8, left: 40, bottom: 8, right: 40)
+            flowLayout.spacing = 8
+        }
+        carouselView.register(CycleScrollViewItemCell.self,
+                              forCellWithReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier)
         carouselView.dataSource = self
     }
     

@@ -12,8 +12,8 @@ import UIKit
 public class CarouselFlowLayout: UICollectionViewFlowLayout {
     public var minimumScale: CGFloat = 0.85
     public var maximumScale: CGFloat = 1
-    public var contentInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
-    public var visibleSpacing: CGFloat = 12
+    public var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+    public var spacing: CGFloat = 12
     
     public override func prepare() {
         super.prepare()
@@ -22,13 +22,13 @@ public class CarouselFlowLayout: UICollectionViewFlowLayout {
             return
         }
         
-        let contentInset = self.contentInset
-        let visibleSpacing = self.visibleSpacing
+        let padding = self.padding
+        let spacing = self.spacing
         let deltaScale = self.maximumScale - self.minimumScale
-        cv.contentInset = contentInset
+        cv.contentInset = padding
         self.scrollDirection = .horizontal
-        self.itemSize = cv.frame.inset(by: contentInset).size
-        let virtualSpacing = self.itemSize.width * deltaScale * 0.5 - visibleSpacing
+        self.itemSize = cv.frame.inset(by: padding).size
+        let virtualSpacing = self.itemSize.width * deltaScale * 0.5 - spacing
         self.minimumInteritemSpacing = 0
         self.minimumLineSpacing = -virtualSpacing
         self.sectionInset = .zero
@@ -50,6 +50,7 @@ public class CarouselFlowLayout: UICollectionViewFlowLayout {
                 let distanceX = abs(attrs.center.x - midX - self.minimumInteritemSpacing)
                 let scale = min(max(minimumScale, maximumScale - distanceX / visibleRect.width * deltaScale), maximumScale)
                 attrs.transform3D = CATransform3DMakeScale(scale, scale, 1)
+                attrs.zIndex = Int((scale * 10).rounded(.down))
             }
         }
         
