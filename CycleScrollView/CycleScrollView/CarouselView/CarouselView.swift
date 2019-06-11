@@ -8,28 +8,37 @@
 
 import UIKit
 
-public protocol CarouselDataSource: AnyObject {
-    func numberOfItems(in carouselView: CarouselView) -> Int
-    func carouselView(_ carouselView: CarouselView, cellForItemAt index: Int) -> UICollectionViewCell
-}
-
 public class CarouselView: UIView {
-    private let collectionView: UICollectionView
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: CarouselFlowLayout())
     private var autoScrollTimer: Timer?
     
+    public var isAutoScroll: Bool = true
     /// 自动滚动时间间隔
     public var timeIntervalForAutoScroll: TimeInterval = 3
     
     public weak var dataSource: CarouselDataSource? {
         didSet {
-            collectionView.reloadData()
-            scrollToItem(at: 0, animated: false)
+            reloadData()
         }
     }
     
+    public weak var delegate: CarouselDelegate?
+    
     public override init(frame: CGRect) {
-        collectionView = UICollectionView(frame: frame, collectionViewLayout: CarouselFlowLayout())
         super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        setupUI()
+    }
+    
+    private func setupUI() {
         collectionView.backgroundColor = nil
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = .fast
@@ -39,11 +48,8 @@ public class CarouselView: UIView {
         setupAutoLayout()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     public func setupAutoLayout() {
+        collectionView.frame = self.bounds
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(collectionView)
     }
@@ -64,6 +70,32 @@ public class CarouselView: UIView {
     
     public func setupCollectionView(_ setter: (UICollectionView) -> Void) {
         setter(collectionView)
+    }
+    
+    public override func didMoveToWindow() {
+        super.didMoveToWindow()
+        let isAttachedToWindow = self.window != nil
+        if isAttachedToWindow {
+            DispatchQueue.main.async {
+                self.scrollCurrentItemToCenter()
+            }
+        }
+        if isAutoScroll {
+            if isAttachedToWindow {
+                startAutoScroller()
+            } else {
+                stopAutoScroller()
+            }
+        }
+    }
+    
+    private func scrollCurrentItemToCenter() {
+        let bounds = collectionView.bounds
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        guard let indexPath = collectionView.indexPathForItem(at: center) else {
+            return
+        }
+        scrollToItem(at: indexPath.item, animated: false)
     }
 }
 
@@ -117,7 +149,7 @@ extension CarouselView {
         let listView = self.collectionView
         let bounds = listView.bounds
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        guard let indexPath = listView.indexPathForItem(at: center) else {
+        guard !listView.isTracking, let indexPath = listView.indexPathForItem(at: center) else {
             return
         }
         
@@ -151,6 +183,11 @@ extension CarouselView: UICollectionViewDataSource {
 }
 
 extension CarouselView: UICollectionViewDelegateFlowLayout {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.carouselView(self, didSelectItemAt: indexPath.item)
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
             return .zero
@@ -162,21 +199,18 @@ extension CarouselView: UICollectionViewDelegateFlowLayout {
     }
     
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        let bounds = scrollView.bounds
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        guard let indexPath = collectionView.indexPathForItem(at: center) else {
-            return
-        }
-        scrollToItem(at: indexPath.item, animated: false)
+        scrollCurrentItemToCenter()
         resumeAutoScroller()
     }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        scrollViewDidEndScrollingAnimation(scrollView)
+        scrollCurrentItemToCenter()
+        resumeAutoScroller()
     }
     
-    
-    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        pauseAutoScroller()
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if decelerate {
+            pauseAutoScroller()
+        }
     }
 }

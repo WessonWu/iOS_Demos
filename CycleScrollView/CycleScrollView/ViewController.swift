@@ -10,25 +10,12 @@ import UIKit
 import Kingfisher
 
 class ViewController: UIViewController {
-    
+    @IBOutlet weak var carouselView: CarouselView!
     var images: [URL] = []
-    
-    
-    lazy var carouselView: CarouselView = CarouselView()
-    
-    override func loadView() {
-        super.loadView()
-        
-        carouselView.frame = CGRect(x: 0, y: 88, width: self.view.bounds.width, height: 200)
-        carouselView.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
-        self.view.addSubview(carouselView)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        carouselView.backgroundColor = UIColor.cyan
         images = [URL(string: "http://pic37.nipic.com/20140113/8800276_184927469000_2.png")!,
                   URL(string: "http://k.zol-img.com.cn/sjbbs/7692/a7691515_s.jpg")!,
                   URL(string: "http://pic15.nipic.com/20110628/1369025_192645024000_2.jpg")!,
@@ -46,18 +33,8 @@ class ViewController: UIViewController {
         carouselView.register(CycleScrollViewItemCell.self,
                               forCellWithReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier)
         carouselView.dataSource = self
+        carouselView.delegate = self
     }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        carouselView.startAutoScroller()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        carouselView.stopAutoScroller()
-    } 
 }
 
 extension ViewController: CarouselDataSource {
@@ -73,3 +50,15 @@ extension ViewController: CarouselDataSource {
     }
 }
 
+extension ViewController: CarouselDelegate {
+    func carouselView(_ carouselView: CarouselView, didSelectItemAt index: Int) {
+        print("selected: \(index)")
+        
+        let sb = UIStoryboard(name: "Main", bundle: Bundle.main)
+        guard let vc = sb.instantiateViewController(withIdentifier: "MainViewController") as? ViewController else {
+            return
+        }
+        vc.title = "Main: \(index)"
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}

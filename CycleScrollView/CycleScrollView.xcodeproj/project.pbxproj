@@ -15,6 +15,7 @@
 		0A422AA522ADF6C000E747D6 /* CycleScrollViewItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A422AA422ADF6C000E747D6 /* CycleScrollViewItemCell.swift */; };
 		0A422AA822AF408100E747D6 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A422AA722AF408100E747D6 /* CarouselView.swift */; };
 		0A422AAA22AF411A00E747D6 /* CarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A422AA922AF411A00E747D6 /* CarouselFlowLayout.swift */; };
+		0A422AAC22AF863300E747D6 /* CarouselDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A422AAB22AF863300E747D6 /* CarouselDelegate.swift */; };
 		82902793E779CE760B9F92EC /* Pods_CycleScrollView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B44B38A0CEAC38C6EF8EA4C9 /* Pods_CycleScrollView.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		0A422AA422ADF6C000E747D6 /* CycleScrollViewItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleScrollViewItemCell.swift; sourceTree = "<group>"; };
 		0A422AA722AF408100E747D6 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		0A422AA922AF411A00E747D6 /* CarouselFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselFlowLayout.swift; sourceTree = "<group>"; };
+		0A422AAB22AF863300E747D6 /* CarouselDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselDelegate.swift; sourceTree = "<group>"; };
 		294073A94FF0877350A42DBA /* Pods-CycleScrollView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CycleScrollView.debug.xcconfig"; path = "Target Support Files/Pods-CycleScrollView/Pods-CycleScrollView.debug.xcconfig"; sourceTree = "<group>"; };
 		2E638F580402C9B318267D6C /* Pods-CycleScrollView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CycleScrollView.release.xcconfig"; path = "Target Support Files/Pods-CycleScrollView/Pods-CycleScrollView.release.xcconfig"; sourceTree = "<group>"; };
 		B44B38A0CEAC38C6EF8EA4C9 /* Pods_CycleScrollView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CycleScrollView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +86,7 @@
 			children = (
 				0A422AA722AF408100E747D6 /* CarouselView.swift */,
 				0A422AA922AF411A00E747D6 /* CarouselFlowLayout.swift */,
+				0A422AAB22AF863300E747D6 /* CarouselDelegate.swift */,
 			);
 			path = CarouselView;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 			files = (
 				0A422AA822AF408100E747D6 /* CarouselView.swift in Sources */,
 				0A422AA522ADF6C000E747D6 /* CycleScrollViewItemCell.swift in Sources */,
+				0A422AAC22AF863300E747D6 /* CarouselDelegate.swift in Sources */,
 				0A422A9322ADF55200E747D6 /* ViewController.swift in Sources */,
 				0A422A9122ADF55200E747D6 /* AppDelegate.swift in Sources */,
 				0A422AAA22AF411A00E747D6 /* CarouselFlowLayout.swift in Sources */,
