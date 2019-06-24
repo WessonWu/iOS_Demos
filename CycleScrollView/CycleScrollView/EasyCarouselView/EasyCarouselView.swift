@@ -1,3 +1,10 @@
+//
+//  EasyCarouselView
+//
+//  Created by wuweixin on 2019/6/11.
+//  Copyright © 2019 cn.wessonwu. All rights reserved.
+//
+
 import UIKit
 
 public class EasyCarouselView: UIView {
