@@ -24,6 +24,16 @@ public class CarouselView: UIView {
     
     public weak var delegate: CarouselDelegate?
     
+    public var numberOfItems: Int {
+        return dataSource?.numberOfItems(in: self) ?? 0
+    }
+    
+    public var currentItem: Int? {
+        let bounds = collectionView.bounds
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        return collectionView.indexPathForItem(at: center)?.item
+    }
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -72,6 +82,16 @@ public class CarouselView: UIView {
         setter(collectionView)
     }
     
+    public func indexForContentOffset(_ offset: CGPoint) -> Int? {
+        let bounds = collectionView.bounds
+        let boundsByOffseted = CGRect(x: offset.x,
+                                      y: bounds.origin.y,
+                                      width: bounds.width,
+                                      height: bounds.height)
+        let centerByOffseted = CGPoint(x: boundsByOffseted.midX, y: boundsByOffseted.midY)
+        return collectionView.indexPathForItem(at: centerByOffseted)?.item
+    }
+    
     public override func didMoveToWindow() {
         super.didMoveToWindow()
         let isAttachedToWindow = self.window != nil
@@ -90,12 +110,10 @@ public class CarouselView: UIView {
     }
     
     private func scrollCurrentItemToCenter() {
-        let bounds = collectionView.bounds
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        guard let indexPath = collectionView.indexPathForItem(at: center) else {
+        guard let index = self.currentItem else {
             return
         }
-        scrollToItem(at: indexPath.item, animated: false)
+        scrollToItem(at: index, animated: false)
     }
 }
 
