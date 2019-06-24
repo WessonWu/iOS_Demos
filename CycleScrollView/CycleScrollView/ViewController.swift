@@ -16,11 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        images = [URL(string: "http://pic37.nipic.com/20140113/8800276_184927469000_2.png")!,
-                  URL(string: "http://k.zol-img.com.cn/sjbbs/7692/a7691515_s.jpg")!,
-                  URL(string: "http://pic15.nipic.com/20110628/1369025_192645024000_2.jpg")!,
-                  URL(string: "http://pic18.nipic.com/20120204/8339340_144203764154_2.jpg")!,
-                  URL(string: "http://pic40.nipic.com/20140331/9469669_142840860000_2.jpg")!]
+        images = [URL(string: "http://pic37.nipic.com/20140113/8800276_184927469000_2.png")!]
         
         carouselView.setupCollectionView { (collectionView) in
             guard let flowLayout = collectionView.collectionViewLayout as? CarouselFlowLayout else {
@@ -34,6 +30,12 @@ class ViewController: UIViewController {
                               forCellWithReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier)
         carouselView.dataSource = self
         carouselView.delegate = self
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.images = [URL(string: "http://pic37.nipic.com/20140113/8800276_184927469000_2.png")!,
+                           URL(string: "http://k.zol-img.com.cn/sjbbs/7692/a7691515_s.jpg")!]
+            self.carouselView.reloadData()
+        }
     }
 }
 
@@ -42,8 +44,9 @@ extension ViewController: CarouselDataSource {
         return images.count
     }
     
-    func carouselView(_ carouselView: CarouselView, cellForItemAt index: Int) -> UICollectionViewCell {
-        let cell = carouselView.dequeueReusableCell(withReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier, for: index) as! CycleScrollViewItemCell
+    func carouselView(_ carouselView: CarouselView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = carouselView.dequeueReusableCell(withReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier, for: indexPath) as! CycleScrollViewItemCell
+        let index = indexPath.item
         let imageURL = images[index]
         cell.imageView.kf.setImage(with: imageURL)
         return cell
@@ -51,7 +54,8 @@ extension ViewController: CarouselDataSource {
 }
 
 extension ViewController: CarouselDelegate {
-    func carouselView(_ carouselView: CarouselView, didSelectItemAt index: Int) {
+    func carouselView(_ carouselView: CarouselView, didSelectItemAt indexPath: IndexPath) {
+        let index = indexPath.item
         print("selected: \(index)")
         
         let vc = SecondViewController()

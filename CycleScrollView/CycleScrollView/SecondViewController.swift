@@ -64,8 +64,9 @@ extension SecondViewController: CarouselDataSource {
         return images.count
     }
     
-    func carouselView(_ carouselView: CarouselView, cellForItemAt index: Int) -> UICollectionViewCell {
-        let cell = carouselView.dequeueReusableCell(withReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier, for: index) as! CycleScrollViewItemCell
+    func carouselView(_ carouselView: CarouselView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = carouselView.dequeueReusableCell(withReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier, for: indexPath) as! CycleScrollViewItemCell
+        let index = indexPath.item
         let imageURL = images[index]
         cell.imageView.kf.setImage(with: imageURL)
         return cell
@@ -73,7 +74,8 @@ extension SecondViewController: CarouselDataSource {
 }
 
 extension SecondViewController: CarouselDelegate {
-    func carouselView(_ carouselView: CarouselView, didSelectItemAt index: Int) {
+    func carouselView(_ carouselView: CarouselView, didSelectItemAt indexPath: IndexPath) {
+        let index = indexPath.item
         print("selected: \(index)")
         
         let vc = SecondViewController()

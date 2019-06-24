@@ -10,14 +10,14 @@ import UIKit
 
 public protocol CarouselDataSource: AnyObject {
     func numberOfItems(in carouselView: CarouselView) -> Int
-    func carouselView(_ carouselView: CarouselView, cellForItemAt index: Int) -> UICollectionViewCell
+    func carouselView(_ carouselView: CarouselView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
 }
 
 public protocol CarouselDelegate: AnyObject {
-    func carouselView(_ carouselView: CarouselView, didSelectItemAt index: Int)
+    func carouselView(_ carouselView: CarouselView, didSelectItemAt indexPath: IndexPath)
 }
 
 extension CarouselDelegate {
-    func carouselView(_ carouselView: CarouselView, didSelectItemAt index: Int) {}
+    func carouselView(_ carouselView: CarouselView, didSelectItemAt indexPath: IndexPath) {}
 }
 

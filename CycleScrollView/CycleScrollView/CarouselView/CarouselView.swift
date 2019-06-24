@@ -24,10 +24,7 @@ public class CarouselView: UIView {
     
     public weak var delegate: CarouselDelegate?
     
-    public var numberOfItems: Int {
-        return dataSource?.numberOfItems(in: self) ?? 0
-    }
-    
+    public private(set) var numberOfItems: Int = 0
     public var currentItem: Int? {
         let bounds = collectionView.bounds
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
@@ -64,8 +61,10 @@ public class CarouselView: UIView {
         self.addSubview(collectionView)
     }
     
-    public final func reloadData() {
+    public func reloadData() {
         self.collectionView.reloadData()
+        fetchNumberOfItems()
+        scrollCurrentItemToCenter()
     }
     
     public final func scrollToItem(at index: Int, animated: Bool) {
@@ -82,14 +81,16 @@ public class CarouselView: UIView {
         setter(collectionView)
     }
     
-    public func indexForContentOffset(_ offset: CGPoint) -> Int? {
+    public func indexPathForVisibleRect(_ rect: CGRect) -> IndexPath? {
+        return collectionView.indexPathForItem(at: CGPoint(x: rect.midX, y: rect.midY))
+    }
+    
+    public func indexForContentOffset(_ contentOffset: CGPoint) -> Int? {
         let bounds = collectionView.bounds
-        let boundsByOffseted = CGRect(x: offset.x,
-                                      y: bounds.origin.y,
-                                      width: bounds.width,
-                                      height: bounds.height)
-        let centerByOffseted = CGPoint(x: boundsByOffseted.midX, y: boundsByOffseted.midY)
-        return collectionView.indexPathForItem(at: centerByOffseted)?.item
+        return indexPathForVisibleRect(CGRect(x: contentOffset.x,
+                                              y: bounds.origin.y,
+                                              width: bounds.width,
+                                              height: bounds.height))?.item
     }
     
     public override func didMoveToWindow() {
@@ -109,6 +110,10 @@ public class CarouselView: UIView {
         }
     }
     
+    private func fetchNumberOfItems() {
+        self.numberOfItems = dataSource?.numberOfItems(in: self) ?? 0
+    }
+    
     private func scrollCurrentItemToCenter() {
         guard let index = self.currentItem else {
             return
@@ -122,8 +127,8 @@ extension CarouselView {
     public func register(_ cellClass: AnyClass?, forCellWithReuseIdentifier reuseIdentifier: String) {
         collectionView.register(cellClass, forCellWithReuseIdentifier: reuseIdentifier)
     }
-    public func dequeueReusableCell(withReuseIdentifier reuseIdentifier: String, for index: Int) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: IndexPath(item: index, section: 0))
+    public func dequeueReusableCell(withReuseIdentifier reuseIdentifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     }
 }
 
@@ -165,9 +170,7 @@ extension CarouselView {
     @objc
     private func autoScrollTick() {
         let listView = self.collectionView
-        let bounds = listView.bounds
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        guard !listView.isTracking, let indexPath = listView.indexPathForItem(at: center) else {
+        guard !listView.isTracking, let indexPath = indexPathForVisibleRect(listView.bounds) else {
             return
         }
         
@@ -185,24 +188,25 @@ extension CarouselView {
 
 extension CarouselView: UICollectionViewDataSource {
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 20
+        fetchNumberOfItems()
+        return numberOfItems > 1 ? 20 : 1
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource?.numberOfItems(in: self) ?? 0
+        return numberOfItems
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let ds = self.dataSource else {
             fatalError("CarouselView's dataSource can't be nil!")
         }
-        return ds.carouselView(self, cellForItemAt: indexPath.item)
+        return ds.carouselView(self, cellForItemAt: indexPath)
     }
 }
 
 extension CarouselView: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.carouselView(self, didSelectItemAt: indexPath.item)
+        delegate?.carouselView(self, didSelectItemAt: indexPath)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     
