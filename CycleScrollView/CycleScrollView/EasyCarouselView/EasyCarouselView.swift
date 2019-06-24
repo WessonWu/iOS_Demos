@@ -18,9 +18,8 @@ public class EasyCarouselView: UIView {
     
     public private(set) var numberOfItems: Int = 0
     public var currentItem: Int? {
-        let bounds = collectionView.bounds
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        return collectionView.indexPathForItem(at: center)?.item
+        let visibleRect = collectionView.bounds
+        return indexForPoint(CGPoint(x: visibleRect.midX, y: visibleRect.midY))
     }
     
     public override init(frame: CGRect) {
@@ -74,16 +73,8 @@ public class EasyCarouselView: UIView {
         setter(collectionView)
     }
     
-    public func indexPathForVisibleRect(_ rect: CGRect) -> IndexPath? {
-        return collectionView.indexPathForItem(at: CGPoint(x: rect.midX, y: rect.midY))
-    }
-    
-    public func indexForContentOffset(_ contentOffset: CGPoint) -> Int? {
-        let bounds = collectionView.bounds
-        return indexPathForVisibleRect(CGRect(x: contentOffset.x,
-                                              y: bounds.origin.y,
-                                              width: bounds.width,
-                                              height: bounds.height))?.item
+    public func indexForPoint(_ point: CGPoint) -> Int? {
+        return collectionView.indexPathForItem(at: point)?.item
     }
     
     public override func didMoveToWindow() {
@@ -163,7 +154,9 @@ extension EasyCarouselView {
     @objc
     private func autoScrollTick() {
         let listView = self.collectionView
-        guard !listView.isTracking, let indexPath = indexPathForVisibleRect(listView.bounds) else {
+        let visibleRect = listView.bounds
+        let center = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        guard !listView.isTracking, let indexPath = collectionView.indexPathForItem(at: center) else {
             return
         }
         
