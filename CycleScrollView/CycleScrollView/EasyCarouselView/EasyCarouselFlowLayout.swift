@@ -9,7 +9,7 @@
 import UIKit
 
 /// 不要试图去修改原来UICollectionViewFlowLayout的属性，因为会失效
-public class CarouselFlowLayout: UICollectionViewFlowLayout {
+public class EasyCarouselFlowLayout: UICollectionViewFlowLayout {
     public var minimumScale: CGFloat = 0.85
     public var maximumScale: CGFloat = 1
     public var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)

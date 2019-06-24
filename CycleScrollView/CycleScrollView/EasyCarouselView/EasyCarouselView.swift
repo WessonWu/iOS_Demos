@@ -1,28 +1,20 @@
-//
-//  CarouselView.swift
-//  CycleScrollView
-//
-//  Created by wuweixin on 2019/6/11.
-//  Copyright © 2019 cn.wessonwu. All rights reserved.
-//
-
 import UIKit
 
-public class CarouselView: UIView {
-    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: CarouselFlowLayout())
+public class EasyCarouselView: UIView {
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: EasyCarouselFlowLayout())
     private var autoScrollTimer: Timer?
     
     public var isAutoScroll: Bool = true
     /// 自动滚动时间间隔
     public var timeIntervalForAutoScroll: TimeInterval = 3
     
-    public weak var dataSource: CarouselDataSource? {
+    public weak var dataSource: EasyCarouselDataSource? {
         didSet {
             reloadData()
         }
     }
     
-    public weak var delegate: CarouselDelegate?
+    public weak var delegate: EasyCarouselDelegate?
     
     public private(set) var numberOfItems: Int = 0
     public var currentItem: Int? {
@@ -51,6 +43,7 @@ public class CarouselView: UIView {
         collectionView.decelerationRate = .fast
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.bounces = true
         
         setupAutoLayout()
     }
@@ -123,7 +116,7 @@ public class CarouselView: UIView {
 }
 
 /// 重用支持
-extension CarouselView {
+extension EasyCarouselView {
     public func register(_ cellClass: AnyClass?, forCellWithReuseIdentifier reuseIdentifier: String) {
         collectionView.register(cellClass, forCellWithReuseIdentifier: reuseIdentifier)
     }
@@ -133,7 +126,7 @@ extension CarouselView {
 }
 
 /// 自动滚动支持
-extension CarouselView {
+extension EasyCarouselView {
     /// 开启自动滚动
     public final func startAutoScroller() {
         guard self.autoScrollTimer == nil else {
@@ -186,7 +179,7 @@ extension CarouselView {
 }
 
 
-extension CarouselView: UICollectionViewDataSource {
+extension EasyCarouselView: UICollectionViewDataSource {
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         fetchNumberOfItems()
         return numberOfItems > 1 ? 20 : 1
@@ -204,7 +197,7 @@ extension CarouselView: UICollectionViewDataSource {
     }
 }
 
-extension CarouselView: UICollectionViewDelegateFlowLayout {
+extension EasyCarouselView: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.carouselView(self, didSelectItemAt: indexPath)
         collectionView.deselectItem(at: indexPath, animated: true)

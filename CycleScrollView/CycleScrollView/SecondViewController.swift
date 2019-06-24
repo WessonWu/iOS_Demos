@@ -11,7 +11,7 @@ import UIKit
 class SecondViewController: UIViewController {
     var images: [URL] = []
     
-    lazy var carouselView: CarouselView = CarouselView()
+    lazy var carouselView: EasyCarouselView = EasyCarouselView()
     
     override func loadView() {
         super.loadView()
@@ -34,7 +34,7 @@ class SecondViewController: UIViewController {
                   URL(string: "http://pic40.nipic.com/20140331/9469669_142840860000_2.jpg")!]
         
         carouselView.setupCollectionView { (collectionView) in
-            guard let flowLayout = collectionView.collectionViewLayout as? CarouselFlowLayout else {
+            guard let flowLayout = collectionView.collectionViewLayout as? EasyCarouselFlowLayout else {
                 return
             }
             
@@ -59,12 +59,12 @@ class SecondViewController: UIViewController {
     }
 }
 
-extension SecondViewController: CarouselDataSource {
-    func numberOfItems(in carouselView: CarouselView) -> Int {
+extension SecondViewController: EasyCarouselDataSource {
+    func numberOfItems(in carouselView: EasyCarouselView) -> Int {
         return images.count
     }
     
-    func carouselView(_ carouselView: CarouselView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func carouselView(_ carouselView: EasyCarouselView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = carouselView.dequeueReusableCell(withReuseIdentifier: CycleScrollViewItemCell.reuseIdentifier, for: indexPath) as! CycleScrollViewItemCell
         let index = indexPath.item
         let imageURL = images[index]
@@ -73,8 +73,8 @@ extension SecondViewController: CarouselDataSource {
     }
 }
 
-extension SecondViewController: CarouselDelegate {
-    func carouselView(_ carouselView: CarouselView, didSelectItemAt indexPath: IndexPath) {
+extension SecondViewController: EasyCarouselDelegate {
+    func carouselView(_ carouselView: EasyCarouselView, didSelectItemAt indexPath: IndexPath) {
         let index = indexPath.item
         print("selected: \(index)")
         
