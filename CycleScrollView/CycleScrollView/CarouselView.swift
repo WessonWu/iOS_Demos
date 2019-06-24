@@ -14,8 +14,10 @@ final class CarouselView: EasyCarouselView {
     let pageControl: UIPageControl = UIPageControl()
     
     override func setupAutoLayout() {
-        super.setupAutoLayout()
         pageControl.hidesForSinglePage = true
+        pageControl.addTarget(self, action: #selector(currentItemDidChanged(_:)), for: .valueChanged)
+        
+        super.setupAutoLayout()
         self.addSubview(pageControl)
         
         pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -37,5 +39,11 @@ final class CarouselView: EasyCarouselView {
         if let index = self.currentItem {
             pageControl.currentPage = index
         }
+    }
+    
+    
+    @objc
+    private func currentItemDidChanged(_ sender: UIPageControl) {
+        scrollToItem(at: sender.currentPage, animated: false)
     }
 }
