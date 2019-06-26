@@ -16,7 +16,7 @@ public class CircleSlider: UIControl {
     public private(set) lazy var thumbView: UIView = UIView()
     
     public var thumbSize: CGSize {
-        return CGSize(width: 52, height: 52)
+        return CGSize(width: 40, height: 40)
     }
     
     /// MARK - Basic Properties
@@ -106,7 +106,6 @@ public class CircleSlider: UIControl {
     }
     
     public func setup() {
-        thumbView.backgroundColor = UIColor.green
         self.addSubview(thumbView)
     }
     
@@ -150,8 +149,11 @@ public class CircleSlider: UIControl {
         let location = touch.location(in: self)
         let origin = CGPoint(x: bounds.midX, y: bounds.midY)
         let alpha = CircleSlider.alpha(from: origin, to: location)
-        sliderLayer.progress = Float(alpha / (2 * CGFloat.pi))
-        sendActions(for: .valueChanged)
+        let expected = Float(alpha / (2 * CGFloat.pi))
+        if sliderLayer.progress != expected {
+            sliderLayer.progress = expected
+            sendActions(for: .valueChanged)
+        }
         return true
     }
     

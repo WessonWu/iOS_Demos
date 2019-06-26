@@ -9,15 +9,13 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var resultLabel: UILabel!
+    
     lazy var slider = ParentLocker()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        slider.trackRadius = 64
-        slider.trackLineWidth = 20
-        slider.minimumValue = 0
-        slider.maximumValue = 360
-        slider.backgroundColor = UIColor.cyan
         self.view.addSubview(slider)
         
         slider.translatesAutoresizingMaskIntoConstraints = false
@@ -48,8 +46,9 @@ class ViewController: UIViewController {
             UIView.animate(withDuration: 0.35) {
                 sender.currentValue = 0
             }
+            self.resultLabel.text = "解锁失败"
         } else {
-            print("完成")
+            self.resultLabel.text = "解锁成功"
         }
     }
 }
