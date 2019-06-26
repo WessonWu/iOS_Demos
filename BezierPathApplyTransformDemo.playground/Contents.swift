@@ -55,6 +55,7 @@ extension CGRect {
 
 extension UIBezierPath {
     
+    @discardableResult
     func applyRotation(anchorPoint: CGPoint, angle: CGFloat) -> UIBezierPath {
         // 1. 将anchorPoint变换到原点
         apply(CGAffineTransform(translationX: -anchorPoint.x, y: -anchorPoint.y))
@@ -65,11 +66,13 @@ extension UIBezierPath {
         return self
     }
     
+    @discardableResult
     func applyTranslation(x: CGFloat, y: CGFloat) -> UIBezierPath {
         apply(CGAffineTransform(translationX: x, y: y))
         return self
     }
     
+    @discardableResult
     func applyScale(anchorPoint: CGPoint, scaleX: CGFloat, scaleY: CGFloat) -> UIBezierPath {
         apply(CGAffineTransform(translationX: -anchorPoint.x, y: -anchorPoint.y))
         apply(CGAffineTransform(scaleX: scaleX, y: scaleY))

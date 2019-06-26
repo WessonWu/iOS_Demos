@@ -43,20 +43,13 @@ final class ParentLockerLayer: CircleSliderLayer {
         arrowPath.addLine(to: CGPoint(x: 13, y: 12))
         arrowPath.addLine(to: CGPoint(x: 6.5, y: 0))
         arrowPath.close()
+
+        let offsetX = trackRadius * cos(endAngle)
+        let offsetY = trackRadius * sin(endAngle)
         
-        let alpha = halfOfPi - endAngle
-        let offsetX = trackRadius * cos(alpha)
-        let offsetY = trackRadius * sin(alpha)
-        let boundsOfArrow = arrowPath.bounds
-        var transform = CGAffineTransform.identity.translatedBy(x: -6.5, y: -8)
-        transform = transform.translatedBy(x: arcCenter.x, y: arcCenter.y).translatedBy(x: offsetX, y: offsetY)
-        let centerOfArrow = CGPoint(x: boundsOfArrow.midX, y: boundsOfArrow.midY)
-        transform = transform.translatedBy(x: centerOfArrow.x, y: centerOfArrow.y)
-                            .rotated(by: CGFloat.pi + endAngle)
-                            .translatedBy(x: -centerOfArrow.x, y: -centerOfArrow.y)
-        arrowPath.apply(transform)
-        
-        
+        arrowPath.apply(CGAffineTransform(translationX: -6.5, y: -8))
+        arrowPath.apply(CGAffineTransform(rotationAngle: CGFloat.pi + endAngle))
+        arrowPath.apply(CGAffineTransform(translationX: arcCenter.x + offsetX, y: arcCenter.y + offsetY))
         
         ctx.addPath(arrowPath.cgPath)
         ctx.setFillColor(color.cgColor)
@@ -129,13 +122,29 @@ extension UIColor {
 }
 
 
-fileprivate extension UIBezierPath {
-    func applyCentered(transform:CGAffineTransform) {
-        let center = PathBoundingCenter(path: path)
-        var t = CGAffineTransform.identity
-        t = t.translatedBy(x: center.x, y: center.y)
-        t = transform.concatenating(t)
-        t = t.translatedBy(x: -center.x, y: -center.y)
-        path.apply(t)
+extension UIBezierPath {
+    @discardableResult
+    func applyRotation(anchorPoint: CGPoint, angle: CGFloat) -> UIBezierPath {
+        // 1. 将anchorPoint变换到原点
+        apply(CGAffineTransform(translationX: -anchorPoint.x, y: -anchorPoint.y))
+        // 2. 执行旋转变换
+        apply(CGAffineTransform(rotationAngle: angle))
+        // 3. 将anchorPoint变换回原处
+        apply(CGAffineTransform(translationX: anchorPoint.x, y: anchorPoint.y))
+        return self
+    }
+    
+    @discardableResult
+    func applyTranslation(x: CGFloat, y: CGFloat) -> UIBezierPath {
+        apply(CGAffineTransform(translationX: x, y: y))
+        return self
+    }
+    
+    @discardableResult
+    func applyScale(anchorPoint: CGPoint, scaleX: CGFloat, scaleY: CGFloat) -> UIBezierPath {
+        apply(CGAffineTransform(translationX: -anchorPoint.x, y: -anchorPoint.y))
+        apply(CGAffineTransform(scaleX: scaleX, y: scaleY))
+        apply(CGAffineTransform(translationX: anchorPoint.x, y: anchorPoint.y))
+        return self
     }
 }
