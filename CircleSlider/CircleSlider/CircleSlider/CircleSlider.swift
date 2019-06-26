@@ -63,12 +63,30 @@ public class CircleSlider: UIControl {
         }
     }
     
-    @objc dynamic public var progress: Float {
+    public var minimumValue: Float = 0 {
+        didSet {
+            if minimumValue >= maximumValue {
+                fatalError("The minimumValue(\(minimumValue)) should less than maximumValue(\(maximumValue)).")
+            }
+        }
+    }
+    public var maximumValue: Float = 1 {
+        didSet {
+            if maximumValue <= minimumValue {
+                fatalError("The maximumValue(\(maximumValue)) should greater than minimumValue(\(minimumValue)).")
+            }
+        }
+    }
+    
+    
+    public var currentValue: Float {
         get {
-            return sliderLayer.progress
+            let progress = sliderLayer.progress
+            return minimumValue + progress * (maximumValue - minimumValue)
         }
         set {
-            sliderLayer.progress = newValue
+            let value = min(max(minimumValue, newValue), maximumValue)
+            sliderLayer.progress = value / (maximumValue - minimumValue)
         }
     }
     
@@ -92,12 +110,12 @@ public class CircleSlider: UIControl {
         self.addSubview(thumbView)
     }
     
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        thumbView.frame = thumbRect(forBounds: self.bounds, value: progress)
+    public override func draw(_ layer: CALayer, in ctx: CGContext) {
+        if let pLayer = layer as? CircleSliderLayer {
+            thumbView.frame = thumbRect(forBounds: self.bounds, value: pLayer.progress)
+        }
+        super.draw(layer, in: ctx)
     }
-    
     
     public func thumbRect(forBounds bounds: CGRect, value: Float) -> CGRect {
         let alpha = -Float.pi / 2 +  value * 2 * Float.pi
@@ -132,13 +150,10 @@ public class CircleSlider: UIControl {
         let location = touch.location(in: self)
         let origin = CGPoint(x: bounds.midX, y: bounds.midY)
         let alpha = CircleSlider.alpha(from: origin, to: location)
-        self.progress = Float(alpha / (2 * CGFloat.pi))
-        self.setNeedsLayout()
+        sliderLayer.progress = Float(alpha / (2 * CGFloat.pi))
+        setNeedsLayout()
+        sendActions(for: .valueChanged)
         return true
-    }
-    
-    public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
-        
     }
     
     // 以origin作为原点，画->为x轴，画↑为y轴(alpha是与y轴正半轴的夹角)
