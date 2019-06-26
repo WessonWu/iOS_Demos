@@ -207,13 +207,5 @@ public class CircleSlider: UIControl {
         // 在原点
         return 0
     }
-    
-    // 以origin作为原点，画->为x轴，画↑为y轴(alpha是与y轴正半轴的夹角)
-    public class func locationInBorder(fromOrigin origin: CGPoint, radius: CGFloat, alpha: CGFloat) -> CGPoint {
-        let finalAlpha = CGFloat.pi - alpha
-        let x = origin.x + radius * sin(finalAlpha)
-        let y = origin.y + radius * cos(finalAlpha)
-        return CGPoint(x: x, y: y)
-    }
 }
 
