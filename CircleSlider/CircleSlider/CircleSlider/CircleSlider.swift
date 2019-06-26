@@ -112,5 +112,90 @@ public class CircleSlider: UIControl {
                       width: thumbSize.width,
                       height: thumbSize.height)
     }
+    
+    public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        return thumbView.frame.contains(point)
+    }
+    
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if self.point(inside: point, with: event) {
+            return self
+        }
+        return nil
+    }
+    
+    public override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        return true
+    }
+    
+    public override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let location = touch.location(in: self)
+        let origin = CGPoint(x: bounds.midX, y: bounds.midY)
+        let alpha = CircleSlider.alpha(from: origin, to: location)
+        self.progress = Float(alpha / (2 * CGFloat.pi))
+        self.setNeedsLayout()
+        return true
+    }
+    
+    public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        
+    }
+    
+    // 以origin作为原点，画->为x轴，画↑为y轴(alpha是与y轴正半轴的夹角)
+    public class func alpha(from origin: CGPoint, to location: CGPoint) -> CGFloat {
+        let deltaX = location.x - origin.x
+        let deltaY = location.y - origin.y
+        
+        if deltaX > 0 && deltaY < 0 {
+            // 第一象限(右上角)
+            return atan(deltaX / -deltaY)
+        }
+        if deltaX > 0 && deltaY > 0 {
+            // 第二象限(右下角)
+            return CGFloat.pi - atan(deltaX / deltaY)
+        }
+        if deltaX < 0 && deltaY > 0 {
+            // 第三象限(左下角)
+            return CGFloat.pi + atan(-deltaX / deltaY)
+        }
+        if deltaX < 0 && deltaY < 0 {
+            // 第四象限(左上角)
+            return 2 * CGFloat.pi - atan(deltaX / deltaY)
+        }
+        
+        // 在x或y轴上
+        if deltaY == 0 {
+            // 在x轴上
+            if deltaX > 0 {
+                // 在原点右边
+                return 0.5 * CGFloat.pi
+            }
+            if deltaX < 0 {
+                // 在原点左边
+                return 1.5 * CGFloat.pi
+            }
+        } else {
+            // 在y轴上
+            if deltaY < 0 {
+                // 在原点上方
+                return 0
+            }
+            if deltaY > 0 {
+                // 在原点下方
+                return CGFloat.pi
+            }
+        }
+        
+        // 在原点
+        return 0
+    }
+    
+    // 以origin作为原点，画->为x轴，画↑为y轴(alpha是与y轴正半轴的夹角)
+    public class func locationInBorder(fromOrigin origin: CGPoint, radius: CGFloat, alpha: CGFloat) -> CGPoint {
+        let finalAlpha = CGFloat.pi - alpha
+        let x = origin.x + radius * sin(finalAlpha)
+        let y = origin.y + radius * cos(finalAlpha)
+        return CGPoint(x: x, y: y)
+    }
 }
 
