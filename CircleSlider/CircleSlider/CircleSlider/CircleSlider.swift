@@ -151,7 +151,6 @@ public class CircleSlider: UIControl {
         let origin = CGPoint(x: bounds.midX, y: bounds.midY)
         let alpha = CircleSlider.alpha(from: origin, to: location)
         sliderLayer.progress = Float(alpha / (2 * CGFloat.pi))
-        setNeedsLayout()
         sendActions(for: .valueChanged)
         return true
     }

@@ -14,6 +14,7 @@
 		0AA4FDCF22C20F9A002D001C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4FDCD22C20F9A002D001C /* LaunchScreen.storyboard */; };
 		0AA4FDD822C20FBC002D001C /* CircleSliderLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4FDD722C20FBC002D001C /* CircleSliderLayer.swift */; };
 		0AA4FDDA22C20FDE002D001C /* CircleSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4FDD922C20FDE002D001C /* CircleSlider.swift */; };
+		0AA4FDDC22C35727002D001C /* ParentLocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4FDDB22C35727002D001C /* ParentLocker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		0AA4FDD022C20F9A002D001C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AA4FDD722C20FBC002D001C /* CircleSliderLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleSliderLayer.swift; sourceTree = "<group>"; };
 		0AA4FDD922C20FDE002D001C /* CircleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleSlider.swift; sourceTree = "<group>"; };
+		0AA4FDDB22C35727002D001C /* ParentLocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentLocker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				0AA4FDCB22C20F9A002D001C /* Assets.xcassets */,
 				0AA4FDCD22C20F9A002D001C /* LaunchScreen.storyboard */,
 				0AA4FDD022C20F9A002D001C /* Info.plist */,
+				0AA4FDDB22C35727002D001C /* ParentLocker.swift */,
 			);
 			path = CircleSlider;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				0AA4FDD822C20FBC002D001C /* CircleSliderLayer.swift in Sources */,
 				0AA4FDC722C20F99002D001C /* ViewController.swift in Sources */,
+				0AA4FDDC22C35727002D001C /* ParentLocker.swift in Sources */,
 				0AA4FDDA22C20FDE002D001C /* CircleSlider.swift in Sources */,
 				0AA4FDC522C20F99002D001C /* AppDelegate.swift in Sources */,
 			);

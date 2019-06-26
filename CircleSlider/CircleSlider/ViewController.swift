@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    lazy var slider = CircleSlider()
+    lazy var slider = ParentLocker()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -44,12 +44,12 @@ class ViewController: UIViewController {
     
     @objc
     private func touchUp(_ sender: CircleSlider) {
-        print(#function)
-        
-        if sender.currentValue < 359 {
+        if sender.currentValue < 360 {
             UIView.animate(withDuration: 0.35) {
                 sender.currentValue = 0
             }
+        } else {
+            print("完成")
         }
     }
 }
