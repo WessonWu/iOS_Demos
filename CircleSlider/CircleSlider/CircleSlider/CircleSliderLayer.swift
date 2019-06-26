@@ -75,6 +75,10 @@ public class CircleSliderLayer: CALayer {
     }
     
     public func drawTrackPath(in ctx: CGContext) {
+        ctx.saveGState()
+        defer {
+            ctx.restoreGState()
+        }
         let path = UIBezierPath(arcCenter: CGPoint(x: bounds.midX,
                                                    y: bounds.midY),
                                 radius: trackRadius,
@@ -88,6 +92,10 @@ public class CircleSliderLayer: CALayer {
     }
     
     public func drawTrackingPath(in ctx: CGContext) {
+        ctx.saveGState()
+        defer {
+            ctx.restoreGState()
+        }
         let halfOfPi = CGFloat.pi / 2
         
         let startAngle = -halfOfPi

@@ -106,6 +106,8 @@ public class CircleSlider: UIControl {
     }
     
     public func setup() {
+        // 否则strokePath边缘会模糊
+        self.contentScaleFactor = UIScreen.main.scale
         self.addSubview(thumbView)
     }
     
