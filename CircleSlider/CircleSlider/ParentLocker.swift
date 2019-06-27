@@ -18,8 +18,8 @@ final class ParentLockerLayer: CircleSliderLayer {
         // 指示方向
         let arcCenter = CGPoint(x: bounds.midX, y: bounds.midY)
         let halfOfPi = CGFloat.pi / 2
-        let startAngle = -halfOfPi + CGFloat(0.1) * 2 * CGFloat.pi
-        let endAngle = startAngle + CGFloat(0.28) * 2 * CGFloat.pi
+        let startAngle = -halfOfPi + alpha(forAngle: 30)
+        let endAngle = -halfOfPi + alpha(forAngle: 116)
         let ovalPath = UIBezierPath(arcCenter: arcCenter,
                                     radius: trackRadius,
                                     startAngle: startAngle,
@@ -27,27 +27,29 @@ final class ParentLockerLayer: CircleSliderLayer {
                                     clockwise: true)
         
         ctx.addPath(ovalPath.cgPath)
-        ctx.setLineWidth(2)
-        ctx.setLineDash(phase: 0, lengths: [10, 2])
+        ctx.setLineWidth(1)
+        ctx.setLineDash(phase: 0, lengths: [4, 3])
         ctx.setStrokeColor(color.cgColor)
         ctx.strokePath()
         ctx.restoreGState()
         
         
-        ctx.saveGState()
         // 箭头 (paincode)
+        ctx.saveGState()
+        
         let arrowPath = UIBezierPath()
-        arrowPath.move(to: CGPoint(x: 6.5, y: 0))
-        arrowPath.addLine(to: CGPoint(x: 0, y: 12))
-        arrowPath.addLine(to: CGPoint(x: 6.5, y: 8)) //以该点为锚点
-        arrowPath.addLine(to: CGPoint(x: 13, y: 12))
-        arrowPath.addLine(to: CGPoint(x: 6.5, y: 0))
+        arrowPath.move(to: CGPoint(x: 3.5, y: 0))
+        arrowPath.addLine(to: CGPoint(x: 0, y: 6))
+        let anchorPoint = CGPoint(x: 3.5, y: 4)
+        arrowPath.addLine(to: anchorPoint) //以该点为锚点
+        arrowPath.addLine(to: CGPoint(x: 7, y: 6))
+        arrowPath.addLine(to: CGPoint(x: 3.5, y: 0))
         arrowPath.close()
 
         let offsetX = trackRadius * cos(endAngle)
         let offsetY = trackRadius * sin(endAngle)
         
-        arrowPath.apply(CGAffineTransform(translationX: -6.5, y: -8))
+        arrowPath.apply(CGAffineTransform(translationX: -anchorPoint.x, y: -anchorPoint.y))
         arrowPath.apply(CGAffineTransform(rotationAngle: CGFloat.pi + endAngle))
         arrowPath.apply(CGAffineTransform(translationX: arcCenter.x + offsetX, y: arcCenter.y + offsetY))
         
@@ -56,6 +58,10 @@ final class ParentLockerLayer: CircleSliderLayer {
         ctx.fillPath(using: .evenOdd)
         
         ctx.restoreGState()
+    }
+    
+    func alpha(forAngle angle: CGFloat) -> CGFloat {
+        return angle / 180 * CGFloat.pi
     }
 }
 
