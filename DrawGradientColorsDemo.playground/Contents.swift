@@ -20,6 +20,10 @@ class DrawGradientView: UIView {
     var locations: [CGFloat]?
     var colors: [UIColor] = []
     
+    
+    var maskedRadius: CGFloat = 0
+    var maskedCorners: UIRectCorner = []
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
@@ -44,6 +48,15 @@ class DrawGradientView: UIView {
             return
         }
         
+        let radius = self.maskedRadius
+        let corners = self.maskedCorners
+        if radius > 0 && !corners.isEmpty {
+            let path = UIBezierPath(roundedRect: self.bounds,
+                                    byRoundingCorners: corners,
+                                    cornerRadii: CGSize(width: radius, height: radius))
+            ctx.addPath(path.cgPath)
+            ctx.clip(using: .evenOdd)
+        }
         ctx.drawLinearGradient(gradient,
                                start: startPoint,
                                end: endPoint,
@@ -61,6 +74,10 @@ class DrawGradientView: UIView {
 let testView = DrawGradientView()
 testView.backgroundColor = UIColor.white
 testView.frame = CGRect(x: 0, y: 0, width: 200, height: 80)
+
+// mask
+testView.maskedRadius = 40
+testView.maskedCorners = [.topRight, .bottomRight]
 
 struct GradientDirection {
     let startPoint: CGPoint
