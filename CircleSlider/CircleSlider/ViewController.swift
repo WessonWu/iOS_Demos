@@ -30,7 +30,9 @@ class ViewController: UIViewController {
     
     @objc
     private func progressValueChanged(_ sender: CircleSlider) {
-        print(#function, sender.currentValue)
+        if sender.currentValue >= 360 {
+            self.resultLabel.text = "解锁成功"
+        }
     }
     
     
@@ -43,7 +45,9 @@ class ViewController: UIViewController {
     @objc
     private func touchUp(_ sender: CircleSlider) {
         if sender.currentValue < 360 {
-            UIView.animate(withDuration: 0.35) {
+            let delta = sender.currentValue / 360 * 0.2
+            let duration = 0.2 + delta
+            UIView.animate(withDuration: TimeInterval(duration)) {
                 sender.currentValue = 0
             }
             self.resultLabel.text = "解锁失败"
