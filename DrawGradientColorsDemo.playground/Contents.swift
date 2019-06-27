@@ -13,31 +13,60 @@ drawsBeforeStartLocation = (1 << 0),  //向内渐变
 drawsAfterEndLocation = (1 << 1)      //向外渐变
 */
 
-class DrawGradientView: UIView {
-    var startPoint: CGPoint = .zero
-    var endPoint: CGPoint = .zero
+
+public class MaskedGradientLayer: CALayer {
+    @NSManaged public var startPoint: CGPoint
+    @NSManaged public var endPoint: CGPoint
+    @NSManaged public var locations: [CGFloat]?
+    @NSManaged public var colors: [CGColor]
     
-    var locations: [CGFloat]?
-    var colors: [UIColor] = []
+    @NSManaged public var maskedRadius: CGFloat
+    @NSManaged public var maskedRectCorner: UIRectCorner
     
+    public override init() {
+        super.init()
+    }
     
-    var maskedRadius: CGFloat = 0
-    var maskedCorners: UIRectCorner = []
-    
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        
-        guard let ctx = UIGraphicsGetCurrentContext(), needsDraw() else {
-            return
+    public override init(layer: Any) {
+        super.init(layer: layer)
+        if let pLayer = layer as? MaskedGradientLayer {
+            self.startPoint = pLayer.startPoint
+            self.endPoint = pLayer.endPoint
+            self.locations = pLayer.locations
+            self.colors = pLayer.colors
+            self.maskedRadius = pLayer.maskedRadius
+            self.maskedRectCorner = pLayer.maskedRectCorner
         }
-        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    open override class func needsDisplay(forKey key: String) -> Bool {
+        switch key {
+        case #keyPath(startPoint),
+             #keyPath(endPoint),
+             #keyPath(locations),
+             #keyPath(colors),
+             #keyPath(maskedRadius),
+             #keyPath(maskedRectCorner):
+            return true
+        default:
+            break
+        }
+        return super.needsDisplay(forKey: key)
+    }
+    
+    public override func draw(in ctx: CGContext) {
+        super.draw(in: ctx)
         ctx.saveGState()
         defer {
             ctx.restoreGState()
         }
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let colorComponents = colors.flatMap { return $0.cgColor.components ?? [] }
+        let colorComponents = colors.flatMap { return $0.components ?? [] }
         let locations = self.locations
         let startPoint = self.startPoint.applying(CGAffineTransform(scaleX: bounds.width, y: bounds.height))
         let endPoint = self.endPoint.applying(CGAffineTransform(scaleX: bounds.width, y: bounds.height))
@@ -45,11 +74,11 @@ class DrawGradientView: UIView {
                                         colorComponents: colorComponents,
                                         locations: locations,
                                         count: locations?.count ?? 0) else {
-            return
+                                            return
         }
         
         let radius = self.maskedRadius
-        let corners = self.maskedCorners
+        let corners = self.maskedRectCorner
         if radius > 0 && !corners.isEmpty {
             let path = UIBezierPath(roundedRect: self.bounds,
                                     byRoundingCorners: corners,
@@ -62,16 +91,70 @@ class DrawGradientView: UIView {
                                end: endPoint,
                                options: .drawsAfterEndLocation)
     }
+}
+
+
+public class MaskedGradientView: UIView {
+    public override class var layerClass: Swift.AnyClass { return MaskedGradientLayer.self }
+    public var gradientLayer: MaskedGradientLayer { return layer as! MaskedGradientLayer }
     
+    public dynamic var startPoint: CGPoint {
+        get {
+            return gradientLayer.startPoint
+        }
+        set {
+            gradientLayer.startPoint = newValue
+        }
+    }
+    public dynamic var endPoint: CGPoint {
+        get {
+            return gradientLayer.endPoint
+        }
+        set {
+            gradientLayer.endPoint = newValue
+        }
+    }
     
-    func needsDraw() -> Bool {
-        return startPoint != endPoint && !colors.isEmpty
+    public dynamic var locations: [CGFloat]? {
+        get {
+            return gradientLayer.locations
+        }
+        set {
+            gradientLayer.locations = newValue
+        }
+    }
+    
+    public dynamic var colors: [CGColor] {
+        get {
+            return gradientLayer.colors
+        }
+        set {
+            gradientLayer.colors = newValue
+        }
+    }
+    
+    public dynamic var maskedRadius: CGFloat {
+        get {
+            return gradientLayer.maskedRadius
+        }
+        set {
+            gradientLayer.maskedRadius = newValue
+        }
+    }
+    
+    public dynamic var maskedCorners: UIRectCorner {
+        get {
+            return gradientLayer.maskedRectCorner
+        }
+        set {
+            gradientLayer.maskedRectCorner = newValue
+        }
     }
 }
 
 
 
-let testView = DrawGradientView()
+let testView = MaskedGradientView()
 testView.backgroundColor = UIColor.white
 testView.frame = CGRect(x: 0, y: 0, width: 200, height: 80)
 
@@ -89,7 +172,7 @@ struct GradientDirection {
     static let bottom_to_top = GradientDirection(startPoint: CGPoint(x: 0, y: 1), endPoint: CGPoint(x: 0, y: 0))
 }
 
-func gradient(view: DrawGradientView = testView, direction: GradientDirection, config: (DrawGradientView) -> Void) {
+func gradient(view: MaskedGradientView = testView, direction: GradientDirection, config: (MaskedGradientView) -> Void) {
     view.startPoint = direction.startPoint
     view.endPoint = direction.endPoint
     config(view)
@@ -100,7 +183,7 @@ func gradient(view: DrawGradientView = testView, direction: GradientDirection, c
 
 // 单色渐变
 gradient(direction: .left_to_right) { (view) in
-    view.colors = [UIColor.red]
+    view.colors = [UIColor.red.cgColor]
     view.locations = nil // 无任何效果
     view.locations = [0, 0.5] //在[0, 0.5]区间内从红色渐变成透明
     view.locations = [0, 1] //在[0, 1]区间内从红色渐变成透明
@@ -108,21 +191,21 @@ gradient(direction: .left_to_right) { (view) in
 
 // 多色渐变
 gradient(direction: .left_to_right) { (view) in
-    view.colors = [UIColor.red, UIColor.green]
+    view.colors = [UIColor.red.cgColor, UIColor.green.cgColor]
     view.locations = nil //无任何效果
     view.locations = [0.3, 0.8] // [0, 0.3]：纯红色；[0.3, 0.8]：红色到绿色渐变；[0.8, 1]：纯绿色
     view.locations = [0, 1] // [0, 1]：红色到绿色渐变
 }
 
 gradient(direction: .left_to_right) { (view) in
-    view.colors = [UIColor.red, UIColor.green, UIColor.blue]
+    view.colors = [UIColor.red.cgColor, UIColor.green.cgColor, UIColor.blue.cgColor]
     view.locations = [0, 0.5, 1] // [0, 0.5]：红色到绿色渐变；[0.5, 1]：绿色到蓝色渐变
 }
 
 
 // 对角线渐变
 gradient(direction: .init(startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))) { (view) in
-    view.colors = [UIColor.red, UIColor.green, UIColor.blue]
+    view.colors = [UIColor.red.cgColor, UIColor.green.cgColor, UIColor.blue.cgColor]
     view.locations = [0, 0.5, 1] // [0, 0.5]：红色到绿色渐变；[0.5, 1]：绿色到蓝色渐变
 }
 
