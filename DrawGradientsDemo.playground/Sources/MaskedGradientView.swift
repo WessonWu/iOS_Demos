@@ -149,4 +149,21 @@ public class MaskedGradientView: UIView {
             gradientLayer.maskedRectCorner = newValue
         }
     }
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setup()
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        setup()
+    }
+    
+    func setup() {
+        self.backgroundColor = UIColor.clear
+        self.gradientLayer.contentsScale = UIScreen.main.scale
+    }
 }
