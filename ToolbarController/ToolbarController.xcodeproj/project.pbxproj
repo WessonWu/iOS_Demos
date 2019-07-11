@@ -15,6 +15,8 @@
 		0A05578922D48328005F3D93 /* ToobarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05578822D48328005F3D93 /* ToobarController.swift */; };
 		0A05578B22D4885D005F3D93 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05578A22D4885D005F3D93 /* OtherViewController.swift */; };
 		0A05578D22D48AD9005F3D93 /* CommonNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05578C22D48AD9005F3D93 /* CommonNavigationController.swift */; };
+		0A05579122D6E1D8005F3D93 /* AudioControlBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05579022D6E1D8005F3D93 /* AudioControlBar.swift */; };
+		0A05579522D72A42005F3D93 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05579422D72A42005F3D93 /* MeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		0A05578822D48328005F3D93 /* ToobarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToobarController.swift; sourceTree = "<group>"; };
 		0A05578A22D4885D005F3D93 /* OtherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
 		0A05578C22D48AD9005F3D93 /* CommonNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNavigationController.swift; sourceTree = "<group>"; };
+		0A05579022D6E1D8005F3D93 /* AudioControlBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioControlBar.swift; sourceTree = "<group>"; };
+		0A05579422D72A42005F3D93 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				0A05578822D48328005F3D93 /* ToobarController.swift */,
 				0A05578A22D4885D005F3D93 /* OtherViewController.swift */,
 				0A05578C22D48AD9005F3D93 /* CommonNavigationController.swift */,
+				0A05579022D6E1D8005F3D93 /* AudioControlBar.swift */,
+				0A05579422D72A42005F3D93 /* MeViewController.swift */,
 			);
 			path = ToolbarController;
 			sourceTree = "<group>";
@@ -145,7 +151,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A05578922D48328005F3D93 /* ToobarController.swift in Sources */,
+				0A05579522D72A42005F3D93 /* MeViewController.swift in Sources */,
 				0A05578B22D4885D005F3D93 /* OtherViewController.swift in Sources */,
+				0A05579122D6E1D8005F3D93 /* AudioControlBar.swift in Sources */,
 				0A05578D22D48AD9005F3D93 /* CommonNavigationController.swift in Sources */,
 				0A05577922D46FE0005F3D93 /* HomeViewController.swift in Sources */,
 				0A05577722D46FE0005F3D93 /* AppDelegate.swift in Sources */,

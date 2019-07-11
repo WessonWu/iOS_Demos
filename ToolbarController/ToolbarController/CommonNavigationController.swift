@@ -24,38 +24,29 @@ class CommonNavigationController: UINavigationController {
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        viewController.hidesBottomBarWhenPushed = true
         super.pushViewController(viewController, animated: animated)
+        if viewControllers.first == viewController {
+            viewController.hidesBottomBarWhenPushed = false
+        }
     }
 }
 
 extension CommonNavigationController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        
         let shouldTabbarHidden = navigationController.shouldTabbarHidden
-        guard let tabbarVC = viewController.tabBarController, shouldTabbarHidden != tabbarVC.tabBar.isHidden else {
-            return
-        }
-        let tabbar = tabbarVC.tabBar
-        tabbar.isHidden = false
+        let tabBarVC = self.tabBarController
         if let transitionCoordinator = viewController.transitionCoordinator {
-            let startTransform: CGAffineTransform
-            let endTransform: CGAffineTransform
-            if shouldTabbarHidden {
-                startTransform = .identity
-                endTransform = CGAffineTransform(translationX: 0, y: tabbar.frame.height)
-            } else {
-                startTransform = CGAffineTransform(translationX: 0, y: tabbar.frame.height)
-                endTransform = .identity
-            }
-            tabbar.transform = startTransform
-            transitionCoordinator.animate(alongsideTransition: { (context) in
-                tabbar.transform = endTransform
-            }) { (context) in
-                tabbar.transform = .identity
-                tabbar.isHidden = navigationController.viewControllers.count > 1
+            if let job = tabBarVC?.tabBarAnimationsWorkItemWithHidden(shouldTabbarHidden) {
+                transitionCoordinator.animate(alongsideTransition: { (_) in
+                    job.animations()
+                }) { (context) in
+                    job.completion(!context.isCancelled)
+                }
             }
         } else {
-            tabbar.transform = .identity
-            tabbar.isHidden = navigationController.viewControllers.count > 1
+            tabBarVC?.setTabBarHidden(shouldTabbarHidden, animated: false)
         }
     }
     
