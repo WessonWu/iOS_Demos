@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="iOS11Adaptive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cA8-Va-Ax1">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HomeCell" textLabel="pUy-8Q-cXE" style="IBUITableViewCellStyleDefault" id="9Yb-jO-OZP">
@@ -50,14 +50,17 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="cA8-Va-Ax1" secondAttribute="bottom" id="VLK-rD-wHA"/>
-                            <constraint firstItem="cA8-Va-Ax1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="f0N-9u-F1n"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cA8-Va-Ax1" secondAttribute="bottom" id="6bo-24-Vkb"/>
                             <constraint firstItem="cA8-Va-Ax1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fSW-nh-Qit"/>
+                            <constraint firstItem="cA8-Va-Ax1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fUj-nZ-jAy"/>
                             <constraint firstItem="cA8-Va-Ax1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="rvd-Ya-IRU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="B3f-cd-YwB"/>
+                    <connections>
+                        <outlet property="tableView" destination="cA8-Va-Ax1" id="Mal-Bt-iAo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -68,11 +71,11 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="pJ9-Qb-8YQ" customClass="OtherViewController" customModule="iOS11Adaptive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d85-63-DPa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jbo-CW-e5E">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MeCell" textLabel="6v0-3X-hyi" style="IBUITableViewCellStyleDefault" id="ido-xm-rD2">
@@ -111,6 +114,9 @@
                         <viewLayoutGuide key="safeArea" id="vGA-EH-juf"/>
                     </view>
                     <navigationItem key="navigationItem" title="Other" id="yXM-4k-tei"/>
+                    <connections>
+                        <outlet property="tableView" destination="jbo-CW-e5E" id="wc8-Z7-spm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7CA-gM-eck" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -122,7 +128,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xQW-3o-cYp" customClass="CompactNavigationViewController" customModule="iOS11Adaptive" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="home" id="LQe-wf-vlJ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xMG-Oi-WXu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="xMG-Oi-WXu">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -242,6 +248,6 @@
         <image name="me" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ftU-p4-Phj"/>
+        <segue reference="3aX-G3-r5M"/>
     </inferredMetricsTieBreakers>
 </document>

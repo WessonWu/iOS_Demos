@@ -9,11 +9,19 @@
 import UIKit
 
 class OtherViewController: UIViewController {
-
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        /// Fix for All_iOS11.0_bug03 (当且仅当UINavigationBar为isTransluent=false才会出现)
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

@@ -19,6 +19,7 @@
 		0A0557C322D97BA2005F3D93 /* iPhoneX_iOS11.0_bug01.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0A0557C222D97BA1005F3D93 /* iPhoneX_iOS11.0_bug01.gif */; };
 		0A0557C822D982E5005F3D93 /* PresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0557C722D982E5005F3D93 /* PresentationViewController.swift */; };
 		0A0557CA22D98699005F3D93 /* iPhoneX_iOS11.0_bug02.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0A0557C922D98699005F3D93 /* iPhoneX_iOS11.0_bug02.gif */; };
+		0A0557CC22D98CC8005F3D93 /* All_iOS11.0_bug03.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0A0557CB22D98CC8005F3D93 /* All_iOS11.0_bug03.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		0A0557C222D97BA1005F3D93 /* iPhoneX_iOS11.0_bug01.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = iPhoneX_iOS11.0_bug01.gif; sourceTree = "<group>"; };
 		0A0557C722D982E5005F3D93 /* PresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationViewController.swift; sourceTree = "<group>"; };
 		0A0557C922D98699005F3D93 /* iPhoneX_iOS11.0_bug02.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = iPhoneX_iOS11.0_bug02.gif; sourceTree = "<group>"; };
+		0A0557CB22D98CC8005F3D93 /* All_iOS11.0_bug03.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = All_iOS11.0_bug03.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 		0A0557C422D97E84005F3D93 /* Bugs */ = {
 			isa = PBXGroup;
 			children = (
+				0A0557CB22D98CC8005F3D93 /* All_iOS11.0_bug03.gif */,
 				0A0557C922D98699005F3D93 /* iPhoneX_iOS11.0_bug02.gif */,
 				0A0557C222D97BA1005F3D93 /* iPhoneX_iOS11.0_bug01.gif */,
 			);
@@ -155,6 +158,7 @@
 				0A0557B322D96C9A005F3D93 /* LaunchScreen.storyboard in Resources */,
 				0A0557CA22D98699005F3D93 /* iPhoneX_iOS11.0_bug02.gif in Resources */,
 				0A0557B022D96C9A005F3D93 /* Assets.xcassets in Resources */,
+				0A0557CC22D98CC8005F3D93 /* All_iOS11.0_bug03.gif in Resources */,
 				0A0557AE22D96C99005F3D93 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
