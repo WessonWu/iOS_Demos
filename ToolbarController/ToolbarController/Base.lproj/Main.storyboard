@@ -145,12 +145,21 @@
                                     <action selector="toggleTabbar:" destination="ZLf-k9-7dp" eventType="touchUpInside" id="XTv-fk-1hX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqC-5Y-pou">
+                                <rect key="frame" x="188" y="543" width="38" height="30"/>
+                                <state key="normal" title="audio"/>
+                                <connections>
+                                    <action selector="pushAudioController:" destination="ZLf-k9-7dp" eventType="touchUpInside" id="Jsb-M8-X8V"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="PI2-NV-Nsq" firstAttribute="centerY" secondItem="Vy3-OO-cbU" secondAttribute="centerY" id="1Yt-so-wc9"/>
                             <constraint firstItem="q2e-w8-ToF" firstAttribute="centerX" secondItem="PI2-NV-Nsq" secondAttribute="centerX" id="9DL-5J-zaK"/>
                             <constraint firstItem="q2e-w8-ToF" firstAttribute="top" secondItem="PI2-NV-Nsq" secondAttribute="bottom" constant="20" id="EDu-7R-ONs"/>
+                            <constraint firstItem="uqC-5Y-pou" firstAttribute="centerX" secondItem="Vy3-OO-cbU" secondAttribute="centerX" id="RTf-go-Mfu"/>
+                            <constraint firstItem="uqC-5Y-pou" firstAttribute="top" secondItem="q2e-w8-ToF" secondAttribute="bottom" constant="30" id="WOt-K6-fA7"/>
                             <constraint firstItem="PI2-NV-Nsq" firstAttribute="centerX" secondItem="Vy3-OO-cbU" secondAttribute="centerX" id="bnW-8X-YcT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TD3-4i-Ndp"/>

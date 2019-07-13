@@ -29,6 +29,11 @@ class MeViewController: UIViewController {
         print(#function, self.view.safeAreaInsets)
     }
     
+    @IBAction func pushAudioController(_ sender: Any) {
+        let audioVC = AudioPlayerViewController()
+        self.navigationController?.delegate = audioVC
+        self.navigationController?.pushViewController(audioVC, animated: true)
+    }
     /*
     // MARK: - Navigation
 
