@@ -10,6 +10,8 @@ import UIKit
 
 class ToolbarController: UITabBarController {
     
+    internal private(set) var fakeTabBar: UITabBar?
+    
     lazy var _controlBar: AudioControlBar = AudioControlBar()
     
     override func viewDidLoad() {
@@ -32,6 +34,19 @@ class ToolbarController: UITabBarController {
         }
         
         bar.frame = CGRect(x: 0, y: maxY - barHeight, width: self.view.frame.width, height: barHeight)
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if fakeTabBar == nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                guard self.fakeTabBar == nil else {
+                    return
+                }
+                self.fakeTabBar = NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self.tabBar)) as? UITabBar
+            }
+        }
     }
 }
 

@@ -9,17 +9,27 @@
 import UIKit
 
 class AudioPlayerViewController: UIViewController {
+    
+    lazy var dismissButton: UIButton = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.cyan
         // Do any additional setup after loading the view.
+        dismissButton.setTitle("dismiss", for: .normal)
+        self.view.addSubview(dismissButton)
+        
+        dismissButton.translatesAutoresizingMaskIntoConstraints = false
+        dismissButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        dismissButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        
+        dismissButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
     }
     
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     /*
     // MARK: - Navigation
@@ -31,6 +41,11 @@ class AudioPlayerViewController: UIViewController {
     }
     */
 
+    
+    @objc
+    private func dismissSelf() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 
