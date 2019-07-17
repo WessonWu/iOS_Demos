@@ -16,6 +16,8 @@ class RDVFirstViewController: UITableViewController {
         self.title = "First"
         
         self.rdv_tabBarItem?.badgeValue = "3"
+        self.extendedLayoutIncludesOpaqueBars = true
+        self.edgesForExtendedLayout = [.bottom]
         
         if let tabBarController = self.rdv_tabBarController, tabBarController.tabBar.isTranslucent {
             let tabBar = tabBarController.tabBar

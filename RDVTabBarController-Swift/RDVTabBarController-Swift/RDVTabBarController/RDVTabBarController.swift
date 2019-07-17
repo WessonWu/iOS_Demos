@@ -36,6 +36,7 @@ public class RDVTabBarController: UIViewController, RDVTabBarDelegate {
                 viewController.willMove(toParent: nil)
                 viewController.view.removeFromSuperview()
                 viewController.removeFromParent()
+                viewController.rdv_tabBarController = nil
             }
             
             var tabBarItems: [RDVTabBarItem] = []
@@ -200,15 +201,16 @@ public class RDVTabBarController: UIViewController, RDVTabBarDelegate {
     }
     
     func index(for viewController: UIViewController?) -> Int? {
-        var searchedController = viewController
-        while searchedController?.parent != nil && searchedController?.parent != self {
-            searchedController = searchedController?.parent
+        guard let vc = viewController else {
+            return nil
         }
         
-        if let searchedVC = searchedController {
-            return viewControllers.firstIndex(where: { searchedVC.isEqual($0) })
+        var searchedController = vc
+        while let parentVC = searchedController.parent, parentVC != self {
+            searchedController = parentVC
         }
-        return nil
+        
+        return viewControllers.firstIndex(where: { searchedController.isEqual($0) })
     }
     
     
