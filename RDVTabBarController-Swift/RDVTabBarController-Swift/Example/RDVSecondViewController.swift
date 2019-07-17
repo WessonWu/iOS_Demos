@@ -11,7 +11,6 @@ import UIKit
 class RDVSecondViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Second"
         
         if let tabBarController = self.rdv_tabBarController, tabBarController.tabBar.isTranslucent {
             let tabBar = tabBarController.tabBar

@@ -58,12 +58,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func setupViewControllers() {
         let firstVC = RDVFirstViewController()
+        firstVC.title = "First"
         let firstNavigationVC = UINavigationController(rootViewController: firstVC)
         
         let secondVC = RDVSecondViewController()
+        secondVC.title = "Second"
         let secondNavigationVC = UINavigationController(rootViewController: secondVC)
         
         let thirdVC = RDVThirdViewController()
+        thirdVC.title = "Third"
         let thirdNavigationVC = UINavigationController(rootViewController: thirdVC)
         
         let tabBarController = RDVTabBarController()
@@ -87,14 +90,14 @@ extension AppDelegate {
             item.finishedUnselectedImage = UIImage(named: "\(named)_normal")
         }
         
-        let tabBar = tabBarController.tabBar
-        if #available(iOS 11.0, *) {
-            let safeAreaBottom = self.window?.safeAreaInsets.bottom ?? 0
-            tabBar.height = safeAreaBottom + 49
-            tabBar.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: safeAreaBottom, right: 0)
-        } else {
-            tabBar.height = 49
-        }
+//        let tabBar = tabBarController.tabBar
+//        if #available(iOS 11.0, *) {
+//            let safeAreaBottom = self.window?.safeAreaInsets.bottom ?? 0
+//            tabBar.height = safeAreaBottom + 49
+//            tabBar.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: safeAreaBottom, right: 0)
+//        } else {
+//            tabBar.height = 49
+//        }
     }
     
     

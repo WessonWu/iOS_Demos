@@ -11,7 +11,6 @@ import UIKit
 class RDVThirdViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Third"
         
         if let tabBarController = self.rdv_tabBarController, tabBarController.tabBar.isTranslucent {
             let tabBar = tabBarController.tabBar

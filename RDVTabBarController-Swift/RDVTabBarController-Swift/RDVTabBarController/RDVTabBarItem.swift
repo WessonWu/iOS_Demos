@@ -64,19 +64,15 @@ public class RDVTabBarItem: UIControl {
     /// the text attributes for badge.
     public var badgeTextAttributes: [NSAttributedString.Key: Any]?
     
-    
-    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         commonInitialization()
     }
     
-    
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInitialization()
     }
-    
     
     private func commonInitialization() {
         // Setup defaults
@@ -180,8 +176,8 @@ public class RDVTabBarItem: UIControl {
             badgeSize.width = badgeSize.height
         }
         
-        let badgeBackgroundFrame = CGRect(x: round(((frameSize.width + imageSize.width) / 2) * 0.9) + badgePositionAdjustment.horizontal,
-                                          y: badgeTextInsets.top + badgePositionAdjustment.vertical,
+        let badgeBackgroundFrame = CGRect(x: round(frameSize.width / 2 + imageSize.width / 2 * 0.9) + badgePositionAdjustment.horizontal,
+                                          y: 2 + badgePositionAdjustment.vertical,
                                           width: badgeSize.width + badgeTextInsets.left + badgeTextInsets.right,
                                           height: badgeSize.height + badgeTextInsets.top + badgeTextInsets.bottom)
         
@@ -204,6 +200,6 @@ public class RDVTabBarItem: UIControl {
                                                  y: badgeBackgroundFrame.minY + badgeTextInsets.top,
                                                  width: badgeSize.width,
                                                  height: badgeSize.height),
-                                      withAttributes: nil)
+                                      withAttributes: badgeTextAttributes)
     }
 }

@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 public protocol RDVTabBarDelegate: AnyObject {
     func tabBar(_ tabBar: RDVTabBar, shouldSelectItemAt index: Int) -> Bool
     func tabBar(_ tabBar: RDVTabBar, didSelectItemAt index: Int) -> Void
@@ -47,7 +46,11 @@ public class RDVTabBar: UIView {
     
     /// backgroundView stays behind tabBar's items. If you want to add additional views,
     /// add them as subviews of backgroundView.
-    public private(set) lazy var backgroundView = UIView(frame: self.bounds)
+    public private(set) lazy var backgroundView: UIView = { [unowned self] in
+       let backgroundView = UIView(frame: self.bounds)
+        backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        return backgroundView
+    }()
     /// contentEdgeInsets can be used to center the items in the middle of the tabBar.
     public var contentEdgeInsets: UIEdgeInsets = .zero
     /// Sets the height of tab bar.
@@ -70,19 +73,21 @@ public class RDVTabBar: UIView {
         }
     }
     
+    public var automaticallyAdjustsContentInsets: Bool = true
+    
     var selectedIndex: Int = 0 {
         didSet {
             if selectedIndex != oldValue {
                 let oldItem = tabBarItem(at: oldValue)
-                let newItem = tabBarItem(at: selectedIndex)
                 oldItem?.isSelected = false
-                newItem?.isSelected = true
             }
+            
+            let newItem = tabBarItem(at: selectedIndex)
+            newItem?.isSelected = true
         }
     }
     
     private var itemWidth: CGFloat = 50
-    
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -96,30 +101,37 @@ public class RDVTabBar: UIView {
     
     private func commonInitialization() {
         self.addSubview(backgroundView)
-        
+        self.isTranslucent = false
         // Accessibility
         self.isAccessibilityElement = false
     }
     
     public override func layoutSubviews() {
         let frameSize = self.frame.size
-        let contentEdgeInsets = self.contentEdgeInsets
-        let minimumContentHeight = self.minimumContentHeight
+        var contentEdgeInsets = self.contentEdgeInsets
+        if #available(iOS 11.0, *), automaticallyAdjustsContentInsets {
+            let safeAreaInsets = self.safeAreaInsets
+            contentEdgeInsets.top += safeAreaInsets.top
+            contentEdgeInsets.left += safeAreaInsets.left
+            contentEdgeInsets.bottom += safeAreaInsets.bottom
+            contentEdgeInsets.right += safeAreaInsets.right
+        }
         self.backgroundView.frame = CGRect(x: 0,
-                                           y: frameSize.height - minimumContentHeight,
+                                           y: 0,
                                            width: frameSize.width,
                                            height: frameSize.height)
         let avaibleWidth = frameSize.width - contentEdgeInsets.left - contentEdgeInsets.right
         let count: CGFloat = items.count > 0 ? CGFloat(items.count) : 1
         self.itemWidth = round(avaibleWidth / count)
         
+        // Layout Items
         for (index, item) in items.enumerated() {
             let itemHeight = item.itemHeight ?? frameSize.height
             
             item.frame = CGRect(x: contentEdgeInsets.left + CGFloat(index) * itemWidth,
-                                y: round(frameSize.height - itemHeight) - self.contentEdgeInsets.top,
+                                y: round(frameSize.height - itemHeight) - contentEdgeInsets.top,
                                 width: self.itemWidth,
-                                height: itemHeight - self.contentEdgeInsets.bottom)
+                                height: itemHeight - contentEdgeInsets.bottom)
             
             item.setNeedsDisplay()
         }

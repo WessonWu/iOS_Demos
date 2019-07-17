@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0AA1980B22DEB07000FB9FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1980A22DEB07000FB9FA6 /* AppDelegate.swift */; };
-		0AA1980D22DEB07000FB9FA6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1980C22DEB07000FB9FA6 /* ViewController.swift */; };
 		0AA1981222DEB07100FB9FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA1981122DEB07100FB9FA6 /* Assets.xcassets */; };
 		0AA1981522DEB07100FB9FA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA1981322DEB07100FB9FA6 /* LaunchScreen.storyboard */; };
 		0AA1981E22DEB0AC00FB9FA6 /* RDVTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1981D22DEB0AC00FB9FA6 /* RDVTabBarItem.swift */; };
@@ -24,7 +23,6 @@
 /* Begin PBXFileReference section */
 		0AA1980722DEB07000FB9FA6 /* RDVTabBarController-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RDVTabBarController-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA1980A22DEB07000FB9FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0AA1980C22DEB07000FB9FA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0AA1981122DEB07100FB9FA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AA1981422DEB07100FB9FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AA1981622DEB07100FB9FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,7 +69,6 @@
 				0AA1982522DF082800FB9FA6 /* Example */,
 				0AA1981C22DEB07800FB9FA6 /* RDVTabBarController */,
 				0AA1980A22DEB07000FB9FA6 /* AppDelegate.swift */,
-				0AA1980C22DEB07000FB9FA6 /* ViewController.swift */,
 				0AA1981122DEB07100FB9FA6 /* Assets.xcassets */,
 				0AA1981322DEB07100FB9FA6 /* LaunchScreen.storyboard */,
 				0AA1981622DEB07100FB9FA6 /* Info.plist */,
@@ -172,7 +169,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AA1981E22DEB0AC00FB9FA6 /* RDVTabBarItem.swift in Sources */,
-				0AA1980D22DEB07000FB9FA6 /* ViewController.swift in Sources */,
 				0AA1982D22DF0BAE00FB9FA6 /* RDVDetailsViewController.swift in Sources */,
 				0AA1982722DF089F00FB9FA6 /* RDVFirstViewController.swift in Sources */,
 				0AA1982422DEEEC800FB9FA6 /* UIViewController+RDVTabBarControllerItem.swift in Sources */,

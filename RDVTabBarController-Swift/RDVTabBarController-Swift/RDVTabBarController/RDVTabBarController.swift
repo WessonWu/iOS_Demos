@@ -66,7 +66,7 @@ public class RDVTabBarController: UIViewController, RDVTabBarDelegate {
     /// The index of the view controller associated with the currently selected tab item.
     public var selectedIndex: Int = 0 {
         didSet {
-            guard self.selectedIndex != oldValue else {
+            guard self.selectedIndex != oldValue || self.selectedViewController?.parent == nil else {
                 return
             }
             
@@ -101,7 +101,7 @@ public class RDVTabBarController: UIViewController, RDVTabBarDelegate {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.addSubview(self.contentView)
         self.view.addSubview(self.tabBar)
     }
@@ -124,14 +124,14 @@ public class RDVTabBarController: UIViewController, RDVTabBarDelegate {
         
         if tabBarHeight <= 0 {
             if #available(iOS 11.0, *) {
-                let safeAreaBottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-                tabBarHeight = 58 + safeAreaBottom / 1.5
+                let safeAreaBottom = self.view.safeAreaInsets.bottom
+                tabBarHeight = 49 + safeAreaBottom
             } else {
-                tabBarHeight = 58
+                tabBarHeight = 49
             }
         } else if #available(iOS 11.0, *) {
-            let safeAreaBottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-            tabBarHeight = 58 + safeAreaBottom / 1.5
+            let safeAreaBottom = self.view.safeAreaInsets.bottom
+            tabBarHeight = 49 + safeAreaBottom
         }
         
         if !self.isTabBarHidden {
