@@ -12,10 +12,21 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var viewController: RDVTabBarController?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        self.window = window
+        window.backgroundColor = UIColor.white
+        setupViewControllers()
+        window.rootViewController = self.viewController
+        window.makeKeyAndVisible()
+        
+        customizeInterface()
+        
         return true
     }
 
@@ -42,5 +53,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+extension AppDelegate {
+    func setupViewControllers() {
+        let firstVC = RDVFirstViewController()
+        let firstNavigationVC = UINavigationController(rootViewController: firstVC)
+        
+        let secondVC = RDVSecondViewController()
+        let secondNavigationVC = UINavigationController(rootViewController: secondVC)
+        
+        let thirdVC = RDVThirdViewController()
+        let thirdNavigationVC = UINavigationController(rootViewController: thirdVC)
+        
+        let tabBarController = RDVTabBarController()
+        tabBarController.viewControllers = [firstNavigationVC, secondNavigationVC, thirdNavigationVC]
+        self.viewController = tabBarController
+        
+        customizeTabBarForController(tabBarController)
+    }
+    
+    
+    func customizeTabBarForController(_ tabBarController: RDVTabBarController) {
+        let finishedImage = UIImage(named: "tabbar_selected_background")
+        let unfinishedImage = UIImage(named: "tabbar_normal_background")
+        
+        let tabBarItemImages = ["first", "second", "third"]
+        for (index, item) in tabBarController.tabBar.items.enumerated() {
+            item.backgroundSelectedImage = finishedImage
+            item.backgroundUnselectedImage = unfinishedImage
+            let named = tabBarItemImages[index]
+            item.finishedSelectedImage = UIImage(named: "\(named)_selected")
+            item.finishedUnselectedImage = UIImage(named: "\(named)_normal")
+        }
+        
+        let tabBar = tabBarController.tabBar
+        if #available(iOS 11.0, *) {
+            let safeAreaBottom = self.window?.safeAreaInsets.bottom ?? 0
+            tabBar.height = safeAreaBottom + 49
+            tabBar.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: safeAreaBottom, right: 0)
+        } else {
+            tabBar.height = 49
+        }
+    }
+    
+    
+    func customizeInterface() {
+        let navBar = UINavigationBar.appearance()
+        
+        let backgroundImage = UIImage(named: "navigationbar_background_tall")
+        let textAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 18),
+                                                             .foregroundColor: UIColor.black]
+        navBar.setBackgroundImage(backgroundImage, for: .default)
+        navBar.titleTextAttributes = textAttributes
+    }
 }
 

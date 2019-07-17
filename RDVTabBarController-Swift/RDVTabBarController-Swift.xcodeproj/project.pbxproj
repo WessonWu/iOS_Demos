@@ -9,20 +9,22 @@
 /* Begin PBXBuildFile section */
 		0AA1980B22DEB07000FB9FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1980A22DEB07000FB9FA6 /* AppDelegate.swift */; };
 		0AA1980D22DEB07000FB9FA6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1980C22DEB07000FB9FA6 /* ViewController.swift */; };
-		0AA1981022DEB07000FB9FA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA1980E22DEB07000FB9FA6 /* Main.storyboard */; };
 		0AA1981222DEB07100FB9FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA1981122DEB07100FB9FA6 /* Assets.xcassets */; };
 		0AA1981522DEB07100FB9FA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA1981322DEB07100FB9FA6 /* LaunchScreen.storyboard */; };
 		0AA1981E22DEB0AC00FB9FA6 /* RDVTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1981D22DEB0AC00FB9FA6 /* RDVTabBarItem.swift */; };
 		0AA1982022DEC62200FB9FA6 /* RDVTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1981F22DEC62200FB9FA6 /* RDVTabBar.swift */; };
 		0AA1982222DEDE1300FB9FA6 /* RDVTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1982122DEDE1300FB9FA6 /* RDVTabBarController.swift */; };
 		0AA1982422DEEEC800FB9FA6 /* UIViewController+RDVTabBarControllerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1982322DEEEC800FB9FA6 /* UIViewController+RDVTabBarControllerItem.swift */; };
+		0AA1982722DF089F00FB9FA6 /* RDVFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1982622DF089F00FB9FA6 /* RDVFirstViewController.swift */; };
+		0AA1982922DF0AE700FB9FA6 /* RDVSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1982822DF0AE700FB9FA6 /* RDVSecondViewController.swift */; };
+		0AA1982B22DF0B7D00FB9FA6 /* RDVThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1982A22DF0B7D00FB9FA6 /* RDVThirdViewController.swift */; };
+		0AA1982D22DF0BAE00FB9FA6 /* RDVDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1982C22DF0BAE00FB9FA6 /* RDVDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0AA1980722DEB07000FB9FA6 /* RDVTabBarController-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RDVTabBarController-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA1980A22DEB07000FB9FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AA1980C22DEB07000FB9FA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0AA1980F22DEB07000FB9FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0AA1981122DEB07100FB9FA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AA1981422DEB07100FB9FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AA1981622DEB07100FB9FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -30,6 +32,10 @@
 		0AA1981F22DEC62200FB9FA6 /* RDVTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDVTabBar.swift; sourceTree = "<group>"; };
 		0AA1982122DEDE1300FB9FA6 /* RDVTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDVTabBarController.swift; sourceTree = "<group>"; };
 		0AA1982322DEEEC800FB9FA6 /* UIViewController+RDVTabBarControllerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+RDVTabBarControllerItem.swift"; sourceTree = "<group>"; };
+		0AA1982622DF089F00FB9FA6 /* RDVFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDVFirstViewController.swift; sourceTree = "<group>"; };
+		0AA1982822DF0AE700FB9FA6 /* RDVSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDVSecondViewController.swift; sourceTree = "<group>"; };
+		0AA1982A22DF0B7D00FB9FA6 /* RDVThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDVThirdViewController.swift; sourceTree = "<group>"; };
+		0AA1982C22DF0BAE00FB9FA6 /* RDVDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDVDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +68,10 @@
 		0AA1980922DEB07000FB9FA6 /* RDVTabBarController-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				0AA1982522DF082800FB9FA6 /* Example */,
 				0AA1981C22DEB07800FB9FA6 /* RDVTabBarController */,
 				0AA1980A22DEB07000FB9FA6 /* AppDelegate.swift */,
 				0AA1980C22DEB07000FB9FA6 /* ViewController.swift */,
-				0AA1980E22DEB07000FB9FA6 /* Main.storyboard */,
 				0AA1981122DEB07100FB9FA6 /* Assets.xcassets */,
 				0AA1981322DEB07100FB9FA6 /* LaunchScreen.storyboard */,
 				0AA1981622DEB07100FB9FA6 /* Info.plist */,
@@ -82,6 +88,17 @@
 				0AA1982322DEEEC800FB9FA6 /* UIViewController+RDVTabBarControllerItem.swift */,
 			);
 			path = RDVTabBarController;
+			sourceTree = "<group>";
+		};
+		0AA1982522DF082800FB9FA6 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				0AA1982622DF089F00FB9FA6 /* RDVFirstViewController.swift */,
+				0AA1982822DF0AE700FB9FA6 /* RDVSecondViewController.swift */,
+				0AA1982A22DF0B7D00FB9FA6 /* RDVThirdViewController.swift */,
+				0AA1982C22DF0BAE00FB9FA6 /* RDVDetailsViewController.swift */,
+			);
+			path = Example;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,7 +161,6 @@
 			files = (
 				0AA1981522DEB07100FB9FA6 /* LaunchScreen.storyboard in Resources */,
 				0AA1981222DEB07100FB9FA6 /* Assets.xcassets in Resources */,
-				0AA1981022DEB07000FB9FA6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,24 +173,20 @@
 			files = (
 				0AA1981E22DEB0AC00FB9FA6 /* RDVTabBarItem.swift in Sources */,
 				0AA1980D22DEB07000FB9FA6 /* ViewController.swift in Sources */,
+				0AA1982D22DF0BAE00FB9FA6 /* RDVDetailsViewController.swift in Sources */,
+				0AA1982722DF089F00FB9FA6 /* RDVFirstViewController.swift in Sources */,
 				0AA1982422DEEEC800FB9FA6 /* UIViewController+RDVTabBarControllerItem.swift in Sources */,
 				0AA1982222DEDE1300FB9FA6 /* RDVTabBarController.swift in Sources */,
 				0AA1982022DEC62200FB9FA6 /* RDVTabBar.swift in Sources */,
+				0AA1982B22DF0B7D00FB9FA6 /* RDVThirdViewController.swift in Sources */,
 				0AA1980B22DEB07000FB9FA6 /* AppDelegate.swift in Sources */,
+				0AA1982922DF0AE700FB9FA6 /* RDVSecondViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0AA1980E22DEB07000FB9FA6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0AA1980F22DEB07000FB9FA6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0AA1981322DEB07100FB9FA6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
