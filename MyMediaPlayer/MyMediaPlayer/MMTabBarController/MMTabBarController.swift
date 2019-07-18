@@ -90,10 +90,9 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewControllers = [rootViewController]
         self.navigationBar.isHidden = true
         self.interactivePopGestureRecognizer?.delegate = self
-        
-        pushViewController(rootViewController, animated: false)
         self.view.addSubview(bottomBar)
     }
     
@@ -105,19 +104,7 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        let viewSize = self.view.bounds.size
-        var bottomBarHeight = bottomBar.minimumContentHeight()
-
-        if #available(iOS 11.0, *), !bottomBar.isAllHidden {
-            let safeAreaBottom = self.view.safeAreaInsets.bottom
-            bottomBarHeight += safeAreaBottom
-        }
-
-        bottomBar.frame = CGRect(x: 0,
-                                 y: viewSize.height - bottomBarHeight,
-                                 width: viewSize.width,
-                                 height: bottomBarHeight)
+        bottomBar.frame = finalFrameForBottomBar()
     }
     
     public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
@@ -167,9 +154,7 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
         bottomBar.isSongViewHidden = isSongViewHidden
         bottomBar.isTabBarHidden = isTabBarHidden
         
-        self.view.setNeedsLayout()
-        
-        if !bottomBar.isAllHidden {
+        if !bottomBar.isBottomBarHidden {
             bottomBar.isHidden = false
         }
         
@@ -181,15 +166,30 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
             bottomBar.tabBar.isHidden = false
         }
         
+        let finalFrame = finalFrameForBottomBar()
         UIView.animate(withDuration: animated ? 0.24 : 0, animations: {
-            self.view.layoutIfNeeded()
+            self.bottomBar.frame = finalFrame
         }) { (_) in
-            self.bottomBar.isHidden = self.bottomBar.isAllHidden
+            self.bottomBar.isHidden = self.bottomBar.isBottomBarHidden
             self.bottomBar.songView.isHidden = self.bottomBar.isSongViewHidden
             self.bottomBar.tabBar.isHidden = self.bottomBar.isTabBarHidden
         }
     }
     
+    
+    private func finalFrameForBottomBar() -> CGRect {
+        let viewSize = self.view.bounds.size
+        var bottomBarHeight = bottomBar.minimumContentHeight()
+        
+        if #available(iOS 11.0, *), !bottomBar.isBottomBarHidden {
+            bottomBarHeight += self.view.safeAreaInsets.bottom
+        }
+        
+        return CGRect(x: 0,
+                      y: viewSize.height - bottomBarHeight,
+                      width: viewSize.width,
+                      height: bottomBarHeight)
+    }
 }
 
 extension MMTabBarController: UIGestureRecognizerDelegate {

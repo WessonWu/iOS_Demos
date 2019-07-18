@@ -9,7 +9,7 @@
 import UIKit
 
 public class MiniPlayerSongView: UIView {
-    public var intrinsicHeight: CGFloat = 48
+    public var minimumContentHeight: CGFloat = 48
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

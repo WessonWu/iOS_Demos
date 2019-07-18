@@ -44,7 +44,7 @@ public class MMTabBar: UIView {
         return tabBarItem(at: self.selectedIndex)
     }
     
-    public var itemHeight: CGFloat = 49
+    public var minimumContentHeight: CGFloat = 49
     
     public var contentEdgeInsets: UIEdgeInsets = .zero
     
@@ -93,7 +93,7 @@ public class MMTabBar: UIView {
         let avaibleWidth = frameSize.width - contentEdgeInsets.left - contentEdgeInsets.right
         let count: CGFloat = items.count > 0 ? CGFloat(items.count) : 1
         let itemWidth = round(avaibleWidth / count)
-        let itemHeight = self.itemHeight + contentEdgeInsets.top + contentEdgeInsets.bottom
+        let itemHeight = self.minimumContentHeight + contentEdgeInsets.top + contentEdgeInsets.bottom
         // Layout Items
         for (index, item) in items.enumerated() {
             
