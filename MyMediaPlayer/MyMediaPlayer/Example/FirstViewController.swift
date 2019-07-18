@@ -52,3 +52,13 @@ class FirstViewController: UITableViewController {
         self.mm_tabBarItem?.badgeValue = (indexPath.row + 1).description
     }
 }
+
+extension FirstViewController: MMBottomBarDisplayable {
+    var shouldTabBarHidden: Bool {
+        return false
+    }
+    
+    var shouldSongViewHidden: Bool {
+        return false
+    }
+}

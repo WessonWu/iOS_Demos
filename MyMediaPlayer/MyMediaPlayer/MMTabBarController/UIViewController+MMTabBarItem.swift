@@ -36,3 +36,43 @@ extension UIViewController {
         return self.parent?.mm_tabBarController
     }
 }
+
+
+extension UIApplication {
+    override open var next: UIResponder? {
+        UIViewController.awake
+        return super.next
+    }
+}
+
+extension UIViewController {
+    static let awake: Void = {
+        swizzleMethods()
+    }()
+    
+    fileprivate class func swizzleMethods() {
+        method_exchangeImplementations(
+            class_getInstanceMethod(self, #selector(UIViewController.viewWillAppear(_:)))!,
+            class_getInstanceMethod(self, #selector(UIViewController.MMTabBarController_viewWillAppear(_:)))!)
+    }
+    
+    @objc
+    func MMTabBarController_viewWillAppear(_ animated: Bool) {
+        self.MMTabBarController_viewWillAppear(animated)
+        
+        guard !self.isKind(of: UITabBarController.self) && !self.isKind(of: UINavigationController.self) && !self.isKind(of: MMTabBarRootViewController.self) else {
+            return
+        }
+        
+        if let tabBarVC = self.mm_tabBarController {
+            var shouldSongViewHidden = true
+            var shouldTabBarHidden = true
+            if let displayable = self as? MMBottomBarDisplayable {
+                shouldSongViewHidden = displayable.shouldSongViewHidden
+                shouldTabBarHidden = displayable.shouldTabBarHidden
+            }
+            tabBarVC.setBottomBarHidden(isSongViewHidden: shouldSongViewHidden, isTabBarHidden: shouldTabBarHidden, animated: animated)
+        }
+    }
+}
+

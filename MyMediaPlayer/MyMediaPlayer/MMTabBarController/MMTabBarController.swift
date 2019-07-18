@@ -13,6 +13,15 @@ public protocol MMBottomBarDisplayable {
     var shouldTabBarHidden: Bool { get }
 }
 
+extension MMBottomBarDisplayable {
+    var shouldSongViewHidden: Bool {
+        return true
+    }
+    var shouldTabBarHidden: Bool {
+        return true
+    }
+}
+
 public protocol MMTabBarControllerDelegate: AnyObject {
     /// Asks the delegate whether the specified view controller should be made active.
     func tabBarController(_ tabBarController: MMTabBarController, shouldSelect viewController: UIViewController) -> Bool
@@ -183,7 +192,7 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
     
 }
 
-extension UINavigationController: UIGestureRecognizerDelegate {
+extension MMTabBarController: UIGestureRecognizerDelegate {
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return viewControllers.count > 1
     }

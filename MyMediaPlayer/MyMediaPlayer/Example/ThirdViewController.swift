@@ -24,12 +24,6 @@ class ThirdViewController: UITableViewController {
 //        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        self.mm_tabBarController?.setBottomBarHidden(isSongViewHidden: false, isTabBarHidden: false, animated: animated)
-    }
-    
     func configureCell(_ cell: UITableViewCell, for indexPath: IndexPath) {
         cell.textLabel?.text = "\(title ?? "") Controller Cell \(indexPath.row)"
     }
@@ -53,4 +47,16 @@ class ThirdViewController: UITableViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+
+extension ThirdViewController: MMBottomBarDisplayable {
+    var shouldTabBarHidden: Bool {
+        return false
+    }
+    
+    var shouldSongViewHidden: Bool {
+        return false
+    }
+}
+
 

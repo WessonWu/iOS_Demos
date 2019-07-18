@@ -49,3 +49,14 @@ class SecondViewController: UITableViewController {
 //        tabBarVC.setTabBarHidden(!tabBarVC.isTabBarHidden, animated: true)
     }
 }
+
+extension SecondViewController: MMBottomBarDisplayable {
+    var shouldTabBarHidden: Bool {
+        return false
+    }
+    
+    var shouldSongViewHidden: Bool {
+        return false
+    }
+}
+

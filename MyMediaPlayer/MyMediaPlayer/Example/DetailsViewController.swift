@@ -51,16 +51,20 @@ class DetailsViewController: UIViewController {
     }
     */
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(data.navigationBarHidden, animated: animated)
-        self.mm_tabBarController?.setBottomBarHidden(isSongViewHidden: data.isSongViewHidden, isTabBarHidden: data.isTabBarHidden, animated: animated)
-    }
-    
     
     @IBAction func goToNext(_ sender: Any) {
         let vc = DetailsViewController.newInstance(data: HiddenData(isSongViewHidden: songViewHiddenSwitch.isOn, isTabBarHidden: tabBarHiddenSwitch.isOn, navigationBarHidden: navigationBarHidden.isOn))
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+}
+
+extension DetailsViewController: MMBottomBarDisplayable {
+    var shouldSongViewHidden: Bool {
+        return data.isSongViewHidden
+    }
+    
+    var shouldTabBarHidden: Bool {
+        return data.isTabBarHidden
+    }
 }
