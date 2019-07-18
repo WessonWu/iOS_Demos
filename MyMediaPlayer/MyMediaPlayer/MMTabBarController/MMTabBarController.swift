@@ -86,8 +86,7 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
     public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
     }
-    
-    
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.viewControllers = [rootViewController]
@@ -177,6 +176,14 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
     }
     
     
+    public func setBottomBarHidden(fromVC: UIViewController, toVC: UIViewController, alongside transitionCoordinator: UIViewControllerTransitionCoordinator?) {
+        if let coordinator = transitionCoordinator {
+        } else {
+            let hiddens = toVC.bottomBarHiddens()
+        }
+    }
+    
+    
     private func finalFrameForBottomBar() -> CGRect {
         let viewSize = self.view.bounds.size
         var bottomBarHeight = bottomBar.minimumContentHeight()
@@ -195,5 +202,16 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
 extension MMTabBarController: UIGestureRecognizerDelegate {
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return viewControllers.count > 1
+    }
+}
+
+
+fileprivate typealias BottomBarHiddens = (isSongViewHidden: Bool, isTabBarHidden: Bool)
+fileprivate extension UIViewController {
+    func bottomBarHiddens() -> BottomBarHiddens {
+        if let displayable = self as? MMBottomBarDisplayable {
+            return (displayable.shouldSongViewHidden, displayable.shouldTabBarHidden)
+        }
+        return (true, true)
     }
 }

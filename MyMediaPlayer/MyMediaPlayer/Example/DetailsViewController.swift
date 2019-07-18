@@ -40,6 +40,12 @@ class DetailsViewController: UIViewController {
         navigationBarHidden.isOn = data.navigationBarHidden
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("ViewWillAppear")
+    }
+    
 
     /*
     // MARK: - Navigation
