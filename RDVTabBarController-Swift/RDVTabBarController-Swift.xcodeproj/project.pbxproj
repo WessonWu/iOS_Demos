@@ -18,6 +18,7 @@
 		0AA1982922DF0AE700FB9FA6 /* RDVSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1982822DF0AE700FB9FA6 /* RDVSecondViewController.swift */; };
 		0AA1982B22DF0B7D00FB9FA6 /* RDVThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1982A22DF0B7D00FB9FA6 /* RDVThirdViewController.swift */; };
 		0AA1982D22DF0BAE00FB9FA6 /* RDVDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1982C22DF0BAE00FB9FA6 /* RDVDetailsViewController.swift */; };
+		0AA1987322E0215600FB9FA6 /* UIViewController+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987222E0215600FB9FA6 /* UIViewController+TabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		0AA1982822DF0AE700FB9FA6 /* RDVSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDVSecondViewController.swift; sourceTree = "<group>"; };
 		0AA1982A22DF0B7D00FB9FA6 /* RDVThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDVThirdViewController.swift; sourceTree = "<group>"; };
 		0AA1982C22DF0BAE00FB9FA6 /* RDVDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDVDetailsViewController.swift; sourceTree = "<group>"; };
+		0AA1987222E0215600FB9FA6 /* UIViewController+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+TabBar.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				0AA1982822DF0AE700FB9FA6 /* RDVSecondViewController.swift */,
 				0AA1982A22DF0B7D00FB9FA6 /* RDVThirdViewController.swift */,
 				0AA1982C22DF0BAE00FB9FA6 /* RDVDetailsViewController.swift */,
+				0AA1987222E0215600FB9FA6 /* UIViewController+TabBar.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 			files = (
 				0AA1981E22DEB0AC00FB9FA6 /* RDVTabBarItem.swift in Sources */,
 				0AA1982D22DF0BAE00FB9FA6 /* RDVDetailsViewController.swift in Sources */,
+				0AA1987322E0215600FB9FA6 /* UIViewController+TabBar.swift in Sources */,
 				0AA1982722DF089F00FB9FA6 /* RDVFirstViewController.swift in Sources */,
 				0AA1982422DEEEC800FB9FA6 /* UIViewController+RDVTabBarControllerItem.swift in Sources */,
 				0AA1982222DEDE1300FB9FA6 /* RDVTabBarController.swift in Sources */,

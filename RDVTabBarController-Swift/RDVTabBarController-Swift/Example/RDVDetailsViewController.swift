@@ -16,7 +16,7 @@ class RDVDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.title = "Details"
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.cyan
         
         let label = UILabel()
         label.text = "Detail View Controller"
@@ -24,21 +24,10 @@ class RDVDetailsViewController: UIViewController {
         label.autoresizingMask = .flexibleWidth
         label.textAlignment = .center
         self.view.addSubview(label)
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        self.rdv_tabBarController?.setTabBarHidden(true, animated: animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.rdv_tabBarController?.setTabBarHidden(false, animated: animated)
         
-        super.viewWillDisappear(animated)
+        self.rdv_preferredTabBarHidden = true
     }
-    
 
     /*
     // MARK: - Navigation

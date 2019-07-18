@@ -93,6 +93,8 @@ public class RDVTabBarController: UIViewController, RDVTabBarDelegate {
     /// A Boolean value that determines whether the tab bar is hidden.
     public private(set) var isTabBarHidden: Bool = false
     
+    public private(set) var isTabBarUserInteractionEnabledWhenTransitioning: Bool = false
+    
     private lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.backgroundColor = UIColor.white
@@ -184,7 +186,14 @@ public class RDVTabBarController: UIViewController, RDVTabBarDelegate {
             self.tabBar.isHidden = false
         }
         
-        UIView.animate(withDuration: animated ? 0.24 : 0, animations: {
+        if !isTabBarUserInteractionEnabledWhenTransitioning,
+            let transitioningCoordinator = mostNearTransitioningCoordinator(for: self.selectedViewController) {
+            self.tabBar.isUserInteractionEnabled = false
+            transitioningCoordinator.animate(alongsideTransition: nil) { (context) in
+                self.tabBar.isUserInteractionEnabled = true
+            }
+        }
+        UIView.animate(withDuration: animated ? 0.35 : 0, animations: {
             self.view.layoutIfNeeded()
         }) { (finished) in
             self.tabBar.isHidden = self.isTabBarHidden
@@ -211,6 +220,25 @@ public class RDVTabBarController: UIViewController, RDVTabBarDelegate {
         }
         
         return viewControllers.firstIndex(where: { searchedController.isEqual($0) })
+    }
+    
+    
+    func mostNearTransitioningCoordinator(for viewController: UIViewController?) -> UIViewControllerTransitionCoordinator? {
+        guard let vc = viewController else {
+            return nil
+        }
+        
+        if let transitionCoordinator = vc.transitionCoordinator {
+            return transitionCoordinator
+        }
+        
+        for child in vc.children {
+            if let transitioningCoordinator = mostNearTransitioningCoordinator(for: child) {
+                return transitioningCoordinator
+            }
+        }
+        
+        return nil
     }
     
     
