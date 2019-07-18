@@ -9,20 +9,30 @@
 /* Begin PBXBuildFile section */
 		0A05575022D32011005F3D93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05574F22D32011005F3D93 /* AppDelegate.swift */; };
 		0A05575222D32011005F3D93 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05575122D32011005F3D93 /* ViewController.swift */; };
-		0A05575522D32011005F3D93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A05575322D32011005F3D93 /* Main.storyboard */; };
 		0A05575722D32012005F3D93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A05575622D32012005F3D93 /* Assets.xcassets */; };
 		0A05575A22D32012005F3D93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A05575822D32012005F3D93 /* LaunchScreen.storyboard */; };
 		0A05576622D32035005F3D93 /* MMPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05576222D32035005F3D93 /* MMPlayer.swift */; };
 		0A05576722D32035005F3D93 /* MMItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05576322D32035005F3D93 /* MMItem.swift */; };
 		0A05576822D32035005F3D93 /* MMPlayerReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05576422D32035005F3D93 /* MMPlayerReference.swift */; };
 		0A05576922D32035005F3D93 /* MMQueuePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05576522D32035005F3D93 /* MMQueuePlayer.swift */; };
+		0AA1987522E0423600FB9FA6 /* MMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987422E0423600FB9FA6 /* MMTabBarController.swift */; };
+		0AA1987822E0447A00FB9FA6 /* MMTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987722E0447A00FB9FA6 /* MMTabBar.swift */; };
+		0AA1987A22E0455C00FB9FA6 /* MMTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987922E0455C00FB9FA6 /* MMTabBarItem.swift */; };
+		0AA1987C22E049AD00FB9FA6 /* MMTabBarRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987B22E049AD00FB9FA6 /* MMTabBarRootViewController.swift */; };
+		0AA1987E22E0512400FB9FA6 /* UIViewController+MMTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987D22E0512400FB9FA6 /* UIViewController+MMTabBarItem.swift */; };
+		0AA1988D22E055CE00FB9FA6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1988822E055CE00FB9FA6 /* SecondViewController.swift */; };
+		0AA1988E22E055CE00FB9FA6 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1988922E055CE00FB9FA6 /* DetailsViewController.swift */; };
+		0AA1988F22E055CE00FB9FA6 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1988A22E055CE00FB9FA6 /* FirstViewController.swift */; };
+		0AA1989022E055CE00FB9FA6 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1988B22E055CE00FB9FA6 /* ThirdViewController.swift */; };
+		0AA1989322E0681100FB9FA6 /* MiniPlayerSongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1989222E0681100FB9FA6 /* MiniPlayerSongView.swift */; };
+		0AA1989522E0689500FB9FA6 /* MMBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1989422E0689500FB9FA6 /* MMBottomBar.swift */; };
+		0AA1989722E0786000FB9FA6 /* DetailsSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA1989622E0786000FB9FA6 /* DetailsSB.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A05574C22D32011005F3D93 /* MyMediaPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMediaPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A05574F22D32011005F3D93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A05575122D32011005F3D93 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0A05575422D32011005F3D93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A05575622D32012005F3D93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A05575922D32012005F3D93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A05575B22D32012005F3D93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -30,6 +40,18 @@
 		0A05576322D32035005F3D93 /* MMItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMItem.swift; sourceTree = "<group>"; };
 		0A05576422D32035005F3D93 /* MMPlayerReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMPlayerReference.swift; sourceTree = "<group>"; };
 		0A05576522D32035005F3D93 /* MMQueuePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMQueuePlayer.swift; sourceTree = "<group>"; };
+		0AA1987422E0423600FB9FA6 /* MMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBarController.swift; sourceTree = "<group>"; };
+		0AA1987722E0447A00FB9FA6 /* MMTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBar.swift; sourceTree = "<group>"; };
+		0AA1987922E0455C00FB9FA6 /* MMTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBarItem.swift; sourceTree = "<group>"; };
+		0AA1987B22E049AD00FB9FA6 /* MMTabBarRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBarRootViewController.swift; sourceTree = "<group>"; };
+		0AA1987D22E0512400FB9FA6 /* UIViewController+MMTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MMTabBarItem.swift"; sourceTree = "<group>"; };
+		0AA1988822E055CE00FB9FA6 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		0AA1988922E055CE00FB9FA6 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		0AA1988A22E055CE00FB9FA6 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		0AA1988B22E055CE00FB9FA6 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		0AA1989222E0681100FB9FA6 /* MiniPlayerSongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerSongView.swift; sourceTree = "<group>"; };
+		0AA1989422E0689500FB9FA6 /* MMBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMBottomBar.swift; sourceTree = "<group>"; };
+		0AA1989622E0786000FB9FA6 /* DetailsSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailsSB.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +84,11 @@
 		0A05574E22D32011005F3D93 /* MyMediaPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				0AA1987F22E0548D00FB9FA6 /* Example */,
+				0AA1987622E0423B00FB9FA6 /* MMTabBarController */,
 				0A05576122D32035005F3D93 /* MMPlayer */,
 				0A05574F22D32011005F3D93 /* AppDelegate.swift */,
 				0A05575122D32011005F3D93 /* ViewController.swift */,
-				0A05575322D32011005F3D93 /* Main.storyboard */,
 				0A05575622D32012005F3D93 /* Assets.xcassets */,
 				0A05575822D32012005F3D93 /* LaunchScreen.storyboard */,
 				0A05575B22D32012005F3D93 /* Info.plist */,
@@ -82,6 +105,32 @@
 				0A05576522D32035005F3D93 /* MMQueuePlayer.swift */,
 			);
 			path = MMPlayer;
+			sourceTree = "<group>";
+		};
+		0AA1987622E0423B00FB9FA6 /* MMTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				0AA1987422E0423600FB9FA6 /* MMTabBarController.swift */,
+				0AA1987722E0447A00FB9FA6 /* MMTabBar.swift */,
+				0AA1987922E0455C00FB9FA6 /* MMTabBarItem.swift */,
+				0AA1987B22E049AD00FB9FA6 /* MMTabBarRootViewController.swift */,
+				0AA1987D22E0512400FB9FA6 /* UIViewController+MMTabBarItem.swift */,
+				0AA1989222E0681100FB9FA6 /* MiniPlayerSongView.swift */,
+				0AA1989422E0689500FB9FA6 /* MMBottomBar.swift */,
+			);
+			path = MMTabBarController;
+			sourceTree = "<group>";
+		};
+		0AA1987F22E0548D00FB9FA6 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				0AA1988922E055CE00FB9FA6 /* DetailsViewController.swift */,
+				0AA1988A22E055CE00FB9FA6 /* FirstViewController.swift */,
+				0AA1988822E055CE00FB9FA6 /* SecondViewController.swift */,
+				0AA1988B22E055CE00FB9FA6 /* ThirdViewController.swift */,
+				0AA1989622E0786000FB9FA6 /* DetailsSB.storyboard */,
+			);
+			path = Example;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,9 +191,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA1989722E0786000FB9FA6 /* DetailsSB.storyboard in Resources */,
 				0A05575A22D32012005F3D93 /* LaunchScreen.storyboard in Resources */,
 				0A05575722D32012005F3D93 /* Assets.xcassets in Resources */,
-				0A05575522D32011005F3D93 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,26 +204,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA1989022E055CE00FB9FA6 /* ThirdViewController.swift in Sources */,
+				0AA1987522E0423600FB9FA6 /* MMTabBarController.swift in Sources */,
+				0AA1987A22E0455C00FB9FA6 /* MMTabBarItem.swift in Sources */,
+				0AA1988F22E055CE00FB9FA6 /* FirstViewController.swift in Sources */,
+				0AA1988E22E055CE00FB9FA6 /* DetailsViewController.swift in Sources */,
+				0AA1987E22E0512400FB9FA6 /* UIViewController+MMTabBarItem.swift in Sources */,
+				0AA1987C22E049AD00FB9FA6 /* MMTabBarRootViewController.swift in Sources */,
 				0A05576722D32035005F3D93 /* MMItem.swift in Sources */,
+				0AA1989322E0681100FB9FA6 /* MiniPlayerSongView.swift in Sources */,
 				0A05575222D32011005F3D93 /* ViewController.swift in Sources */,
+				0AA1989522E0689500FB9FA6 /* MMBottomBar.swift in Sources */,
 				0A05575022D32011005F3D93 /* AppDelegate.swift in Sources */,
+				0AA1988D22E055CE00FB9FA6 /* SecondViewController.swift in Sources */,
 				0A05576622D32035005F3D93 /* MMPlayer.swift in Sources */,
 				0A05576922D32035005F3D93 /* MMQueuePlayer.swift in Sources */,
 				0A05576822D32035005F3D93 /* MMPlayerReference.swift in Sources */,
+				0AA1987822E0447A00FB9FA6 /* MMTabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0A05575322D32011005F3D93 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0A05575422D32011005F3D93 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0A05575822D32012005F3D93 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

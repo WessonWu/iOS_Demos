@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WXH-FX-lr2">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Details View Controller-->
+        <scene sceneID="9RY-NF-kKP">
+            <objects>
+                <viewController id="WXH-FX-lr2" customClass="DetailsViewController" customModule="MyMediaPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zXe-xM-2OD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PRH-Pu-3kJ">
+                                <rect key="frame" x="185" y="239" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="isTabBarHidden:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JeM-9h-oVA">
+                                <rect key="frame" x="40" y="244" width="125" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9KP-l4-Bdp">
+                                <rect key="frame" x="190" y="284" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="songViewHidden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PpG-eH-YDp">
+                                <rect key="frame" x="40" y="289" width="130" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aYB-QR-KQL">
+                                <rect key="frame" x="220" y="323" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="navigationBarHidden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qH-GY-muz">
+                                <rect key="frame" x="40" y="328" width="160" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSC-I5-ket">
+                                <rect key="frame" x="192" y="469" width="30" height="30"/>
+                                <state key="normal" title="next"/>
+                                <connections>
+                                    <action selector="goToNext:" destination="WXH-FX-lr2" eventType="touchUpInside" id="4FW-oE-G9T"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9KP-l4-Bdp" firstAttribute="centerY" secondItem="PpG-eH-YDp" secondAttribute="centerY" id="3wg-oI-Esa"/>
+                            <constraint firstItem="JeM-9h-oVA" firstAttribute="top" secondItem="qP4-PT-rLY" secondAttribute="top" constant="200" id="8Sm-ye-4Cr"/>
+                            <constraint firstItem="BSC-I5-ket" firstAttribute="centerX" secondItem="zXe-xM-2OD" secondAttribute="centerX" id="9hd-Wg-o1B"/>
+                            <constraint firstItem="9qH-GY-muz" firstAttribute="leading" secondItem="PpG-eH-YDp" secondAttribute="leading" id="GQI-hT-nhd"/>
+                            <constraint firstItem="aYB-QR-KQL" firstAttribute="leading" secondItem="9qH-GY-muz" secondAttribute="trailing" constant="20" id="Kfb-wM-a1M"/>
+                            <constraint firstItem="PRH-Pu-3kJ" firstAttribute="centerY" secondItem="JeM-9h-oVA" secondAttribute="centerY" id="O9o-re-vkN"/>
+                            <constraint firstItem="PpG-eH-YDp" firstAttribute="leading" secondItem="JeM-9h-oVA" secondAttribute="leading" id="PTe-0B-WSy"/>
+                            <constraint firstItem="9qH-GY-muz" firstAttribute="top" secondItem="PpG-eH-YDp" secondAttribute="bottom" constant="18" id="PZX-Pd-FWO"/>
+                            <constraint firstItem="JeM-9h-oVA" firstAttribute="leading" secondItem="qP4-PT-rLY" secondAttribute="leading" constant="40" id="QSy-JY-SuB"/>
+                            <constraint firstItem="BSC-I5-ket" firstAttribute="top" secondItem="9qH-GY-muz" secondAttribute="bottom" constant="120" id="S2Y-wY-0CH"/>
+                            <constraint firstItem="aYB-QR-KQL" firstAttribute="centerY" secondItem="9qH-GY-muz" secondAttribute="centerY" id="bEJ-m2-fZx"/>
+                            <constraint firstItem="9KP-l4-Bdp" firstAttribute="leading" secondItem="PpG-eH-YDp" secondAttribute="trailing" constant="20" id="cVF-4J-JPY"/>
+                            <constraint firstItem="PRH-Pu-3kJ" firstAttribute="leading" secondItem="JeM-9h-oVA" secondAttribute="trailing" constant="20" id="hct-oq-ZJg"/>
+                            <constraint firstItem="PpG-eH-YDp" firstAttribute="top" secondItem="JeM-9h-oVA" secondAttribute="bottom" constant="24" id="mq6-bh-qvC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qP4-PT-rLY"/>
+                    </view>
+                    <connections>
+                        <outlet property="navigationBarHidden" destination="aYB-QR-KQL" id="SsO-or-TWM"/>
+                        <outlet property="songViewHiddenSwitch" destination="9KP-l4-Bdp" id="NcM-6e-dmA"/>
+                        <outlet property="tabBarHiddenSwitch" destination="PRH-Pu-3kJ" id="wS3-Tl-eSb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RCt-Xf-Zue" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-48" y="15"/>
+        </scene>
+    </scenes>
+</document>
