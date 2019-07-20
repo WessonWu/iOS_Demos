@@ -8,42 +8,40 @@
 
 import UIKit
 
-struct HiddenData {
-    let isSongViewHidden: Bool
-    let isTabBarHidden: Bool
-    let navigationBarHidden: Bool
+struct Properties {
+    let preferredNavigationHidden: Bool
+    let preferredToolBarHidden: Bool
+    let preferredTabBarHidden: Bool
 }
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: UITableViewController {
     
+    @IBOutlet weak var navigationHiddenSwitch: UISwitch!
+    @IBOutlet weak var toolBarHiddenSwitch: UISwitch!
     @IBOutlet weak var tabBarHiddenSwitch: UISwitch!
-    @IBOutlet weak var songViewHiddenSwitch: UISwitch!
-    @IBOutlet weak var navigationBarHidden: UISwitch!
     
     
-    class func newInstance(data: HiddenData = HiddenData(isSongViewHidden: false, isTabBarHidden: true, navigationBarHidden: true)) -> DetailsViewController {
+    class func newInstance(properties: Properties = Properties(preferredNavigationHidden: false,
+                                                               preferredToolBarHidden: false,
+                                                               preferredTabBarHidden: false)) -> DetailsViewController {
         let sb = UIStoryboard(name: "DetailsSB", bundle: Bundle.main)
         let vc = sb.instantiateInitialViewController() as! DetailsViewController
-        vc.data = data
+        vc.properties = properties
         return vc
     }
     
 
-    var data: HiddenData = HiddenData(isSongViewHidden: false, isTabBarHidden: true, navigationBarHidden: false)
+    var properties: Properties = Properties(preferredNavigationHidden: false,
+                                            preferredToolBarHidden: false,
+                                            preferredTabBarHidden: false)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        songViewHiddenSwitch.isOn = data.isSongViewHidden
-        tabBarHiddenSwitch.isOn = data.isTabBarHidden
-        navigationBarHidden.isOn = data.navigationBarHidden
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        print("ViewWillAppear")
+        navigationHiddenSwitch.isOn = properties.preferredNavigationHidden
+        toolBarHiddenSwitch.isOn = properties.preferredToolBarHidden
+        tabBarHiddenSwitch.isOn = properties.preferredTabBarHidden
     }
     
 
@@ -59,18 +57,22 @@ class DetailsViewController: UIViewController {
     
     
     @IBAction func goToNext(_ sender: Any) {
-        let vc = DetailsViewController.newInstance(data: HiddenData(isSongViewHidden: songViewHiddenSwitch.isOn, isTabBarHidden: tabBarHiddenSwitch.isOn, navigationBarHidden: navigationBarHidden.isOn))
+        let properties = Properties(preferredNavigationHidden: navigationHiddenSwitch.isOn,
+                                    preferredToolBarHidden: toolBarHiddenSwitch.isOn,
+                                    preferredTabBarHidden: tabBarHiddenSwitch.isOn)
+        let vc = DetailsViewController.newInstance(properties: properties)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
 
-extension DetailsViewController: MMBottomBarDisplayable {
-    var shouldSongViewHidden: Bool {
-        return data.isSongViewHidden
+extension DetailsViewController: MMToolBarDisplayble, MMTabBarDisplayble {
+    var preferredToolBarHidden: Bool {
+        return properties.preferredToolBarHidden
     }
     
-    var shouldTabBarHidden: Bool {
-        return data.isTabBarHidden
+    var preferredTabBarHidden: Bool {
+        return properties.preferredTabBarHidden
     }
 }
+

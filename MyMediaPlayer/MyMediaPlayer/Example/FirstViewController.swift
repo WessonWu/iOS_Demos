@@ -53,12 +53,4 @@ class FirstViewController: UITableViewController {
     }
 }
 
-extension FirstViewController: MMBottomBarDisplayable {
-    var shouldTabBarHidden: Bool {
-        return false
-    }
-    
-    var shouldSongViewHidden: Bool {
-        return false
-    }
-}
+extension FirstViewController: MMToolBarDisplayble, MMTabBarDisplayble {}

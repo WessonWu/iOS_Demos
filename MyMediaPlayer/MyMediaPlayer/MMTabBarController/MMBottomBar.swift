@@ -8,15 +8,35 @@
 
 import UIKit
 
+public protocol MMToolBarDisplayble {
+    var preferredToolBarHidden: Bool { get }
+}
+
+public extension MMToolBarDisplayble {
+    var preferredToolBarHidden: Bool {
+        return false
+    }
+}
+
+public protocol MMTabBarDisplayble {
+    var preferredTabBarHidden: Bool { get }
+}
+
+public extension MMTabBarDisplayble {
+    var preferredTabBarHidden: Bool {
+        return false
+    }
+}
+
 public class MMBottomBar: UIView {
-    public private(set) lazy var songView: MiniPlayerSongView = MiniPlayerSongView()
+    public private(set) lazy var toolBar: MMToolBar = MMToolBar()
     public private(set) lazy var tabBar: MMTabBar = MMTabBar()
     
-    public var isSongViewHidden: Bool = false
+    public var isToolBarHidden: Bool = false
     public var isTabBarHidden: Bool = false
     
     public var isBottomBarHidden: Bool {
-        return isSongViewHidden && isTabBarHidden
+        return isToolBarHidden && isTabBarHidden
     }
     
     public override init(frame: CGRect) {
@@ -31,45 +51,52 @@ public class MMBottomBar: UIView {
     
     private func commonInitialization() {
         self.backgroundColor = UIColor.white
-        self.addSubview(songView)
+        self.addSubview(toolBar)
         self.addSubview(tabBar)
     }
     
     public override func layoutSubviews() {
-        let songViewHeight: CGFloat = songView.minimumContentHeight
+        let toolBarHeight: CGFloat = toolBar.minimumContentHeight
         let tabBarHeight: CGFloat = tabBar.minimumContentHeight
         let frameSize = self.frame.size
         var safeAreaBottom: CGFloat = 0
         if #available(iOS 11.0, *) {
             safeAreaBottom = self.safeAreaInsets.bottom
         }
-        let songViewFrame = CGRect(x: 0, y: 0, width: frameSize.width, height: songViewHeight)
+        let toolBarFrame = CGRect(x: 0, y: 0, width: frameSize.width, height: toolBarHeight)
         let tabBarFrame = CGRect(x: 0, y: 0, width: frameSize.width, height: tabBarHeight + safeAreaBottom)
-        switch (isSongViewHidden, isTabBarHidden) {
+        switch (isToolBarHidden, isTabBarHidden) {
         case (false, false):
-            songView.frame = songViewFrame
-            tabBar.frame = tabBarFrame.offsetBy(dx: 0, dy: songViewFrame.maxY)
+            toolBar.frame = toolBarFrame
+            tabBar.frame = tabBarFrame.offsetBy(dx: 0, dy: toolBarFrame.maxY)
         case (false, true):
-            songView.frame = self.bounds
+            toolBar.frame = self.bounds
             tabBar.frame = tabBarFrame.offsetBy(dx: 0, dy: frameSize.height)
         case (true, false):
-            songView.frame = songViewFrame.offsetBy(dx: 0, dy: -songViewHeight)
+            toolBar.frame = toolBarFrame.offsetBy(dx: 0, dy: frameSize.height)
             tabBar.frame = self.bounds
         case (true, true):
-            songView.frame = songViewFrame.offsetBy(dx: 0, dy: frameSize.height)
-            tabBar.frame = tabBarFrame.offsetBy(dx: 0, dy: songView.frame.maxY)
+            toolBar.frame = toolBarFrame.offsetBy(dx: 0, dy: frameSize.height)
+            tabBar.frame = tabBarFrame.offsetBy(dx: 0, dy: toolBar.frame.maxY)
         }
     }
     
     public func minimumContentHeight() -> CGFloat {
         var height: CGFloat = 0
-        if !isSongViewHidden {
-            height += songView.minimumContentHeight
+        if !isToolBarHidden {
+            height += toolBar.minimumContentHeight
         }
         
         if !isTabBarHidden {
             height += tabBar.minimumContentHeight
         }
         return height
+    }
+    
+    
+    func adjustsViewHiddens() {
+        self.isHidden = self.isBottomBarHidden
+        self.toolBar.isHidden = self.isToolBarHidden
+        self.tabBar.isHidden = self.isTabBarHidden
     }
 }

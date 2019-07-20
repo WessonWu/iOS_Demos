@@ -111,3 +111,13 @@ class MMTabBarRootViewController: UIViewController, MMTabBarDelegate {
         return viewControllers[index]
     }
 }
+
+extension MMTabBarRootViewController: MMToolBarDisplayble, MMTabBarDisplayble {
+    var preferredToolBarHidden: Bool {
+        return false
+    }
+    
+    var preferredTabBarHidden: Bool {
+        return false
+    }
+}

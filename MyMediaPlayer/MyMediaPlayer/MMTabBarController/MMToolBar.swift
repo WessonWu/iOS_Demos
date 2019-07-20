@@ -1,5 +1,5 @@
 //
-//  MiniPlayerSongBar.swift
+//  MMToolBar.swift
 //  MyMediaPlayer
 //
 //  Created by wuweixin on 2019/7/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MiniPlayerSongView: UIView {
+public class MMToolBar: UIView {
     public var minimumContentHeight: CGFloat = 48
     
     public override init(frame: CGRect) {

@@ -49,14 +49,6 @@ class ThirdViewController: UITableViewController {
 }
 
 
-extension ThirdViewController: MMBottomBarDisplayable {
-    var shouldTabBarHidden: Bool {
-        return false
-    }
-    
-    var shouldSongViewHidden: Bool {
-        return false
-    }
-}
+extension ThirdViewController: MMToolBarDisplayble, MMTabBarDisplayble {}
 
 

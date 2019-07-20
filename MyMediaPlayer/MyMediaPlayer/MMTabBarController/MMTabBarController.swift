@@ -8,20 +8,6 @@
 
 import UIKit
 
-public protocol MMBottomBarDisplayable {
-    var shouldSongViewHidden: Bool { get }
-    var shouldTabBarHidden: Bool { get }
-}
-
-extension MMBottomBarDisplayable {
-    var shouldSongViewHidden: Bool {
-        return true
-    }
-    var shouldTabBarHidden: Bool {
-        return true
-    }
-}
-
 public protocol MMTabBarControllerDelegate: AnyObject {
     /// Asks the delegate whether the specified view controller should be made active.
     func tabBarController(_ tabBarController: MMTabBarController, shouldSelect viewController: UIViewController) -> Bool
@@ -89,9 +75,10 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewControllers = [rootViewController]
         self.navigationBar.isHidden = true
+        self.delegate = self
         self.interactivePopGestureRecognizer?.delegate = self
+        self.viewControllers = [rootViewController]
         self.view.addSubview(bottomBar)
     }
     
@@ -104,10 +91,6 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         bottomBar.frame = finalFrameForBottomBar()
-    }
-    
-    public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        super.pushViewController(viewController, animated: animated)
     }
     
     public func tabBar(_ tabBar: MMTabBar, shouldSelectItemAt index: Int) -> Bool {
@@ -147,18 +130,18 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
         }
     }
     
-    public func setBottomBarHidden(isSongViewHidden: Bool, isTabBarHidden: Bool, animated: Bool) {
+    public func setBarHidden(isToolBarHidden: Bool, isTabBarHidden: Bool, animated: Bool) {
         self.view.layoutIfNeeded()
         
-        bottomBar.isSongViewHidden = isSongViewHidden
+        bottomBar.isToolBarHidden = isToolBarHidden
         bottomBar.isTabBarHidden = isTabBarHidden
         
         if !bottomBar.isBottomBarHidden {
             bottomBar.isHidden = false
         }
         
-        if !bottomBar.isSongViewHidden {
-            bottomBar.songView.isHidden = false
+        if !bottomBar.isToolBarHidden {
+            bottomBar.toolBar.isHidden = false
         }
         
         if !bottomBar.isTabBarHidden {
@@ -166,21 +149,26 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
         }
         
         let finalFrame = finalFrameForBottomBar()
-        UIView.animate(withDuration: animated ? 0.24 : 0, animations: {
+        UIView.animate(withDuration: animated ? 0.25 : 0, animations: {
             self.bottomBar.frame = finalFrame
+            self.bottomBar.layoutIfNeeded()
         }) { (_) in
-            self.bottomBar.isHidden = self.bottomBar.isBottomBarHidden
-            self.bottomBar.songView.isHidden = self.bottomBar.isSongViewHidden
-            self.bottomBar.tabBar.isHidden = self.bottomBar.isTabBarHidden
+            self.adjustBottomBarsHidden()
         }
     }
     
+    private func automaticallyAdjustsBottomBarHidden(by viewController: UIViewController, animated: Bool) {
+        let preferredToolBarHidden = (viewController as? MMToolBarDisplayble)?.preferredToolBarHidden ?? true
+        let preferredTabBarHidden = (viewController as? MMTabBarDisplayble)?.preferredTabBarHidden ?? true
+        self.setBarHidden(isToolBarHidden: preferredToolBarHidden,
+                          isTabBarHidden: preferredTabBarHidden,
+                          animated: animated)
+    }
     
-    public func setBottomBarHidden(fromVC: UIViewController, toVC: UIViewController, alongside transitionCoordinator: UIViewControllerTransitionCoordinator?) {
-        if let coordinator = transitionCoordinator {
-        } else {
-            let hiddens = toVC.bottomBarHiddens()
-        }
+    private func adjustBottomBarsHidden() {
+        self.bottomBar.adjustsViewHiddens()
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
     }
     
     
@@ -199,19 +187,32 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
     }
 }
 
-extension MMTabBarController: UIGestureRecognizerDelegate {
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return viewControllers.count > 1
+extension MMTabBarController: UINavigationControllerDelegate {
+    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        self.automaticallyAdjustsBottomBarHidden(by: viewController, animated: animated)
+        if let transitionCoordinator = viewController.transitionCoordinator, let fromVC = transitionCoordinator.viewController(forKey: .from), !self.viewControllers.contains(fromVC) {
+            transitionCoordinator.animate(alongsideTransition: nil) { (context) in
+                if context.isCancelled {
+                    self.automaticallyAdjustsBottomBarHidden(by: fromVC, animated: animated)
+                }
+            }
+        }
+    }
+    
+    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    }
+    
+    public func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return nil
+    }
+    
+    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return nil
     }
 }
 
-
-fileprivate typealias BottomBarHiddens = (isSongViewHidden: Bool, isTabBarHidden: Bool)
-fileprivate extension UIViewController {
-    func bottomBarHiddens() -> BottomBarHiddens {
-        if let displayable = self as? MMBottomBarDisplayable {
-            return (displayable.shouldSongViewHidden, displayable.shouldTabBarHidden)
-        }
-        return (true, true)
+extension MMTabBarController: UIGestureRecognizerDelegate {
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return viewControllers.count > 1
     }
 }

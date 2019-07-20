@@ -50,13 +50,4 @@ class SecondViewController: UITableViewController {
     }
 }
 
-extension SecondViewController: MMBottomBarDisplayable {
-    var shouldTabBarHidden: Bool {
-        return false
-    }
-    
-    var shouldSongViewHidden: Bool {
-        return false
-    }
-}
-
+extension SecondViewController: MMToolBarDisplayble, MMTabBarDisplayble {}
