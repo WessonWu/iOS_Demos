@@ -42,11 +42,14 @@ class SecondViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        guard let tabBarVC = self.rdv_tabBarController else {
-//            return
-//        }
-//        
-//        tabBarVC.setTabBarHidden(!tabBarVC.isTabBarHidden, animated: true)
+        guard let tabBarVC = self.mm_tabBarController else {
+            return
+        }
+        
+        let bottomBar = tabBarVC.bottomBar
+        tabBarVC.setBarHidden(isToolBarHidden: bottomBar.isToolBarHidden,
+                              isTabBarHidden: !bottomBar.isTabBarHidden,
+                              animated: true)
     }
 }
 
