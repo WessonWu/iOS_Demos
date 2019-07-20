@@ -110,6 +110,10 @@ class MMTabBarRootViewController: UIViewController, MMTabBarDelegate {
         
         return viewControllers[index]
     }
+    
+    override var mm_preferredNavigationBarHidden: Bool {
+        return true
+    }
 }
 
 extension MMTabBarRootViewController: MMToolBarDisplayble, MMTabBarDisplayble {

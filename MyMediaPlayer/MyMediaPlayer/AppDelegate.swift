@@ -98,7 +98,7 @@ extension AppDelegate {
     
     func customizeInterface() {
         let navBar = UINavigationBar.appearance()
-        
+        navBar.isTranslucent = false
         let backgroundImage = UIImage(named: "navigationbar_background_tall")
         let textAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 18),
                                                              .foregroundColor: UIColor.black]

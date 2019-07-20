@@ -37,6 +37,7 @@ class DetailsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Hello"
 
         // Do any additional setup after loading the view.
         navigationHiddenSwitch.isOn = properties.preferredNavigationHidden
@@ -44,7 +45,6 @@ class DetailsViewController: UITableViewController {
         tabBarHiddenSwitch.isOn = properties.preferredTabBarHidden
     }
     
-
     /*
     // MARK: - Navigation
 

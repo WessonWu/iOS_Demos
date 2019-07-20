@@ -11,11 +11,11 @@ import UIKit
 
 public class MMNavigationController: UINavigationController {
     
-    lazy var navigationStackView: MMNavigationStackView = MMNavigationStackView()
+//    lazy var navigationStackView: MMNavigationStackView = MMNavigationStackView()
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(navigationStackView)
+//        self.view.addSubview(navigationStackView)
         self.navigationBar.isTranslucent = true
         self.navigationBar.isHidden = true
         self.delegate = self
@@ -25,37 +25,24 @@ public class MMNavigationController: UINavigationController {
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        navigationStackView.frame = navigationBar.frame
+//        navigationStackView.frame = navigationBar.frame
     }
     
     
     func transition(fromViewController: UIViewController?, toViewController: UIViewController) {
-        let navigationBarFrame = self.navigationStackView.bounds
-        navigationStackView.subviews.forEach { (subview) in
-            subview.removeFromSuperview()
-        }
-        
         if let fromVC = fromViewController {
-            let fromNavigationBar = fromVC.navigationBar
+            let fromNavigationBar = fromVC.mm_navigationBar
             fromNavigationBar.removeFromSuperview()
-            fromNavigationBar.frame = navigationBarFrame
             fromVC.view.addSubview(fromNavigationBar)
-            fromNavigationBar.isHidden = fromVC.preferredNavigationBarHidden
         }
         
-        let toNavigationBar = toViewController.navigationBar
+        let toNavigationBar = toViewController.mm_navigationBar
         toNavigationBar.removeFromSuperview()
-        toNavigationBar.frame = navigationBarFrame
         toViewController.view.addSubview(toNavigationBar)
-        toNavigationBar.isHidden = toViewController.preferredNavigationBarHidden
         
         let completion: () -> Void = {
-            self.navigationStackView.subviews.forEach {
-                $0.removeFromSuperview()
-            }
-            
-            if let topNavigationBar = self.topViewController?.navigationBar {
-                self.navigationStackView.addSubview(topNavigationBar)
+            if let topNavigationBar = self.topViewController?.mm_navigationBar {
+                self.view.addSubview(topNavigationBar)
             }
         }
         
