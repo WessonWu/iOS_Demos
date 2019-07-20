@@ -47,9 +47,7 @@ class SecondViewController: UITableViewController {
         }
         
         let bottomBar = tabBarVC.bottomBar
-        tabBarVC.setBarHidden(isToolBarHidden: bottomBar.isToolBarHidden,
-                              isTabBarHidden: !bottomBar.isTabBarHidden,
-                              animated: true)
+        tabBarVC.setTabBarHidden(!bottomBar.isTabBarHidden, animated: true)
     }
 }
 

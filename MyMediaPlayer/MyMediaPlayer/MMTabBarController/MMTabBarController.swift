@@ -130,6 +130,15 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
         }
     }
     
+    
+    public func setTabBarHidden(_ hidden: Bool, animated: Bool) {
+        setBarHidden(isToolBarHidden: bottomBar.isToolBarHidden, isTabBarHidden: hidden, animated: animated)
+    }
+    
+    public override func setToolbarHidden(_ hidden: Bool, animated: Bool) {
+        setBarHidden(isToolBarHidden: hidden, isTabBarHidden: bottomBar.isTabBarHidden, animated: animated)
+    }
+    
     public func setBarHidden(isToolBarHidden: Bool, isTabBarHidden: Bool, animated: Bool) {
         self.view.layoutIfNeeded()
         
@@ -141,7 +150,7 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
         }
         
         if !bottomBar.isToolBarHidden {
-            bottomBar.toolBar.isHidden = false
+            bottomBar.toolbar.isHidden = false
         }
         
         if !bottomBar.isTabBarHidden {
@@ -149,6 +158,12 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
         }
         
         let finalFrame = finalFrameForBottomBar()
+        if let transitionCoordinator = self.transitionCoordinator {
+            bottomBar.isTransitioning = true
+            transitionCoordinator.animate(alongsideTransition: nil) { (context) in
+                self.bottomBar.isTransitioning = false
+            }
+        }
         UIView.animate(withDuration: animated ? 0.25 : 0, animations: {
             self.bottomBar.frame = finalFrame
             self.bottomBar.layoutIfNeeded()

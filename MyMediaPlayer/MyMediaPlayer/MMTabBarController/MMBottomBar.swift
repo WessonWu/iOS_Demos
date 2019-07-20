@@ -29,11 +29,14 @@ public extension MMTabBarDisplayble {
 }
 
 public class MMBottomBar: UIView {
-    public private(set) lazy var toolBar: MMToolBar = MMToolBar()
+    public private(set) lazy var toolbar: MMToolBar = MMToolBar()
     public private(set) lazy var tabBar: MMTabBar = MMTabBar()
     
     public var isToolBarHidden: Bool = false
     public var isTabBarHidden: Bool = false
+    
+    public internal(set) var isTransitioning: Bool = false
+    public var isUserInteractionEnabledWhenTransitioning: Bool = false
     
     public var isBottomBarHidden: Bool {
         return isToolBarHidden && isTabBarHidden
@@ -51,12 +54,19 @@ public class MMBottomBar: UIView {
     
     private func commonInitialization() {
         self.backgroundColor = UIColor.white
-        self.addSubview(toolBar)
+        self.addSubview(toolbar)
         self.addSubview(tabBar)
     }
     
+    public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        guard isTransitioning && !isUserInteractionEnabledWhenTransitioning else {
+            return super.point(inside: point, with: event)
+        }
+        return false
+    }
+    
     public override func layoutSubviews() {
-        let toolBarHeight: CGFloat = toolBar.minimumContentHeight
+        let toolBarHeight: CGFloat = toolbar.minimumContentHeight
         let tabBarHeight: CGFloat = tabBar.minimumContentHeight
         let frameSize = self.frame.size
         var safeAreaBottom: CGFloat = 0
@@ -67,24 +77,24 @@ public class MMBottomBar: UIView {
         let tabBarFrame = CGRect(x: 0, y: 0, width: frameSize.width, height: tabBarHeight + safeAreaBottom)
         switch (isToolBarHidden, isTabBarHidden) {
         case (false, false):
-            toolBar.frame = toolBarFrame
+            toolbar.frame = toolBarFrame
             tabBar.frame = tabBarFrame.offsetBy(dx: 0, dy: toolBarFrame.maxY)
         case (false, true):
-            toolBar.frame = self.bounds
+            toolbar.frame = self.bounds
             tabBar.frame = tabBarFrame.offsetBy(dx: 0, dy: frameSize.height)
         case (true, false):
-            toolBar.frame = toolBarFrame.offsetBy(dx: 0, dy: frameSize.height)
+            toolbar.frame = toolBarFrame.offsetBy(dx: 0, dy: frameSize.height)
             tabBar.frame = self.bounds
         case (true, true):
-            toolBar.frame = toolBarFrame.offsetBy(dx: 0, dy: frameSize.height)
-            tabBar.frame = tabBarFrame.offsetBy(dx: 0, dy: toolBar.frame.maxY)
+            toolbar.frame = toolBarFrame.offsetBy(dx: 0, dy: frameSize.height)
+            tabBar.frame = tabBarFrame.offsetBy(dx: 0, dy: toolbar.frame.maxY)
         }
     }
     
     public func minimumContentHeight() -> CGFloat {
         var height: CGFloat = 0
         if !isToolBarHidden {
-            height += toolBar.minimumContentHeight
+            height += toolbar.minimumContentHeight
         }
         
         if !isTabBarHidden {
@@ -96,7 +106,7 @@ public class MMBottomBar: UIView {
     
     func adjustsViewHiddens() {
         self.isHidden = self.isBottomBarHidden
-        self.toolBar.isHidden = self.isToolBarHidden
+        self.toolbar.isHidden = self.isToolBarHidden
         self.tabBar.isHidden = self.isTabBarHidden
     }
 }
