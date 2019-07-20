@@ -26,6 +26,9 @@
 		0AA1989322E0681100FB9FA6 /* MMToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1989222E0681100FB9FA6 /* MMToolBar.swift */; };
 		0AA1989522E0689500FB9FA6 /* MMBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1989422E0689500FB9FA6 /* MMBottomBar.swift */; };
 		0AA1989722E0786000FB9FA6 /* DetailsSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA1989622E0786000FB9FA6 /* DetailsSB.storyboard */; };
+		0AE03E3722E2EA7A00E8F716 /* UIViewController+MMNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE03E3622E2EA7A00E8F716 /* UIViewController+MMNavigationBar.swift */; };
+		0AE03E3922E2F4EE00E8F716 /* MMNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE03E3822E2F4EE00E8F716 /* MMNavigationController.swift */; };
+		0AE03E3B22E2F71300E8F716 /* MMNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE03E3A22E2F71300E8F716 /* MMNavigationStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		0AA1989222E0681100FB9FA6 /* MMToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMToolBar.swift; sourceTree = "<group>"; };
 		0AA1989422E0689500FB9FA6 /* MMBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMBottomBar.swift; sourceTree = "<group>"; };
 		0AA1989622E0786000FB9FA6 /* DetailsSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailsSB.storyboard; sourceTree = "<group>"; };
+		0AE03E3622E2EA7A00E8F716 /* UIViewController+MMNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MMNavigationBar.swift"; sourceTree = "<group>"; };
+		0AE03E3822E2F4EE00E8F716 /* MMNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMNavigationController.swift; sourceTree = "<group>"; };
+		0AE03E3A22E2F71300E8F716 /* MMNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMNavigationStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,9 @@
 				0AA1987D22E0512400FB9FA6 /* UIViewController+MMTabBarItem.swift */,
 				0AA1989222E0681100FB9FA6 /* MMToolBar.swift */,
 				0AA1989422E0689500FB9FA6 /* MMBottomBar.swift */,
+				0AE03E3622E2EA7A00E8F716 /* UIViewController+MMNavigationBar.swift */,
+				0AE03E3822E2F4EE00E8F716 /* MMNavigationController.swift */,
+				0AE03E3A22E2F71300E8F716 /* MMNavigationStackView.swift */,
 			);
 			path = MMTabBarController;
 			sourceTree = "<group>";
@@ -206,6 +215,7 @@
 				0AA1987A22E0455C00FB9FA6 /* MMTabBarItem.swift in Sources */,
 				0AA1988F22E055CE00FB9FA6 /* FirstViewController.swift in Sources */,
 				0AA1988E22E055CE00FB9FA6 /* DetailsViewController.swift in Sources */,
+				0AE03E3922E2F4EE00E8F716 /* MMNavigationController.swift in Sources */,
 				0AA1987E22E0512400FB9FA6 /* UIViewController+MMTabBarItem.swift in Sources */,
 				0AA1987C22E049AD00FB9FA6 /* MMTabBarRootViewController.swift in Sources */,
 				0A05576722D32035005F3D93 /* MMItem.swift in Sources */,
@@ -215,6 +225,8 @@
 				0AA1988D22E055CE00FB9FA6 /* SecondViewController.swift in Sources */,
 				0A05576622D32035005F3D93 /* MMPlayer.swift in Sources */,
 				0A05576922D32035005F3D93 /* MMQueuePlayer.swift in Sources */,
+				0AE03E3722E2EA7A00E8F716 /* UIViewController+MMNavigationBar.swift in Sources */,
+				0AE03E3B22E2F71300E8F716 /* MMNavigationStackView.swift in Sources */,
 				0A05576822D32035005F3D93 /* MMPlayerReference.swift in Sources */,
 				0AA1987822E0447A00FB9FA6 /* MMTabBar.swift in Sources */,
 			);

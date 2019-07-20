@@ -27,7 +27,7 @@ extension MMTabBarControllerDelegate {
     func tabBarController(_ tabBarController: MMTabBarController, didSelectItemAt index: Int) {}
 }
 
-public class MMTabBarController: UINavigationController, MMTabBarDelegate {
+public class MMTabBarController: MMNavigationController, MMTabBarDelegate {
     
     public weak var tabBarControllerDelegate: MMTabBarControllerDelegate?
     
@@ -75,9 +75,6 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationBar.isHidden = true
-        self.delegate = self
-        self.interactivePopGestureRecognizer?.delegate = self
         self.viewControllers = [rootViewController]
         self.view.addSubview(bottomBar)
     }
@@ -202,8 +199,9 @@ public class MMTabBarController: UINavigationController, MMTabBarDelegate {
     }
 }
 
-extension MMTabBarController: UINavigationControllerDelegate {
-    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+extension MMTabBarController {
+    public override func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        super.navigationController(navigationController, willShow: viewController, animated: animated)
         self.automaticallyAdjustsBottomBarHidden(by: viewController, animated: animated)
         if let transitionCoordinator = viewController.transitionCoordinator, let fromVC = transitionCoordinator.viewController(forKey: .from), !self.viewControllers.contains(fromVC) {
             transitionCoordinator.animate(alongsideTransition: nil) { (context) in
@@ -212,22 +210,5 @@ extension MMTabBarController: UINavigationControllerDelegate {
                 }
             }
         }
-    }
-    
-    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-    }
-    
-    public func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return nil
-    }
-    
-    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return nil
-    }
-}
-
-extension MMTabBarController: UIGestureRecognizerDelegate {
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return viewControllers.count > 1
     }
 }
