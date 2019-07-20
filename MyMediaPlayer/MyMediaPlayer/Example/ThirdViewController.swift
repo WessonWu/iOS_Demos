@@ -44,7 +44,7 @@ class ThirdViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let vc = DetailsViewController.newInstance()
-        self.navigationController?.pushViewController(vc, animated: false)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
