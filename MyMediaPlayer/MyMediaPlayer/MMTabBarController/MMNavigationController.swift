@@ -30,8 +30,7 @@ public class MMNavigationController: UINavigationController {
     
     
     func transition(fromViewController: UIViewController?, toViewController: UIViewController) {
-        let navigationBarFrame = self.navigationBar.frame
-        navigationStackView.frame = navigationBarFrame
+        let navigationBarFrame = self.navigationStackView.bounds
         navigationStackView.subviews.forEach { (subview) in
             subview.removeFromSuperview()
         }
