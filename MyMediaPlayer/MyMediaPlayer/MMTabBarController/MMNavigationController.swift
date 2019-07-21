@@ -29,20 +29,47 @@ public class MMNavigationController: UINavigationController {
     }
     
     
-    func transition(fromViewController: UIViewController?, toViewController: UIViewController) {
-        if let fromVC = fromViewController {
-            let fromNavigationBar = fromVC.mm_navigationBar
-            fromNavigationBar.removeFromSuperview()
-            fromVC.view.addSubview(fromNavigationBar)
+    func visibleNavigationBarFrame() -> CGRect {
+        var originalY: CGFloat = 20
+        if #available(iOS 11.0, *) {
+            originalY = self.view.safeAreaInsets.top
         }
-        
-        let toNavigationBar = toViewController.mm_navigationBar
-        toNavigationBar.removeFromSuperview()
-        toViewController.view.addSubview(toNavigationBar)
+        return CGRect(x: 0, y: 0, width: navigationBar.frame.width, height: navigationBar.frame.height + originalY)
+    }
+    
+    func addTransitionNavigationBar(to viewController: UIViewController?) {
+        guard let vc = viewController else {
+            return
+        }
+        let navigationBar = vc.mm_navigationBar
+        if !navigationBar.isHidden {
+            navigationBar.removeFromSuperview()
+            navigationBar.frame = visibleNavigationBarFrame()
+            vc.view.addSubview(navigationBar)
+        }
+    }
+    
+    func removeTransitionNavigationBar(from viewController: UIViewController?) {
+        guard let vc = viewController else {
+            return
+        }
+        let navigationBar = vc.mm_navigationBar
+        if !navigationBar.isHidden {
+            navigationBar.removeFromSuperview()
+        }
+    }
+    
+    func transition(fromViewController: UIViewController?, toViewController: UIViewController) {
+        addTransitionNavigationBar(to: fromViewController)
+        addTransitionNavigationBar(to: toViewController)
         
         let completion: () -> Void = {
+            self.removeTransitionNavigationBar(from: fromViewController)
+            self.removeTransitionNavigationBar(from: toViewController)
             if let topNavigationBar = self.topViewController?.mm_navigationBar {
+                topNavigationBar.frame = self.visibleNavigationBarFrame()
                 self.view.addSubview(topNavigationBar)
+                self.view.layoutIfNeeded()
             }
         }
         
@@ -59,7 +86,7 @@ public class MMNavigationController: UINavigationController {
 
 extension MMNavigationController: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        transition(fromViewController: viewController.transitionCoordinator?.viewController(forKey: .from), toViewController: viewController)
+//        transition(fromViewController: viewController.transitionCoordinator?.viewController(forKey: .from), toViewController: viewController)
     }
     
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
