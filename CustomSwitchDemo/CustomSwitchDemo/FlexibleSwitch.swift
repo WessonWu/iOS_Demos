@@ -1,12 +1,23 @@
 import UIKit
 
+@IBDesignable
 open class FlexibleSwitch: UIControl {
-    open var isOn: Bool = false
+    
+    @IBInspectable
+    open var isOn: Bool = false {
+        didSet {
+            self.hasDelayValueChanges = false
+            self.setNeedsLayout()
+        }
+    }
     
     
     lazy var onView: UIImageView = UIImageView(image: nil)
     lazy var offView: UIImageView = UIImageView(image: nil)
     lazy var thumbView: UIImageView = UIImageView(image: nil)
+    
+    var locationOfBeginTouch: CGPoint = .zero
+    var hasDelayValueChanges: Bool = false
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,12 +42,13 @@ open class FlexibleSwitch: UIControl {
         offView.backgroundColor = UIColor.lightGray
         self.addSubview(offView)
         self.addSubview(onView)
+        self.addSubview(thumbView)
     }
     
     open override func layoutSubviews() {
         onView.frame = onRect(inBounds: self.bounds)
         offView.frame = offRect(inBounds: self.bounds)
-        offView.mask?.frame = onMaskRect(inBounds: onView.bounds, isOn: isOn)
+        onView.mask?.frame = onMaskRect(inBounds: onView.bounds, isOn: isOn)
         offView.mask?.frame = offMaskRect(inBounds: offView.bounds, isOn: isOn)
         thumbView.frame = thumbRect(inBounds: self.bounds, isOn: isOn)
     }
@@ -76,6 +88,41 @@ open class FlexibleSwitch: UIControl {
     
     open func offMaskRect(inBounds bounds: CGRect, isOn: Bool) -> CGRect {
         return isOn ? CGRect(x: bounds.width, y: 0, width: 0, height: bounds.height) : bounds
+    }
+    
+    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let touchAreaRect = self.bounds.insetBy(dx: 0, dy: -8)
+        return touchAreaRect.contains(point)
+    }
+    
+    open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if self.point(inside: point, with: event) {
+            return self
+        }
+        return nil
+    }
+    
+    open override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        self.locationOfBeginTouch = touch.location(in: self)
+        self.hasDelayValueChanges = true
+        return true
+    }
+    
+    open override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let location = touch.location(in: self)
+        let delta = location.x - locationOfBeginTouch.x
+        if abs(delta) > 20 {
+            self.setOn(delta > 0, animated: true)
+            sendActions(for: .valueChanged)
+        }
+        return true
+    }
+    
+    open override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        if hasDelayValueChanges {
+            self.setOn(!isOn, animated: true)
+            sendActions(for: .valueChanged)
+        }
     }
 }
 
