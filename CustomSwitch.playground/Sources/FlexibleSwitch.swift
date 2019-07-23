@@ -8,9 +8,6 @@ open class FlexibleSwitch: UIControl {
     lazy var offView: UIImageView = UIImageView(image: nil)
     lazy var thumbView: UIImageView = UIImageView(image: nil)
     
-    lazy var onMask: UIView = UIView()
-    lazy var offMask: UIView = UIView()
-    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         commonInitilization()
@@ -22,7 +19,9 @@ open class FlexibleSwitch: UIControl {
     }
     
     private func commonInitilization() {
+        let offMask = UIView()
         offMask.backgroundColor = UIColor.black
+        let onMask = UIView()
         onMask.backgroundColor = UIColor.black
         offView.mask = offMask
         onView.mask = onMask
@@ -37,8 +36,8 @@ open class FlexibleSwitch: UIControl {
     open override func layoutSubviews() {
         onView.frame = onRect(inBounds: self.bounds)
         offView.frame = offRect(inBounds: self.bounds)
-        onMask.frame = onMaskRect(inBounds: onView.bounds, isOn: isOn)
-        offMask.frame = offMaskRect(inBounds: offView.bounds, isOn: isOn)
+        offView.mask?.frame = onMaskRect(inBounds: onView.bounds, isOn: isOn)
+        offView.mask?.frame = offMaskRect(inBounds: offView.bounds, isOn: isOn)
         thumbView.frame = thumbRect(inBounds: self.bounds, isOn: isOn)
     }
     
