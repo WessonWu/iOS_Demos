@@ -1,5 +1,5 @@
 //
-//  ContainerNavigationController.swift
+//  RTContainerNavigationController.swift
 //  RTRootNavigationController-Swift
 //
 //  Created by wuweixin on 2019/7/22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContainerNavigationController: UINavigationController {
+class RTContainerNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

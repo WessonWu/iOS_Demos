@@ -8,6 +8,22 @@
 
 import UIKit
 
-public extension RTNavigation where Base: UINavigationController {
+public extension RTNavigation where Base: RTRootNavigationController {
+    var visibleViewController: UIViewController? {
+        return base.visibleViewController.map {
+            RTSafeUnwrapViewController($0)
+        }
+    }
     
+    var topViewController: UIViewController? {
+        return base.topViewController.map {
+            RTSafeUnwrapViewController($0)
+        }
+    }
+    
+    var viewControllers: [UIViewController] {
+        return base.viewControllers.map {
+            RTSafeUnwrapViewController($0)
+        }
+    }
 }

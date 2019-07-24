@@ -1,5 +1,5 @@
 //
-//  ContainerController.swift
+//  RTContainerController.swift
 //  RTRootNavigationController-Swift
 //
 //  Created by wuweixin on 2019/7/22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContainerController: UIViewController {
+class RTContainerController: UIViewController {
     
     var contentViewController: UIViewController!
     var containerNavigationController: UINavigationController!
@@ -134,6 +134,6 @@ class ContainerController: UIViewController {
     }
     
     override var debugDescription: String {
-        return String(format: "<%@: %p contentViewController: %@>", self.classForCoder as! CVarArg, self, self.contentViewController)
+        return String(format: "<%@: %p contentViewController: %@>", NSStringFromClass(type(of: self)), self, self.contentViewController)
     }
 }
