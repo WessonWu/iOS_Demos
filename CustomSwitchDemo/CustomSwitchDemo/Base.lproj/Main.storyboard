@@ -23,6 +23,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isOn" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="thumbImage" value="flexible_switch_thumb"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pC8-zn-u4g">
@@ -47,4 +48,7 @@
             <point key="canvasLocation" x="34.782608695652179" y="18.75"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="flexible_switch_thumb" width="28" height="28"/>
+    </resources>
 </document>

@@ -74,10 +74,7 @@ open class FlexibleSwitch: UIControl {
     
     lazy var onView: UIImageView = UIImageView(image: nil)
     lazy var offView: UIImageView = UIImageView(image: nil)
-    lazy var thumbView: UIImageView = UIImageView(image: UIImage(named: "flexible_switch_thumb"))
-    
-    lazy var onTintLayer: CAShapeLayer = CAShapeLayer()
-    lazy var offTintLayer: CAShapeLayer = CAShapeLayer()
+    lazy var thumbView: UIImageView = UIImageView(image: nil)
     
     var locationOfBeginTouch: CGPoint = .zero
     var hasDelayValueChanges: Bool = false
@@ -93,16 +90,15 @@ open class FlexibleSwitch: UIControl {
     }
     
     private func commonInitilization() {
-        let onTintColor = UIColor(red: 0xff / 255.0,
-                                  green: 0xbc / 255.0,
-                                  blue: 0x1a / 255.0,
-                                  alpha: 1)
-        let offTintColor = UIColor(red: 0xe5 / 255.0,
-                                   green: 0xe5 / 255.0,
-                                   blue: 0xe5 / 255.0,
+        self.thumbTintColor = UIColor.white
+        self.onTintColor = UIColor(red: 0xff / 255.0,
+                                   green: 0xbc / 255.0,
+                                   blue: 0x1a / 255.0,
                                    alpha: 1)
-        self.onTintColor = onTintColor
-        self.offTintColor = offTintColor
+        self.offTintColor = UIColor(red: 0xe5 / 255.0,
+                                    green: 0xe5 / 255.0,
+                                    blue: 0xe5 / 255.0,
+                                    alpha: 1)
         
         thumbView.backgroundColor = nil
         onView.backgroundColor = nil
@@ -130,20 +126,29 @@ open class FlexibleSwitch: UIControl {
     open override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        if onImage == nil || (onImage!.isFlexibleSwitchTintImage && onImage!.size != rect.size) {
-            drawTintImage(on: self.onView, with: onTintColor, size: rect.size)
+        drawTintImageIfNeeded(on: self.onView, with: self.onTintColor, size: rect.size)
+        drawTintImageIfNeeded(on: self.offView, with: self.offTintColor, size: rect.size)
+        
+        
+        let thumbSize = thumbView.frame.size
+        guard let image = thumbView.image else {
+            thumbView.image = FlexibleSwitch.thumbImage(from: thumbTintColor, size: thumbSize)
+            return
         }
         
-        if offImage == nil || (offImage!.isFlexibleSwitchTintImage && offImage!.size != rect.size) {
-            drawTintImage(on: self.offView, with: offTintColor, size: rect.size)
+        if image.isFlexibleSwitchTintImage && image.size != thumbSize {
+            thumbView.image = FlexibleSwitch.thumbImage(from: thumbTintColor, size: thumbSize)
         }
     }
     
-    private func drawTintImage(on view: UIImageView, with tintColor: UIColor?, size: CGSize) {
-        if let tintColor = tintColor {
-            view.image = FlexibleSwitch.tintImage(from: tintColor, size: size)
-        } else {
-            view.image = nil
+    private func drawTintImageIfNeeded(on imageView: UIImageView, with tintColor: UIColor?, size: CGSize) {
+        guard let image = imageView.image else {
+            imageView.image = FlexibleSwitch.tintImage(from: tintColor, size: size)
+            return
+        }
+        
+        if image.isFlexibleSwitchTintImage && image.size != size {
+            imageView.image = FlexibleSwitch.tintImage(from: tintColor, size: size)
         }
     }
     
@@ -156,16 +161,13 @@ open class FlexibleSwitch: UIControl {
     }
     
     open override var intrinsicContentSize: CGSize {
-        return CGSize(width: 32, height: 16)
+        return CGSize(width: 44, height: 16)
     }
     
     open func thumbRect(inBounds bounds: CGRect, isOn: Bool) -> CGRect {
-        var rect: CGRect = CGRect(x: 0, y: 0, width: 28, height: 28)
-        let midWidth = (rect.width / 2).rounded()
+        var rect: CGRect = CGRect(x: -2, y: 0, width: 28, height: 28)
         if isOn {
-            rect.origin.x = bounds.width - midWidth
-        } else {
-            rect.origin.x = -midWidth
+            rect.origin.x = bounds.width - rect.width + 2
         }
         rect.origin.y = (bounds.height - rect.height) / 2
         return rect
@@ -207,9 +209,10 @@ open class FlexibleSwitch: UIControl {
     
     open override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let location = touch.location(in: self)
-        let delta = location.x - locationOfBeginTouch.x
-        if abs(delta) > 20 {
-            self.setOn(delta > 0, animated: true)
+        let translationX = location.x - locationOfBeginTouch.x
+        let distance = self.bounds.width - thumbView.frame.width
+        if abs(translationX) >= distance {
+            self.setOn(translationX > 0, animated: true)
             sendActions(for: .valueChanged)
         }
         return true
@@ -223,18 +226,47 @@ open class FlexibleSwitch: UIControl {
     }
     
     
-    class func tintImage(from color: UIColor, size: CGSize = CGSize(width: 10, height: 10)) -> UIImage? {
-        UIGraphicsBeginImageContext(size)
+    class func tintImage(from tintColor: UIColor?, size: CGSize) -> UIImage? {
+        guard let color = tintColor else {
+            return nil
+        }
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
         defer {
             UIGraphicsEndImageContext()
         }
         guard let ctx = UIGraphicsGetCurrentContext() else {
             return nil
         }
-        UIBezierPath(roundedRect: CGRect(origin: .zero, size: size),
-                     cornerRadius: size.height / 2).addClip()
+        let path = UIBezierPath(roundedRect: CGRect(origin: .zero, size: size),
+                                cornerRadius: size.height / 2)
+        ctx.addPath(path.cgPath)
         ctx.setFillColor(color.cgColor)
-        ctx.fill(CGRect(origin: .zero, size: size))
+        ctx.fillPath()
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        image?.isFlexibleSwitchTintImage = true
+        return image
+    }
+    
+    class func thumbImage(from tintColor: UIColor?, size: CGSize) -> UIImage? {
+        guard let color = tintColor else {
+            return nil
+        }
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        guard let ctx = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        
+        let rect = CGRect(origin: .zero, size: size)
+        let path = UIBezierPath(ovalIn: rect.insetBy(dx: 2, dy: 2))
+        ctx.setShadow(offset: .zero,
+                      blur: 2.5,
+                      color: UIColor.black.withAlphaComponent(0.35).cgColor)
+        ctx.setFillColor(color.cgColor)
+        ctx.addPath(path.cgPath)
+        ctx.fillPath()
         let image = UIGraphicsGetImageFromCurrentImageContext()
         image?.isFlexibleSwitchTintImage = true
         return image
