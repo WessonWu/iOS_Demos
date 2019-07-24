@@ -126,9 +126,18 @@ open class FlexibleSwitch: UIControl {
     open override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        setTintImageIfNeeded(on: self.onView, with: self.onTintColor, size: rect.size, render: FlexibleSwitch.tintImage)
-        setTintImageIfNeeded(on: self.offView, with: self.offTintColor, size: rect.size, render: FlexibleSwitch.tintImage)
-        setTintImageIfNeeded(on: self.thumbView, with: self.thumbTintColor, size: rect.size, render: FlexibleSwitch.thumbImage)
+        setTintImageIfNeeded(on: self.onView,
+                             with: self.onTintColor,
+                             size: onView.frame.size,
+                             render: FlexibleSwitch.tintImage)
+        setTintImageIfNeeded(on: self.offView,
+                             with: self.offTintColor,
+                             size: offView.frame.size,
+                             render: FlexibleSwitch.tintImage)
+        setTintImageIfNeeded(on: self.thumbView,
+                             with: self.thumbTintColor,
+                             size: thumbView.frame.size,
+                             render: FlexibleSwitch.thumbImage)
     }
     
     open func setOn(_ on: Bool, animated: Bool) {
@@ -191,8 +200,12 @@ open class FlexibleSwitch: UIControl {
         let translationX = location.x - locationOfBeginTouch.x
         let distance = self.bounds.width - thumbView.frame.width
         if abs(translationX) >= distance {
-            self.setOn(translationX > 0, animated: true)
-            sendActions(for: .valueChanged)
+            let oldIsOn = self.isOn
+            let newIsOn = translationX > 0
+            if oldIsOn != newIsOn {
+                self.setOn(newIsOn, animated: true)
+                sendActions(for: .valueChanged)
+            }
         }
         return true
     }

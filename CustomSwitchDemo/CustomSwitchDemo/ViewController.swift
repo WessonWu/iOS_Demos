@@ -16,6 +16,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func onValueChanged(_ sender: Any) {
+        print(flexibleSwitch.isOn)
+    }
+    
 }
 
