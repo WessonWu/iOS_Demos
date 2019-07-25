@@ -25,4 +25,8 @@ public extension RTNavigation where Base: UIViewController {
     var navigationBarClass: AnyClass? {
         return (base as? RTNavigationBarCustomizable)?.navigationBarClass
     }
+    
+    var disableInteractivePop: Bool {
+        return (base as? RTNavigationInteractable)?.disableInteractivePop ?? false
+    }
 }

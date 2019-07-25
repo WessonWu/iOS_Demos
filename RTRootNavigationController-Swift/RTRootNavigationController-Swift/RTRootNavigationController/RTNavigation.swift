@@ -30,3 +30,19 @@ public extension RTNavigationCompatible {
 public protocol RTNavigationBarCustomizable {
     var navigationBarClass: AnyClass? { get }
 }
+
+public extension RTNavigationBarCustomizable {
+    var navigationBarClass: AnyClass? {
+        return nil
+    }
+}
+
+public protocol RTNavigationInteractable {
+    var disableInteractivePop: Bool { get }
+}
+
+public extension RTNavigationInteractable {
+    var disableInteractivePop: Bool {
+        return false
+    }
+}
