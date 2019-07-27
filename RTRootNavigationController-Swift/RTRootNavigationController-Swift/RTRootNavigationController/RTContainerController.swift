@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RTContainerController: UIViewController {
+open class RTContainerController: UIViewController {
     
     var contentViewController: UIViewController!
     var containerNavigationController: UINavigationController!
@@ -34,15 +34,15 @@ class RTContainerController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
         self.addChild(containerNavigationController)
@@ -54,59 +54,59 @@ class RTContainerController: UIViewController {
     }
     
     
-    override func becomeFirstResponder() -> Bool {
+    open override func becomeFirstResponder() -> Bool {
         return contentViewController.becomeFirstResponder()
     }
     
-    override var canBecomeFirstResponder: Bool {
+    open override var canBecomeFirstResponder: Bool {
         return contentViewController.canBecomeFirstResponder
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
         return contentViewController.preferredStatusBarStyle
     }
     
-    override var prefersStatusBarHidden: Bool {
+    open override var prefersStatusBarHidden: Bool {
         return contentViewController.prefersStatusBarHidden
     }
     
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    open override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return contentViewController.preferredStatusBarUpdateAnimation
     }
     
     @available(iOS 11.0, *)
-    override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
+    open override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
         return contentViewController.preferredScreenEdgesDeferringSystemGestures
     }
 
     @available(iOS 11.0, *)
-    override var childForScreenEdgesDeferringSystemGestures: UIViewController? {
+    open override var childForScreenEdgesDeferringSystemGestures: UIViewController? {
         return contentViewController.childForScreenEdgesDeferringSystemGestures
     }
     
     @available(iOS 11.0, *)
-    override var prefersHomeIndicatorAutoHidden: Bool {
+    open override var prefersHomeIndicatorAutoHidden: Bool {
         return contentViewController.prefersHomeIndicatorAutoHidden
     }
     
     @available(iOS 11.0, *)
-    override var childForHomeIndicatorAutoHidden: UIViewController? {
+    open override var childForHomeIndicatorAutoHidden: UIViewController? {
         return contentViewController
     }
     
-    override var shouldAutorotate: Bool {
+    open override var shouldAutorotate: Bool {
         return contentViewController.shouldAutorotate
     }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return contentViewController.supportedInterfaceOrientations
     }
     
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+    open override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return contentViewController.preferredInterfaceOrientationForPresentation
     }
     
-    override var hidesBottomBarWhenPushed: Bool {
+    open override var hidesBottomBarWhenPushed: Bool {
         get {
             return contentViewController.hidesBottomBarWhenPushed
         }
@@ -115,7 +115,7 @@ class RTContainerController: UIViewController {
         }
     }
     
-    override var title: String? {
+    open override var title: String? {
         get {
             return contentViewController.title
         }
@@ -124,7 +124,7 @@ class RTContainerController: UIViewController {
         }
     }
     
-    override var tabBarItem: UITabBarItem! {
+    open override var tabBarItem: UITabBarItem! {
         get {
             return contentViewController.tabBarItem
         }
@@ -133,7 +133,7 @@ class RTContainerController: UIViewController {
         }
     }
     
-    override var debugDescription: String {
+    open override var debugDescription: String {
         return String(format: "<%@: %p contentViewController: %@>", NSStringFromClass(type(of: self)), self, self.contentViewController)
     }
 }

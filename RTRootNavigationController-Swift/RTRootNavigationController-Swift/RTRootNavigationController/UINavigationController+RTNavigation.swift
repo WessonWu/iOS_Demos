@@ -9,6 +9,15 @@
 import UIKit
 
 public extension RTNavigation where Base: RTRootNavigationController {
+    weak var delegate: UINavigationControllerDelegate? {
+        get {
+            return base.rt_delegate
+        }
+        set {
+            base.rt_delegate = newValue
+        }
+    }
+    
     /// use this property instead of @c visibleViewController to get the current visiable content view controller
     var visibleViewController: UIViewController? {
         return base.visibleViewController.map {
