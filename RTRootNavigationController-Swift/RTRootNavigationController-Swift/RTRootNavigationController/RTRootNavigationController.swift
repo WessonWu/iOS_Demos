@@ -40,7 +40,7 @@ open class RTRootNavigationController: UINavigationController {
     ///
     /// - Parameter rootViewController: The root viewController
     public convenience init(rootViewControllerNoWrapping rootViewController: UIViewController) {
-        self.init(rootViewController: RTContainerController(contentViewController: rootViewController))
+        self.init(rootViewController: RTContainerController(contentViewControllerNoWrapping: rootViewController))
     }
     
     // MARK: - Override

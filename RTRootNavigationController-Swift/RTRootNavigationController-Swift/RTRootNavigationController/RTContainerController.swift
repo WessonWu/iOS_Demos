@@ -34,8 +34,8 @@ open class RTContainerController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    init(viewController: UIViewController) {
-        self.contentViewController = viewController
+    init(contentViewControllerNoWrapping contentViewController: UIViewController) {
+        self.contentViewController = contentViewController
         super.init(nibName: nil, bundle: nil)
     }
     
