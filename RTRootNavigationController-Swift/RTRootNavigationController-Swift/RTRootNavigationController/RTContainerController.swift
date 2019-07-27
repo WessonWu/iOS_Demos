@@ -111,7 +111,7 @@ open class RTContainerController: UIViewController {
             return contentViewController.hidesBottomBarWhenPushed
         }
         set {
-            contentViewController.hidesBottomBarWhenPushed = newValue
+            super.hidesBottomBarWhenPushed = newValue
         }
     }
     
@@ -120,7 +120,7 @@ open class RTContainerController: UIViewController {
             return contentViewController.title
         }
         set {
-            contentViewController.title = newValue
+            super.title = newValue
         }
     }
     
@@ -129,7 +129,7 @@ open class RTContainerController: UIViewController {
             return contentViewController.tabBarItem
         }
         set {
-            contentViewController.tabBarItem = newValue
+            super.tabBarItem = newValue
         }
     }
     

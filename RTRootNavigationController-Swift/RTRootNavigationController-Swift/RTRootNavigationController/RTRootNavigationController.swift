@@ -54,6 +54,11 @@ open class RTRootNavigationController: UINavigationController {
         super.init(navigationBarClass: navigationBarClass, toolbarClass: toolbarClass)
         commonInit()
     }
+    
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -61,7 +66,7 @@ open class RTRootNavigationController: UINavigationController {
     }
     
     private func commonInit() {
-        
+        // do nothing
     }
     
     open override func awakeFromNib() {
