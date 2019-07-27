@@ -15,9 +15,11 @@ open class RTRootNavigationController: UINavigationController {
     /// use system original back bar item or custom back bar item returned by
     /// (UIBarButtonItem*)customBackItemWithTarget:action: , default is NO
     /// Warning: Set this to YES will INCREASE memory usage!
+    @IBInspectable
     open var useSystemBackBarButtonItem: Bool = false
     
     /// Weather each individual navigation bar uses the visual style of root navigation bar. Default is NO
+    @IBInspectable
     open var transferNavigationBarAttributes: Bool = false
     
     open override var delegate: UINavigationControllerDelegate? {
@@ -31,7 +33,7 @@ open class RTRootNavigationController: UINavigationController {
     
     weak var rt_delegate: UINavigationControllerDelegate?
     
-    var animationBlock: Completion?
+    var completionHandler: Completion?
     
 
     /// Init with a root view controller without wrapping into a navigation controller
@@ -211,10 +213,10 @@ open class RTRootNavigationController: UINavigationController {
     ///   - animated: use animation or not
     ///   - completion: animation complete callback block
     open func pushViewController(_ viewController: UIViewController, animated: Bool, completion: Completion?) {
-        if let animationBlock = self.animationBlock {
-            animationBlock(false)
+        if let completionHandler = self.completionHandler {
+            completionHandler(false)
         }
-        self.animationBlock = completion
+        self.completionHandler = completion
         self.pushViewController(viewController, animated: animated)
     }
     
@@ -226,16 +228,16 @@ open class RTRootNavigationController: UINavigationController {
     /// - Returns: The current UIViewControllers(content controller) poped from the stack
     @discardableResult
     open func popViewController(animated: Bool, completion: Completion?) -> UIViewController? {
-        if let animationBlock = self.animationBlock {
-            animationBlock(false)
+        if let completionHandler = self.completionHandler {
+            completionHandler(false)
         }
-        self.animationBlock = completion
+        self.completionHandler = completion
         
         let vc = self.popViewController(animated: animated)
         if vc == nil {
-            if let animationBlock = self.animationBlock {
-                animationBlock(true)
-                self.animationBlock = nil
+            if let completionHandler = self.completionHandler {
+                completionHandler(true)
+                self.completionHandler = nil
             }
         }
         return vc
@@ -250,18 +252,18 @@ open class RTRootNavigationController: UINavigationController {
     /// - Returns: A array of UIViewControllers(content controller) poped from the stack
     @discardableResult
     open func popToViewController(_ viewController: UIViewController, animated: Bool, completion: Completion?) -> [UIViewController]? {
-        if let animationBlock = self.animationBlock {
-            animationBlock(false)
+        if let completionHandler = self.completionHandler {
+            completionHandler(false)
         }
-        self.animationBlock = completion
+        self.completionHandler = completion
         
         let viewControllers = self.popToViewController(viewController, animated: animated)
         
         let count = viewControllers?.count ?? 0
         if count == 0 {
-            if let animationBlock = self.animationBlock {
-                animationBlock(true)
-                self.animationBlock = nil
+            if let completionHandler = self.completionHandler {
+                completionHandler(true)
+                self.completionHandler = nil
             }
         }
         
@@ -276,18 +278,18 @@ open class RTRootNavigationController: UINavigationController {
     /// - Returns: A array of UIViewControllers(content controller) poped from the stack
     @discardableResult
     open func popToRootViewController(animated: Bool, completion: Completion?) -> [UIViewController]? {
-        if let animationBlock = self.animationBlock {
-            animationBlock(false)
+        if let completionHandler = self.completionHandler {
+            completionHandler(false)
         }
-        self.animationBlock = completion
+        self.completionHandler = completion
         
         let viewControllers = self.popToRootViewController(animated: animated)
         
         let count = viewControllers?.count ?? 0
         if count == 0 {
-            if let animationBlock = self.animationBlock {
-                animationBlock(true)
-                self.animationBlock = nil
+            if let completionHandler = self.completionHandler {
+                completionHandler(true)
+                self.completionHandler = nil
             }
         }
         
@@ -361,14 +363,14 @@ extension RTRootNavigationController: UINavigationControllerDelegate {
                                                 didShow: unwrapped,
                                                 animated: animated)
         
-        if let animationBlock = self.animationBlock {
-            self.animationBlock = nil
+        if let completionHandler = self.completionHandler {
+            self.completionHandler = nil
             if animated {
                 DispatchQueue.main.async {
-                    animationBlock(true)
+                    completionHandler(true)
                 }
             } else {
-                animationBlock(true)
+                completionHandler(true)
             }
         }
     }
