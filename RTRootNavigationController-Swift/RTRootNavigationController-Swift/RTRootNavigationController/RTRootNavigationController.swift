@@ -24,7 +24,7 @@ open class RTRootNavigationController: UINavigationController {
     
     open override var delegate: UINavigationControllerDelegate? {
         get {
-            return super.delegate
+            return self.rt_delegate
         }
         set {
             self.rt_delegate = newValue

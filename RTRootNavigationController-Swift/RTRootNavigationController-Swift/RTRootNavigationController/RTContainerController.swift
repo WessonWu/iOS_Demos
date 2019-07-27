@@ -11,7 +11,7 @@ import UIKit
 open class RTContainerController: UIViewController {
     
     var contentViewController: UIViewController!
-    var containerNavigationController: UINavigationController!
+    var containerNavigationController: UINavigationController?
     
     init(contentViewController: UIViewController,
          navigationBarClass: AnyClass? = nil,
@@ -34,6 +34,11 @@ open class RTContainerController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    init(viewController: UIViewController) {
+        self.contentViewController = viewController
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -45,12 +50,21 @@ open class RTContainerController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.addChild(containerNavigationController)
-        let containerView: UIView = containerNavigationController.view
-        containerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        containerView.frame = self.view.bounds
-        self.view.addSubview(containerView)
-        containerNavigationController.didMove(toParent: self)
+        if let containerNavigationController = self.containerNavigationController {
+            self.addChild(containerNavigationController)
+            let containerView: UIView = containerNavigationController.view
+            containerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            containerView.frame = self.view.bounds
+            self.view.addSubview(containerView)
+            containerNavigationController.didMove(toParent: self)
+        } else {
+            self.addChild(contentViewController)
+            let containerView: UIView = contentViewController.view
+            containerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            containerView.frame = self.view.bounds
+            self.view.addSubview(containerView)
+            contentViewController.didMove(toParent: self)
+        }
     }
     
     
@@ -111,7 +125,7 @@ open class RTContainerController: UIViewController {
             return contentViewController.hidesBottomBarWhenPushed
         }
         set {
-            super.hidesBottomBarWhenPushed = newValue
+            contentViewController.hidesBottomBarWhenPushed = newValue
         }
     }
     
@@ -120,7 +134,7 @@ open class RTContainerController: UIViewController {
             return contentViewController.title
         }
         set {
-            super.title = newValue
+            contentViewController.title = newValue
         }
     }
     

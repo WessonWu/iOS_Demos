@@ -43,7 +43,9 @@ open class RTContainerNavigationController: UINavigationController {
         self.pushViewController(rootViewController, animated: false)
     }
     
-    
+    public override init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?) {
+        super.init(navigationBarClass: navigationBarClass, toolbarClass: toolbarClass)
+    }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -151,9 +153,10 @@ open class RTContainerNavigationController: UINavigationController {
     
     open override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if let navigationController = self.navigationController {
-            return navigationController.pushViewController(viewController, animated: animated)
+            navigationController.pushViewController(viewController, animated: animated)
+        } else {
+            super.pushViewController(viewController, animated: animated)
         }
-        return super.pushViewController(viewController, animated: animated)
     }
     
     open override func forwardingTarget(for aSelector: Selector!) -> Any? {
