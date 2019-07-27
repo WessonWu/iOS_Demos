@@ -38,11 +38,11 @@ public extension RTNavigationBarCustomizable {
 }
 
 public protocol RTNavigationItemCustomizable {
-    func customBackItemWithTarget(_ target: Any?, action: Selector?) -> UIBarButtonItem?
+    func customBackItemWithTarget(_ target: Any?, action: Selector) -> UIBarButtonItem?
 }
 
 public extension RTNavigationItemCustomizable {
-    func customBackItemWithTarget(_ target: Any?, action: Selector?) -> UIBarButtonItem? {
+    func customBackItemWithTarget(_ target: Any?, action: Selector) -> UIBarButtonItem? {
         return nil
     }
 }

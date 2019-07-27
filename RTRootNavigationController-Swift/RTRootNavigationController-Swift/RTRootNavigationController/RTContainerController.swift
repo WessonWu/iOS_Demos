@@ -19,8 +19,8 @@ open class RTContainerController: UIViewController {
          backBarButtonItem: UIBarButtonItem? = nil,
          backTitle: String? = nil) {
         self.contentViewController = contentViewController
-        let containerNavigationController = UINavigationController(navigationBarClass: navigationBarClass,
-                                                                   toolbarClass: nil)
+        let containerNavigationController = RTContainerNavigationController(navigationBarClass: navigationBarClass,
+                                                                            toolbarClass: nil)
         self.containerNavigationController = containerNavigationController
         if yesOrNo {
             let vc = UIViewController()

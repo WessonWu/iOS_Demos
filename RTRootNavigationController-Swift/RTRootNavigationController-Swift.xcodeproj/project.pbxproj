@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1FFF8F22EC429B004C8065 /* RootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FFF8E22EC429B004C8065 /* RootTableViewController.swift */; };
+		0A1FFF9122EC438F004C8065 /* DisableInteractivePopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FFF9022EC438F004C8065 /* DisableInteractivePopViewController.swift */; };
 		0A8B94B422E5FA4D005C6810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B94B322E5FA4D005C6810 /* AppDelegate.swift */; };
-		0A8B94B622E5FA4D005C6810 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B94B522E5FA4D005C6810 /* ViewController.swift */; };
 		0A8B94B922E5FA4D005C6810 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B94B722E5FA4D005C6810 /* Main.storyboard */; };
 		0A8B94BB22E5FA4E005C6810 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B94BA22E5FA4E005C6810 /* Assets.xcassets */; };
 		0A8B94BE22E5FA4E005C6810 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B94BC22E5FA4E005C6810 /* LaunchScreen.storyboard */; };
@@ -22,9 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A1FFF8E22EC429B004C8065 /* RootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTableViewController.swift; sourceTree = "<group>"; };
+		0A1FFF9022EC438F004C8065 /* DisableInteractivePopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableInteractivePopViewController.swift; sourceTree = "<group>"; };
 		0A8B94B022E5FA4D005C6810 /* RTRootNavigationController-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RTRootNavigationController-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8B94B322E5FA4D005C6810 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0A8B94B522E5FA4D005C6810 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0A8B94B822E5FA4D005C6810 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A8B94BA22E5FA4E005C6810 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A8B94BD22E5FA4E005C6810 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +51,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A1FFF8C22EC4129004C8065 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				0A1FFF8D22EC4142004C8065 /* ViewControllers */,
+				0A8B94B322E5FA4D005C6810 /* AppDelegate.swift */,
+				0A8B94B722E5FA4D005C6810 /* Main.storyboard */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		0A1FFF8D22EC4142004C8065 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0A1FFF8E22EC429B004C8065 /* RootTableViewController.swift */,
+				0A1FFF9022EC438F004C8065 /* DisableInteractivePopViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		0A8B94A722E5FA4D005C6810 = {
 			isa = PBXGroup;
 			children = (
@@ -68,10 +89,8 @@
 		0A8B94B222E5FA4D005C6810 /* RTRootNavigationController-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				0A1FFF8C22EC4129004C8065 /* Example */,
 				0A8B94C522E5FA54005C6810 /* RTRootNavigationController */,
-				0A8B94B322E5FA4D005C6810 /* AppDelegate.swift */,
-				0A8B94B522E5FA4D005C6810 /* ViewController.swift */,
-				0A8B94B722E5FA4D005C6810 /* Main.storyboard */,
 				0A8B94BA22E5FA4E005C6810 /* Assets.xcassets */,
 				0A8B94BC22E5FA4E005C6810 /* LaunchScreen.storyboard */,
 				0A8B94BF22E5FA4E005C6810 /* Info.plist */,
@@ -165,12 +184,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A8B94CD22E6110E005C6810 /* RTRootNavigationController.swift in Sources */,
-				0A8B94B622E5FA4D005C6810 /* ViewController.swift in Sources */,
 				0A8B94C922E60031005C6810 /* RTContainerNavigationController.swift in Sources */,
 				0A8B94CB22E600CE005C6810 /* Helper.swift in Sources */,
 				0A8B94F322E8A4F4005C6810 /* UIViewController+RTNavigation.swift in Sources */,
 				0A8B94CF22E61478005C6810 /* UINavigationController+RTNavigation.swift in Sources */,
 				0A8B94B422E5FA4D005C6810 /* AppDelegate.swift in Sources */,
+				0A1FFF8F22EC429B004C8065 /* RootTableViewController.swift in Sources */,
+				0A1FFF9122EC438F004C8065 /* DisableInteractivePopViewController.swift in Sources */,
 				0A8B94F522E8A6A1005C6810 /* RTNavigation.swift in Sources */,
 				0A8B94C722E5FAAE005C6810 /* RTContainerController.swift in Sources */,
 			);

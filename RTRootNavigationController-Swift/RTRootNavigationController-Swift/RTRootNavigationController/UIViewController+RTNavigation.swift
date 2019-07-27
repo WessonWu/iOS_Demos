@@ -40,7 +40,7 @@ public extension RTNavigation where Base: UIViewController {
         }
     }
     
-    func customBackItemWithTarget(_ target: Any?, action: Selector?) -> UIBarButtonItem? {
+    func customBackItemWithTarget(_ target: Any?, action: Selector) -> UIBarButtonItem? {
         return (base as? RTNavigationItemCustomizable)?.customBackItemWithTarget(target, action: action)
     }
 }
