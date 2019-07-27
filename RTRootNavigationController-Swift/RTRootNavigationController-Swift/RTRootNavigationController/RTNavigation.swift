@@ -6,7 +6,7 @@
 //  Copyright © 2019 wuweixin. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public final class RTNavigation<Base> {
     public let base: Base
@@ -37,12 +37,12 @@ public extension RTNavigationBarCustomizable {
     }
 }
 
-public protocol RTNavigationInteractable {
-    var disableInteractivePop: Bool { get }
+public protocol RTNavigationItemCustomizable {
+    func customBackItemWithTarget(_ target: Any?, action: Selector?) -> UIBarButtonItem?
 }
 
-public extension RTNavigationInteractable {
-    var disableInteractivePop: Bool {
-        return false
+public extension RTNavigationItemCustomizable {
+    func customBackItemWithTarget(_ target: Any?, action: Selector?) -> UIBarButtonItem? {
+        return nil
     }
 }

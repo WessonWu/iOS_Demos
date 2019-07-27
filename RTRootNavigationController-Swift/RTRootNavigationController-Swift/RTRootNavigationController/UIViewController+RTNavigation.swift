@@ -10,6 +10,10 @@ import UIKit
 
 extension UIViewController: RTNavigationCompatible {}
 
+internal struct AssociatedKeys {
+    static var disableInteractivePop = "rt_disableInteractivePop"
+}
+
 public extension RTNavigation where Base: UIViewController {
     var navigationController: RTRootNavigationController? {
         var vc: UIViewController = self.base
@@ -27,6 +31,23 @@ public extension RTNavigation where Base: UIViewController {
     }
     
     var disableInteractivePop: Bool {
-        return (base as? RTNavigationInteractable)?.disableInteractivePop ?? false
+        get {
+            return objc_getAssociatedObject(base, &AssociatedKeys.disableInteractivePop) as? Bool ?? false
+        }
+        
+        set {
+            objc_setAssociatedObject(base, &AssociatedKeys.disableInteractivePop, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
+    
+    func customBackItemWithTarget(_ target: Any?, action: Selector?) -> UIBarButtonItem? {
+        return (base as? RTNavigationItemCustomizable)?.customBackItemWithTarget(target, action: action)
+    }
+}
+
+
+internal extension RTNavigation where Base: UIViewController {
+    var hasSetInteractivePop: Bool {
+        return (objc_getAssociatedObject(base, &AssociatedKeys.disableInteractivePop) as? Bool) != nil
     }
 }
