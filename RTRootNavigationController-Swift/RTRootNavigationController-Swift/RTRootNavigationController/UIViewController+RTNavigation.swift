@@ -26,6 +26,11 @@ public extension RTNavigation where Base: UIViewController {
         return vc as? RTRootNavigationController
     }
     
+    
+    var unwrapped: UIViewController {
+        return RTSafeUnwrapViewController(base)
+    }
+    
     var navigationBarClass: AnyClass? {
         return (base as? RTNavigationBarCustomizable)?.navigationBarClass
     }
