@@ -24,9 +24,6 @@ open class RTContainerNavigationController: UINavigationController {
     
     open override var delegate: UINavigationControllerDelegate? {
         get {
-            if let navigationController = self.navigationController {
-                return navigationController.delegate
-            }
             return super.delegate
         }
         set {
