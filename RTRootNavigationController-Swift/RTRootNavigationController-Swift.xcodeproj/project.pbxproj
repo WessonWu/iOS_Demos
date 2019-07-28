@@ -16,6 +16,7 @@
 		0A4DDD0F22EDF46100B28804 /* PushRemoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DDD0722EDF46100B28804 /* PushRemoveViewController.swift */; };
 		0A4DDD1022EDF46100B28804 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DDD0822EDF46100B28804 /* ItemDetailViewController.swift */; };
 		0A4DDD1122EDF46100B28804 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DDD0922EDF46100B28804 /* CollectionViewController.swift */; };
+		0A4DDD1722EDFBFE00B28804 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DDD1622EDFBFE00B28804 /* WebViewController.swift */; };
 		0A8B94B422E5FA4D005C6810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B94B322E5FA4D005C6810 /* AppDelegate.swift */; };
 		0A8B94B922E5FA4D005C6810 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B94B722E5FA4D005C6810 /* Main.storyboard */; };
 		0A8B94BB22E5FA4E005C6810 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B94BA22E5FA4E005C6810 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		0A4DDD0722EDF46100B28804 /* PushRemoveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushRemoveViewController.swift; sourceTree = "<group>"; };
 		0A4DDD0822EDF46100B28804 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		0A4DDD0922EDF46100B28804 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		0A4DDD1622EDFBFE00B28804 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		0A8B94B022E5FA4D005C6810 /* RTRootNavigationController-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RTRootNavigationController-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8B94B322E5FA4D005C6810 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A8B94B822E5FA4D005C6810 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		0A4DDD0122EDF46100B28804 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0A4DDD1622EDFBFE00B28804 /* WebViewController.swift */,
 				0A4DDD0222EDF46100B28804 /* RootTableViewController.swift */,
 				0A4DDD0322EDF46100B28804 /* DisableInteractivePopViewController.swift */,
 				0A4DDD0422EDF46100B28804 /* ItemListViewController.swift */,
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A8B94CD22E6110E005C6810 /* RTRootNavigationController.swift in Sources */,
+				0A4DDD1722EDFBFE00B28804 /* WebViewController.swift in Sources */,
 				0A8B94C922E60031005C6810 /* RTContainerNavigationController.swift in Sources */,
 				0A4DDD0D22EDF46100B28804 /* TableViewController.swift in Sources */,
 				0A8B94CB22E600CE005C6810 /* Helper.swift in Sources */,

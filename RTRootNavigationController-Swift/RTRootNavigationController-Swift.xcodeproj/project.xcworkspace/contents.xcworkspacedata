@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:RTRootNavigationController-Swift.xcodeproj">
+      location = "group:../../../../../../../System/Volumes/Data/Users/wuweixin/Documents/GitHub/iOS_Demos/RTRootNavigationController-Swift/RTRootNavigationController-Swift/Example/ViewControllers/WebViewController.swift">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
