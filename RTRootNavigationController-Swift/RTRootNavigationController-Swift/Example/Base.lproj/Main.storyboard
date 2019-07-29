@@ -196,6 +196,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="v35-et-zLA" kind="show" id="zUp-jU-4Z7"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -400,6 +403,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n6G-VM-EMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-944.92753623188412" y="751.33928571428567"/>
+        </scene>
+        <!--StatusBar-->
+        <scene sceneID="kWY-4o-YRd">
+            <objects>
+                <viewController id="v35-et-zLA" customClass="StatusBarHiddenViewController" customModule="RTRootNavigationController_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BFx-AD-OSh"/>
+                        <viewControllerLayoutGuide type="bottom" id="wCc-VP-xjd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zeC-ae-TUz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="StatusBar" id="oYX-Q2-Yl8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C8U-hO-wxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2344" y="717"/>
         </scene>
         <!--Title-->
         <scene sceneID="ENg-T6-kdz">

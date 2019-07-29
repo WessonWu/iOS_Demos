@@ -54,6 +54,7 @@ class WebViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.rt.disableInteractivePop = false
 
         // Do any additional setup after loading the view.
         

@@ -336,10 +336,8 @@ extension RTRootNavigationController: UINavigationControllerDelegate {
         if !isRootVC && unwrapped.isViewLoaded {
             let hasSetLeftItem = unwrapped.navigationItem.leftBarButtonItem != nil
             let rt_vc = unwrapped.rt
-            if hasSetLeftItem && !rt_vc.hasSetInteractivePop {
-                rt_vc.disableInteractivePop = true
-            } else if !rt_vc.hasSetInteractivePop {
-                rt_vc.disableInteractivePop = false
+            if !rt_vc.hasSetInteractivePop {
+                rt_vc.disableInteractivePop = hasSetLeftItem
             }
             installsLeftBarButtonItemIfNeeded(for: unwrapped)
         }
