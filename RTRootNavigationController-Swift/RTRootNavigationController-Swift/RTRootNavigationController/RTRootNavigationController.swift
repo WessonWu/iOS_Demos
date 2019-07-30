@@ -314,10 +314,10 @@ extension RTRootNavigationController {
             if let backItem = viewController.rt.customBackItemWithTarget(self, action: #selector(onBack(_:))) {
                 viewController.navigationItem.leftBarButtonItem = backItem
             } else {
-                viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back",
-                                                                                  style: .plain,
-                                                                                  target: self,
-                                                                                  action: #selector(onBack(_:)))
+                let button = RTBackButton(frame: CGRect(origin: .zero, size: CGSize(width: 44, height: 44)))
+                button.sizeToFit()
+                button.addTarget(self, action: #selector(onBack(_:)), for: .touchUpInside)
+                viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
             }
         }
     }

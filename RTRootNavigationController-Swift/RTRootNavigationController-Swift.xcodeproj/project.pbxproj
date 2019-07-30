@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A22D0A122EDE4930063C6C4 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22D0A022EDE4930063C6C4 /* CustomNavigationBar.swift */; };
+		0A49276522F099B5001FC152 /* RTBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A49276422F099B5001FC152 /* RTBackButton.swift */; };
 		0A4DDD0A22EDF46100B28804 /* RootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DDD0222EDF46100B28804 /* RootTableViewController.swift */; };
 		0A4DDD0B22EDF46100B28804 /* DisableInteractivePopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DDD0322EDF46100B28804 /* DisableInteractivePopViewController.swift */; };
 		0A4DDD0C22EDF46100B28804 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DDD0422EDF46100B28804 /* ItemListViewController.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		0A22D0A022EDE4930063C6C4 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		0A49276422F099B5001FC152 /* RTBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RTBackButton.swift; path = "../../../../../../../../System/Volumes/Data/Users/wuweixin/Documents/GitHub/iOS_Demos/RTRootNavigationController-Swift/RTRootNavigationController-Swift/RTRootNavigationController/RTBackButton.swift"; sourceTree = "<group>"; };
 		0A4DDD0222EDF46100B28804 /* RootTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTableViewController.swift; sourceTree = "<group>"; };
 		0A4DDD0322EDF46100B28804 /* DisableInteractivePopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisableInteractivePopViewController.swift; sourceTree = "<group>"; };
 		0A4DDD0422EDF46100B28804 /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				0A8B94CE22E61478005C6810 /* UINavigationController+RTNavigation.swift */,
 				0A8B94F222E8A4F4005C6810 /* UIViewController+RTNavigation.swift */,
 				0A8B94F422E8A6A1005C6810 /* RTNavigation.swift */,
+				0A49276422F099B5001FC152 /* RTBackButton.swift */,
 			);
 			path = RTRootNavigationController;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				0A4DDD1722EDFBFE00B28804 /* WebViewController.swift in Sources */,
 				0A8B94C922E60031005C6810 /* RTContainerNavigationController.swift in Sources */,
 				0A4DDD0D22EDF46100B28804 /* TableViewController.swift in Sources */,
+				0A49276522F099B5001FC152 /* RTBackButton.swift in Sources */,
 				0A8B94CB22E600CE005C6810 /* Helper.swift in Sources */,
 				0A8B94F322E8A4F4005C6810 /* UIViewController+RTNavigation.swift in Sources */,
 				0A8B94CF22E61478005C6810 /* UINavigationController+RTNavigation.swift in Sources */,
