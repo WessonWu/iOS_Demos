@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1FC97622F1EB1100C9F674 /* UINavigationController+LayoutMargins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FC97522F1EB1100C9F674 /* UINavigationController+LayoutMargins.swift */; };
 		0A22D0A122EDE4930063C6C4 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22D0A022EDE4930063C6C4 /* CustomNavigationBar.swift */; };
 		0A49276522F099B5001FC152 /* RTBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A49276422F099B5001FC152 /* RTBackButton.swift */; };
 		0A4DDD0A22EDF46100B28804 /* RootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DDD0222EDF46100B28804 /* RootTableViewController.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A1FC97522F1EB1100C9F674 /* UINavigationController+LayoutMargins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UINavigationController+LayoutMargins.swift"; path = "../../../../../../../../../System/Volumes/Data/Users/wuweixin/Documents/GitHub/iOS_Demos/RTRootNavigationController-Swift/RTRootNavigationController-Swift/Example/ViewControllers/UINavigationController+LayoutMargins.swift"; sourceTree = "<group>"; };
 		0A22D0A022EDE4930063C6C4 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		0A49276422F099B5001FC152 /* RTBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RTBackButton.swift; path = "../../../../../../../../System/Volumes/Data/Users/wuweixin/Documents/GitHub/iOS_Demos/RTRootNavigationController-Swift/RTRootNavigationController-Swift/RTRootNavigationController/RTBackButton.swift"; sourceTree = "<group>"; };
 		0A4DDD0222EDF46100B28804 /* RootTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTableViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				0A4DDD0822EDF46100B28804 /* ItemDetailViewController.swift */,
 				0A4DDD0922EDF46100B28804 /* CollectionViewController.swift */,
 				0A4DDD1822EF450F00B28804 /* StatusBarHiddenViewController.swift */,
+				0A1FC97522F1EB1100C9F674 /* UINavigationController+LayoutMargins.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				0A4DDD0B22EDF46100B28804 /* DisableInteractivePopViewController.swift in Sources */,
 				0A4DDD0F22EDF46100B28804 /* PushRemoveViewController.swift in Sources */,
 				0A8B94F522E8A6A1005C6810 /* RTNavigation.swift in Sources */,
+				0A1FC97622F1EB1100C9F674 /* UINavigationController+LayoutMargins.swift in Sources */,
 				0A8B94C722E5FAAE005C6810 /* RTContainerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
