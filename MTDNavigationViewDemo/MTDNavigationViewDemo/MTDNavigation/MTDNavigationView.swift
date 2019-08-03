@@ -88,6 +88,14 @@ open class MTDNavigationView: UIView {
         return CGSize(width: width, height: 20 + 44)
     }
     
+    /// A Boolean value indicating whether the navigation view is translucent (true) or not (false).
+    open var isTranslucent: Bool = false {
+        didSet {
+            self.superview?.setNeedsUpdateConstraints()
+            self.superview?.updateConstraintsIfNeeded()
+        }
+    }
+    
     /// 自动设置返回按钮显示/隐藏(处在MTDNavigationController时才有用)
     open var automaticallyAdjustsBackItemHidden: Bool = true
 
@@ -170,7 +178,7 @@ open class MTDNavigationView: UIView {
         leftItemsStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
         rightItemsStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        let rightWidthConstraint = leftItemsStackView.widthAnchor.constraint(equalToConstant: 0)
+        let rightWidthConstraint = rightItemsStackView.widthAnchor.constraint(equalToConstant: 0)
         rightWidthConstraint.priority = UILayoutPriority(200)
         rightWidthConstraint.isActive = true
         rightItemsStackView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true

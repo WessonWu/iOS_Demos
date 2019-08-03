@@ -18,6 +18,7 @@
 		0ABEB4F422F530BB00BDF624 /* MTDNavigationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4F322F530BB00BDF624 /* MTDNavigationItemView.swift */; };
 		0ABEB4F622F536C800BDF624 /* MTDNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4F522F536C800BDF624 /* MTDNavigation.swift */; };
 		0ABEB4F822F537B600BDF624 /* MTDNavigation+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4F722F537B600BDF624 /* MTDNavigation+UIViewController.swift */; };
+		0ABEB4FB22F5766700BDF624 /* TranslucentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4FA22F5766700BDF624 /* TranslucentTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		0ABEB4F322F530BB00BDF624 /* MTDNavigationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTDNavigationItemView.swift; sourceTree = "<group>"; };
 		0ABEB4F522F536C800BDF624 /* MTDNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTDNavigation.swift; sourceTree = "<group>"; };
 		0ABEB4F722F537B600BDF624 /* MTDNavigation+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTDNavigation+UIViewController.swift"; sourceTree = "<group>"; };
+		0ABEB4FA22F5766700BDF624 /* TranslucentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslucentTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,10 +68,8 @@
 		0A1FC9BE22F31CBE00C9F674 /* MTDNavigationViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0ABEB4F922F5764200BDF624 /* Example */,
 				0A1FC9D122F31D3E00C9F674 /* MTDNavigation */,
-				0A1FC9BF22F31CBE00C9F674 /* AppDelegate.swift */,
-				0A1FC9C122F31CBE00C9F674 /* ViewController.swift */,
-				0A1FC9C322F31CBE00C9F674 /* Main.storyboard */,
 				0A1FC9C622F31CBF00C9F674 /* Assets.xcassets */,
 				0A1FC9C822F31CBF00C9F674 /* LaunchScreen.storyboard */,
 				0A1FC9CB22F31CBF00C9F674 /* Info.plist */,
@@ -88,6 +88,17 @@
 				0ABEB4F722F537B600BDF624 /* MTDNavigation+UIViewController.swift */,
 			);
 			path = MTDNavigation;
+			sourceTree = "<group>";
+		};
+		0ABEB4F922F5764200BDF624 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				0A1FC9BF22F31CBE00C9F674 /* AppDelegate.swift */,
+				0A1FC9C122F31CBE00C9F674 /* ViewController.swift */,
+				0A1FC9C322F31CBE00C9F674 /* Main.storyboard */,
+				0ABEB4FA22F5766700BDF624 /* TranslucentTableViewController.swift */,
+			);
+			path = Example;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +179,7 @@
 				0ABEB4F822F537B600BDF624 /* MTDNavigation+UIViewController.swift in Sources */,
 				0ABEB4F422F530BB00BDF624 /* MTDNavigationItemView.swift in Sources */,
 				0A1FC9D722F3290400C9F674 /* MTDNavigationView.swift in Sources */,
+				0ABEB4FB22F5766700BDF624 /* TranslucentTableViewController.swift in Sources */,
 				0A1FC9D522F3213900C9F674 /* MTDWrapperController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
