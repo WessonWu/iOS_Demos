@@ -15,6 +15,9 @@
 		0A1FC9D322F31F9700C9F674 /* MTDNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FC9D222F31F9700C9F674 /* MTDNavigationController.swift */; };
 		0A1FC9D522F3213900C9F674 /* MTDWrapperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FC9D422F3213900C9F674 /* MTDWrapperController.swift */; };
 		0A1FC9D722F3290400C9F674 /* MTDNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FC9D622F3290400C9F674 /* MTDNavigationView.swift */; };
+		0ABEB4F422F530BB00BDF624 /* MTDNavigationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4F322F530BB00BDF624 /* MTDNavigationItemView.swift */; };
+		0ABEB4F622F536C800BDF624 /* MTDNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4F522F536C800BDF624 /* MTDNavigation.swift */; };
+		0ABEB4F822F537B600BDF624 /* MTDNavigation+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4F722F537B600BDF624 /* MTDNavigation+UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		0A1FC9D222F31F9700C9F674 /* MTDNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTDNavigationController.swift; sourceTree = "<group>"; };
 		0A1FC9D422F3213900C9F674 /* MTDWrapperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTDWrapperController.swift; sourceTree = "<group>"; };
 		0A1FC9D622F3290400C9F674 /* MTDNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTDNavigationView.swift; sourceTree = "<group>"; };
+		0ABEB4F322F530BB00BDF624 /* MTDNavigationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTDNavigationItemView.swift; sourceTree = "<group>"; };
+		0ABEB4F522F536C800BDF624 /* MTDNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTDNavigation.swift; sourceTree = "<group>"; };
+		0ABEB4F722F537B600BDF624 /* MTDNavigation+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTDNavigation+UIViewController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,9 @@
 				0A1FC9D222F31F9700C9F674 /* MTDNavigationController.swift */,
 				0A1FC9D422F3213900C9F674 /* MTDWrapperController.swift */,
 				0A1FC9D622F3290400C9F674 /* MTDNavigationView.swift */,
+				0ABEB4F322F530BB00BDF624 /* MTDNavigationItemView.swift */,
+				0ABEB4F522F536C800BDF624 /* MTDNavigation.swift */,
+				0ABEB4F722F537B600BDF624 /* MTDNavigation+UIViewController.swift */,
 			);
 			path = MTDNavigation;
 			sourceTree = "<group>";
@@ -153,8 +162,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A1FC9D322F31F9700C9F674 /* MTDNavigationController.swift in Sources */,
+				0ABEB4F622F536C800BDF624 /* MTDNavigation.swift in Sources */,
 				0A1FC9C222F31CBE00C9F674 /* ViewController.swift in Sources */,
 				0A1FC9C022F31CBE00C9F674 /* AppDelegate.swift in Sources */,
+				0ABEB4F822F537B600BDF624 /* MTDNavigation+UIViewController.swift in Sources */,
+				0ABEB4F422F530BB00BDF624 /* MTDNavigationItemView.swift in Sources */,
 				0A1FC9D722F3290400C9F674 /* MTDNavigationView.swift in Sources */,
 				0A1FC9D522F3213900C9F674 /* MTDWrapperController.swift in Sources */,
 			);

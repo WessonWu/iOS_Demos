@@ -19,12 +19,27 @@ open class MTDWrapperController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.addChild(self.contentViewController)
-        let contentView: UIView = contentViewController.view
+        guard let vc = self.contentViewController else {
+            return
+        }
+        
+        let mtd_vc = vc.mtd
+        let navigationView = mtd_vc.navigationView
+        navigationView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(navigationView)
+        navigationView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        navigationView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        navigationView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        self.addChild(vc)
+        let contentView: UIView = vc.view
         contentView.frame = self.view.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(contentView)
-        contentViewController.didMove(toParent: self)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.topAnchor.constraint(equalTo: navigationView.bottomAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        vc.didMove(toParent: self)
     }
     
     

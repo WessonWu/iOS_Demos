@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-open class MTDNavigationController: UINavigationController {
+open class MTDNavigationController: UINavigationController, MTDNavigationViewDelegate {
     public typealias Completion = (Bool) -> Void
     
     open override var delegate: UINavigationControllerDelegate? {
@@ -245,21 +245,19 @@ open class MTDNavigationController: UINavigationController {
         return viewControllers
     }
     
-}
-
-// MARK: - Internal
-extension MTDNavigationController {
     
-    @objc
-    func onBack(_ sender: Any?) {
+    public func performBackAction(in navigationView: MTDNavigationView) {
         self.popViewController(animated: true)
     }
+    
 }
-
 // MARK: - UINavigationControllerDelegate Proxy
 extension MTDNavigationController: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        let isRootVC = viewController.isEqual(self.viewControllers.first)
         let unwrapped = MTDSafeUnwrapViewController(viewController)
+        let mtd_vc = unwrapped.mtd
+        mtd_vc.navigationView.backButton.isHidden = isRootVC
         self.mtd_delegate?.navigationController?(navigationController,
                                                 willShow: unwrapped,
                                                 animated: animated)
@@ -268,15 +266,21 @@ extension MTDNavigationController: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         let isRootVC = viewController.isEqual(self.viewControllers.first)
         let unwrapped = MTDSafeUnwrapViewController(viewController)
-//        let rt_vc = unwrapped.rt
-//        if rt_vc.disableInteractivePop {
-//            self.interactivePopGestureRecognizer?.delegate = nil
-//            self.interactivePopGestureRecognizer?.isEnabled = false
-//        } else {
-//            self.interactivePopGestureRecognizer?.delaysTouchesBegan = true
-//            self.interactivePopGestureRecognizer?.delegate = self
-//            self.interactivePopGestureRecognizer?.isEnabled = !isRootVC
-//        }
+        let mtd_vc = unwrapped.mtd
+        
+        let navigationView = mtd_vc.navigationView
+        if mtd_vc.navigationView.delegate == nil {
+            navigationView.delegate = self
+        }
+        
+        if mtd_vc.disableInteractivePop {
+            self.interactivePopGestureRecognizer?.delegate = nil
+            self.interactivePopGestureRecognizer?.isEnabled = false
+        } else {
+            self.interactivePopGestureRecognizer?.delaysTouchesBegan = true
+            self.interactivePopGestureRecognizer?.delegate = self
+            self.interactivePopGestureRecognizer?.isEnabled = !isRootVC
+        }
         
         MTDNavigationController.attemptRotationToDeviceOrientation()
         

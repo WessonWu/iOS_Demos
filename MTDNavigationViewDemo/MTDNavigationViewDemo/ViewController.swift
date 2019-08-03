@@ -13,8 +13,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.mtd.navigationView.backgroundColor = UIColor.red
     }
 
 
+    @IBAction func changeTitle(_ sender: Any) {
+        self.title = "ChangeTitle" + arc4random_uniform(100).description
+    }
+    
 }
 
