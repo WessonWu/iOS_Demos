@@ -257,7 +257,10 @@ extension MTDNavigationController: UINavigationControllerDelegate {
         let isRootVC = viewController.isEqual(self.viewControllers.first)
         let unwrapped = MTDSafeUnwrapViewController(viewController)
         let mtd_vc = unwrapped.mtd
-        mtd_vc.navigationView.backButton.isHidden = isRootVC
+        let navigationView = mtd_vc.navigationView
+        if navigationView.automaticallyAdjustsBackItemHidden {
+            mtd_vc.navigationView.backButton.isHidden = isRootVC
+        }
         self.mtd_delegate?.navigationController?(navigationController,
                                                 willShow: unwrapped,
                                                 animated: animated)
@@ -271,6 +274,10 @@ extension MTDNavigationController: UINavigationControllerDelegate {
         let navigationView = mtd_vc.navigationView
         if mtd_vc.navigationView.delegate == nil {
             navigationView.delegate = self
+        }
+        
+        if !mtd_vc.hasSetInteractivePop {
+            mtd_vc.disableInteractivePop = navigationView.isHidden
         }
         
         if mtd_vc.disableInteractivePop {

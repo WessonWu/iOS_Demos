@@ -31,6 +31,10 @@ public extension MTDNavigation where Base: UIViewController {
         return base.parent as? MTDWrapperController
     }
     
+    var unwrapped: UIViewController {
+        return MTDSafeUnwrapViewController(base)
+    }
+    
     var navigationView: MTDNavigationView {
         if let view = objc_getAssociatedObject(base, &AssociatedKeys.navigationView) as? MTDNavigationView {
             return view
@@ -55,5 +59,11 @@ public extension MTDNavigation where Base: UIViewController {
         set {
             objc_setAssociatedObject(base, &AssociatedKeys.disableInteractivePop, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
+    }
+}
+
+internal extension MTDNavigation where Base: UIViewController {
+    var hasSetInteractivePop: Bool {
+        return (objc_getAssociatedObject(base, &AssociatedKeys.disableInteractivePop) as? Bool) != nil
     }
 }

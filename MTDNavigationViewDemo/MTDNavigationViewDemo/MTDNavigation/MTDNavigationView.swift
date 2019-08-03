@@ -87,6 +87,9 @@ open class MTDNavigationView: UIView {
         }
         return CGSize(width: width, height: 20 + 44)
     }
+    
+    /// 自动设置返回按钮显示/隐藏(处在MTDNavigationController时才有用)
+    open var automaticallyAdjustsBackItemHidden: Bool = true
 
     open weak var owning: UIViewController? {
         didSet {
@@ -99,7 +102,11 @@ open class MTDNavigationView: UIView {
         }
     }
     
+    var backItemHiddenObservation: NSKeyValueObservation?
     var titleObservation: NSKeyValueObservation?
+    
+    private weak var showBackButtonConstraint: NSLayoutConstraint?
+    private weak var hideBackButtonConstraint: NSLayoutConstraint?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -150,13 +157,43 @@ open class MTDNavigationView: UIView {
         titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        leftItemsStackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).isActive = true
+        leftItemsStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        let leftWidthConstraint = leftItemsStackView.widthAnchor.constraint(equalToConstant: 0)
+        leftWidthConstraint.priority = UILayoutPriority(200)
+        leftWidthConstraint.isActive = true
+        
+        let showBackButtonConstraint = leftItemsStackView.leadingAnchor.constraint(equalTo: backButton.trailingAnchor)
+        let hideBackButtonConstraint = leftItemsStackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor)
+        self.showBackButtonConstraint = showBackButtonConstraint
+        self.hideBackButtonConstraint = hideBackButtonConstraint
+        
         leftItemsStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
+        rightItemsStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        let rightWidthConstraint = leftItemsStackView.widthAnchor.constraint(equalToConstant: 0)
+        rightWidthConstraint.priority = UILayoutPriority(200)
+        rightWidthConstraint.isActive = true
         rightItemsStackView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
         rightItemsStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        
+        
+        self.onBackButtonHidden(backButton.isHidden)
+        self.backItemHiddenObservation = backButton.observe(\.isHidden, changeHandler: { [weak self] (button, _) in
+            self?.onBackButtonHidden(button.isHidden)
+        })
     }
     
+    open func onBackButtonHidden(_ isHidden: Bool) {
+        if isHidden {
+            self.showBackButtonConstraint?.isActive = false
+            self.hideBackButtonConstraint?.isActive = true
+        } else {
+            self.hideBackButtonConstraint?.isActive = false
+            self.showBackButtonConstraint?.isActive = true
+        }
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+    }
     
     open func onLeftNavigationItemsChanged(_ navigationItems: [UIView], oldItems: [UIView]) {
         oldItems.forEach { (item) in
@@ -183,5 +220,10 @@ open class MTDNavigationView: UIView {
     @objc
     private func onBackClick(_ sender: Any) {
         delegate?.performBackAction(in: self)
+    }
+    
+    deinit {
+        self.backItemHiddenObservation?.invalidate()
+        self.backItemHiddenObservation = nil
     }
 }

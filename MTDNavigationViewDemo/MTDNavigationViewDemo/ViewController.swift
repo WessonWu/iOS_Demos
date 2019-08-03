@@ -13,7 +13,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.mtd.navigationView.backgroundColor = UIColor.red
+        
+        let navigationView = self.mtd.navigationView
+//        navigationView.automaticallyAdjustsBackItemHidden = false
+//        navigationView.backButton.isHidden = true
+        navigationView.backgroundColor = UIColor.red
+        navigationView.leftNavigationItemViews = [MTDNavigationImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(changeTitle(_:))),
+                                                  MTDNavigationImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(changeTitle(_:)))]
+        navigationView.rightNavigationItemViews = [MTDNavigationImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(changeTitle(_:))),
+                                                   MTDNavigationImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(changeTitle(_:)))]
     }
 
 

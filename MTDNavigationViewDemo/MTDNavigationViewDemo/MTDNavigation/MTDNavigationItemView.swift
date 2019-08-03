@@ -85,7 +85,7 @@ open class MTDNavigationImageItemView: MTDNavigationItemView {
     }
     
     open override var intrinsicContentSize: CGSize {
-        return CGSize(width: 44, height: 44)
+        return CGSize(width: 32, height: 44)
     }
     
     open override func layoutSubviews() {
