@@ -22,7 +22,7 @@ open class MTDNavigationView: UIView {
     
     open private(set) lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "nav_bar_back_ic"), for: .normal)
+        button.setImage(UIImage(named: "nav_bar_back_ic")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = UIColor.white
         return button
     }()

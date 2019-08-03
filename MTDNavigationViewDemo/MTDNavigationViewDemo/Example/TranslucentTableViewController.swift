@@ -21,10 +21,13 @@ class TranslucentTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         let mtd_self = self.mtd
+        self.title = "Translucent"
         
         let navigationView = mtd_self.navigationView
         navigationView.isTranslucent = true
-        navigationView.backgroundColor = UIColor.blue.withAlphaComponent(0.4)
+        navigationView.titleLabel.textColor = UIColor.orange
+        navigationView.backButton.tintColor = UIColor.orange
+        navigationView.backgroundColor = UIColor.blue.withAlphaComponent(0)
         
         translucentSwitch.isOn = navigationView.isTranslucent
     }
@@ -51,5 +54,14 @@ class TranslucentTableViewController: UITableViewController {
 
     @IBAction func translucentValueChanged(_ sender: UISwitch) {
         self.mtd.navigationView.isTranslucent = sender.isOn
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        var offsetY = scrollView.contentOffset.y
+        if #available(iOS 11.0, *) {
+            offsetY += scrollView.adjustedContentInset.top
+        }
+        let alpha: CGFloat = min(max(0, (offsetY / 64)), 1)
+        self.mtd.navigationView.backgroundColor = UIColor.blue.withAlphaComponent(alpha)
     }
 }

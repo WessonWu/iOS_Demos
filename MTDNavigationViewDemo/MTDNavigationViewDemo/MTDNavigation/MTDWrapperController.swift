@@ -11,7 +11,8 @@ import UIKit
 open class MTDWrapperController: UIViewController {
     public private(set) var contentViewController: UIViewController!
     
-    private var translucentObservation: NSKeyValueObservation?
+    var isNavigationViewHidden: Bool = true
+    
     private var reservedSpaceContraints: [NSLayoutConstraint] = []
     private var noReservedSpaceContraints: [NSLayoutConstraint] = []
     
@@ -53,13 +54,18 @@ open class MTDWrapperController: UIViewController {
     }
     
     open override func updateViewConstraints() {
-        print(#function)
-        if contentViewController.mtd.navigationView.isTranslucent {
+        let mtd_vc = contentViewController.mtd
+        let navigationView = mtd_vc.navigationView
+        if navigationView.isTranslucent {
             NSLayoutConstraint.deactivate(self.reservedSpaceContraints)
             NSLayoutConstraint.activate(self.noReservedSpaceContraints)
         } else {
             NSLayoutConstraint.deactivate(self.noReservedSpaceContraints)
             NSLayoutConstraint.activate(self.reservedSpaceContraints)
+        }
+        
+        if isNavigationViewHidden {
+            
         }
         super.updateViewConstraints()
     }
