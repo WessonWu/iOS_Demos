@@ -152,11 +152,6 @@ open class MTDWrapperController: UIViewController {
     open override var debugDescription: String {
         return String(format: "<%@: %p contentViewController: %@>", NSStringFromClass(type(of: self)), self, self.contentViewController)
     }
-    
-    deinit {
-        self.translucentObservation?.invalidate()
-        self.translucentObservation = nil
-    }
 }
 
 
