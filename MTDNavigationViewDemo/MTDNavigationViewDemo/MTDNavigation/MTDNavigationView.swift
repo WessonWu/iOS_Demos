@@ -83,16 +83,19 @@ open class MTDNavigationView: UIView {
     open override var intrinsicContentSize: CGSize {
         let width = UIScreen.main.bounds.width
         if #available(iOS 11.0, *) {
-            return CGSize(width: width, height: max(20, self.safeAreaInsets.top) + 44)
+            return CGSize(width: width, height: max(20, self.safeAreaInsets.top) + contentHeight)
         }
-        return CGSize(width: width, height: 20 + 44)
+        return CGSize(width: width, height: 20 + contentHeight)
+    }
+    
+    open var contentHeight: CGFloat {
+        return 44
     }
     
     /// A Boolean value indicating whether the navigation view is translucent (true) or not (false).
     open var isTranslucent: Bool = false {
         didSet {
-            self.superview?.setNeedsUpdateConstraints()
-            self.superview?.updateConstraintsIfNeeded()
+            self.superview?.setNeedsLayout()
         }
     }
     
@@ -154,18 +157,18 @@ open class MTDNavigationView: UIView {
         }
         contentView.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor).isActive = true
         contentView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        contentView.heightAnchor.constraint(equalToConstant: contentHeight).isActive = true
         contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
-        backButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: contentHeight).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: contentHeight).isActive = true
         backButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         backButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
         titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        leftItemsStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        leftItemsStackView.heightAnchor.constraint(equalToConstant: contentHeight).isActive = true
         let leftWidthConstraint = leftItemsStackView.widthAnchor.constraint(equalToConstant: 0)
         leftWidthConstraint.priority = UILayoutPriority(200)
         leftWidthConstraint.isActive = true
@@ -177,7 +180,7 @@ open class MTDNavigationView: UIView {
         
         leftItemsStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        rightItemsStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        rightItemsStackView.heightAnchor.constraint(equalToConstant: contentHeight).isActive = true
         let rightWidthConstraint = rightItemsStackView.widthAnchor.constraint(equalToConstant: 0)
         rightWidthConstraint.priority = UILayoutPriority(200)
         rightWidthConstraint.isActive = true

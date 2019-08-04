@@ -11,14 +11,17 @@ import UIKit
 open class MTDWrapperController: UIViewController {
     public private(set) var contentViewController: UIViewController!
     
-    var isNavigationViewHidden: Bool = true
-    
-    private var reservedSpaceContraints: [NSLayoutConstraint] = []
-    private var noReservedSpaceContraints: [NSLayoutConstraint] = []
+    public private(set) var isNavigationViewHidden: Bool = true
     
     public convenience init(contentViewController: UIViewController) {
         self.init()
         self.contentViewController = contentViewController
+    }
+    
+    open override func loadView() {
+        let wrapperView = MTDViewControllerWrapperView(frame: UIScreen.main.bounds)
+        wrapperView.contentView = contentViewController.view
+        self.view = wrapperView
     }
 
     open override func viewDidLoad() {
@@ -30,44 +33,13 @@ open class MTDWrapperController: UIViewController {
         
         let mtd_vc = vc.mtd
         let navigationView = mtd_vc.navigationView
-        
-        navigationView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(navigationView)
-        navigationView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        navigationView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        navigationView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         self.addChild(vc)
         let contentView: UIView = vc.view
         contentView.frame = self.view.bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.insertSubview(contentView, at: 0)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        let reservedSpaceContraint = contentView.topAnchor.constraint(equalTo: navigationView.bottomAnchor)
-        let noReservedSpaceContraint = contentView.topAnchor.constraint(equalTo: self.view.topAnchor)
-        self.reservedSpaceContraints = [reservedSpaceContraint]
-        self.noReservedSpaceContraints = [noReservedSpaceContraint]
-        contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        self.view.setNeedsUpdateConstraints()
-        self.view.updateConstraintsIfNeeded()
         vc.didMove(toParent: self)
-    }
-    
-    open override func updateViewConstraints() {
-        let mtd_vc = contentViewController.mtd
-        let navigationView = mtd_vc.navigationView
-        if navigationView.isTranslucent {
-            NSLayoutConstraint.deactivate(self.reservedSpaceContraints)
-            NSLayoutConstraint.activate(self.noReservedSpaceContraints)
-        } else {
-            NSLayoutConstraint.deactivate(self.noReservedSpaceContraints)
-            NSLayoutConstraint.activate(self.reservedSpaceContraints)
-        }
-        
-        if isNavigationViewHidden {
-            
-        }
-        super.updateViewConstraints()
     }
     
     open override func becomeFirstResponder() -> Bool {
