@@ -53,6 +53,7 @@ class MTDViewControllerWrapperView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+
         let statusBarHeight: CGFloat
         if #available(iOS 11.0, *) {
             statusBarHeight = max(20, self.safeAreaInsets.top)
@@ -60,24 +61,43 @@ class MTDViewControllerWrapperView: UIView {
             statusBarHeight = 20
         }
         
-        var contentViewFrame: CGRect = self.bounds
+        var contentFrame: CGRect = self.bounds
         if let navigationView = self.navigationView {
-            let navigationViewFrame = CGRect(x: 0,
-                                             y: 0,
-                                             width: self.bounds.width,
-                                             height: statusBarHeight + navigationView.contentHeight)
-            if !navigationView.isHidden && !navigationView.isTranslucent {
-                contentViewFrame = contentViewFrame.inset(by: UIEdgeInsets(top: navigationViewFrame.height,
-                                                                           left: 0,
-                                                                           bottom: 0,
-                                                                           right: 0))
+            let navigationHeight = statusBarHeight + navigationView.contentHeight
+            
+            let navigationFrame: CGRect
+            if navigationView.isNavigationViewHidden {
+                navigationFrame = CGRect(x: 0, y: -navigationHeight, width: self.bounds.width, height: navigationHeight)
+            } else {
+                navigationFrame = CGRect(x: 0, y: 0, width: self.bounds.width, height: navigationHeight)
+                if !navigationView.isTranslucent {
+                    contentFrame = contentFrame.inset(by: UIEdgeInsets(top: navigationHeight, left: 0, bottom: 0, right: 0))
+                }
             }
             
-            navigationView.frame = navigationViewFrame
+            navigationView.frame = navigationFrame
         }
         
         if let contentView = self.contentView, contentView.superview == self {
-            contentView.frame = contentViewFrame
+            contentView.frame = contentFrame
+        }
+    }
+    
+    func setNavigationViewHidden(_ hidden: Bool, animated: Bool) {
+        self.layoutIfNeeded()
+        guard let navigationView = self.navigationView else {
+            return
+        }
+        if animated {
+            self.setNeedsLayout()
+            navigationView.setNavigationViewHidden(hidden, animations: {
+                self.layoutIfNeeded()
+            }, completion: { (_) in
+//                self.setNeedsLayout()
+//                self.layoutIfNeeded()
+            })
+        } else {
+            navigationView.setNavigationViewHidden(hidden)
         }
     }
 }

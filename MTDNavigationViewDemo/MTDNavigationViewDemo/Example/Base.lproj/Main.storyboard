@@ -25,15 +25,32 @@
                                     <action selector="changeTitle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oZC-fH-t2t"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezf-Ii-pK5">
+                                <rect key="frame" x="157" y="381" width="100" height="30"/>
+                                <state key="normal" title="Toggle Hidden"/>
+                                <connections>
+                                    <action selector="toggleNavigationHidden:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4in-4d-bjg"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jof-wI-EIi">
+                                <rect key="frame" x="182.5" y="328" width="51" height="31"/>
+                            </switch>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.90983726590000003" green="1" blue="0.44592099829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="OPA-Id-K8K" firstAttribute="top" secondItem="Ezf-Ii-pK5" secondAttribute="bottom" constant="22" id="4lA-vZ-PGd"/>
+                            <constraint firstItem="Ezf-Ii-pK5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="64Q-zu-hly"/>
                             <constraint firstItem="OPA-Id-K8K" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6GP-5z-XqI"/>
                             <constraint firstItem="OPA-Id-K8K" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="MRE-aE-KRl"/>
+                            <constraint firstItem="Ezf-Ii-pK5" firstAttribute="top" secondItem="jof-wI-EIi" secondAttribute="bottom" constant="22" id="RZz-zz-88h"/>
+                            <constraint firstItem="jof-wI-EIi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ggT-QN-8mX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Du3-PO-dsu"/>
+                    <connections>
+                        <outlet property="animationSwitch" destination="jof-wI-EIi" id="hfP-ji-dLJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -64,7 +81,7 @@
                                     </connections>
                                 </switch>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="9Gl-Cf-v8s" firstAttribute="leading" secondItem="LXW-KK-Sfo" secondAttribute="leading" constant="16" id="gIb-BF-gxU"/>
                                 <constraint firstItem="mK7-pb-pes" firstAttribute="centerY" secondItem="9Gl-Cf-v8s" secondAttribute="centerY" id="iYe-W0-UCV"/>

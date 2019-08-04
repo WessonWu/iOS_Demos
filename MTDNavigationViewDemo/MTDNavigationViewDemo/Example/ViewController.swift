@@ -9,7 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var animationSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -29,5 +30,9 @@ class ViewController: UIViewController {
         self.title = "ChangeTitle" + arc4random_uniform(100).description
     }
     
+    @IBAction func toggleNavigationHidden(_ sender: Any) {
+        let mtd_self = self.mtd
+        mtd_self.setNavigationViewHidden(!mtd_self.isNavigationViewHidden, animated: animationSwitch.isOn)
+    }
 }
 

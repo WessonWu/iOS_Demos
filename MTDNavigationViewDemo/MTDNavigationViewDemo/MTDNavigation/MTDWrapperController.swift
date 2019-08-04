@@ -11,8 +11,6 @@ import UIKit
 open class MTDWrapperController: UIViewController {
     public private(set) var contentViewController: UIViewController!
     
-    public private(set) var isNavigationViewHidden: Bool = true
-    
     public convenience init(contentViewController: UIViewController) {
         self.init()
         self.contentViewController = contentViewController
@@ -40,6 +38,14 @@ open class MTDWrapperController: UIViewController {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.insertSubview(contentView, at: 0)
         vc.didMove(toParent: self)
+    }
+    
+    
+    open func setNavigationViewHidden(_ hidden: Bool, animated: Bool) {
+        guard let view = self.view as? MTDViewControllerWrapperView else {
+            return
+        }
+        view.setNavigationViewHidden(hidden, animated: animated)
     }
     
     open override func becomeFirstResponder() -> Bool {

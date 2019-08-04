@@ -99,6 +99,16 @@ open class MTDNavigationView: UIView {
         }
     }
     
+    open private(set) var isNavigationViewHidden: Bool = false
+    open override var isHidden: Bool {
+        get {
+            return super.isHidden
+        }
+        set {
+            self.setNavigationViewHidden(newValue)
+        }
+    }
+    
     /// 自动设置返回按钮显示/隐藏(处在MTDNavigationController时才有用)
     open var automaticallyAdjustsBackItemHidden: Bool = true
 
@@ -132,6 +142,7 @@ open class MTDNavigationView: UIView {
     private func commonInitilization() {
         self.backgroundColor = UIColor.cyan
         self.backButton.addTarget(self, action: #selector(onBackClick(_:)), for: .touchUpInside)
+        self.isNavigationViewHidden = super.isHidden
         
         self.addSubview(contentView)
         contentView.addSubview(backButton)
@@ -225,6 +236,26 @@ open class MTDNavigationView: UIView {
         
         navigationItems.forEach { (item) in
             rightItemsStackView.addArrangedSubview(item)
+        }
+    }
+    
+    public func setNavigationViewHidden(_ hidden: Bool, animations: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
+        guard self.isNavigationViewHidden != hidden else {
+            return
+        }
+        self.isNavigationViewHidden = hidden
+        if let animations = animations {
+            if !self.isNavigationViewHidden {
+                super.isHidden = false
+            }
+            let duration = TimeInterval(UINavigationController.hideShowBarDuration)
+            UIView.animate(withDuration: duration, animations: animations, completion: { finished in
+                super.isHidden = self.isNavigationViewHidden
+                completion?(finished)
+            })
+        } else {
+            super.isHidden = hidden
+            completion?(true)
         }
     }
     

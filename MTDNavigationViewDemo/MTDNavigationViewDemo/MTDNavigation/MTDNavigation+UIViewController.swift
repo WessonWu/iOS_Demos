@@ -60,6 +60,14 @@ public extension MTDNavigation where Base: UIViewController {
             objc_setAssociatedObject(base, &AssociatedKeys.disableInteractivePop, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
+    
+    var isNavigationViewHidden: Bool {
+        return navigationView.isNavigationViewHidden
+    }
+    
+    func setNavigationViewHidden(_ hidden: Bool, animated: Bool) {
+        wrapperController?.setNavigationViewHidden(hidden, animated: animated)
+    }
 }
 
 internal extension MTDNavigation where Base: UIViewController {
