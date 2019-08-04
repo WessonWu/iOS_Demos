@@ -88,16 +88,17 @@ class MTDViewControllerWrapperView: UIView {
         guard let navigationView = self.navigationView else {
             return
         }
+        var animations: (() -> Void)? = nil
         if animated {
             self.setNeedsLayout()
-            navigationView.setNavigationViewHidden(hidden, animations: {
+            animations = {
                 self.layoutIfNeeded()
-            }, completion: { (_) in
-//                self.setNeedsLayout()
-//                self.layoutIfNeeded()
-            })
-        } else {
-            navigationView.setNavigationViewHidden(hidden)
+            }
         }
+        let completion: (Bool) -> Void = { _ in
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+        }
+        navigationView.setNavigationViewHidden(hidden, animations: animations, completion: completion)
     }
 }
