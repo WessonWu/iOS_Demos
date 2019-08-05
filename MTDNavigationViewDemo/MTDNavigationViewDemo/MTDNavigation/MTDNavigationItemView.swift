@@ -100,7 +100,7 @@ open class MTDNavigationImageItemView: MTDNavigationItemView {
 open class MTDNavigationTitleItemView: MTDNavigationItemView {
     open private(set) lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = UIColor.black
         label.textAlignment = .center
         return label

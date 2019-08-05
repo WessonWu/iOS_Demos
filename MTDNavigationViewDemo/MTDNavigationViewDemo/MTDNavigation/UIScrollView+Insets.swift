@@ -11,6 +11,9 @@ import UIKit
 fileprivate var MTDWrapperController_adjustedContentInsetTop: UInt8 = 0
 
 extension UIScrollView {
+    var hasSetAdjustedContentInsetTop: Bool {
+        return objc_getAssociatedObject(self, &MTDWrapperController_adjustedContentInsetTop) as? CGFloat != nil
+    }
     // iOS 11.0 以下
     var adjustedContentInsetTop: CGFloat {
         get {
@@ -22,17 +25,23 @@ extension UIScrollView {
                 return
             }
             
+            let hasSetAdjustedContentInsetTop = self.hasSetAdjustedContentInsetTop
+            
             var contentInsetTop = self.contentInset.top
             contentInsetTop -= originInsetTop
             contentInsetTop += newValue
             
             var scrollIndicatorInsetTop = self.scrollIndicatorInsets.top
             scrollIndicatorInsetTop -= originInsetTop
-            contentInsetTop += newValue
+            scrollIndicatorInsetTop += newValue
             
             objc_setAssociatedObject(self, &MTDWrapperController_adjustedContentInsetTop, newValue, .OBJC_ASSOCIATION_ASSIGN)
             self.contentInset.top = contentInsetTop
             self.scrollIndicatorInsets.top = scrollIndicatorInsetTop
+            
+            if !hasSetAdjustedContentInsetTop {
+                self.contentOffset.y = -contentInsetTop
+            }
         }
     }
 }

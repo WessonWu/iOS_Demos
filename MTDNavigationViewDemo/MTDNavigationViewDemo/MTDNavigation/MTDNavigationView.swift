@@ -29,7 +29,7 @@ open class MTDNavigationView: UIView {
     
     open private(set) lazy var titleLabel: UILabel = {
        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textColor = UIColor.black
         label.textAlignment = .center
         return label
