@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class MTDWrapperController: UIViewController {
+open class MTDWrapperController: UIViewController, MTDNavigationViewDelegate {
     public private(set) var contentViewController: UIViewController!
     
     var observations: [NSKeyValueObservation] = []
@@ -158,6 +158,10 @@ open class MTDWrapperController: UIViewController {
     
     open override var debugDescription: String {
         return String(format: "<%@: %p contentViewController: %@>", NSStringFromClass(type(of: self)), self, self.contentViewController)
+    }
+    
+    public func performBackAction(in navigationView: MTDNavigationView) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     deinit {

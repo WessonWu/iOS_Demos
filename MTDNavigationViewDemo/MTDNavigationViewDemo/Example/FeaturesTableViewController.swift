@@ -36,7 +36,7 @@ class FeaturesTableViewController: UITableViewController {
         navigationView.leftNavigationItemViews = [MTDNavigationImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(onShareItemClick(_:))),
                                                   MTDNavigationTitleItemView(title: "完成", target: self, action: #selector(onShareItemClick(_:)))]
         navigationView.rightNavigationItemViews = [MTDNavigationImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(onShareItemClick(_:))),
-                                                   MTDNavigationImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(onShareItemClick(_:)))]
+                                                   MTDNavigationTitleItemView(title: "Present", target: self, action: #selector(presentNext))]
     }
     
     
@@ -83,5 +83,14 @@ class FeaturesTableViewController: UITableViewController {
     
     @IBAction func onShareItemClick(_ sender: Any) {
         self.title = "Features" + arc4random_uniform(100).description
+    }
+    
+    @IBAction func presentNext() {
+        let sb = UIStoryboard(name: "Features", bundle: Bundle.main)
+        guard let vc = sb.instantiateInitialViewController() else {
+            return
+        }
+        
+        self.mtd.present(vc, animated: true)
     }
 }

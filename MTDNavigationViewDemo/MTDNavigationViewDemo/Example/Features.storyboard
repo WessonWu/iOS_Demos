@@ -25,7 +25,7 @@
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eNr-lR-8QM">
                             <rect key="frame" x="0.0" y="412" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Go Next"/>
+                            <state key="normal" title="Push Next"/>
                             <connections>
                                 <segue destination="0uk-Yl-OtG" kind="show" id="avH-k7-y4v"/>
                             </connections>
@@ -266,7 +266,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1DT-Gt-xwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1745" y="1430"/>
+            <point key="canvasLocation" x="1803" y="1412"/>
         </scene>
     </scenes>
 </document>

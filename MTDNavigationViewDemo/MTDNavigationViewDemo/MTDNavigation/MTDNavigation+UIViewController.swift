@@ -66,6 +66,24 @@ public extension MTDNavigation where Base: UIViewController {
     func setNavigationViewHidden(_ hidden: Bool, animated: Bool) {
         wrapperController?.setNavigationViewHidden(hidden, animated: animated)
     }
+    
+    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        let wrapped = MTDSafeWrapViewController(viewControllerToPresent)
+        let mtd_vc = viewControllerToPresent.mtd
+        let navigationView = mtd_vc.navigationView
+        if navigationView.delegate == nil {
+            navigationView.delegate = wrapped as? MTDWrapperController
+        }
+        base.present(wrapped, animated: flag, completion: completion)
+    }
+    
+    func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        if let vc = base.parent as? MTDWrapperController {
+            vc.dismiss(animated: flag, completion: completion)
+        } else {
+            base.dismiss(animated: flag, completion: completion)
+        }
+    }
 }
 
 internal extension MTDNavigation where Base: UIViewController {
