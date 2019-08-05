@@ -8,8 +8,8 @@
 
 import UIKit
 
-class NoBackgroundView: UIView {
-    override var backgroundColor: UIColor? {
+open class NoBackgroundView: UIView {
+    open override var backgroundColor: UIColor? {
         get {
             return super.backgroundColor
         }
@@ -19,12 +19,12 @@ class NoBackgroundView: UIView {
         }
     }
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         commonInitilization()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInitilization()
     }

@@ -20,13 +20,7 @@ open class MTDNavigationView: UIView {
     
     open weak var delegate: MTDNavigationViewDelegate?
     
-    open private(set) lazy var backButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "nav_bar_back_ic")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        button.tintColor = UIColor.black
-        return button
-    }()
-    
+    open private(set) lazy var backButton: UIControl = MTDNavigationManager.backButton()
     open private(set) lazy var titleLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 17)
@@ -94,6 +88,13 @@ open class MTDNavigationView: UIView {
         }
     }
     
+    open var itemSpacing: CGFloat = 0 {
+        didSet {
+            leftItemsStackView.spacing = itemSpacing
+            rightItemsStackView.spacing = itemSpacing
+        }
+    }
+    
     open private(set) var isNavigationViewHidden: Bool = false
     open override var isHidden: Bool {
         get {
@@ -153,15 +154,12 @@ open class MTDNavigationView: UIView {
             safeTopConstraint.isActive = true
         }
         contentView.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor).isActive = true
-//        contentView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor).isActive = true
         let contentTrailing = contentView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor)
         contentTrailing.priority = UILayoutPriority(999)
         contentTrailing.isActive = true
         contentView.heightAnchor.constraint(equalToConstant: contentHeight).isActive = true
         contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
-        backButton.widthAnchor.constraint(equalToConstant: contentHeight).isActive = true
-        backButton.heightAnchor.constraint(equalToConstant: contentHeight).isActive = true
         backButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         backButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
