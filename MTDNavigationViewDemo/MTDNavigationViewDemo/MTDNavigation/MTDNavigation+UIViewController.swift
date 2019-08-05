@@ -11,6 +11,7 @@ import UIKit
 internal struct AssociatedKeys {
     static var navigationView = "mtd_navigationView"
     static var disableInteractivePop = "mtd_disableInteractivePop"
+    static var adjustedContentInsetTop = "mtd_adjustedContentInsetTop"
 }
 
 extension UIViewController: MTDNavigationCompatible {}
@@ -51,11 +52,11 @@ public extension MTDNavigation where Base: UIViewController {
     
     var disableInteractivePop: Bool {
         get {
-            return objc_getAssociatedObject(base, &AssociatedKeys.disableInteractivePop) as? Bool ?? false
+            return disableInteractivePopAssociatedObject?.boolValue ?? false
         }
         
         set {
-            objc_setAssociatedObject(base, &AssociatedKeys.disableInteractivePop, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(base, &AssociatedKeys.disableInteractivePop, NSNumber(value: newValue), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -87,7 +88,11 @@ public extension MTDNavigation where Base: UIViewController {
 }
 
 internal extension MTDNavigation where Base: UIViewController {
+    var disableInteractivePopAssociatedObject: NSNumber? {
+        return objc_getAssociatedObject(base, &AssociatedKeys.disableInteractivePop) as? NSNumber
+    }
+    
     var hasSetInteractivePop: Bool {
-        return (objc_getAssociatedObject(base, &AssociatedKeys.disableInteractivePop) as? Bool) != nil
+        return disableInteractivePopAssociatedObject != nil
     }
 }

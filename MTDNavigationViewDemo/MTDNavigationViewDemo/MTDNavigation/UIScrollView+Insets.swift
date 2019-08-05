@@ -8,16 +8,17 @@
 
 import UIKit
 
-fileprivate var MTDWrapperController_adjustedContentInsetTop: UInt8 = 0
-
 extension UIScrollView {
     var hasSetAdjustedContentInsetTop: Bool {
-        return objc_getAssociatedObject(self, &MTDWrapperController_adjustedContentInsetTop) as? CGFloat != nil
+        return objc_getAssociatedObject(self, &AssociatedKeys.adjustedContentInsetTop) as? NSNumber != nil
     }
     // iOS 11.0 以下
     var adjustedContentInsetTop: CGFloat {
         get {
-            return objc_getAssociatedObject(self, &MTDWrapperController_adjustedContentInsetTop) as? CGFloat ?? 0
+            if let number = objc_getAssociatedObject(self, &AssociatedKeys.adjustedContentInsetTop) as? NSNumber {
+                return CGFloat(number.floatValue)
+            }
+            return 0
         }
         set {
             let originInsetTop = self.adjustedContentInsetTop
@@ -35,7 +36,7 @@ extension UIScrollView {
             scrollIndicatorInsetTop -= originInsetTop
             scrollIndicatorInsetTop += newValue
             
-            objc_setAssociatedObject(self, &MTDWrapperController_adjustedContentInsetTop, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &AssociatedKeys.adjustedContentInsetTop, NSNumber(value: Float(newValue)), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             self.contentInset.top = contentInsetTop
             self.scrollIndicatorInsets.top = scrollIndicatorInsetTop
             
