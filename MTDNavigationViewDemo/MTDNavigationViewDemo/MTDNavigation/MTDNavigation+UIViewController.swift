@@ -45,7 +45,7 @@ public extension MTDNavigation where Base: UIViewController {
             objc_setAssociatedObject(base, &AssociatedKeys.navigationView, view, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return view
         }
-        let view = MTDNavigationView()
+        let view = MTDNavigationManager.build()
         view.owning = base
         objc_setAssociatedObject(base, &AssociatedKeys.navigationView, view, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         return view

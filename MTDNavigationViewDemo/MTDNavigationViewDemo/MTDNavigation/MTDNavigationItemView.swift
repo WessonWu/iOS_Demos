@@ -58,13 +58,16 @@ open class MTDNavigationItemView: UIControl {
 open class MTDNavigationImageItemView: MTDNavigationItemView {
     open private(set) lazy var imageView: UIImageView = {
        let imageView = UIImageView()
+        imageView.tintColor = UIColor.black
         imageView.contentMode = .center
         return imageView
     }()
     
     public convenience init(image: UIImage?, target: Any?, action: Selector?) {
         self.init()
-        imageView.image = image
+        if let image = image {
+            imageView.image = image.renderingMode == .automatic ? image.withRenderingMode(.alwaysTemplate) : image
+        }
         if let target = target, let action = action {
             addTarget(target, action: action, for: .touchUpInside)
         }

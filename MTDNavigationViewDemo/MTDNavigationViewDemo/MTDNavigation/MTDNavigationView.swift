@@ -23,16 +23,14 @@ open class MTDNavigationView: UIView {
     open private(set) lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "nav_bar_back_ic")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        button.tintColor = UIColor.white
+        button.tintColor = UIColor.black
         return button
     }()
     
     open private(set) lazy var titleLabel: UILabel = {
        let label = UILabel()
-        let name = "PingFangSC-Medium"
-        let fontDescriptor = UIFontDescriptor(name: name, size: 17)
-        label.font = UIFont(descriptor: fontDescriptor, size: 17)
-        label.textColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = UIColor.black
         label.textAlignment = .center
         return label
     }()
@@ -140,7 +138,7 @@ open class MTDNavigationView: UIView {
     }
     
     private func commonInitilization() {
-        self.backgroundColor = UIColor.cyan
+        self.backgroundColor = UIColor.white
         self.backButton.addTarget(self, action: #selector(onBackClick(_:)), for: .touchUpInside)
         self.isNavigationViewHidden = super.isHidden
         
