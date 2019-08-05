@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0A1FC9C022F31CBE00C9F674 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FC9BF22F31CBE00C9F674 /* AppDelegate.swift */; };
-		0A1FC9C222F31CBE00C9F674 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1FC9C122F31CBE00C9F674 /* ViewController.swift */; };
 		0A1FC9C522F31CBE00C9F674 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1FC9C322F31CBE00C9F674 /* Main.storyboard */; };
 		0A1FC9C722F31CBF00C9F674 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A1FC9C622F31CBF00C9F674 /* Assets.xcassets */; };
 		0A1FC9CA22F31CBF00C9F674 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1FC9C822F31CBF00C9F674 /* LaunchScreen.storyboard */; };
@@ -21,12 +20,14 @@
 		0ABEB4FB22F5766700BDF624 /* TranslucentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4FA22F5766700BDF624 /* TranslucentTableViewController.swift */; };
 		0ABEB4FD22F7D41800BDF624 /* MTDViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4FC22F7D41800BDF624 /* MTDViewControllerWrapperView.swift */; };
 		0ABEB4FF22F7DA9900BDF624 /* MTDNavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4FE22F7DA9900BDF624 /* MTDNavigationManager.swift */; };
+		0ABEB50122F8028C00BDF624 /* FeaturesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB50022F8028C00BDF624 /* FeaturesTableViewController.swift */; };
+		0ABEB50322F802A300BDF624 /* Features.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEB50222F802A300BDF624 /* Features.storyboard */; };
+		0ABEB50522F806C800BDF624 /* ColorSelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB50422F806C800BDF624 /* ColorSelectionTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A1FC9BC22F31CBE00C9F674 /* MTDNavigationViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTDNavigationViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A1FC9BF22F31CBE00C9F674 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0A1FC9C122F31CBE00C9F674 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0A1FC9C422F31CBE00C9F674 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A1FC9C622F31CBF00C9F674 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A1FC9C922F31CBF00C9F674 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -40,6 +41,9 @@
 		0ABEB4FA22F5766700BDF624 /* TranslucentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslucentTableViewController.swift; sourceTree = "<group>"; };
 		0ABEB4FC22F7D41800BDF624 /* MTDViewControllerWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDViewControllerWrapperView.swift; sourceTree = "<group>"; };
 		0ABEB4FE22F7DA9900BDF624 /* MTDNavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTDNavigationManager.swift; sourceTree = "<group>"; };
+		0ABEB50022F8028C00BDF624 /* FeaturesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesTableViewController.swift; sourceTree = "<group>"; };
+		0ABEB50222F802A300BDF624 /* Features.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Features.storyboard; sourceTree = "<group>"; };
+		0ABEB50422F806C800BDF624 /* ColorSelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,9 +104,11 @@
 			isa = PBXGroup;
 			children = (
 				0A1FC9BF22F31CBE00C9F674 /* AppDelegate.swift */,
-				0A1FC9C122F31CBE00C9F674 /* ViewController.swift */,
 				0A1FC9C322F31CBE00C9F674 /* Main.storyboard */,
 				0ABEB4FA22F5766700BDF624 /* TranslucentTableViewController.swift */,
+				0ABEB50022F8028C00BDF624 /* FeaturesTableViewController.swift */,
+				0ABEB50222F802A300BDF624 /* Features.storyboard */,
+				0ABEB50422F806C800BDF624 /* ColorSelectionTableViewController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -166,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A1FC9CA22F31CBF00C9F674 /* LaunchScreen.storyboard in Resources */,
+				0ABEB50322F802A300BDF624 /* Features.storyboard in Resources */,
 				0A1FC9C722F31CBF00C9F674 /* Assets.xcassets in Resources */,
 				0A1FC9C522F31CBE00C9F674 /* Main.storyboard in Resources */,
 			);
@@ -180,14 +187,15 @@
 			files = (
 				0A1FC9D322F31F9700C9F674 /* MTDNavigationController.swift in Sources */,
 				0ABEB4F622F536C800BDF624 /* MTDNavigation.swift in Sources */,
-				0A1FC9C222F31CBE00C9F674 /* ViewController.swift in Sources */,
 				0A1FC9C022F31CBE00C9F674 /* AppDelegate.swift in Sources */,
 				0ABEB4FF22F7DA9900BDF624 /* MTDNavigationManager.swift in Sources */,
 				0ABEB4F822F537B600BDF624 /* MTDNavigation+UIViewController.swift in Sources */,
 				0ABEB4FD22F7D41800BDF624 /* MTDViewControllerWrapperView.swift in Sources */,
 				0ABEB4F422F530BB00BDF624 /* MTDNavigationItemView.swift in Sources */,
+				0ABEB50522F806C800BDF624 /* ColorSelectionTableViewController.swift in Sources */,
 				0A1FC9D722F3290400C9F674 /* MTDNavigationView.swift in Sources */,
 				0ABEB4FB22F5766700BDF624 /* TranslucentTableViewController.swift in Sources */,
+				0ABEB50122F8028C00BDF624 /* FeaturesTableViewController.swift in Sources */,
 				0A1FC9D522F3213900C9F674 /* MTDWrapperController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

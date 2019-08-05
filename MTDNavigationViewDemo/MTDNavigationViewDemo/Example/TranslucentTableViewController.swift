@@ -31,6 +31,10 @@ class TranslucentTableViewController: UITableViewController {
         
         translucentSwitch.isOn = navigationView.isTranslucent
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     // MARK: - Table view data source
 

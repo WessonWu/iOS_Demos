@@ -67,6 +67,9 @@ open class MTDNavigationController: UINavigationController, MTDNavigationViewDel
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        self.interactivePopGestureRecognizer?.delaysTouchesBegan = true
+        self.interactivePopGestureRecognizer?.delegate = self
+        self.interactivePopGestureRecognizer?.isEnabled = true
         
         super.delegate = self
         super.setNavigationBarHidden(true, animated: false)
@@ -267,7 +270,6 @@ extension MTDNavigationController: UINavigationControllerDelegate {
     }
     
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        let isRootVC = viewController.isEqual(self.viewControllers.first)
         let unwrapped = MTDSafeUnwrapViewController(viewController)
         let mtd_vc = unwrapped.mtd
         
@@ -278,15 +280,6 @@ extension MTDNavigationController: UINavigationControllerDelegate {
         
         if !mtd_vc.hasSetInteractivePop {
             mtd_vc.disableInteractivePop = navigationView.isHidden
-        }
-        
-        if mtd_vc.disableInteractivePop {
-            self.interactivePopGestureRecognizer?.delegate = nil
-            self.interactivePopGestureRecognizer?.isEnabled = false
-        } else {
-            self.interactivePopGestureRecognizer?.delaysTouchesBegan = true
-            self.interactivePopGestureRecognizer?.delegate = self
-            self.interactivePopGestureRecognizer?.isEnabled = !isRootVC
         }
         
         MTDNavigationController.attemptRotationToDeviceOrientation()
@@ -330,6 +323,17 @@ extension MTDNavigationController: UINavigationControllerDelegate {
 }
 
 extension MTDNavigationController: UIGestureRecognizerDelegate {
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard gestureRecognizer.isEqual(self.interactivePopGestureRecognizer) else {
+            return true
+        }
+        let viewControllers = self.viewControllers
+        guard viewControllers.count > 1, let topViewController = self.topViewController.map({ MTDSafeUnwrapViewController($0) }) else {
+            return false
+        }
+        return !topViewController.mtd.disableInteractivePop
+    }
+    
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
