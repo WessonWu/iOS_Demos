@@ -109,20 +109,8 @@ open class MTDNavigationView: UIView {
     
     /// 自动设置返回按钮显示/隐藏(处在MTDNavigationController时才有用)
     open var automaticallyAdjustsBackItemHidden: Bool = true
-
-    open weak var owning: UIViewController? {
-        didSet {
-            self.titleObservation?.invalidate()
-            self.titleObservation = nil
-            self.titleLabel.text = owning?.title
-            self.titleObservation = owning?.observe(\.title, options: [.new, .old], changeHandler: { [weak self] (vc, _) in
-                self?.titleLabel.text = vc.title
-            })
-        }
-    }
     
     var backItemHiddenObservation: NSKeyValueObservation?
-    var titleObservation: NSKeyValueObservation?
     
     private weak var showBackButtonConstraint: NSLayoutConstraint?
     private weak var hideBackButtonConstraint: NSLayoutConstraint?
@@ -165,7 +153,10 @@ open class MTDNavigationView: UIView {
             safeTopConstraint.isActive = true
         }
         contentView.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor).isActive = true
+//        contentView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor).isActive = true
+        let contentTrailing = contentView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor)
+        contentTrailing.priority = UILayoutPriority(999)
+        contentTrailing.isActive = true
         contentView.heightAnchor.constraint(equalToConstant: contentHeight).isActive = true
         contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         

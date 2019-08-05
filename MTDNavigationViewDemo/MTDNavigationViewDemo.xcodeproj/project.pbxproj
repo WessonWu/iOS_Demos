@@ -23,6 +23,7 @@
 		0ABEB50122F8028C00BDF624 /* FeaturesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB50022F8028C00BDF624 /* FeaturesTableViewController.swift */; };
 		0ABEB50322F802A300BDF624 /* Features.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEB50222F802A300BDF624 /* Features.storyboard */; };
 		0ABEB50522F806C800BDF624 /* ColorSelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB50422F806C800BDF624 /* ColorSelectionTableViewController.swift */; };
+		0ABEB50722F824B000BDF624 /* UIScrollView+Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB50622F824B000BDF624 /* UIScrollView+Insets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		0ABEB50022F8028C00BDF624 /* FeaturesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesTableViewController.swift; sourceTree = "<group>"; };
 		0ABEB50222F802A300BDF624 /* Features.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Features.storyboard; sourceTree = "<group>"; };
 		0ABEB50422F806C800BDF624 /* ColorSelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionTableViewController.swift; sourceTree = "<group>"; };
+		0ABEB50622F824B000BDF624 /* UIScrollView+Insets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Insets.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				0ABEB4F522F536C800BDF624 /* MTDNavigation.swift */,
 				0ABEB4F722F537B600BDF624 /* MTDNavigation+UIViewController.swift */,
 				0ABEB4FE22F7DA9900BDF624 /* MTDNavigationManager.swift */,
+				0ABEB50622F824B000BDF624 /* UIScrollView+Insets.swift */,
 			);
 			path = MTDNavigation;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A1FC9D322F31F9700C9F674 /* MTDNavigationController.swift in Sources */,
+				0ABEB50722F824B000BDF624 /* UIScrollView+Insets.swift in Sources */,
 				0ABEB4F622F536C800BDF624 /* MTDNavigation.swift in Sources */,
 				0A1FC9C022F31CBE00C9F674 /* AppDelegate.swift in Sources */,
 				0ABEB4FF22F7DA9900BDF624 /* MTDNavigationManager.swift in Sources */,
