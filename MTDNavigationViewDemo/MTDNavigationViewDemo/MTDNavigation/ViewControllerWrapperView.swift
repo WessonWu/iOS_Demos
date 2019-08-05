@@ -1,5 +1,5 @@
 //
-//  MTDViewControllerWrapperView.swift
+//  ViewControllerWrapperView.swift
 //  MTDNavigationViewDemo
 //
 //  Created by wuweixin on 2019/8/4.
@@ -8,33 +8,9 @@
 
 import UIKit
 
-class MTDViewControllerWrapperView: UIView {
+final class ViewControllerWrapperView: NoBackgroundView {
     var navigationView: MTDNavigationView?
     var contentView: UIView?
-    
-    override var backgroundColor: UIColor? {
-        get {
-            return super.backgroundColor
-        }
-        set {
-            // no background color
-            super.backgroundColor = UIColor.clear
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInitilization()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInitilization()
-    }
-    
-    private func commonInitilization() {
-        super.backgroundColor = UIColor.clear
-    }
     
     override func addSubview(_ view: UIView) {
         if let navigationView = view as? MTDNavigationView {

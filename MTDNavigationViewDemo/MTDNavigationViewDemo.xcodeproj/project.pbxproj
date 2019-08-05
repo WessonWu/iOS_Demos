@@ -18,12 +18,14 @@
 		0ABEB4F622F536C800BDF624 /* MTDNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4F522F536C800BDF624 /* MTDNavigation.swift */; };
 		0ABEB4F822F537B600BDF624 /* MTDNavigation+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4F722F537B600BDF624 /* MTDNavigation+UIViewController.swift */; };
 		0ABEB4FB22F5766700BDF624 /* TranslucentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4FA22F5766700BDF624 /* TranslucentTableViewController.swift */; };
-		0ABEB4FD22F7D41800BDF624 /* MTDViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4FC22F7D41800BDF624 /* MTDViewControllerWrapperView.swift */; };
+		0ABEB4FD22F7D41800BDF624 /* ViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4FC22F7D41800BDF624 /* ViewControllerWrapperView.swift */; };
 		0ABEB4FF22F7DA9900BDF624 /* MTDNavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4FE22F7DA9900BDF624 /* MTDNavigationManager.swift */; };
 		0ABEB50122F8028C00BDF624 /* FeaturesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB50022F8028C00BDF624 /* FeaturesTableViewController.swift */; };
 		0ABEB50322F802A300BDF624 /* Features.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEB50222F802A300BDF624 /* Features.storyboard */; };
 		0ABEB50522F806C800BDF624 /* ColorSelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB50422F806C800BDF624 /* ColorSelectionTableViewController.swift */; };
 		0ABEB50722F824B000BDF624 /* UIScrollView+Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB50622F824B000BDF624 /* UIScrollView+Insets.swift */; };
+		0ABEB50922F847E400BDF624 /* NavigationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB50822F847E400BDF624 /* NavigationContentView.swift */; };
+		0ABEB50B22F8484E00BDF624 /* NoBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB50A22F8484E00BDF624 /* NoBackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,12 +42,14 @@
 		0ABEB4F522F536C800BDF624 /* MTDNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTDNavigation.swift; sourceTree = "<group>"; };
 		0ABEB4F722F537B600BDF624 /* MTDNavigation+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTDNavigation+UIViewController.swift"; sourceTree = "<group>"; };
 		0ABEB4FA22F5766700BDF624 /* TranslucentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslucentTableViewController.swift; sourceTree = "<group>"; };
-		0ABEB4FC22F7D41800BDF624 /* MTDViewControllerWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDViewControllerWrapperView.swift; sourceTree = "<group>"; };
+		0ABEB4FC22F7D41800BDF624 /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
 		0ABEB4FE22F7DA9900BDF624 /* MTDNavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTDNavigationManager.swift; sourceTree = "<group>"; };
 		0ABEB50022F8028C00BDF624 /* FeaturesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesTableViewController.swift; sourceTree = "<group>"; };
 		0ABEB50222F802A300BDF624 /* Features.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Features.storyboard; sourceTree = "<group>"; };
 		0ABEB50422F806C800BDF624 /* ColorSelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionTableViewController.swift; sourceTree = "<group>"; };
 		0ABEB50622F824B000BDF624 /* UIScrollView+Insets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Insets.swift"; sourceTree = "<group>"; };
+		0ABEB50822F847E400BDF624 /* NavigationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationContentView.swift; sourceTree = "<group>"; };
+		0ABEB50A22F8484E00BDF624 /* NoBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoBackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +94,7 @@
 		0A1FC9D122F31D3E00C9F674 /* MTDNavigation */ = {
 			isa = PBXGroup;
 			children = (
-				0ABEB4FC22F7D41800BDF624 /* MTDViewControllerWrapperView.swift */,
+				0ABEB4FC22F7D41800BDF624 /* ViewControllerWrapperView.swift */,
 				0A1FC9D222F31F9700C9F674 /* MTDNavigationController.swift */,
 				0A1FC9D422F3213900C9F674 /* MTDWrapperController.swift */,
 				0A1FC9D622F3290400C9F674 /* MTDNavigationView.swift */,
@@ -99,6 +103,8 @@
 				0ABEB4F722F537B600BDF624 /* MTDNavigation+UIViewController.swift */,
 				0ABEB4FE22F7DA9900BDF624 /* MTDNavigationManager.swift */,
 				0ABEB50622F824B000BDF624 /* UIScrollView+Insets.swift */,
+				0ABEB50822F847E400BDF624 /* NavigationContentView.swift */,
+				0ABEB50A22F8484E00BDF624 /* NoBackgroundView.swift */,
 			);
 			path = MTDNavigation;
 			sourceTree = "<group>";
@@ -193,9 +199,11 @@
 				0ABEB4F622F536C800BDF624 /* MTDNavigation.swift in Sources */,
 				0A1FC9C022F31CBE00C9F674 /* AppDelegate.swift in Sources */,
 				0ABEB4FF22F7DA9900BDF624 /* MTDNavigationManager.swift in Sources */,
+				0ABEB50B22F8484E00BDF624 /* NoBackgroundView.swift in Sources */,
 				0ABEB4F822F537B600BDF624 /* MTDNavigation+UIViewController.swift in Sources */,
-				0ABEB4FD22F7D41800BDF624 /* MTDViewControllerWrapperView.swift in Sources */,
+				0ABEB4FD22F7D41800BDF624 /* ViewControllerWrapperView.swift in Sources */,
 				0ABEB4F422F530BB00BDF624 /* MTDNavigationItemView.swift in Sources */,
+				0ABEB50922F847E400BDF624 /* NavigationContentView.swift in Sources */,
 				0ABEB50522F806C800BDF624 /* ColorSelectionTableViewController.swift in Sources */,
 				0A1FC9D722F3290400C9F674 /* MTDNavigationView.swift in Sources */,
 				0ABEB4FB22F5766700BDF624 /* TranslucentTableViewController.swift in Sources */,

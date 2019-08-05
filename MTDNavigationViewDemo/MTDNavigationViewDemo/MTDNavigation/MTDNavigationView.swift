@@ -36,11 +36,8 @@ open class MTDNavigationView: UIView {
     }()
     
     
-    open private(set) lazy var contentView: UIView = {
-       let view = UIView()
-        view.backgroundColor = UIColor.clear
-        return view
-    }()
+    open private(set) lazy var contentView: UIView = NavigationContentView()
+    open private(set) lazy var shadowImageView: UIImageView = ShadowImageView()
     
     open var leftNavigationItemViews: [UIView] = [] {
         didSet {
@@ -126,17 +123,20 @@ open class MTDNavigationView: UIView {
     }
     
     private func commonInitilization() {
+        self.clipsToBounds = false
         self.backgroundColor = UIColor.white
         self.backButton.addTarget(self, action: #selector(onBackClick(_:)), for: .touchUpInside)
         self.isNavigationViewHidden = super.isHidden
         
         self.addSubview(contentView)
+        self.addSubview(shadowImageView)
         contentView.addSubview(backButton)
         contentView.addSubview(titleLabel)
         contentView.addSubview(leftItemsStackView)
         contentView.addSubview(rightItemsStackView)
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        shadowImageView.translatesAutoresizingMaskIntoConstraints = false
         backButton.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         leftItemsStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -186,6 +186,10 @@ open class MTDNavigationView: UIView {
         rightWidthConstraint.isActive = true
         rightItemsStackView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
         rightItemsStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        
+        shadowImageView.topAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        shadowImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        shadowImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
         
         self.onBackButtonHidden(backButton.isHidden)

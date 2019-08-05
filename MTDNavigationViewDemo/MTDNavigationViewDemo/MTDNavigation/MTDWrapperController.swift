@@ -19,7 +19,7 @@ open class MTDWrapperController: UIViewController, MTDNavigationViewDelegate {
     }
     
     open override func loadView() {
-        let wrapperView = MTDViewControllerWrapperView(frame: UIScreen.main.bounds)
+        let wrapperView = ViewControllerWrapperView(frame: UIScreen.main.bounds)
         wrapperView.contentView = contentViewController.view
         self.view = wrapperView
     }
@@ -50,7 +50,7 @@ open class MTDWrapperController: UIViewController, MTDNavigationViewDelegate {
     
     
     open func setNavigationViewHidden(_ hidden: Bool, animated: Bool) {
-        guard let view = self.view as? MTDViewControllerWrapperView else {
+        guard let view = self.view as? ViewControllerWrapperView else {
             return
         }
         view.setNavigationViewHidden(hidden, animated: animated)
