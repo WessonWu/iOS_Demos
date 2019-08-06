@@ -20,13 +20,12 @@ open class MTDWrapperController: UIViewController, MTDNavigationViewDelegate {
     
     open override func loadView() {
         let wrapperView = ViewControllerWrapperView(frame: UIScreen.main.bounds)
-        wrapperView.contentView = contentViewController.view
+        wrapperView.contentViewController = contentViewController
         self.view = wrapperView
     }
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.automaticallyAdjustsScrollViewInsets = false
         
         guard let vc = self.contentViewController else {
             return
@@ -34,11 +33,6 @@ open class MTDWrapperController: UIViewController, MTDNavigationViewDelegate {
         
         let mtd_vc = vc.mtd
         let navigationView = mtd_vc.navigationView
-        navigationView.titleLabel.text = contentViewController.title
-        let ob1 = contentViewController.observe(\.title) { (vc, _) in
-            navigationView.titleLabel.text = vc.title
-        }
-        observations.append(ob1)
         self.view.addSubview(navigationView)
         self.addChild(vc)
         let contentView: UIView = vc.view
@@ -46,8 +40,39 @@ open class MTDWrapperController: UIViewController, MTDNavigationViewDelegate {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.insertSubview(contentView, at: 0)
         vc.didMove(toParent: self)
+        
+        navigationView.titleLabel.text = contentViewController.title
+        let ob1 = contentViewController.observe(\.title) { (vc, _) in
+            navigationView.titleLabel.text = vc.title
+        }
+        observations = [ob1]
     }
     
+    open override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        automaticallyAdjustsInsetsIfNeeded()
+    }
+    
+    func automaticallyAdjustsInsetsIfNeeded() {
+        let mtd_vc = contentViewController.mtd
+        let navigationView = mtd_vc.navigationView
+        let extended = contentViewController.extendedLayoutIncludesOpaqueBars && !contentViewController.edgesForExtendedLayout.contains(.top)
+        let shouldAdjustsScrollInsets = !navigationView.isNavigationViewHidden && (navigationView.isTranslucent || extended)
+        if #available(iOS 11.0, *) {
+            if shouldAdjustsScrollInsets {
+                contentViewController.adjustedSafeAreaInsetTop = navigationView.intrinsicContentSize.height - self.view.safeAreaInsets.top
+            } else {
+                contentViewController.adjustedSafeAreaInsetTop = 0
+            }
+        } else {
+            if shouldAdjustsScrollInsets && self.automaticallyAdjustsScrollViewInsets {
+                contentViewController.adjustsScrollViewInsets(top: navigationView.intrinsicContentSize.height)
+            } else {
+                contentViewController.adjustsScrollViewInsets(top: 0)
+            }
+        }
+    }
     
     open func setNavigationViewHidden(_ hidden: Bool, animated: Bool) {
         guard let view = self.view as? ViewControllerWrapperView else {
@@ -56,25 +81,44 @@ open class MTDWrapperController: UIViewController, MTDNavigationViewDelegate {
         view.setNavigationViewHidden(hidden, animated: animated)
     }
     
-    open override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        let mtd_vc = contentViewController.mtd
-        let navigationView = mtd_vc.navigationView
-        let shouldAdjustsScrollInsets = !navigationView.isNavigationViewHidden && navigationView.isTranslucent
-        if #available(iOS 11.0, *) {
-            if shouldAdjustsScrollInsets {
-                contentViewController.additionalSafeAreaInsets.top = navigationView.frame.height - contentViewController.view.safeAreaInsets.top
+    open override var edgesForExtendedLayout: UIRectEdge {
+        get {
+            var edges = contentViewController.edgesForExtendedLayout
+            if #available(iOS 11.0, *) {
+                
             } else {
-                contentViewController.additionalSafeAreaInsets = .zero
+                // 避免UIScrollView的contentInset多出20的高度
+                edges.remove(.top)
             }
-        } else {
-            if shouldAdjustsScrollInsets && contentViewController.automaticallyAdjustsScrollViewInsets {
-                contentViewController.adjustsScrollViewInsets(top: navigationView.frame.height)
-            } else {
-                contentViewController.adjustsScrollViewInsets(top: 0)
-            }
+            return edges
         }
+        set {
+            contentViewController.edgesForExtendedLayout = newValue
+        }
+    }
+    
+    open override var extendedLayoutIncludesOpaqueBars: Bool {
+        get {
+            return contentViewController.extendedLayoutIncludesOpaqueBars
+        }
+        set {
+            contentViewController.extendedLayoutIncludesOpaqueBars = newValue
+        }
+    }
+    
+    open override var automaticallyAdjustsScrollViewInsets: Bool {
+        get {
+            return contentViewController.automaticallyAdjustsScrollViewInsets
+        }
+        set {
+            contentViewController.automaticallyAdjustsScrollViewInsets = newValue
+        }
+    }
+    
+    @available(iOS 11.0, *)
+    open override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        self.automaticallyAdjustsInsetsIfNeeded()
     }
     
     open override func becomeFirstResponder() -> Bool {

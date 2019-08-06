@@ -10,7 +10,7 @@ import UIKit
 
 final class ViewControllerWrapperView: NoBackgroundView {
     var navigationView: MTDNavigationView?
-    var contentView: UIView?
+    weak var contentViewController: UIViewController?
     
     override func addSubview(_ view: UIView) {
         if let navigationView = view as? MTDNavigationView {
@@ -47,14 +47,17 @@ final class ViewControllerWrapperView: NoBackgroundView {
             } else {
                 navigationFrame = CGRect(x: 0, y: 0, width: self.bounds.width, height: navigationHeight)
                 if !navigationView.isTranslucent {
-                    contentFrame = contentFrame.inset(by: UIEdgeInsets(top: navigationHeight, left: 0, bottom: 0, right: 0))
+                    if let vc = self.contentViewController,
+                        !vc.extendedLayoutIncludesOpaqueBars || vc.edgesForExtendedLayout.contains(.top) {
+                        contentFrame = contentFrame.inset(by: UIEdgeInsets(top: navigationHeight, left: 0, bottom: 0, right: 0))
+                    }
                 }
             }
             
             navigationView.frame = navigationFrame
         }
         
-        if let contentView = self.contentView, contentView.superview == self {
+        if let vc = self.contentViewController, let contentView = vc.view, contentView.superview == self {
             contentView.frame = contentFrame
         }
     }

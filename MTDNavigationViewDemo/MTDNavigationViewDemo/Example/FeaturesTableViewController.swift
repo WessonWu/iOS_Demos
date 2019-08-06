@@ -28,6 +28,8 @@ class FeaturesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.extendedLayoutIncludesOpaqueBars = true
+//        self.edgesForExtendedLayout.remove(.top)
         let mtd_self = self.mtd
         let navigationView = mtd_self.navigationView
         self.isTranslucentSwitch.isOn = navigationView.isTranslucent

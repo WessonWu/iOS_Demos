@@ -12,6 +12,7 @@ internal struct AssociatedKeys {
     static var navigationView = "mtd_navigationView"
     static var disableInteractivePop = "mtd_disableInteractivePop"
     static var adjustedContentInsetTop = "mtd_adjustedContentInsetTop"
+    static var adjustedSafeAreaInsetTop = "mtd_adjustedSafeAreaInsetTop"
 }
 
 extension UIViewController: MTDNavigationCompatible {}

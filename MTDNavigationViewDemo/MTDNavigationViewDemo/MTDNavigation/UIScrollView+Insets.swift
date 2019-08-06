@@ -47,7 +47,30 @@ extension UIScrollView {
     }
 }
 
-extension UIViewController {
+extension UIViewController {   
+    @available(iOS 11.0, *)
+    var adjustedSafeAreaInsetTop: CGFloat {
+        get {
+            if let number = objc_getAssociatedObject(self, &AssociatedKeys.adjustedSafeAreaInsetTop) as? NSNumber {
+                return CGFloat(number.floatValue)
+            }
+            return 0
+        }
+        set {
+            let originInsetTop = self.adjustedSafeAreaInsetTop
+            guard originInsetTop != newValue else {
+                return
+            }
+            
+            var insetTop = self.additionalSafeAreaInsets.top
+            insetTop -= originInsetTop
+            insetTop += newValue
+            
+            objc_setAssociatedObject(self, &AssociatedKeys.adjustedSafeAreaInsetTop, NSNumber(value: Float(newValue)), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            self.additionalSafeAreaInsets.top = insetTop
+        }
+    }
+    
     func adjustsScrollViewInsets(top: CGFloat) {
         if let scrollView = self.view as? UIScrollView {
             scrollView.adjustedContentInsetTop = top

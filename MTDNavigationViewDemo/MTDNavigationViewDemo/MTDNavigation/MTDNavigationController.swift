@@ -64,6 +64,7 @@ open class MTDNavigationController: UINavigationController, MTDNavigationViewDel
         self.interactivePopGestureRecognizer?.isEnabled = true
         
         super.delegate = self
+        super.navigationBar.isTranslucent = false
         super.setNavigationBarHidden(true, animated: false)
     }
     
