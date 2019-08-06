@@ -63,9 +63,21 @@ open class TitleButton: BasicButton {
     }
 }
 
-open class BackButton: ImageButton {
+open class BackButton: ImageButton {    
+    public class func `default`() -> BackButton {
+        return BackButton(image: UIImage(named: "nav_bar_back_ic",
+                                         in: Bundle(for: BackButton.self),
+                                         compatibleWith: nil))
+    }
+    
+    override func commonInitilization() {
+        super.commonInitilization()
+        self.contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 8)
+    }
+    
     open override var intrinsicContentSize: CGSize {
-        return CGSize(width: 44, height: 44)
+        let contentSize = super.intrinsicContentSize
+        return CGSize(width: contentSize.width, height: 44)
     }
 }
 

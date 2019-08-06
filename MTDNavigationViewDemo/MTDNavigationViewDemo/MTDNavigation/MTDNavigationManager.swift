@@ -16,7 +16,7 @@ public protocol MTDNavigationViewBuilderType {
 public final class MTDNavigationViewDefaultBuilder: MTDNavigationViewBuilderType {
     
     public func backButton() -> UIControl {
-        return BackButton(image: UIImage(named: "nav_bar_back_ic")?.withRenderingMode(.alwaysTemplate))
+        return BackButton.default()
     }
     
     public func build() -> MTDNavigationView {
