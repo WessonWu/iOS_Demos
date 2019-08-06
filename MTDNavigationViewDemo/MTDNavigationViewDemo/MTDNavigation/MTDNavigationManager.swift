@@ -24,8 +24,18 @@ public final class MTDNavigationViewDefaultBuilder: MTDNavigationViewBuilderType
     }
 }
 
+public struct MTDNavigationStyle {
+    public var backgroundColor: UIColor = UIColor.white
+    public var titleColor: UIColor = UIColor.black
+    public var tintColor: UIColor = UIColor.black
+    public var contentHeight: CGFloat = 44
+    
+    public init() {}
+}
+
 public final class MTDNavigationManager {
     public static var navigationViewBuilder: MTDNavigationViewBuilderType = MTDNavigationViewDefaultBuilder()
+    public static var style: MTDNavigationStyle = MTDNavigationStyle()
     
     public class func backButton(with builder: MTDNavigationViewBuilderType = MTDNavigationManager.navigationViewBuilder) -> UIControl {
         return builder.backButton()

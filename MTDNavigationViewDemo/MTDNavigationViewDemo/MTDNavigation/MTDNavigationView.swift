@@ -24,7 +24,7 @@ open class MTDNavigationView: UIView {
     open private(set) lazy var titleLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 17)
-        label.textColor = UIColor.black
+        label.textColor = MTDNavigationManager.style.titleColor
         label.textAlignment = .center
         return label
     }()
@@ -78,7 +78,7 @@ open class MTDNavigationView: UIView {
     }
     
     open var contentHeight: CGFloat {
-        return 44
+        return MTDNavigationManager.style.contentHeight
     }
     
     /// A Boolean value indicating whether the navigation view is translucent (true) or not (false).
@@ -125,7 +125,7 @@ open class MTDNavigationView: UIView {
     
     private func commonInitilization() {
         self.clipsToBounds = false
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = MTDNavigationManager.style.backgroundColor
         self.backButton.addTarget(self, action: #selector(onBackClick(_:)), for: .touchUpInside)
         self.isNavigationViewHidden = super.isHidden
         

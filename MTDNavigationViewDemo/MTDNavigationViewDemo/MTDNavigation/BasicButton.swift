@@ -20,7 +20,7 @@ open class BasicButton: UIButton {
     }
     
     func commonInitilization() {
-        self.tintColor = UIColor.black
+        self.tintColor = MTDNavigationManager.style.tintColor
     }
 }
 
@@ -47,7 +47,7 @@ open class TitleButton: BasicButton {
         }
         set {
             super.tintColor = newValue
-            let color = newValue ?? UIColor.black
+            let color = newValue ?? MTDNavigationManager.style.tintColor
             setTitleColor(color, for: .normal)
             setTitleColor(color.withAlphaComponent(0.6), for: .highlighted)
             setTitleColor(color.withAlphaComponent(0.4), for: .disabled)
