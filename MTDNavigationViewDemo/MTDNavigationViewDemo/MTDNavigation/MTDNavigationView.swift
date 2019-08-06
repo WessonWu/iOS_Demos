@@ -144,19 +144,22 @@ open class MTDNavigationView: UIView {
         rightItemsStackView.translatesAutoresizingMaskIntoConstraints = false
         
         self.layoutMargins = .zero
-        let contentViewTopConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: self.topAnchor, constant: 20)
-        contentViewTopConstraint.priority = UILayoutPriority(950)
-        contentViewTopConstraint.isActive = true
+        contentView.topAnchor.constraint(greaterThanOrEqualTo: self.topAnchor, constant: 20).setup { (constraint) in
+            constraint.priority = UILayoutPriority(950)
+            constraint.isActive = true
+        }
         if #available(iOS 11.0, *) {
             self.directionalLayoutMargins = .zero
-            let safeTopConstraint = contentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor)
-            safeTopConstraint.priority = UILayoutPriority(900)
-            safeTopConstraint.isActive = true
+            contentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).setup { (constraint) in
+                constraint.priority = UILayoutPriority(900)
+                constraint.isActive = true
+            }
         }
         contentView.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor).isActive = true
-        let contentTrailing = contentView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor)
-        contentTrailing.priority = UILayoutPriority(999)
-        contentTrailing.isActive = true
+        contentView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor).setup { (constraint) in
+            constraint.priority = UILayoutPriority(999)
+            constraint.isActive = true
+        }
         contentView.heightAnchor.constraint(equalToConstant: contentHeight).isActive = true
         contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
@@ -166,22 +169,24 @@ open class MTDNavigationView: UIView {
         titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        leftItemsStackView.heightAnchor.constraint(equalToConstant: contentHeight).isActive = true
-        let leftWidthConstraint = leftItemsStackView.widthAnchor.constraint(equalToConstant: 0)
-        leftWidthConstraint.priority = UILayoutPriority(200)
-        leftWidthConstraint.isActive = true
-        
-        let showBackButtonConstraint = leftItemsStackView.leadingAnchor.constraint(equalTo: backButton.trailingAnchor)
-        let hideBackButtonConstraint = leftItemsStackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor)
-        self.showBackButtonConstraint = showBackButtonConstraint
-        self.hideBackButtonConstraint = hideBackButtonConstraint
-        
+        leftItemsStackView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        leftItemsStackView.widthAnchor.constraint(equalToConstant: 0).setup { (constraint) in
+            constraint.priority = UILayoutPriority(200)
+            constraint.isActive = true
+        }
+        leftItemsStackView.leadingAnchor.constraint(equalTo: backButton.trailingAnchor).setup { (constraint) in
+            self.showBackButtonConstraint = constraint
+        }
+        leftItemsStackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).setup { (constraint) in
+            self.hideBackButtonConstraint = constraint
+        }
         leftItemsStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        rightItemsStackView.heightAnchor.constraint(equalToConstant: contentHeight).isActive = true
-        let rightWidthConstraint = rightItemsStackView.widthAnchor.constraint(equalToConstant: 0)
-        rightWidthConstraint.priority = UILayoutPriority(200)
-        rightWidthConstraint.isActive = true
+        rightItemsStackView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        rightItemsStackView.widthAnchor.constraint(equalToConstant: 0).setup { (constraint) in
+            constraint.priority = UILayoutPriority(200)
+            constraint.isActive = true
+        }
         rightItemsStackView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
         rightItemsStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         

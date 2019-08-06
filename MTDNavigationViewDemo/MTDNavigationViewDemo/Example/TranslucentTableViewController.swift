@@ -28,6 +28,7 @@ class TranslucentTableViewController: UITableViewController {
         navigationView.titleLabel.textColor = UIColor.orange
         navigationView.backButton.tintColor = UIColor.orange
         navigationView.backgroundColor = UIColor.blue.withAlphaComponent(0)
+        navigationView.shadowImageView.image = UIImage()
         
         translucentSwitch.isOn = navigationView.isTranslucent
     }

@@ -11,18 +11,19 @@
 		0A1FC9C522F31CBE00C9F674 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1FC9C322F31CBE00C9F674 /* Main.storyboard */; };
 		0A1FC9C722F31CBF00C9F674 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A1FC9C622F31CBF00C9F674 /* Assets.xcassets */; };
 		0A1FC9CA22F31CBF00C9F674 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1FC9C822F31CBF00C9F674 /* LaunchScreen.storyboard */; };
-		0A7E662622F88425003AB0A4 /* MTDNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E661922F88425003AB0A4 /* MTDNavigation.swift */; };
-		0A7E662722F88425003AB0A4 /* MTDItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E661A22F88425003AB0A4 /* MTDItemView.swift */; };
-		0A7E662922F88425003AB0A4 /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E661C22F88425003AB0A4 /* BasicButton.swift */; };
-		0A7E662A22F88425003AB0A4 /* MTDNavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E661D22F88425003AB0A4 /* MTDNavigationManager.swift */; };
-		0A7E662B22F88425003AB0A4 /* MTDNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E661E22F88425003AB0A4 /* MTDNavigationView.swift */; };
-		0A7E662C22F88425003AB0A4 /* UIScrollView+Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E661F22F88425003AB0A4 /* UIScrollView+Insets.swift */; };
-		0A7E662D22F88425003AB0A4 /* NoBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E662022F88425003AB0A4 /* NoBackgroundView.swift */; };
-		0A7E662E22F88425003AB0A4 /* MTDNavigation+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E662122F88425003AB0A4 /* MTDNavigation+UIViewController.swift */; };
-		0A7E662F22F88425003AB0A4 /* MTDWrapperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E662222F88425003AB0A4 /* MTDWrapperController.swift */; };
-		0A7E663022F88425003AB0A4 /* MTDNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E662322F88425003AB0A4 /* MTDNavigationController.swift */; };
-		0A7E663122F88425003AB0A4 /* NavigationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E662422F88425003AB0A4 /* NavigationContentView.swift */; };
-		0A7E663222F88425003AB0A4 /* ViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7E662522F88425003AB0A4 /* ViewControllerWrapperView.swift */; };
+		0A2DA25B22F910D000E03B8A /* MTDNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA24F22F910D000E03B8A /* MTDNavigation.swift */; };
+		0A2DA25C22F910D000E03B8A /* MTDItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA25022F910D000E03B8A /* MTDItemView.swift */; };
+		0A2DA25D22F910D000E03B8A /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA25122F910D000E03B8A /* BasicButton.swift */; };
+		0A2DA25E22F910D000E03B8A /* MTDNavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA25222F910D000E03B8A /* MTDNavigationManager.swift */; };
+		0A2DA25F22F910D000E03B8A /* MTDNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA25322F910D000E03B8A /* MTDNavigationView.swift */; };
+		0A2DA26022F910D000E03B8A /* UIScrollView+Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA25422F910D000E03B8A /* UIScrollView+Insets.swift */; };
+		0A2DA26122F910D000E03B8A /* NoBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA25522F910D000E03B8A /* NoBackgroundView.swift */; };
+		0A2DA26222F910D000E03B8A /* MTDNavigation+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA25622F910D000E03B8A /* MTDNavigation+UIViewController.swift */; };
+		0A2DA26322F910D000E03B8A /* MTDWrapperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA25722F910D000E03B8A /* MTDWrapperController.swift */; };
+		0A2DA26422F910D000E03B8A /* MTDNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA25822F910D000E03B8A /* MTDNavigationController.swift */; };
+		0A2DA26522F910D000E03B8A /* NavigationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA25922F910D000E03B8A /* NavigationContentView.swift */; };
+		0A2DA26622F910D000E03B8A /* ViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA25A22F910D000E03B8A /* ViewControllerWrapperView.swift */; };
+		0A2DA26822F918CE00E03B8A /* NSLayoutConstraint+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA26722F918CE00E03B8A /* NSLayoutConstraint+Setup.swift */; };
 		0ABEB4FB22F5766700BDF624 /* TranslucentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB4FA22F5766700BDF624 /* TranslucentTableViewController.swift */; };
 		0ABEB50122F8028C00BDF624 /* FeaturesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABEB50022F8028C00BDF624 /* FeaturesTableViewController.swift */; };
 		0ABEB50322F802A300BDF624 /* Features.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABEB50222F802A300BDF624 /* Features.storyboard */; };
@@ -36,18 +37,19 @@
 		0A1FC9C622F31CBF00C9F674 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A1FC9C922F31CBF00C9F674 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A1FC9CB22F31CBF00C9F674 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A7E661922F88425003AB0A4 /* MTDNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDNavigation.swift; sourceTree = "<group>"; };
-		0A7E661A22F88425003AB0A4 /* MTDItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDItemView.swift; sourceTree = "<group>"; };
-		0A7E661C22F88425003AB0A4 /* BasicButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
-		0A7E661D22F88425003AB0A4 /* MTDNavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDNavigationManager.swift; sourceTree = "<group>"; };
-		0A7E661E22F88425003AB0A4 /* MTDNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDNavigationView.swift; sourceTree = "<group>"; };
-		0A7E661F22F88425003AB0A4 /* UIScrollView+Insets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Insets.swift"; sourceTree = "<group>"; };
-		0A7E662022F88425003AB0A4 /* NoBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoBackgroundView.swift; sourceTree = "<group>"; };
-		0A7E662122F88425003AB0A4 /* MTDNavigation+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTDNavigation+UIViewController.swift"; sourceTree = "<group>"; };
-		0A7E662222F88425003AB0A4 /* MTDWrapperController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDWrapperController.swift; sourceTree = "<group>"; };
-		0A7E662322F88425003AB0A4 /* MTDNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDNavigationController.swift; sourceTree = "<group>"; };
-		0A7E662422F88425003AB0A4 /* NavigationContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationContentView.swift; sourceTree = "<group>"; };
-		0A7E662522F88425003AB0A4 /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
+		0A2DA24F22F910D000E03B8A /* MTDNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDNavigation.swift; sourceTree = "<group>"; };
+		0A2DA25022F910D000E03B8A /* MTDItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDItemView.swift; sourceTree = "<group>"; };
+		0A2DA25122F910D000E03B8A /* BasicButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
+		0A2DA25222F910D000E03B8A /* MTDNavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDNavigationManager.swift; sourceTree = "<group>"; };
+		0A2DA25322F910D000E03B8A /* MTDNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDNavigationView.swift; sourceTree = "<group>"; };
+		0A2DA25422F910D000E03B8A /* UIScrollView+Insets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Insets.swift"; sourceTree = "<group>"; };
+		0A2DA25522F910D000E03B8A /* NoBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoBackgroundView.swift; sourceTree = "<group>"; };
+		0A2DA25622F910D000E03B8A /* MTDNavigation+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTDNavigation+UIViewController.swift"; sourceTree = "<group>"; };
+		0A2DA25722F910D000E03B8A /* MTDWrapperController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDWrapperController.swift; sourceTree = "<group>"; };
+		0A2DA25822F910D000E03B8A /* MTDNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDNavigationController.swift; sourceTree = "<group>"; };
+		0A2DA25922F910D000E03B8A /* NavigationContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationContentView.swift; sourceTree = "<group>"; };
+		0A2DA25A22F910D000E03B8A /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
+		0A2DA26722F918CE00E03B8A /* NSLayoutConstraint+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Setup.swift"; sourceTree = "<group>"; };
 		0ABEB4FA22F5766700BDF624 /* TranslucentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslucentTableViewController.swift; sourceTree = "<group>"; };
 		0ABEB50022F8028C00BDF624 /* FeaturesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesTableViewController.swift; sourceTree = "<group>"; };
 		0ABEB50222F802A300BDF624 /* Features.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Features.storyboard; sourceTree = "<group>"; };
@@ -84,7 +86,7 @@
 		0A1FC9BE22F31CBE00C9F674 /* MTDNavigationViewDemo */ = {
 			isa = PBXGroup;
 			children = (
-				0A7E661822F88425003AB0A4 /* MTDNavigation */,
+				0A2DA24E22F910D000E03B8A /* MTDNavigation */,
 				0ABEB4F922F5764200BDF624 /* Example */,
 				0A1FC9C622F31CBF00C9F674 /* Assets.xcassets */,
 				0A1FC9C822F31CBF00C9F674 /* LaunchScreen.storyboard */,
@@ -93,24 +95,24 @@
 			path = MTDNavigationViewDemo;
 			sourceTree = "<group>";
 		};
-		0A7E661822F88425003AB0A4 /* MTDNavigation */ = {
+		0A2DA24E22F910D000E03B8A /* MTDNavigation */ = {
 			isa = PBXGroup;
 			children = (
-				0A7E661922F88425003AB0A4 /* MTDNavigation.swift */,
-				0A7E661A22F88425003AB0A4 /* MTDItemView.swift */,
-				0A7E661C22F88425003AB0A4 /* BasicButton.swift */,
-				0A7E661D22F88425003AB0A4 /* MTDNavigationManager.swift */,
-				0A7E661E22F88425003AB0A4 /* MTDNavigationView.swift */,
-				0A7E661F22F88425003AB0A4 /* UIScrollView+Insets.swift */,
-				0A7E662022F88425003AB0A4 /* NoBackgroundView.swift */,
-				0A7E662122F88425003AB0A4 /* MTDNavigation+UIViewController.swift */,
-				0A7E662222F88425003AB0A4 /* MTDWrapperController.swift */,
-				0A7E662322F88425003AB0A4 /* MTDNavigationController.swift */,
-				0A7E662422F88425003AB0A4 /* NavigationContentView.swift */,
-				0A7E662522F88425003AB0A4 /* ViewControllerWrapperView.swift */,
+				0A2DA24F22F910D000E03B8A /* MTDNavigation.swift */,
+				0A2DA25022F910D000E03B8A /* MTDItemView.swift */,
+				0A2DA25122F910D000E03B8A /* BasicButton.swift */,
+				0A2DA25222F910D000E03B8A /* MTDNavigationManager.swift */,
+				0A2DA25322F910D000E03B8A /* MTDNavigationView.swift */,
+				0A2DA25422F910D000E03B8A /* UIScrollView+Insets.swift */,
+				0A2DA25522F910D000E03B8A /* NoBackgroundView.swift */,
+				0A2DA25622F910D000E03B8A /* MTDNavigation+UIViewController.swift */,
+				0A2DA25722F910D000E03B8A /* MTDWrapperController.swift */,
+				0A2DA25822F910D000E03B8A /* MTDNavigationController.swift */,
+				0A2DA25922F910D000E03B8A /* NavigationContentView.swift */,
+				0A2DA25A22F910D000E03B8A /* ViewControllerWrapperView.swift */,
+				0A2DA26722F918CE00E03B8A /* NSLayoutConstraint+Setup.swift */,
 			);
-			name = MTDNavigation;
-			path = ../../../../../../../System/Volumes/Data/Users/wuweixin/Documents/GitHub/iOS_Demos/MTDNavigationViewDemo/MTDNavigationViewDemo/MTDNavigation;
+			path = MTDNavigation;
 			sourceTree = "<group>";
 		};
 		0ABEB4F922F5764200BDF624 /* Example */ = {
@@ -198,22 +200,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A7E662D22F88425003AB0A4 /* NoBackgroundView.swift in Sources */,
-				0A7E662A22F88425003AB0A4 /* MTDNavigationManager.swift in Sources */,
-				0A7E662622F88425003AB0A4 /* MTDNavigation.swift in Sources */,
-				0A7E662922F88425003AB0A4 /* BasicButton.swift in Sources */,
+				0A2DA26222F910D000E03B8A /* MTDNavigation+UIViewController.swift in Sources */,
+				0A2DA25D22F910D000E03B8A /* BasicButton.swift in Sources */,
+				0A2DA25B22F910D000E03B8A /* MTDNavigation.swift in Sources */,
 				0A1FC9C022F31CBE00C9F674 /* AppDelegate.swift in Sources */,
-				0A7E663022F88425003AB0A4 /* MTDNavigationController.swift in Sources */,
-				0A7E662C22F88425003AB0A4 /* UIScrollView+Insets.swift in Sources */,
+				0A2DA26022F910D000E03B8A /* UIScrollView+Insets.swift in Sources */,
+				0A2DA26622F910D000E03B8A /* ViewControllerWrapperView.swift in Sources */,
 				0ABEB50522F806C800BDF624 /* ColorSelectionTableViewController.swift in Sources */,
-				0A7E662E22F88425003AB0A4 /* MTDNavigation+UIViewController.swift in Sources */,
-				0A7E662722F88425003AB0A4 /* MTDItemView.swift in Sources */,
+				0A2DA26322F910D000E03B8A /* MTDWrapperController.swift in Sources */,
+				0A2DA25F22F910D000E03B8A /* MTDNavigationView.swift in Sources */,
+				0A2DA26122F910D000E03B8A /* NoBackgroundView.swift in Sources */,
+				0A2DA26522F910D000E03B8A /* NavigationContentView.swift in Sources */,
+				0A2DA25C22F910D000E03B8A /* MTDItemView.swift in Sources */,
+				0A2DA25E22F910D000E03B8A /* MTDNavigationManager.swift in Sources */,
+				0A2DA26422F910D000E03B8A /* MTDNavigationController.swift in Sources */,
 				0ABEB4FB22F5766700BDF624 /* TranslucentTableViewController.swift in Sources */,
-				0A7E663222F88425003AB0A4 /* ViewControllerWrapperView.swift in Sources */,
-				0A7E663122F88425003AB0A4 /* NavigationContentView.swift in Sources */,
-				0A7E662B22F88425003AB0A4 /* MTDNavigationView.swift in Sources */,
+				0A2DA26822F918CE00E03B8A /* NSLayoutConstraint+Setup.swift in Sources */,
 				0ABEB50122F8028C00BDF624 /* FeaturesTableViewController.swift in Sources */,
-				0A7E662F22F88425003AB0A4 /* MTDWrapperController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

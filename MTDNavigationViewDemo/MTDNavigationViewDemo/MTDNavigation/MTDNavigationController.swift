@@ -25,14 +25,6 @@ open class MTDNavigationController: UINavigationController, MTDNavigationViewDel
     
     var completionHandler: Completion?
     
-    
-    /// Init with a root view controller without wrapping into a navigation controller
-    ///
-    /// - Parameter rootViewController: The root viewController
-//    public convenience init(rootViewControllerNoWrapping rootViewController: UIViewController) {
-//        self.init(rootViewController: RTContainerController(contentViewControllerNoWrapping: rootViewController))
-//    }
-    
     // MARK: - Override
     
     public override init(rootViewController: UIViewController) {
