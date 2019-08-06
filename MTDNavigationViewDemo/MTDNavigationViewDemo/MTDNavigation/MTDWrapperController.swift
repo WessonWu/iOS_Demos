@@ -48,9 +48,8 @@ open class MTDWrapperController: UIViewController, MTDNavigationViewDelegate {
         observations = [ob1]
     }
     
-    open override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         automaticallyAdjustsInsetsIfNeeded()
     }
     
@@ -61,13 +60,13 @@ open class MTDWrapperController: UIViewController, MTDNavigationViewDelegate {
         let shouldAdjustsScrollInsets = !navigationView.isNavigationViewHidden && (navigationView.isTranslucent || extended)
         if #available(iOS 11.0, *) {
             if shouldAdjustsScrollInsets {
-                contentViewController.adjustedSafeAreaInsetTop = navigationView.intrinsicContentSize.height - self.view.safeAreaInsets.top
+                contentViewController.adjustedSafeAreaInsetTop = navigationView.frame.height - self.view.safeAreaInsets.top
             } else {
                 contentViewController.adjustedSafeAreaInsetTop = 0
             }
         } else {
             if shouldAdjustsScrollInsets && self.automaticallyAdjustsScrollViewInsets {
-                contentViewController.adjustsScrollViewInsets(top: navigationView.intrinsicContentSize.height)
+                contentViewController.adjustsScrollViewInsets(top: navigationView.frame.height)
             } else {
                 contentViewController.adjustsScrollViewInsets(top: 0)
             }
