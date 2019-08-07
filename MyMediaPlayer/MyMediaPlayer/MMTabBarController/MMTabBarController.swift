@@ -6,7 +6,7 @@
 //  Copyright © 2019 cn.wessonwu. All rights reserved.
 //
 
-import UIKit
+import MTDNavigationView
 
 public protocol MMTabBarControllerDelegate: AnyObject {
     /// Asks the delegate whether the specified view controller should be made active.
@@ -27,11 +27,11 @@ extension MMTabBarControllerDelegate {
     func tabBarController(_ tabBarController: MMTabBarController, didSelectItemAt index: Int) {}
 }
 
-public class MMTabBarController: MMNavigationController, MMTabBarDelegate {
+open class MMTabBarController: MTDNavigationController, MMTabBarDelegate {
     
-    public weak var tabBarControllerDelegate: MMTabBarControllerDelegate?
+    open weak var tabBarControllerDelegate: MMTabBarControllerDelegate?
     
-    public var tabBarViewControllers: [UIViewController] {
+    open var tabBarViewControllers: [UIViewController] {
         get {
             return rootViewController.viewControllers
         }
@@ -40,7 +40,7 @@ public class MMTabBarController: MMNavigationController, MMTabBarDelegate {
         }
     }
     
-    public var selectedIndex: Int {
+    open var selectedIndex: Int {
         get {
             return rootViewController.selectedIndex
         }
@@ -49,15 +49,15 @@ public class MMTabBarController: MMNavigationController, MMTabBarDelegate {
         }
     }
     
-    public var selectedViewController: UIViewController? {
+    open var selectedViewController: UIViewController? {
         return rootViewController.selectedViewController
     }
     
-    public var tabBar: MMTabBar {
+    open var tabBar: MMTabBar {
         return bottomBar.tabBar
     }
     
-    public private(set) lazy var bottomBar: MMBottomBar = {
+    open private(set) lazy var bottomBar: MMBottomBar = {
         let bottomBar = MMBottomBar()
         bottomBar.autoresizingMask = [.flexibleWidth,
                                    .flexibleTopMargin,
@@ -69,28 +69,29 @@ public class MMTabBarController: MMNavigationController, MMTabBarDelegate {
     
     lazy var rootViewController: MMTabBarRootViewController = MMTabBarRootViewController(with: self)
     
-    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
     }
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
+        rootViewController.mtd.navigationView.isHidden = true
         self.viewControllers = [rootViewController]
         self.view.addSubview(bottomBar)
     }
     
-    public override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let index = self.selectedIndex
         self.selectedIndex = index
     }
     
-    public override func viewDidLayoutSubviews() {
+    open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         bottomBar.frame = finalFrameForBottomBar()
     }
     
-    public func tabBar(_ tabBar: MMTabBar, shouldSelectItemAt index: Int) -> Bool {
+    open func tabBar(_ tabBar: MMTabBar, shouldSelectItemAt index: Int) -> Bool {
         guard let viewController = rootViewController.viewController(at: index) else {
             return false
         }
@@ -115,7 +116,7 @@ public class MMTabBarController: MMNavigationController, MMTabBarDelegate {
         return true
     }
     
-    public func tabBar(_ tabBar: MMTabBar, didSelectItemAt index: Int) {
+    open func tabBar(_ tabBar: MMTabBar, didSelectItemAt index: Int) {
         guard index >= 0 && index < self.rootViewController.viewControllers.count else {
             return
         }
@@ -128,15 +129,15 @@ public class MMTabBarController: MMNavigationController, MMTabBarDelegate {
     }
     
     
-    public func setTabBarHidden(_ hidden: Bool, animated: Bool) {
+    open func setTabBarHidden(_ hidden: Bool, animated: Bool) {
         setBarHidden(isToolBarHidden: bottomBar.isToolBarHidden, isTabBarHidden: hidden, animated: animated)
     }
     
-    public override func setToolbarHidden(_ hidden: Bool, animated: Bool) {
+    open override func setToolbarHidden(_ hidden: Bool, animated: Bool) {
         setBarHidden(isToolBarHidden: hidden, isTabBarHidden: bottomBar.isTabBarHidden, animated: animated)
     }
     
-    public func setBarHidden(isToolBarHidden: Bool, isTabBarHidden: Bool, animated: Bool) {
+    open func setBarHidden(isToolBarHidden: Bool, isTabBarHidden: Bool, animated: Bool) {
         self.view.layoutIfNeeded()
         
         bottomBar.isToolBarHidden = isToolBarHidden
@@ -197,10 +198,8 @@ public class MMTabBarController: MMNavigationController, MMTabBarDelegate {
                       width: viewSize.width,
                       height: bottomBarHeight)
     }
-}
-
-extension MMTabBarController {
-    public override func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    
+    open override func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         super.navigationController(navigationController, willShow: viewController, animated: animated)
         self.automaticallyAdjustsBottomBarHidden(by: viewController, animated: animated)
         if let transitionCoordinator = viewController.transitionCoordinator, let fromVC = transitionCoordinator.viewController(forKey: .from), !self.viewControllers.contains(fromVC) {

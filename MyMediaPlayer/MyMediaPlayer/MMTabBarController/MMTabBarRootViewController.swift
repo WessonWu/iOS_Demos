@@ -81,11 +81,6 @@ class MMTabBarRootViewController: UIViewController, MMTabBarDelegate {
         self.view.addSubview(contentView)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return self.selectedViewController?.preferredStatusBarStyle ?? super.preferredStatusBarStyle
     }

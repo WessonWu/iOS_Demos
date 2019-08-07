@@ -55,12 +55,6 @@ class DetailsViewController: UITableViewController {
     }
     */
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.setNavigationBarHidden(properties.preferredNavigationHidden, animated: animated)
-    }
-    
     
     @IBAction func goToNext(_ sender: Any) {
         let properties = Properties(preferredNavigationHidden: navigationHiddenSwitch.isOn,
