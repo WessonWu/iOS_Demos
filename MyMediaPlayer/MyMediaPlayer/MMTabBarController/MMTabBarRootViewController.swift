@@ -64,7 +64,6 @@ class MMTabBarRootViewController: UIViewController, MMTabBarDelegate, MTDViewCon
         let view = UIView()
         let contentView = UIView()
         contentView.backgroundColor = UIColor.clear
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return view
     }()
     
@@ -78,6 +77,7 @@ class MMTabBarRootViewController: UIViewController, MMTabBarDelegate, MTDViewCon
         super.viewDidLoad()
         
         contentView.frame = self.view.bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(contentView)
     }
     

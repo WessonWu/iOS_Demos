@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MTDNavigationView
 
 class FirstViewController: UITableViewController {
     
@@ -18,6 +19,9 @@ class FirstViewController: UITableViewController {
         self.mm_tabBarItem?.badgeValue = "3"
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = [.bottom]
+        
+        self.mtd.navigationView.backButton.isHidden = true
+        
         
 //        if let tabBarController = self.rdv_tabBarController, tabBarController.tabBar.isTranslucent {
 //            let tabBar = tabBarController.tabBar

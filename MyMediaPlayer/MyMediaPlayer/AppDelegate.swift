@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MTDNavigationView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -65,7 +66,9 @@ extension AppDelegate {
         thirdVC.title = "Third"
         
         let tabBarController = MMTabBarController()
-        tabBarController.tabBarViewControllers = [firstVC, secondVC, thirdVC]
+        tabBarController.tabBarViewControllers = [MTDWrapperController(contentViewController: firstVC),
+                                                  MTDWrapperController(contentViewController: secondVC),
+                                                  MTDWrapperController(contentViewController: thirdVC)]
         self.viewController = tabBarController
         
         customizeTabBarForController(tabBarController)

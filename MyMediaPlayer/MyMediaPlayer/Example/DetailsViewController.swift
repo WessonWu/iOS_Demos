@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MTDNavigationView
 
 struct Properties {
     let preferredNavigationHidden: Bool
@@ -43,6 +44,9 @@ class DetailsViewController: UITableViewController {
         navigationHiddenSwitch.isOn = properties.preferredNavigationHidden
         toolBarHiddenSwitch.isOn = properties.preferredToolBarHidden
         tabBarHiddenSwitch.isOn = properties.preferredTabBarHidden
+        
+        self.mtd.navigationView.isHidden = properties.preferredNavigationHidden
+        self.mtd.disableInteractivePop = false
     }
     
     /*

@@ -22,6 +22,8 @@ class ThirdViewController: UITableViewController {
 //            self.tableView.contentInset = insets;
 //            self.tableView.scrollIndicatorInsets = insets
 //        }
+        
+        self.mtd.navigationView.backButton.isHidden = true
     }
     
     func configureCell(_ cell: UITableViewCell, for indexPath: IndexPath) {
