@@ -19,7 +19,7 @@ public protocol MMTabBarControllerDelegate: AnyObject {
     func tabBarController(_ tabBarController: MMTabBarController, didSelectItemAt index: Int)
 }
 
-extension MMTabBarControllerDelegate {
+public extension MMTabBarControllerDelegate {
     func tabBarController(_ tabBarController: MMTabBarController, shouldSelect viewController: UIViewController) -> Bool {
         return true
     }
@@ -171,8 +171,8 @@ open class MMTabBarController: MTDNavigationController, MMTabBarDelegate {
     }
     
     private func automaticallyAdjustsBottomBarHidden(by viewController: UIViewController, animated: Bool) {
-        let preferredToolBarHidden = (viewController as? MMToolBarDisplayble)?.preferredToolBarHidden ?? true
-        let preferredTabBarHidden = (viewController as? MMTabBarDisplayble)?.preferredTabBarHidden ?? true
+        let preferredToolBarHidden = prefersToolBarHidden(in: viewController)
+        let preferredTabBarHidden = prefersTabBarHidden(in: viewController)
         self.setBarHidden(isToolBarHidden: preferredToolBarHidden,
                           isTabBarHidden: preferredTabBarHidden,
                           animated: animated)

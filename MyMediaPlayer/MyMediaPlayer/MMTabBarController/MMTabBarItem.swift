@@ -8,58 +8,58 @@
 
 import UIKit
 
-public class MMTabBarItem: UIControl {
+open class MMTabBarItem: UIControl {
     // MARK: - Title configuration
     
     /// The title displayed by the tab bar item.
-    public var title: String?
+    open var title: String?
     /// The offset for the rectangle around the tab bar item's title.
-    public var titlePositionAdjustment: UIOffset = .zero
+    open var titlePositionAdjustment: UIOffset = .zero
     
     /// For title's text attributes see
     /// https://developer.apple.com/library/ios/documentation/uikit/reference/NSString_UIKit_Additions/Reference/Reference.html
     
     /// The title attributes dictionary used for tab bar item's unselected state.
-    public var unselectedTitleAttributes: [NSAttributedString.Key: Any]?
+    open var unselectedTitleAttributes: [NSAttributedString.Key: Any]?
     /// The title attributes dictionary used for tab bar item's selected state.
-    public var selectedTitleAttributes: [NSAttributedString.Key: Any]?
+    open var selectedTitleAttributes: [NSAttributedString.Key: Any]?
     
     // MARK: - Image configuration
     
     /// The offset for the rectangle around the tab bar item's image.
-    public var imagePositionAdjustment: UIOffset = .zero
+    open var imagePositionAdjustment: UIOffset = .zero
     
     /// The image used for tab bar item's selected state.
-    public var finishedSelectedImage: UIImage?
+    open var finishedSelectedImage: UIImage?
     /// The image used for tab bar item's unselected state.
-    public var finishedUnselectedImage: UIImage?
+    open var finishedUnselectedImage: UIImage?
     
     // MARK: - Background configuration
     
     /// The background image used for tab bar item's selected state.
-    public var backgroundSelectedImage: UIImage?
+    open var backgroundSelectedImage: UIImage?
     /// The background image used for tab bar item's unselected state.
-    public var backgroundUnselectedImage: UIImage?
+    open var backgroundUnselectedImage: UIImage?
     
     // MARK: - Badge configuration
     
     /// Text that is displayed in the upper-right corner of the item with a surrounding background.
-    public var badgeValue: String? {
+    open var badgeValue: String? {
         didSet {
             self.setNeedsDisplay()
         }
     }
     /// Image used for background of badge.
-    public var badgeBackgroundImage: UIImage?
+    open var badgeBackgroundImage: UIImage?
     /// Color used for badge's background.
-    public var badgeBackgroundColor: UIColor? = UIColor.red
+    open var badgeBackgroundColor: UIColor? = UIColor.red
     /// The offset for the rectangle around the tab bar item's badge.
-    public var badgePositionAdjustment: UIOffset = .zero
+    open var badgePositionAdjustment: UIOffset = .zero
     /// Insets used for badge's text.
-    public var badgeTextInsets: UIEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+    open var badgeTextInsets: UIEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
     
     /// the text attributes for badge.
-    public var badgeTextAttributes: [NSAttributedString.Key: Any]?
+    open var badgeTextAttributes: [NSAttributedString.Key: Any]?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -92,7 +92,7 @@ public class MMTabBarItem: UIControl {
     }
     
     
-    public override func draw(_ rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         let frameSize = self.frame.size
         
         let backgroundImage: UIImage?

@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MTDNavigationView
 
 extension UIViewController {
-    public var mm_tabBarItem: MMTabBarItem? {
+    open var mm_tabBarItem: MMTabBarItem? {
         get {
             guard let tabBarController = self.mm_tabBarController, tabBarController.selectedViewController != nil else {
                 return nil
@@ -29,10 +30,29 @@ extension UIViewController {
         }
     }
     
-    public var mm_tabBarController: MMTabBarController? {
+    open var mm_tabBarController: MMTabBarController? {
         if let tabBarController = self as? MMTabBarController {
             return tabBarController
         }
         return self.parent?.mm_tabBarController
     }
+}
+
+extension MTDWrapperController: MMTabBarDisplayble, MMToolBarDisplayble {
+    public var preferredTabBarHidden: Bool {
+        return prefersTabBarHidden(in: contentViewController)
+    }
+    
+    public var preferredToolBarHidden: Bool {
+        return prefersToolBarHidden(in: contentViewController)
+    }
+}
+
+
+@inline(__always) func prefersTabBarHidden(in vc: UIViewController) -> Bool {
+    return (vc as? MMTabBarDisplayble)?.preferredTabBarHidden ?? true
+}
+
+@inline(__always) func prefersToolBarHidden(in vc: UIViewController) -> Bool {
+    return (vc as? MMToolBarDisplayble)?.preferredToolBarHidden ?? true
 }

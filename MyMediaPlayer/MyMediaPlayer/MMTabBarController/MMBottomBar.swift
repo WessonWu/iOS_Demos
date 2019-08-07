@@ -28,9 +28,9 @@ public extension MMTabBarDisplayble {
     }
 }
 
-public class MMBottomBar: UIView {
-    public private(set) lazy var toolbar: MMToolBar = MMToolBar()
-    public private(set) lazy var tabBar: MMTabBar = MMTabBar()
+open class MMBottomBar: UIView {
+    open private(set) lazy var toolbar: MMToolBar = MMToolBar()
+    open private(set) lazy var tabBar: MMTabBar = MMTabBar()
     
     public var isToolBarHidden: Bool = false
     public var isTabBarHidden: Bool = false
@@ -58,14 +58,14 @@ public class MMBottomBar: UIView {
         self.addSubview(tabBar)
     }
     
-    public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         guard isTransitioning && !isUserInteractionEnabledWhenTransitioning else {
             return super.point(inside: point, with: event)
         }
         return false
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         let toolBarHeight: CGFloat = toolbar.minimumContentHeight
         let tabBarHeight: CGFloat = tabBar.minimumContentHeight
         let frameSize = self.frame.size
@@ -91,7 +91,7 @@ public class MMBottomBar: UIView {
         }
     }
     
-    public func minimumContentHeight() -> CGFloat {
+    open func minimumContentHeight() -> CGFloat {
         var height: CGFloat = 0
         if !isToolBarHidden {
             height += toolbar.minimumContentHeight

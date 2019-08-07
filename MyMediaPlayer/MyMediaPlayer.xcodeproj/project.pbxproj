@@ -26,7 +26,6 @@
 		0AA1989322E0681100FB9FA6 /* MMToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1989222E0681100FB9FA6 /* MMToolBar.swift */; };
 		0AA1989522E0689500FB9FA6 /* MMBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1989422E0689500FB9FA6 /* MMBottomBar.swift */; };
 		0AA1989722E0786000FB9FA6 /* DetailsSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA1989622E0786000FB9FA6 /* DetailsSB.storyboard */; };
-		0AE03E3722E2EA7A00E8F716 /* UIViewController+MMNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE03E3622E2EA7A00E8F716 /* UIViewController+MMNavigationBar.swift */; };
 		0CEE3F646EB8D92837646BC8 /* Pods_MyMediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F1B572336FAA3732453C17E /* Pods_MyMediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +51,6 @@
 		0AA1989222E0681100FB9FA6 /* MMToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMToolBar.swift; sourceTree = "<group>"; };
 		0AA1989422E0689500FB9FA6 /* MMBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMBottomBar.swift; sourceTree = "<group>"; };
 		0AA1989622E0786000FB9FA6 /* DetailsSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailsSB.storyboard; sourceTree = "<group>"; };
-		0AE03E3622E2EA7A00E8F716 /* UIViewController+MMNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MMNavigationBar.swift"; sourceTree = "<group>"; };
 		2F1B572336FAA3732453C17E /* Pods_MyMediaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMediaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E3DBE45846CFB64D6470516 /* Pods-MyMediaPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMediaPlayer.release.xcconfig"; path = "Target Support Files/Pods-MyMediaPlayer/Pods-MyMediaPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		67F59D99B5721FC102CF0B88 /* Pods-MyMediaPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMediaPlayer.debug.xcconfig"; path = "Target Support Files/Pods-MyMediaPlayer/Pods-MyMediaPlayer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 				0AA1987D22E0512400FB9FA6 /* UIViewController+MMTabBarItem.swift */,
 				0AA1989222E0681100FB9FA6 /* MMToolBar.swift */,
 				0AA1989422E0689500FB9FA6 /* MMBottomBar.swift */,
-				0AE03E3622E2EA7A00E8F716 /* UIViewController+MMNavigationBar.swift */,
 			);
 			path = MMTabBarController;
 			sourceTree = "<group>";
@@ -286,7 +283,6 @@
 				0AA1988D22E055CE00FB9FA6 /* SecondViewController.swift in Sources */,
 				0A05576622D32035005F3D93 /* MMPlayer.swift in Sources */,
 				0A05576922D32035005F3D93 /* MMQueuePlayer.swift in Sources */,
-				0AE03E3722E2EA7A00E8F716 /* UIViewController+MMNavigationBar.swift in Sources */,
 				0A05576822D32035005F3D93 /* MMPlayerReference.swift in Sources */,
 				0AA1987822E0447A00FB9FA6 /* MMTabBar.swift in Sources */,
 			);

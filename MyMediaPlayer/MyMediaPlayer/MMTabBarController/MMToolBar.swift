@@ -8,8 +8,8 @@
 
 import UIKit
 
-public class MMToolBar: UIView {
-    public var minimumContentHeight: CGFloat = 48
+open class MMToolBar: UIView {
+    open var minimumContentHeight: CGFloat = 48
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

@@ -6,9 +6,9 @@
 //  Copyright © 2019 cn.wessonwu. All rights reserved.
 //
 
-import UIKit
+import MTDNavigationView
 
-class MMTabBarRootViewController: UIViewController, MMTabBarDelegate {
+class MMTabBarRootViewController: UIViewController, MMTabBarDelegate, MTDViewControllerNaked {
     weak var mmTabBarController: MMTabBarController?
     
     var viewControllers: [UIViewController] = [] {
@@ -109,10 +109,6 @@ class MMTabBarRootViewController: UIViewController, MMTabBarDelegate {
         }
         
         return viewControllers[index]
-    }
-    
-    override var mm_preferredNavigationBarHidden: Bool {
-        return true
     }
 }
 
