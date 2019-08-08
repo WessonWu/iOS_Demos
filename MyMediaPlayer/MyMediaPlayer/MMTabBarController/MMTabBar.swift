@@ -74,10 +74,7 @@ public class MMTabBar: UIView {
     }
     
     private func commonInitialization() {
-        self.backgroundColor = UIColor(red: 245 / 255.0,
-                                       green: 245 / 255.0,
-                                       blue: 245 / 255.0,
-                                       alpha: 1)
+        self.backgroundColor = UIColor.white
     }
     
     public override func layoutSubviews() {

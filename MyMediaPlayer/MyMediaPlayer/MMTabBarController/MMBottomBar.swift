@@ -53,7 +53,7 @@ open class MMBottomBar: UIView {
     }
     
     private func commonInitialization() {
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.clear
         self.addSubview(toolbar)
         self.addSubview(tabBar)
     }

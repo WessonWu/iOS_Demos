@@ -23,6 +23,6 @@ open class MMToolBar: UIView {
     
     
     private func commonInitialization() {
-        self.backgroundColor = UIColor.orange
+        self.backgroundColor = UIColor.white
     }
 }

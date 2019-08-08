@@ -70,6 +70,7 @@ extension AppDelegate {
                                                   MTDWrapperController(contentViewController: secondVC),
                                                   MTDWrapperController(contentViewController: thirdVC)]
         self.viewController = tabBarController
+        tabBarController.bottomBar.toolbar.backgroundColor = UIColor.cyan
         
         customizeTabBarForController(tabBarController)
     }
