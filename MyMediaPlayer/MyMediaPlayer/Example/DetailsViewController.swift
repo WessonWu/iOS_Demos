@@ -47,6 +47,13 @@ class DetailsViewController: UITableViewController {
         
         self.mtd.navigationView.isHidden = properties.preferredNavigationHidden
         self.mtd.disableInteractivePop = false
+        
+        let navigationView = self.mtd.navigationView
+        navigationView.backButton.isHidden = true
+        navigationView.leftNavigationItemViews = [MTDImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(onShare)),
+                                                  MTDImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(onShare))]
+        navigationView.rightNavigationItemViews = [MTDImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(onShare)),
+                                                   MTDTitleItemView(title: "Next", target: self, action: #selector(goToNext(_:)))]
     }
     
     /*
@@ -66,6 +73,10 @@ class DetailsViewController: UITableViewController {
                                     preferredTabBarHidden: tabBarHiddenSwitch.isOn)
         let vc = DetailsViewController.newInstance(properties: properties)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func onShare() {
+        self.title = "Detail" + arc4random_uniform(100).description
     }
     
 }

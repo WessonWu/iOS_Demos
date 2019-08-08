@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MTDNavigationView
 
 class ThirdViewController: UITableViewController {
     override func viewDidLoad() {
@@ -23,7 +24,12 @@ class ThirdViewController: UITableViewController {
 //            self.tableView.scrollIndicatorInsets = insets
 //        }
         
-        self.mtd.navigationView.backButton.isHidden = true
+        let navigationView = self.mtd.navigationView
+        navigationView.backButton.isHidden = true
+        navigationView.leftNavigationItemViews = [MTDImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(onShare)),
+                                                  MTDImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(onShare))]
+        navigationView.rightNavigationItemViews = [MTDImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(onShare)),
+                                                   MTDImageItemView(image: #imageLiteral(resourceName: "nav_share_ic"), target: self, action: #selector(onShare))]
     }
     
     func configureCell(_ cell: UITableViewCell, for indexPath: IndexPath) {
@@ -47,6 +53,10 @@ class ThirdViewController: UITableViewController {
         
         let vc = DetailsViewController.newInstance()
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func onShare() {
+        self.title = "Third" + arc4random_uniform(100).description
     }
 }
 
