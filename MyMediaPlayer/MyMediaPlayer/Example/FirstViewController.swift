@@ -9,7 +9,7 @@
 import UIKit
 import MTDNavigationView
 
-class FirstViewController: UITableViewController {
+class FirstViewController: CompatibleTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

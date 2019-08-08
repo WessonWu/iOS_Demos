@@ -15,7 +15,7 @@ struct Properties {
     let preferredTabBarHidden: Bool
 }
 
-class DetailsViewController: UITableViewController {
+class DetailsViewController: CompatibleTableViewController {
     
     @IBOutlet weak var navigationHiddenSwitch: UISwitch!
     @IBOutlet weak var toolBarHiddenSwitch: UISwitch!
@@ -77,6 +77,12 @@ class DetailsViewController: UITableViewController {
     
     @IBAction func onShare() {
         self.title = "Detail" + arc4random_uniform(100).description
+    }
+    
+    
+    @IBAction func presentMediaPlayer(_ sender: Any) {
+        
+        self.present(MyMediaPlayerViewController.newInstance(), animated: true, completion: nil)
     }
     
 }
