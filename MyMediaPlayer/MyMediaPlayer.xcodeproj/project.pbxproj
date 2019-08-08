@@ -14,6 +14,7 @@
 		0A05576722D32035005F3D93 /* MMItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05576322D32035005F3D93 /* MMItem.swift */; };
 		0A05576822D32035005F3D93 /* MMPlayerReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05576422D32035005F3D93 /* MMPlayerReference.swift */; };
 		0A05576922D32035005F3D93 /* MMQueuePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05576522D32035005F3D93 /* MMQueuePlayer.swift */; };
+		0A2DA27222FBB71300E03B8A /* UIScrollView+Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA27122FBB71300E03B8A /* UIScrollView+Insets.swift */; };
 		0AA1987522E0423600FB9FA6 /* MMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987422E0423600FB9FA6 /* MMTabBarController.swift */; };
 		0AA1987822E0447A00FB9FA6 /* MMTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987722E0447A00FB9FA6 /* MMTabBar.swift */; };
 		0AA1987A22E0455C00FB9FA6 /* MMTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987922E0455C00FB9FA6 /* MMTabBarItem.swift */; };
@@ -39,6 +40,7 @@
 		0A05576322D32035005F3D93 /* MMItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMItem.swift; sourceTree = "<group>"; };
 		0A05576422D32035005F3D93 /* MMPlayerReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMPlayerReference.swift; sourceTree = "<group>"; };
 		0A05576522D32035005F3D93 /* MMQueuePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMQueuePlayer.swift; sourceTree = "<group>"; };
+		0A2DA27122FBB71300E03B8A /* UIScrollView+Insets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Insets.swift"; sourceTree = "<group>"; };
 		0AA1987422E0423600FB9FA6 /* MMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBarController.swift; sourceTree = "<group>"; };
 		0AA1987722E0447A00FB9FA6 /* MMTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBar.swift; sourceTree = "<group>"; };
 		0AA1987922E0455C00FB9FA6 /* MMTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBarItem.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		0AA1987622E0423B00FB9FA6 /* MMTabBarController */ = {
 			isa = PBXGroup;
 			children = (
+				0A2DA27122FBB71300E03B8A /* UIScrollView+Insets.swift */,
 				0AA1987422E0423600FB9FA6 /* MMTabBarController.swift */,
 				0AA1987722E0447A00FB9FA6 /* MMTabBar.swift */,
 				0AA1987922E0455C00FB9FA6 /* MMTabBarItem.swift */,
@@ -270,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AA1989022E055CE00FB9FA6 /* ThirdViewController.swift in Sources */,
+				0A2DA27222FBB71300E03B8A /* UIScrollView+Insets.swift in Sources */,
 				0AA1987522E0423600FB9FA6 /* MMTabBarController.swift in Sources */,
 				0AA1987A22E0455C00FB9FA6 /* MMTabBarItem.swift in Sources */,
 				0AA1988F22E055CE00FB9FA6 /* FirstViewController.swift in Sources */,

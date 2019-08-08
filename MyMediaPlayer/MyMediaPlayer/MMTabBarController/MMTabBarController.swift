@@ -89,6 +89,35 @@ open class MMTabBarController: MTDNavigationController, MMTabBarDelegate {
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         bottomBar.frame = finalFrameForBottomBar()
+        self.automaticallyAdjustsInsetsIfNeeded()
+    }
+    
+    
+    func automaticallyAdjustsInsetsIfNeeded() {
+        guard let topVC = self.topViewController else {
+            return
+        }
+        
+        let shouldAdjustsScrollInsets = !bottomBar.isBottomBarHidden
+        if #available(iOS 11.0, *) {
+            if shouldAdjustsScrollInsets {
+                topVC.adjustedSafeAreaInsetBottom = bottomBar.frame.height - self.view.safeAreaInsets.bottom
+            } else {
+                topVC.adjustedSafeAreaInsetBottom = 0
+            }
+        } else {
+            if shouldAdjustsScrollInsets && self.automaticallyAdjustsScrollViewInsets {
+                topVC.adjustsScrollViewInsets(bottom: bottomBar.frame.height)
+            } else {
+                topVC.adjustsScrollViewInsets(bottom: 0)
+            }
+        }
+    }
+    
+    @available(iOS 11.0, *)
+    open override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        self.automaticallyAdjustsInsetsIfNeeded()
     }
     
     open func tabBar(_ tabBar: MMTabBar, shouldSelectItemAt index: Int) -> Bool {

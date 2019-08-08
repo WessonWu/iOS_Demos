@@ -56,6 +56,7 @@ class MMTabBarRootViewController: UIViewController, MMTabBarDelegate, MTDViewCon
             
             mmTabBarController?.tabBar.selectedIndex = self.selectedIndex
             self.view.setNeedsLayout()
+            self.parent?.view.setNeedsLayout()
             self.setNeedsStatusBarAppearanceUpdate()
         }
     }
@@ -75,6 +76,7 @@ class MMTabBarRootViewController: UIViewController, MMTabBarDelegate, MTDViewCon
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.edgesForExtendedLayout = []
         
         contentView.frame = self.view.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

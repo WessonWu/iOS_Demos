@@ -1,21 +1,16 @@
 PODS:
-  - MTDNavigationView (0.1.1)
+  - MTDNavigationView (0.1.2)
 
 DEPENDENCIES:
-  - MTDNavigationView (from `https://github.com/WessonWu/MTDNavigationController.git`)
+  - MTDNavigationView (~> 0.1.2)
 
-EXTERNAL SOURCES:
-  MTDNavigationView:
-    :git: https://github.com/WessonWu/MTDNavigationController.git
-
-CHECKOUT OPTIONS:
-  MTDNavigationView:
-    :commit: 25e780760698d394dfe767a44ecfbd16af0ee59d
-    :git: https://github.com/WessonWu/MTDNavigationController.git
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - MTDNavigationView
 
 SPEC CHECKSUMS:
-  MTDNavigationView: c307812f19ce617ac71919132e6eeba37064cf41
+  MTDNavigationView: 424d1d8f37c7a2a3eaf282ff2828dd9294c6fe0c
 
-PODFILE CHECKSUM: f4dd5a0044fa1158cc0ce8ffdff4b489eab8d81a
+PODFILE CHECKSUM: 3ecddbb7a23a9ce44217e4271fc9667d3614a766
 
 COCOAPODS: 1.7.5
