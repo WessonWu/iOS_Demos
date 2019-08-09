@@ -54,6 +54,8 @@ class FirstViewController: CompatibleTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.mm_tabBarItem?.badgeValue = (indexPath.row + 1).description
+        
+        self.present(MyMediaPlayerViewController.newInstance(), animated: true, completion: nil)
     }
 }
 

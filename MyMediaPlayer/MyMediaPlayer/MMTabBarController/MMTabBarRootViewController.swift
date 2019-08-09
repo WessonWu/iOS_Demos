@@ -92,18 +92,12 @@ class MMTabBarRootViewController: UIViewController, MMTabBarDelegate, MTDViewCon
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        var mask = UIInterfaceOrientationMask.all
-        
-        viewControllers.forEach { (vc) in
-            let supportedOrientations = vc.supportedInterfaceOrientations
-            if mask.rawValue > supportedOrientations.rawValue {
-                mask = supportedOrientations
-            }
-        }
-        
-        return mask
+        return self.selectedViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
     }
     
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return self.selectedViewController?.preferredInterfaceOrientationForPresentation ?? super.preferredInterfaceOrientationForPresentation
+    }
     
     func viewController(at index: Int) -> UIViewController? {
         guard index >= 0 && index < viewControllers.count else {
