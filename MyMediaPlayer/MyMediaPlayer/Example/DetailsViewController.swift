@@ -85,6 +85,10 @@ class DetailsViewController: CompatibleTableViewController {
         self.present(MyMediaPlayerViewController.newInstance(), animated: true, completion: nil)
     }
     
+    deinit {
+        print(#file, #function)
+    }
+    
 }
 
 extension DetailsViewController: MMToolBarDisplayble, MMTabBarDisplayble {

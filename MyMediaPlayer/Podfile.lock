@@ -1,16 +1,24 @@
 PODS:
-  - MTDNavigationView (0.2.1)
+  - FBRetainCycleDetector (0.1.4)
+  - MLeaksFinder (1.0.0):
+    - FBRetainCycleDetector
+  - MTDNavigationView (0.2.4)
 
 DEPENDENCIES:
-  - MTDNavigationView (~> 0.2.1)
+  - MLeaksFinder
+  - MTDNavigationView (~> 0.2.4)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - FBRetainCycleDetector
+    - MLeaksFinder
     - MTDNavigationView
 
 SPEC CHECKSUMS:
-  MTDNavigationView: f5ce8e09482a5446d6998e0f29a763c9023391bf
+  FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
+  MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
+  MTDNavigationView: 626a48b9115331f0d7b2bb949d7b5dcb47b2c665
 
-PODFILE CHECKSUM: 8cffc4fd9d542ff8230cc77154e1d8c2c353ab66
+PODFILE CHECKSUM: e3c25d329aaed91bcff51480db6874460027b97b
 
 COCOAPODS: 1.7.5
