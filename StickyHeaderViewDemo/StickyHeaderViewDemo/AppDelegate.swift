@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  StickyHeaderCollectionViewDemo
+//  StickyHeaderViewDemo
 //
-//  Created by wuweixin on 2019/8/10.
-//  Copyright © 2019 cn.wessonwu. All rights reserved.
+//  Created by wuweixin on 2019/8/11.
+//  Copyright © 2019 wuweixin. All rights reserved.
 //
 
 import UIKit
