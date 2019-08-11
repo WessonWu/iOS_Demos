@@ -19,6 +19,7 @@
 		0A51C90522FC6BB900DC3179 /* MyMediaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51C90422FC6BB900DC3179 /* MyMediaPlayerViewController.swift */; };
 		0A51C90722FC6BDE00DC3179 /* CompatibleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51C90622FC6BDE00DC3179 /* CompatibleViewController.swift */; };
 		0A51C90922FC718800DC3179 /* CompatibleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51C90822FC718800DC3179 /* CompatibleTableViewController.swift */; };
+		0A5C491222FFF7EF0057CE9D /* UIScrollView+AdjustsContentInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C491122FFF7EF0057CE9D /* UIScrollView+AdjustsContentInset.swift */; };
 		0AA1987522E0423600FB9FA6 /* MMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987422E0423600FB9FA6 /* MMTabBarController.swift */; };
 		0AA1987822E0447A00FB9FA6 /* MMTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987722E0447A00FB9FA6 /* MMTabBar.swift */; };
 		0AA1987A22E0455C00FB9FA6 /* MMTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987922E0455C00FB9FA6 /* MMTabBarItem.swift */; };
@@ -49,6 +50,7 @@
 		0A51C90422FC6BB900DC3179 /* MyMediaPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMediaPlayerViewController.swift; sourceTree = "<group>"; };
 		0A51C90622FC6BDE00DC3179 /* CompatibleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleViewController.swift; sourceTree = "<group>"; };
 		0A51C90822FC718800DC3179 /* CompatibleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleTableViewController.swift; sourceTree = "<group>"; };
+		0A5C491122FFF7EF0057CE9D /* UIScrollView+AdjustsContentInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+AdjustsContentInset.swift"; sourceTree = "<group>"; };
 		0AA1987422E0423600FB9FA6 /* MMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBarController.swift; sourceTree = "<group>"; };
 		0AA1987722E0447A00FB9FA6 /* MMTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBar.swift; sourceTree = "<group>"; };
 		0AA1987922E0455C00FB9FA6 /* MMTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBarItem.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				0A51C90422FC6BB900DC3179 /* MyMediaPlayerViewController.swift */,
 				0A51C90622FC6BDE00DC3179 /* CompatibleViewController.swift */,
 				0A51C90822FC718800DC3179 /* CompatibleTableViewController.swift */,
+				0A5C491122FFF7EF0057CE9D /* UIScrollView+AdjustsContentInset.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				0A05575022D32011005F3D93 /* AppDelegate.swift in Sources */,
 				0AA1988D22E055CE00FB9FA6 /* SecondViewController.swift in Sources */,
 				0A05576622D32035005F3D93 /* MMPlayer.swift in Sources */,
+				0A5C491222FFF7EF0057CE9D /* UIScrollView+AdjustsContentInset.swift in Sources */,
 				0A05576922D32035005F3D93 /* MMQueuePlayer.swift in Sources */,
 				0A51C90722FC6BDE00DC3179 /* CompatibleViewController.swift in Sources */,
 				0A05576822D32035005F3D93 /* MMPlayerReference.swift in Sources */,
