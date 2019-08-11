@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,9 @@
 		0A5C495222FFFEBD0057CE9D /* StickyHeaderViewBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C495122FFFEBD0057CE9D /* StickyHeaderViewBinder.swift */; };
 		0A5C4954230001990057CE9D /* StickyHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C4953230001990057CE9D /* StickyHeaderViewController.swift */; };
 		0A5C4956230005B00057CE9D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C4955230005B00057CE9D /* ViewController.swift */; };
+		0A5C495A23005BE00057CE9D /* StickyHeaderTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C495923005BE00057CE9D /* StickyHeaderTabViewController.swift */; };
+		0A5C495C23005D400057CE9D /* TabDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C495B23005D400057CE9D /* TabDetailTableViewController.swift */; };
+		B04565F2064A98A425A95461 /* Pods_StickyHeaderViewDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1BC0B4AFDD23044C883EF2 /* Pods_StickyHeaderViewDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,11 @@
 		0A5C495122FFFEBD0057CE9D /* StickyHeaderViewBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeaderViewBinder.swift; sourceTree = "<group>"; };
 		0A5C4953230001990057CE9D /* StickyHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeaderViewController.swift; sourceTree = "<group>"; };
 		0A5C4955230005B00057CE9D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0A5C495923005BE00057CE9D /* StickyHeaderTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeaderTabViewController.swift; sourceTree = "<group>"; };
+		0A5C495B23005D400057CE9D /* TabDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabDetailTableViewController.swift; sourceTree = "<group>"; };
+		5A4156589823688AE57F46E8 /* Pods-StickyHeaderViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickyHeaderViewDemo.release.xcconfig"; path = "Target Support Files/Pods-StickyHeaderViewDemo/Pods-StickyHeaderViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+		7E1BC0B4AFDD23044C883EF2 /* Pods_StickyHeaderViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StickyHeaderViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D849C95C5DAFDEF6367FF63E /* Pods-StickyHeaderViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickyHeaderViewDemo.debug.xcconfig"; path = "Target Support Files/Pods-StickyHeaderViewDemo/Pods-StickyHeaderViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B04565F2064A98A425A95461 /* Pods_StickyHeaderViewDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +53,8 @@
 			children = (
 				0A5C493D22FFFDBC0057CE9D /* StickyHeaderViewDemo */,
 				0A5C493C22FFFDBC0057CE9D /* Products */,
+				29003A2085C994559BF860FC /* Pods */,
+				3747057B4EE178AD7794DDAD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +77,8 @@
 				0A5C494722FFFDBE0057CE9D /* LaunchScreen.storyboard */,
 				0A5C494A22FFFDBE0057CE9D /* Info.plist */,
 				0A5C4953230001990057CE9D /* StickyHeaderViewController.swift */,
+				0A5C495923005BE00057CE9D /* StickyHeaderTabViewController.swift */,
+				0A5C495B23005D400057CE9D /* TabDetailTableViewController.swift */,
 			);
 			path = StickyHeaderViewDemo;
 			sourceTree = "<group>";
@@ -78,6 +91,23 @@
 			path = StickyHeaderView;
 			sourceTree = "<group>";
 		};
+		29003A2085C994559BF860FC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D849C95C5DAFDEF6367FF63E /* Pods-StickyHeaderViewDemo.debug.xcconfig */,
+				5A4156589823688AE57F46E8 /* Pods-StickyHeaderViewDemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		3747057B4EE178AD7794DDAD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E1BC0B4AFDD23044C883EF2 /* Pods_StickyHeaderViewDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -85,9 +115,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A5C494D22FFFDBE0057CE9D /* Build configuration list for PBXNativeTarget "StickyHeaderViewDemo" */;
 			buildPhases = (
+				36529D4D1566AA73FB7EF59E /* [CP] Check Pods Manifest.lock */,
 				0A5C493722FFFDBC0057CE9D /* Sources */,
 				0A5C493822FFFDBC0057CE9D /* Frameworks */,
 				0A5C493922FFFDBC0057CE9D /* Resources */,
+				B4DA34C5FA56604380B7DECF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,14 +176,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		36529D4D1566AA73FB7EF59E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StickyHeaderViewDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B4DA34C5FA56604380B7DECF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StickyHeaderViewDemo/Pods-StickyHeaderViewDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StickyHeaderViewDemo/Pods-StickyHeaderViewDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StickyHeaderViewDemo/Pods-StickyHeaderViewDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0A5C493722FFFDBC0057CE9D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A5C495C23005D400057CE9D /* TabDetailTableViewController.swift in Sources */,
 				0A5C4954230001990057CE9D /* StickyHeaderViewController.swift in Sources */,
 				0A5C493F22FFFDBC0057CE9D /* AppDelegate.swift in Sources */,
 				0A5C4956230005B00057CE9D /* ViewController.swift in Sources */,
+				0A5C495A23005BE00057CE9D /* StickyHeaderTabViewController.swift in Sources */,
 				0A5C495222FFFEBD0057CE9D /* StickyHeaderViewBinder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,6 +372,7 @@
 		};
 		0A5C494E22FFFDBE0057CE9D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D849C95C5DAFDEF6367FF63E /* Pods-StickyHeaderViewDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -314,6 +391,7 @@
 		};
 		0A5C494F22FFFDBE0057CE9D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A4156589823688AE57F46E8 /* Pods-StickyHeaderViewDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
