@@ -10,7 +10,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class TabDetailTableViewController: UITableViewController, IndicatorInfoProvider {
+class TabDetailTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class TabDetailTableViewController: UITableViewController, IndicatorInfoProvider
         return cell
     }
     
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "random" + arc4random_uniform(100).description)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

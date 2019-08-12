@@ -8,7 +8,7 @@
 
 import XLPagerTabStrip
 
-class StickyHeaderTabViewController: PagerTabStripViewController, PagerTabStripDataSource {
+class StickyHeaderTabViewController: PagerContainerController {
     
     @IBOutlet var headerView: UIImageView!
     
@@ -16,31 +16,16 @@ class StickyHeaderTabViewController: PagerTabStripViewController, PagerTabStripD
     lazy var secondVC: TabDetailTableViewController = TabDetailTableViewController()
     
     
-    lazy var fixedHeaderHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 160
-    lazy var tabViewHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 44
+    var fixedHeaderHeight: CGFloat = 160
+    var tabViewHeight: CGFloat = 44
     
     var detailVCs: [TabDetailTableViewController] {
         return [firstVC, secondVC]
     }
     
-    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerContainerController: PagerContainerController) -> [UIViewController] {
         return detailVCs
     }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        commonInitilization()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInitilization()
-    }
-    
-    private func commonInitilization() {
-        self.datasource = self
-    }
-    
     
     var observers: [NSKeyValueObservation] = []
     
@@ -49,8 +34,15 @@ class StickyHeaderTabViewController: PagerTabStripViewController, PagerTabStripD
         
         self.edgesForExtendedLayout = []
         self.automaticallyAdjustsScrollViewInsets = false
-        self.containerView.bounces = false
         
+        var additionalContentInset: UIEdgeInsets = .zero
+        if #available(iOS 11.0, *), let safeAreaInsets = UIApplication.shared.keyWindow?.safeAreaInsets {
+            additionalContentInset = safeAreaInsets
+        } else {
+            additionalContentInset.top = UIApplication.shared.statusBarFrame.height
+        }
+        self.fixedHeaderHeight += additionalContentInset.top
+        self.tabViewHeight += additionalContentInset.top
         
         let headerHeight = self.fixedHeaderHeight
         headerView.frame = CGRect(x: 0,
@@ -60,6 +52,7 @@ class StickyHeaderTabViewController: PagerTabStripViewController, PagerTabStripD
         headerView.autoresizingMask = [.flexibleWidth]
         self.view.addSubview(headerView)
         
+
         
         detailVCs.forEach { (detail) in
             let scrollView: UIScrollView = detail.tableView
@@ -67,7 +60,9 @@ class StickyHeaderTabViewController: PagerTabStripViewController, PagerTabStripD
                 scrollView.contentInsetAdjustmentBehavior = .never
             }
             scrollView.contentInset.top = headerHeight
+            scrollView.contentInset.bottom = additionalContentInset.bottom
             scrollView.scrollIndicatorInsets.top = headerHeight
+            scrollView.scrollIndicatorInsets.bottom = additionalContentInset.bottom
             let observer = scrollView.observe(\.contentOffset, changeHandler: { [weak self] (sv, _) in
                 self?.childScrollViewDidScroll(sv)
             })

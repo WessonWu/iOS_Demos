@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A2738D42301B1EB00BB615E /* PagerContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2738D32301B1EB00BB615E /* PagerContainerViewController.swift */; };
 		0A5C493F22FFFDBC0057CE9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C493E22FFFDBC0057CE9D /* AppDelegate.swift */; };
 		0A5C494422FFFDBC0057CE9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A5C494222FFFDBC0057CE9D /* Main.storyboard */; };
 		0A5C494622FFFDBE0057CE9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A5C494522FFFDBE0057CE9D /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A2738D32301B1EB00BB615E /* PagerContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerContainerViewController.swift; sourceTree = "<group>"; };
 		0A5C493B22FFFDBC0057CE9D /* StickyHeaderViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickyHeaderViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A5C493E22FFFDBC0057CE9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A5C494322FFFDBC0057CE9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				0A5C495122FFFEBD0057CE9D /* StickyHeaderViewBinder.swift */,
+				0A2738D32301B1EB00BB615E /* PagerContainerViewController.swift */,
 			);
 			path = StickyHeaderView;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2738D42301B1EB00BB615E /* PagerContainerViewController.swift in Sources */,
 				0A5C495C23005D400057CE9D /* TabDetailTableViewController.swift in Sources */,
 				0A5C4954230001990057CE9D /* StickyHeaderViewController.swift in Sources */,
 				0A5C493F22FFFDBC0057CE9D /* AppDelegate.swift in Sources */,
