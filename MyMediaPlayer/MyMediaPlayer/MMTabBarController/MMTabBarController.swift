@@ -239,4 +239,13 @@ open class MMTabBarController: MTDNavigationController, MMTabBarDelegate {
             }
         }
     }
+    
+    open override func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        super.navigationController(navigationController, didShow: viewController, animated: animated)
+        
+        if let pendingPresentedViewController = viewController.pendingPresentedViewController {
+            viewController.pendingPresentedViewController = nil
+            viewController.present(pendingPresentedViewController, animated: true, completion: nil)
+        }
+    }
 }

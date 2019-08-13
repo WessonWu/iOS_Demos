@@ -38,6 +38,36 @@ extension UIViewController {
     }
 }
 
+extension UIViewController {
+    open var pendingPresentedViewController: UIViewController? {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.pendingPresentedViewController) as? UIViewController
+        }
+        set {
+            let oldValue = self.pendingPresentedViewController
+            oldValue?.pendingPresentingViewController = nil
+            newValue?.pendingPresentingViewController = self
+            objc_setAssociatedObject(self, &AssociatedKeys.pendingPresentedViewController, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    open var pendingPresentingViewController: UIViewController? {
+        get {
+            if let vcRef = objc_getAssociatedObject(self, &AssociatedKeys.pendingPresentingViewController) as? ViewControllerRef {
+                return vcRef.value
+            }
+            return nil
+        }
+        set {
+            var value: ViewControllerRef? = nil
+            if let vc = newValue {
+                value = ViewControllerRef(vc)
+            }
+            objc_setAssociatedObject(self, &AssociatedKeys.pendingPresentingViewController, value, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+}
+
 extension MTDWrapperController: MMTabBarDisplayble, MMToolBarDisplayble {
     public var preferredTabBarHidden: Bool {
         return prefersTabBarHidden(in: contentViewController)

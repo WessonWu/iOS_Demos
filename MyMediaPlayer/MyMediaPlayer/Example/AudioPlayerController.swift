@@ -8,7 +8,9 @@
 
 import UIKit
 
-class AudioPlayerController: CompatibleViewController {
+public protocol PresentedViewControllerPushable: UIViewController {}
+
+class AudioPlayerController: CompatibleViewController, PresentedViewControllerPushable {
     static let shared: AudioPlayerController = sharedInit()
     
     lazy var interactiveTransition: SwipeDismissInteractiveTransition = SwipeDismissInteractiveTransition()
@@ -32,8 +34,8 @@ class AudioPlayerController: CompatibleViewController {
         
         self.view.addSubview(pushAnotherVCButton)
         pushAnotherVCButton.translatesAutoresizingMaskIntoConstraints = false
-        pushAnotherVCButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-        pushAnotherVCButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        pushAnotherVCButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        pushAnotherVCButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         
         pushAnotherVCButton.addTarget(self, action: #selector(pushAnotherVC), for: .touchUpInside)
         
@@ -51,6 +53,15 @@ class AudioPlayerController: CompatibleViewController {
     @objc
     func pushAnotherVC() {
         print(#function)
+        
+        
+        guard let topMostViewController = UIApplication.shared.topMostViewController() else {
+            return
+        }
+        
+        print(topMostViewController)
+        
+        UIApplication.shared.pushViewControllerAsPossible(DetailsViewController.newInstance())
     }
 }
 
@@ -65,5 +76,68 @@ extension AudioPlayerController: UIViewControllerTransitioningDelegate {
     
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactiveTransition.isInteracting ? interactiveTransition : nil
+    }
+}
+
+
+
+
+public extension UIApplication {
+    func topMostViewController(for viewController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = viewController as? UINavigationController {
+            return topMostViewController(for: navigationController.visibleViewController)
+        }
+        if let tabBarController = viewController as? UITabBarController {
+            if let selectedViewController = tabBarController.selectedViewController {
+                return topMostViewController(for: selectedViewController)
+            }
+        }
+        if let splitViewController = viewController as? UISplitViewController {
+            if let lastVC = splitViewController.viewControllers.last {
+                return topMostViewController(for: lastVC)
+            }
+        }
+        if let presentedViewController = viewController?.presentedViewController {
+            return topMostViewController(for: presentedViewController)
+        }
+        return viewController
+    }
+    
+    
+    func pushViewControllerAsPossible(_ viewController: UIViewController, animated: Bool = true) {
+        guard let topMostVC = self.topMostViewController() else {
+            return
+        }
+        
+        if let navigationController = topMostVC.navigationController {
+            navigationController.pushViewController(viewController, animated: animated)
+            return
+        }
+        
+        if let _ = topMostVC as? PresentedViewControllerPushable,
+            let navigationController = topMostVC.presentingViewController?.topMostNavigaitonController() {
+            navigationController.topViewController?.pendingPresentedViewController = topMostVC
+            topMostVC.dismiss(animated: false) {
+                navigationController.pushViewController(viewController, animated: animated)
+            }
+        }
+    }
+}
+
+public extension UIViewController {
+    func topMostNavigaitonController() -> UINavigationController? {
+        if let navigationController = self as? UINavigationController {
+            return navigationController
+        }
+        if let navigationController = self.navigationController {
+            return navigationController
+        }
+        if let tabBarController = self as? UITabBarController {
+            return tabBarController.selectedViewController?.topMostNavigaitonController()
+        }
+        if let splitViewController = self as? UISplitViewController {
+            return splitViewController.viewControllers.last?.topMostNavigaitonController()
+        }
+        return nil
     }
 }

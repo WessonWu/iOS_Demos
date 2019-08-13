@@ -11,6 +11,9 @@ import UIKit
 internal struct AssociatedKeys {
     static var adjustedContentInsetBottom = "mm_adjustedContentInsetBottom"
     static var adjustedSafeAreaInsetBottom = "mm_adjustedSafeAreaInsetBottom"
+    
+    static var pendingPresentedViewController = "mm_pendingPresentedViewController"
+    static var pendingPresentingViewController = "mm_pendingPresentingViewController"
 }
 
 
