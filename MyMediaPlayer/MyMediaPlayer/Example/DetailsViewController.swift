@@ -82,7 +82,8 @@ class DetailsViewController: CompatibleTableViewController {
     
     @IBAction func presentMediaPlayer(_ sender: Any) {
         
-        self.present(MyMediaPlayerViewController.newInstance(), animated: true, completion: nil)
+//        self.present(MyMediaPlayerViewController.newInstance(), animated: true, completion: nil)
+        self.present(AudioPlayerController.shared, animated: true, completion: nil)
     }
     
     deinit {
