@@ -42,6 +42,12 @@ class AudioPlayerController: CompatibleViewController, PresentedViewControllerPu
         interactiveTransition.prepare(for: self)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.pendingPresentingViewController?.pendingPresentedViewController = nil
+    }
+    
     
     
     // override MLeaksFinder's willDealloc method
