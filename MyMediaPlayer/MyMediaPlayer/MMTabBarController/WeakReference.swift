@@ -10,7 +10,10 @@ import UIKit
 
 public final class WeakReference<Element: AnyObject> {
     public weak var value: Element?
-    public init(_ value: Element) {
+    public init?(_ value: Element?) {
+        if value == nil {
+            return nil
+        }
         self.value = value
     }
 }

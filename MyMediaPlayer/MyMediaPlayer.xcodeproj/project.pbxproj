@@ -17,6 +17,7 @@
 		0A222C3E2301974300D15398 /* SwipeTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A222C3C2301974200D15398 /* SwipeTransitionAnimator.swift */; };
 		0A222C3F2301974300D15398 /* SwipeDismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A222C3D2301974200D15398 /* SwipeDismissInteractiveTransition.swift */; };
 		0A222C442302B26200D15398 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A222C432302B26200D15398 /* AudioPlayerController.swift */; };
+		0A222C492303AC3600D15398 /* UIViewController+Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A222C482303AC3600D15398 /* UIViewController+Operation.swift */; };
 		0A2738D62303148800BB615E /* WeakReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2738D52303148800BB615E /* WeakReference.swift */; };
 		0A2DA27222FBB71300E03B8A /* UIScrollView+Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA27122FBB71300E03B8A /* UIScrollView+Insets.swift */; };
 		0A51C90322FC6B3800DC3179 /* MediaTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51C90222FC6B3800DC3179 /* MediaTransitionAnimator.swift */; };
@@ -52,6 +53,7 @@
 		0A222C3C2301974200D15398 /* SwipeTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeTransitionAnimator.swift; sourceTree = "<group>"; };
 		0A222C3D2301974200D15398 /* SwipeDismissInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeDismissInteractiveTransition.swift; sourceTree = "<group>"; };
 		0A222C432302B26200D15398 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
+		0A222C482303AC3600D15398 /* UIViewController+Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Operation.swift"; sourceTree = "<group>"; };
 		0A2738D52303148800BB615E /* WeakReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakReference.swift; sourceTree = "<group>"; };
 		0A2DA27122FBB71300E03B8A /* UIScrollView+Insets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Insets.swift"; sourceTree = "<group>"; };
 		0A51C90222FC6B3800DC3179 /* MediaTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTransitionAnimator.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				0AA1989222E0681100FB9FA6 /* MMToolBar.swift */,
 				0AA1989422E0689500FB9FA6 /* MMBottomBar.swift */,
 				0A2738D52303148800BB615E /* WeakReference.swift */,
+				0A222C482303AC3600D15398 /* UIViewController+Operation.swift */,
 			);
 			path = MMTabBarController;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				0AA1987E22E0512400FB9FA6 /* UIViewController+MMTabBarItem.swift in Sources */,
 				0AA1987C22E049AD00FB9FA6 /* MMTabBarRootViewController.swift in Sources */,
 				0A51C90922FC718800DC3179 /* CompatibleTableViewController.swift in Sources */,
+				0A222C492303AC3600D15398 /* UIViewController+Operation.swift in Sources */,
 				0A05576722D32035005F3D93 /* MMItem.swift in Sources */,
 				0AA1989322E0681100FB9FA6 /* MMToolBar.swift in Sources */,
 				0AA1989522E0689500FB9FA6 /* MMBottomBar.swift in Sources */,

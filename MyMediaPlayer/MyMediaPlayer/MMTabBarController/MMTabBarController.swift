@@ -191,7 +191,7 @@ open class MMTabBarController: MTDNavigationController, MMTabBarDelegate {
                 self.bottomBar.isTransitioning = false
             }
         }
-        UIView.animate(withDuration: animated ? 0.25 : 0, animations: {
+        UIView.animate(withDuration: animated ? 0.2 : 0, animations: {
             self.bottomBar.frame = finalFrame
             self.bottomBar.layoutIfNeeded()
         }) { (_) in
@@ -200,8 +200,8 @@ open class MMTabBarController: MTDNavigationController, MMTabBarDelegate {
     }
     
     private func automaticallyAdjustsBottomBarHidden(by viewController: UIViewController, animated: Bool) {
-        let preferredToolBarHidden = prefersToolBarHidden(in: viewController)
-        let preferredTabBarHidden = prefersTabBarHidden(in: viewController)
+        let preferredToolBarHidden = mm_prefersToolBarHidden(in: viewController)
+        let preferredTabBarHidden = mm_prefersTabBarHidden(in: viewController)
         self.setBarHidden(isToolBarHidden: preferredToolBarHidden,
                           isTabBarHidden: preferredTabBarHidden,
                           animated: animated)
@@ -243,9 +243,9 @@ open class MMTabBarController: MTDNavigationController, MMTabBarDelegate {
     open override func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         super.navigationController(navigationController, didShow: viewController, animated: animated)
         
-        if let pendingPresentedViewController = viewController.pendingPresentedViewController {
-            viewController.pendingPresentedViewController = nil
-            viewController.present(pendingPresentedViewController, animated: true, completion: nil)
+        if let pendingPresentedViewController = viewController.mm_pendingPresentedViewController {
+            viewController.mm_pendingPresentedViewController = nil
+            viewController.present(pendingPresentedViewController, animated: animated, completion: nil)
         }
     }
 }
