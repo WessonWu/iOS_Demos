@@ -7,65 +7,67 @@ import MediaPlayer
 
 // MMPlayer: My Media Player
 
-public class MMPlayer: NSObject {
+open class MMPlayer: NSObject {
     /// 播放器代理
-    public weak var delegate: MMPlayerDelegate?
+    open weak var delegate: MMPlayerDelegate?
     
     // MARK: - 播放状态
     /// 播放器状态
-    public private(set) var status: MMPlayerStatus = .unknown
+    open private(set) var status: MMPlayerStatus = .unknown
     /// 播放状态
-    public private(set) var playbackState: MMPlaybackState = .stopped
+    open private(set) var playbackState: MMPlaybackState = .stopped
     /// 是否正在播放
-    public var isPlaying: Bool {
+    open var isPlaying: Bool {
         return playbackState == .playing
     }
     /// 播放模式
-    public var playMode: MMPlayMode = .listCycle
+    open var playMode: MMPlayMode = .listCycle
     /// 播放器发生的错误
-    public private(set) var error: Error?
+    open private(set) var error: Error?
     
     // MARK: 内部播放播放器
     /// 用于播放的AVPlayer
-    public private(set) var avPlayer: AVPlayer?
+    open private(set) var avPlayer: AVPlayer?
     /// 用于播放的AVPlayerItem
-    public private(set) var avPlayerItem: AVPlayerItem?
+    open private(set) var avPlayerItem: AVPlayerItem?
     /// 用于播放的AVURLAsset
-    public private(set) var avURLAsset: AVURLAsset?
+    open private(set) var avURLAsset: AVURLAsset?
     
-    public var keysOfAVURLAssetLoadValuesAsynchronously: [String] {
+    open var keysOfAVURLAssetLoadValuesAsynchronously: [String] {
         return ["playable"]
     }
     
     /// 当前的播放源
-    public private(set) var mediaItem: MMItemType?
+    open private(set) var mediaItem: MMItemType?
     
     
     // MRAK: - Remote Control Management
     /// 是否可以接受远程事件 (控制是否响应控制中心的命令)
-    public var shouldReceiveRemoteEvents: Bool = true {
+    open var shouldReceiveRemoteEvents: Bool = true {
         didSet {
             shouldReceiveRemoteEventsAdjustment()
         }
     }
     /// 是否该显示nowPlayingInfo
-    public var shouldDisplayNowPlayingInfo: Bool = true
+    open var shouldDisplayNowPlayingInfo: Bool = true
     /// 控制中心显示的信息
-    public private(set) var nowPlayingInfo: [String: Any] = [:]
+    open private(set) var nowPlayingInfo: [String: Any] = [:]
     
     // MARK: - 其他
     /// 是否正在等待播放 (根据需要显示加载中样式)
-    @objc dynamic public private(set) var isWaitingForPlayback: Bool = false
+    @objc dynamic open private(set) var isWaitingForPlayback: Bool = false
     /// 是否处于Seek中 (防止在拖动进度条时受到影响)
-    @objc dynamic public private(set) var isSeeking: Bool = false
+    @objc dynamic open private(set) var isSeeking: Bool = false
     /// 媒体是否已经加载完成
-    @objc dynamic public private(set) var isMediaLoadCompleted: Bool = false
+    @objc dynamic open private(set) var isMediaLoadCompleted: Bool = false
     
-    public private(set) var avPlayerItemObserverContext: Void = ()
+    // MARK: - 监听相关
+    private var periodicTimerObserverToken: Any?
+    open private(set) var avPlayerItemObserverContext: Void = ()
     
     
     // MARK: - 播放核心方法
-    public func play() {
+    open func play() {
         initAVPlayerIfNeeded()
         reloadAVPlayerItemIfNeeded()
         resumeLoading()
@@ -74,7 +76,7 @@ public class MMPlayer: NSObject {
         updateNowPlayingInfoCenter()
     }
 
-    public func pause() {
+    open func pause() {
         guard playbackState == .playing else {
             setRate(0)
             return
@@ -85,7 +87,7 @@ public class MMPlayer: NSObject {
         detectWaitingForPlayback()
     }
     
-    public func stop() {
+    open func stop() {
         setRate(0)
         avPlayer?.replaceCurrentItem(with: nil)
         self.playbackState = .stopped
@@ -93,7 +95,7 @@ public class MMPlayer: NSObject {
     }
     
     /// 播放/暂停
-    public func togglePlay() {
+    open func togglePlay() {
         if isPlaying {
             pause()
         } else {
@@ -149,7 +151,7 @@ public class MMPlayer: NSObject {
     }
     
     
-    public func replaceCurrentItem(with mediaItem: MMItemType?) {
+    open func replaceCurrentItem(with mediaItem: MMItemType?) {
         self.mediaItem = mediaItem
         
         guard let item = self.mediaItem else {
@@ -157,6 +159,13 @@ public class MMPlayer: NSObject {
         }
         
         guard let url = item.assetURL else {
+            let localizedDescription = NSLocalizedString("URL cannot be nil.",
+                                                         comment: "URL cannot be nil description")
+            let localizedFailureReason = NSLocalizedString("URL was nil",
+                                                           comment: "URL cannot be nil failure reason")
+            let userInfo: [String: Any] = [NSLocalizedDescriptionKey: localizedDescription,
+                                           NSLocalizedFailureReasonErrorKey: localizedFailureReason]
+            failedToPlayWithError(URLError(.badURL, userInfo: userInfo))
             return
         }
         
@@ -174,7 +183,7 @@ public class MMPlayer: NSObject {
     
     /// 恢复AVPlayerItem缓存数据
     /// 当AVPlayer的playerItem不为nil时才会加载数据
-    public func resumeLoading() {
+    open func resumeLoading() {
         guard let player = self.avPlayer,
             let playerItem = self.avPlayerItem,
             player.currentItem == nil else {
@@ -196,6 +205,10 @@ public class MMPlayer: NSObject {
     }
     
     private func prepareToPlayAsset(_ urlAsset: AVURLAsset, withKeys keys: [String]) {
+        // 保证已经切换掉的AVURLAsset不会执行以下逻辑
+        guard urlAsset == self.avURLAsset else {
+            return
+        }
         var outError: NSError?
         let keyOfFailToLoad = keys.first { (key) -> Bool in
             return urlAsset.statusOfValue(forKey: key, error: &outError) == .failed
@@ -231,7 +244,7 @@ public class MMPlayer: NSObject {
     // MARK: - 相关状态的处理
     /// 尝试加载数据 (一般判断网络环境)
     @discardableResult
-    public func tryToRetrieveData() -> Bool {
+    open func tryToRetrieveData() -> Bool {
         guard self.avURLAsset != nil else { return false }
         if isMediaLoadCompleted {
             return true
@@ -274,9 +287,25 @@ public class MMPlayer: NSObject {
         }
     }
     
+    // Time Observer Management
+    private func addPeriodicTimerObserver(for player: AVPlayer) {
+        let timescale = CMTimeScale(NSEC_PER_SEC)
+        let interval = CMTime(seconds: 1, preferredTimescale: timescale)
+        self.periodicTimerObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main, using: { [weak self] (time) in
+            guard let strongSelf = self,
+                let avPlayerItem = strongSelf.avPlayerItem,
+                strongSelf.avPlayer?.currentItem == avPlayerItem else {
+                return
+            }
+            strongSelf.delegate?.player(strongSelf,
+                                        currentTimeDidChanged: time,
+                                        duration: avPlayerItem.duration)
+        })
+    }
+    
     
     // MARK: - 控制中心
-    public func setupNowPlayingInfoCenter(with mediaItem: MMItemType) {
+    open func setupNowPlayingInfoCenter(with mediaItem: MMItemType) {
         guard shouldDisplayNowPlayingInfo else {
             return
         }
@@ -315,7 +344,7 @@ public class MMPlayer: NSObject {
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
     
-    public func updateNowPlayingInfoCenter(withElapsedTime elapsed: TimeInterval? = nil) {
+    open func updateNowPlayingInfoCenter(withElapsedTime elapsed: TimeInterval? = nil) {
         guard shouldDisplayNowPlayingInfo else {
             return
         }
@@ -330,7 +359,7 @@ public class MMPlayer: NSObject {
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
     
-    public func cleanNowPlayingInfo() {
+    open func cleanNowPlayingInfo() {
         self.nowPlayingInfo = [:]
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
     }
@@ -341,7 +370,7 @@ public class MMPlayer: NSObject {
         setRemoteCommandEventsEnabled(self.shouldReceiveRemoteEvents)
     }
     
-    public var supportedRemoteCommands: [MPRemoteCommand] {
+    open var supportedRemoteCommands: [MPRemoteCommand] {
         let center = MPRemoteCommandCenter.shared()
         var commands = [center.playCommand,
                         center.pauseCommand,
@@ -352,7 +381,7 @@ public class MMPlayer: NSObject {
         return commands
     }
     
-    public func setRemoteCommandEventsEnabled(_ enabled: Bool) {
+    open func setRemoteCommandEventsEnabled(_ enabled: Bool) {
         let center = MPRemoteCommandCenter.shared()
         let supported = self.supportedRemoteCommands
         center.commonCommands.forEach {
@@ -364,7 +393,7 @@ public class MMPlayer: NSObject {
         }
     }
     
-    public func addRemoteCommandEvents() {
+    open func addRemoteCommandEvents() {
         removeRemoteCommandEvents()
         setRemoteCommandEventsEnabled(true)
         
@@ -373,7 +402,7 @@ public class MMPlayer: NSObject {
         }
     }
     
-    func removeRemoteCommandEvents() {
+    open func removeRemoteCommandEvents() {
         supportedRemoteCommands.forEach {
             $0.removeTarget(self)
         }
@@ -392,7 +421,7 @@ public class MMPlayer: NSObject {
     /// 处理远程控制命令
     /// 注意：只有delegate的handleRemoteCommandEvent方法
     /// 返回nil时，才会调用该方法
-    public func handleRemoteCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    open func handleRemoteCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
         let center = MPRemoteCommandCenter.shared()
         switch event.command {
         case center.playCommand:
@@ -442,7 +471,7 @@ public class MMPlayer: NSObject {
     
     
     @objc
-    public func playerItemDidPlayToEndTime(_ notification: Notification) {
+    open func playerItemDidPlayToEndTime(_ notification: Notification) {
         
     }
     
@@ -463,7 +492,7 @@ public class MMPlayer: NSObject {
         }
     }
     
-    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &avPlayerItemObserverContext,
             let key = keyPath,
             let playerItem = self.avPlayerItem else {

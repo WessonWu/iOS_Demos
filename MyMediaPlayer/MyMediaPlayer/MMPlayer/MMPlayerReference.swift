@@ -76,12 +76,14 @@ extension MMPlaybackState: CustomStringConvertible, CustomDebugStringConvertible
 
 
 public protocol MMPlayerDelegate: AnyObject {
+    func player(_ player: MMPlayer, currentTimeDidChanged currentTime: CMTime, duration: CMTime)
     func player(_ player: MMPlayer, loadedTimeRangesDidChanged timeRanges: [CMTimeRange])
     func player(_ player: MMPlayer, retriveArtworkImageWithURL url: URL, completion: @escaping (UIImage?) -> Void)
     func player(_ player: MMPlayer, handleRemoteCommandEvent event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus?
 }
 
 extension MMPlayerDelegate {
+    func player(_ player: MMPlayer, currentTimeDidChanged currentTime: CMTime, duration: CMTime) {}
     func player(_ player: MMPlayer, loadedTimeRangesDidChanged timeRanges: [CMTimeRange]) {}
     func player(_ player: MMPlayer, retrieveArtworkImageWithURL url: URL, completion: @escaping (UIImage?) -> Void) {
         completion(nil)
