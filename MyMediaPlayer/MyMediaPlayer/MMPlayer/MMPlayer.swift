@@ -15,7 +15,13 @@ open class MMPlayer: NSObject {
     /// 播放器状态
     open private(set) var status: MMPlayerStatus = .unknown
     /// 播放状态
-    open private(set) var playbackState: MMPlaybackState = .stopped
+    open private(set) var playbackState: MMPlaybackState = .stopped {
+        didSet {
+            DispatchQueue.runOnMainThreadSafely {
+                self.delegate?.player(self, playbackStateDidChanged: self.playbackState, oldState: oldValue)
+            }
+        }
+    }
     /// 是否正在播放
     open var isPlaying: Bool {
         return playbackState == .playing
@@ -27,18 +33,46 @@ open class MMPlayer: NSObject {
     
     // MARK: 内部播放播放器
     /// 用于播放的AVPlayer
-    open private(set) var avPlayer: AVPlayer?
+    open private(set) var avPlayer: AVPlayer? {
+        didSet {
+            if let player = oldValue {
+                removePeriodicTimerObserver(forPlayer: player)
+            }
+            if let player = self.avPlayer {
+                addPeriodicTimerObserver(for: player)
+            }
+        }
+    }
     /// 用于播放的AVPlayerItem
-    open private(set) var avPlayerItem: AVPlayerItem?
+    open private(set) var avPlayerItem: AVPlayerItem? {
+        didSet {
+            if let playerItem = oldValue {
+                removeObserversForAVPlayerItem(playerItem)
+            }
+            if let playerItem = self.avPlayerItem {
+                addObserversForAVPlayerItem(playerItem)
+            }
+        }
+    }
     /// 用于播放的AVURLAsset
     open private(set) var avURLAsset: AVURLAsset?
+    
+    
+    // 是否应该从音频中断中恢复播放 (修复5s 9.0截屏使得在暂停中的音频开始播放)
+    private var shouldResumeFromAudioSessionInterruption: Bool = false
     
     open var keysOfAVURLAssetLoadValuesAsynchronously: [String] {
         return ["playable"]
     }
     
     /// 当前的播放源
-    open private(set) var mediaItem: MMItemType?
+    open private(set) var mediaItem: MMItemType? {
+        didSet {
+            DispatchQueue.runOnMainThreadSafely {
+                self.delegate?.player(self, mediaItemDidSet: self.mediaItem, oldItem: oldValue)
+            }
+        }
+    }
     
     
     // MRAK: - Remote Control Management
@@ -65,6 +99,13 @@ open class MMPlayer: NSObject {
     private var periodicTimerObserverToken: Any?
     open private(set) var avPlayerItemObserverContext: Void = ()
     
+    /// The backgroundTaskIdentifier for media buffering in background
+    private var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
+    
+    public override init() {
+        super.init()
+        addNotifications()
+    }
     
     // MARK: - 播放核心方法
     open func play() {
@@ -241,6 +282,25 @@ open class MMPlayer: NSObject {
         self.status = .error
     }
     
+    /// 从出错的情况下恢复播放 (一般处理收到mediaServicesWereResetNotification)
+    /// 调试方法：系统Settings -> Development -> Reset Media Services
+    /// 相关介绍：https://developer.apple.com/library/archive/qa/qa1749/_index.html
+    @objc
+    func recoverPlaybackFromError() {
+        guard let player = self.avPlayer, self.avURLAsset != nil else {
+            return
+        }
+//        self.pendingSeekTime = self.playerItem?.currentTime()
+        self.avPlayer = nil
+        self.avPlayerItem = nil
+        player.replaceCurrentItem(with: nil)
+        if isPlaying {
+            play()
+        } else {
+            pause()
+        }
+    }
+    
     // MARK: - 相关状态的处理
     /// 尝试加载数据 (一般判断网络环境)
     @discardableResult
@@ -287,6 +347,38 @@ open class MMPlayer: NSObject {
         }
     }
     
+    // MARK: - 后台在线加载音频支持(支持后台处理mediaServicesWereResetNotification)
+    
+    /// 根据需要启用backgroundTask
+    /// 条件：（防止滥用）
+    /// 1、播放中
+    /// 2、处于后台
+    func beginBackgroundTaskIfNeeded() {
+        guard UIApplication.shared.applicationState != .active && self.isPlaying else {
+            endBackgroundTaskIfNeeded()
+            return
+        }
+        
+        if self.backgroundTaskIdentifier == nil || self.backgroundTaskIdentifier == .invalid {
+            self.backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: { [weak self] in
+                self?.endBackgroundTaskIfNeeded()
+            })
+        }
+    }
+    
+    /// 结束backgroundTask
+    func endBackgroundTaskIfNeeded() {
+        guard let backgroundTaskIdentifier = self.backgroundTaskIdentifier else {
+            return
+        }
+        defer {
+            self.backgroundTaskIdentifier = nil
+        }
+        if backgroundTaskIdentifier != .invalid {
+            UIApplication.shared.endBackgroundTask(backgroundTaskIdentifier)
+        }
+    }
+    
     // Time Observer Management
     private func addPeriodicTimerObserver(for player: AVPlayer) {
         let timescale = CMTimeScale(NSEC_PER_SEC)
@@ -301,6 +393,13 @@ open class MMPlayer: NSObject {
                                         currentTimeDidChanged: time,
                                         duration: avPlayerItem.duration)
         })
+    }
+    
+    private func removePeriodicTimerObserver(forPlayer player: AVPlayer) {
+        if let timeObserverToken = self.periodicTimerObserverToken {
+            player.removeTimeObserver(timeObserverToken)
+            self.periodicTimerObserverToken = nil
+        }
     }
     
     
@@ -326,7 +425,7 @@ open class MMPlayer: NSObject {
                         let resultImage = image else {
                         return
                     }
-                    DispatchQueue.main.async {
+                    DispatchQueue.runOnMainThreadSafely {
                         var nowPlayingInfo = strongSelf.nowPlayingInfo
                         nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(image: resultImage)
                         strongSelf.nowPlayingInfo = nowPlayingInfo
@@ -437,7 +536,32 @@ open class MMPlayer: NSObject {
     }
     
     
-    // MARK: - KVO Observers
+    // MARK: - KVO & Notification Observers
+    func addNotifications() {
+        addNotification(name: AVAudioSession.interruptionNotification,
+                        selector: #selector(audioSessionInterruption(_:)),
+                        object: nil)
+        addNotification(name: AVAudioSession.routeChangeNotification,
+                        selector: #selector(audioSessionRouteChange(_:)),
+                        object: nil)
+        addNotification(name: AVAudioSession.mediaServicesWereLostNotification,
+                        selector: #selector(recoverPlaybackFromError),
+                        object: nil)
+        addNotification(name: Notification.Name(rawValue: kCMTimebaseNotification_EffectiveRateChanged as String),
+                        selector: #selector(effectiveRateChanged(_:)),
+                        object: nil)
+        addNotification(name: UIApplication.didEnterBackgroundNotification,
+                        selector: #selector(applicationLifeCycleHandler(_:)),
+                        object: nil)
+        addNotification(name: UIApplication.didBecomeActiveNotification,
+                        selector: #selector(applicationLifeCycleHandler(_:)),
+                        object: nil)
+    }
+    
+    func removeNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func addObserversForAVPlayerItem(_ playerItem: AVPlayerItem) {
         addKVOObserver(for: playerItem, with: #keyPath(AVPlayerItem.status))
         addKVOObserver(for: playerItem, with: #keyPath(AVPlayerItem.isPlaybackBufferEmpty))
@@ -469,10 +593,87 @@ open class MMPlayer: NSObject {
                            object: playerItem)
     }
     
+    open func didReceiveAudioSessionInterruption(_ context: AudioSessionInterruptionContext) {
+        switch context.type {
+        case .began:
+            let isPlayingBefore = self.isPlaying
+            self.pause() // 暂停播放
+            self.shouldResumeFromAudioSessionInterruption = isPlayingBefore
+        case .ended:
+            guard let options = context.options,
+                options.contains(.shouldResume)
+                    && self.shouldReceiveRemoteEvents
+                    && self.shouldResumeFromAudioSessionInterruption else {
+                        return
+            }
+            self.play()
+        @unknown default:
+            break
+        }
+    }
     
+    open func didReceiveAudioSessionRouteChange(_ context: AudioSessionRouteChangeContext) {
+        switch context.reason {
+        case .oldDeviceUnavailable:
+            guard let previousOutput = context.previousRouteDescription?.outputs.first else { return }
+            switch previousOutput.portType {
+            case .headphones,
+                 .bluetoothLE,
+                 .bluetoothHFP,
+                 .bluetoothA2DP:
+                self.pause()
+            default: break
+            }
+        default: break
+        }
+    }
+    
+    open func didPlayToEndTime(_ playerItem: AVPlayerItem) {}
+    
+    /// 音频中断通知
     @objc
-    open func playerItemDidPlayToEndTime(_ notification: Notification) {
-        
+    private func audioSessionInterruption(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let rawValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+            let type = AVAudioSession.InterruptionType(rawValue: rawValue) else { return }
+        let options: AVAudioSession.InterruptionOptions?
+        if let rawValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
+            options = AVAudioSession.InterruptionOptions(rawValue: rawValue)
+        } else {
+            options = nil
+        }
+        let context: AudioSessionInterruptionContext
+        if #available(iOS 10.3, *) {
+            let wasSuspened = userInfo[AVAudioSessionInterruptionWasSuspendedKey] as? Bool ?? false
+            context = AudioSessionInterruptionContext(type: type, options: options, wasSuspened: wasSuspened)
+        } else {
+            context = AudioSessionInterruptionContext(type: type, options: options)
+        }
+        DispatchQueue.runOnMainThreadSafely {
+            self.delegate?.player(self, didReceiveAudioSessionInterruption: context)
+            self.didReceiveAudioSessionInterruption(context)
+        }
+    }
+    
+    /// 音频输入输出改变通知
+    @objc
+    private func audioSessionRouteChange(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let rawValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
+            let reason = AVAudioSession.RouteChangeReason(rawValue: rawValue) else {
+                return
+        }
+        let previousRouteDescription: AVAudioSessionRouteDescription?
+        if let previousRoute = userInfo[AVAudioSessionRouteChangePreviousRouteKey] as? AVAudioSessionRouteDescription {
+            previousRouteDescription = previousRoute
+        } else {
+            previousRouteDescription = nil
+        }
+        let context = AudioSessionRouteChangeContext(reason: reason, previousRouteDescription: previousRouteDescription)
+        DispatchQueue.runOnMainThreadSafely {
+            self.delegate?.player(self, didReceiveAudioSessionRouteChange: context)
+            self.didReceiveAudioSessionRouteChange(context)
+        }
     }
     
     /// 监听AVPlayerItem的其他通知
@@ -489,6 +690,43 @@ open class MMPlayer: NSObject {
         case .AVPlayerItemPlaybackStalled:
             tryToRetrieveDataWhenPlaying()
         default: break
+        }
+    }
+    
+    /// 该通知用于监听真正处于播放或等待状态
+    /// CMTimebaseGetRate(AVPlayerItem.timebase) == 1: AVPlayer真正处于播放状态
+    /// CMTimebaseGetRate(AVPlayerItem.timebase) == 0: AVPlayer并未播放(处于Waiting/Paused状态)
+    @objc
+    private func effectiveRateChanged(_ notification: Notification) {
+        DispatchQueue.runOnMainThreadSafely {
+            self.detectWaitingForPlayback()
+        }
+    }
+    
+    @objc
+    private func playerItemDidPlayToEndTime(_ notification: Notification) {
+        guard let playerItem = notification.object as? AVPlayerItem,
+            playerItem.isEqual(self.avPlayerItem) else {
+                return
+        }
+        
+        DispatchQueue.runOnMainThreadSafely {
+            self.delegate?.playerDidPlayToEndTime(self)
+        }
+        
+        didPlayToEndTime(playerItem)
+    }
+    
+    /// UIApplication生命周期事件处理
+    @objc
+    private func applicationLifeCycleHandler(_ notification: Notification) {
+        switch notification.name {
+        case UIApplication.didEnterBackgroundNotification:
+            beginBackgroundTaskIfNeeded()
+        case UIApplication.didBecomeActiveNotification:
+            endBackgroundTaskIfNeeded()
+        default:
+            break
         }
     }
     
@@ -522,10 +760,13 @@ open class MMPlayer: NSObject {
                 #endif
             }
         case #keyPath(AVPlayerItem.isPlaybackBufferEmpty):
+            // 当isPlaybackBufferEmpty == true: 检查是否可以加载数据，以便提示网络相关的状态
             if playerItem.isPlaybackBufferEmpty {
                 tryToRetrieveDataWhenPlaying()
             }
         case #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp):
+            // 当isPlaybackLikelyToKeepUp == true: 恢复播放
+            // 当isPlaybackLikelyToKeepUp == false: 检查是否可以加载数据，以便提示网络相关的状态
             if playerItem.isPlaybackLikelyToKeepUp {
                 resumeIfNeeded()
             } else {
@@ -534,11 +775,33 @@ open class MMPlayer: NSObject {
         case #keyPath(AVPlayerItem.loadedTimeRanges):
             self.isMediaLoadCompleted = playerItem.isLoadCompleted
             
-            if let delegate = self.delegate {
-                delegate.player(self, loadedTimeRangesDidChanged: playerItem.loadedTimeRanges.map { $0.timeRangeValue })
+            DispatchQueue.runOnMainThreadSafely {
+                if let delegate = self.delegate {
+                    delegate.player(self, loadedTimeRangesDidChanged: playerItem.loadedTimeRanges.map { $0.timeRangeValue })
+                }
             }
         default: break
         }
+    }
+    
+    /// do not override this method.
+    public final func reset() {
+        DispatchQueue.checkOnMainThread()
+        defer {
+            self.delegate?.playerWasReset(self)
+        }
+        stop()
+        cleanNowPlayingInfo()
+        self.mediaItem = nil
+        self.avURLAsset = nil
+        self.avPlayerItem = nil
+        self.isMediaLoadCompleted = false
+        self.isWaitingForPlayback = false
+        self.status = .unknown
+    }
+    
+    deinit {
+        removeNotifications()
     }
 }
 
@@ -557,6 +820,23 @@ extension MMPlayer {
     
     @inline(__always) func removeNotification(name: Notification.Name, object: Any?) {
         NotificationCenter.default.removeObserver(self, name: name, object: object)
+    }
+}
+
+
+extension DispatchQueue {
+    class func runOnMainThreadSafely(_ execute: @escaping () -> Void) {
+        if Thread.current.isMainThread {
+            execute()
+        } else {
+            DispatchQueue.main.async(execute: execute)
+        }
+    }
+    
+    @inlinable class func checkOnMainThread(_ aSelector: Selector = #function) {
+        if !Thread.current.isMainThread {
+            fatalError(NSStringFromSelector(aSelector) + " should be on main thread!")
+        }
     }
 }
 
