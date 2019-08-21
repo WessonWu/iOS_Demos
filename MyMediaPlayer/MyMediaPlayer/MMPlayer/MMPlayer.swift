@@ -109,6 +109,10 @@ open class MMPlayer: NSObject {
     
     // MARK: - 播放核心方法
     open func play() {
+        self.shouldResumeFromAudioSessionInterruption = false
+        guard avURLAsset != nil && tryToRetrieveData() else {
+            return setRate(0)
+        }
         initAVPlayerIfNeeded()
         reloadAVPlayerItemIfNeeded()
         resumeLoading()
@@ -118,7 +122,8 @@ open class MMPlayer: NSObject {
     }
 
     open func pause() {
-        guard playbackState == .playing else {
+        self.shouldResumeFromAudioSessionInterruption = false
+        guard avURLAsset != nil && playbackState == .playing else {
             setRate(0)
             return
         }
@@ -129,6 +134,11 @@ open class MMPlayer: NSObject {
     }
     
     open func stop() {
+        self.shouldResumeFromAudioSessionInterruption = false
+        self.avURLAsset?.cancelLoading()
+        guard avURLAsset != nil else {
+            return setRate(0)
+        }
         setRate(0)
         avPlayer?.replaceCurrentItem(with: nil)
         self.playbackState = .stopped
@@ -192,13 +202,20 @@ open class MMPlayer: NSObject {
     }
     
     
+    /// 替换当前正在播放的媒体源
+    ///
+    /// - Parameter mediaItem: 媒体源
     open func replaceCurrentItem(with mediaItem: MMItemType?) {
-        self.mediaItem = mediaItem
+        // reset the player to initial state for preparing for playback next item.
+        reset()
         
+        // set the media item and check if exists.
+        self.mediaItem = mediaItem
         guard let item = self.mediaItem else {
             return
         }
         
+        // check url is not nil.
         guard let url = item.assetURL else {
             let localizedDescription = NSLocalizedString("URL cannot be nil.",
                                                          comment: "URL cannot be nil description")
@@ -210,8 +227,9 @@ open class MMPlayer: NSObject {
             return
         }
         
-        self.status = .unknown
         
+        // Create and load AVURLAsset asynchronously.
+        self.status = .unknown
         let keys = keysOfAVURLAssetLoadValuesAsynchronously
         let urlAsset = AVURLAsset(url: url)
         self.avURLAsset = urlAsset
@@ -220,6 +238,11 @@ open class MMPlayer: NSObject {
                 self?.prepareToPlayAsset(urlAsset, withKeys: keys)
             }
         }
+        
+        // setup now playing info center
+        setupNowPlayingInfoCenter(with: item)
+        // Adjusts remote control center button state.
+        shouldReceiveRemoteEventsAdjustment()
     }
     
     /// 恢复AVPlayerItem缓存数据
@@ -612,6 +635,9 @@ open class MMPlayer: NSObject {
         }
     }
     
+    /// 音频输入/输出改变
+    ///
+    /// - Parameter context: 音频输入/输出上下文
     open func didReceiveAudioSessionRouteChange(_ context: AudioSessionRouteChangeContext) {
         switch context.reason {
         case .oldDeviceUnavailable:
@@ -628,6 +654,9 @@ open class MMPlayer: NSObject {
         }
     }
     
+    /// AVPlayerItem播放完成
+    ///
+    /// - Parameter playerItem: 播放完成的AVPlayerItem
     open func didPlayToEndTime(_ playerItem: AVPlayerItem) {}
     
     /// 音频中断通知
@@ -784,7 +813,7 @@ open class MMPlayer: NSObject {
         }
     }
     
-    /// do not override this method.
+    /// 重置音频播放器
     public final func reset() {
         DispatchQueue.checkOnMainThread()
         defer {
