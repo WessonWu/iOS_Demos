@@ -126,6 +126,8 @@ open class MMPlayer: NSObject {
     private var periodicTimerObserverToken: Any?
     open private(set) var avPlayerItemObserverContext: Void = ()
     
+    /// 保存当前的进度（用于从错误中恢复播放）
+    private var pendingSeekTime: CMTime?
     /// The backgroundTaskIdentifier for media buffering in background
     private var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
     
@@ -261,7 +263,7 @@ open class MMPlayer: NSObject {
         let urlAsset = AVURLAsset(url: url)
         self.avURLAsset = urlAsset
         urlAsset.loadValuesAsynchronously(forKeys: keys) { [weak self] in
-            DispatchQueue.main.async {
+            DispatchQueue.runOnMainThreadSafely {
                 self?.prepareToPlayAsset(urlAsset, withKeys: keys)
             }
         }
@@ -362,7 +364,7 @@ open class MMPlayer: NSObject {
         guard let player = self.avPlayer, self.avURLAsset != nil else {
             return
         }
-//        self.pendingSeekTime = self.playerItem?.currentTime()
+        self.pendingSeekTime = self.avPlayerItem?.currentTime()
         self.avPlayer = nil
         self.avPlayerItem = nil
         player.replaceCurrentItem(with: nil)
@@ -828,6 +830,10 @@ open class MMPlayer: NSObject {
                 break
             case .readyToPlay:
                 self.status = .readyToPlay
+                if let seekTime = self.pendingSeekTime {
+                    self.pendingSeekTime = nil
+                    self.seekSafely(to: seekTime)
+                }
             case .failed:
                 // 加载出错
                 failedToPlayWithError(playerItem.error)
