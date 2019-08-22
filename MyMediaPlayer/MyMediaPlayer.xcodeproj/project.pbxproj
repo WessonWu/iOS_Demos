@@ -20,6 +20,7 @@
 		0A222C492303AC3600D15398 /* UIViewController+Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A222C482303AC3600D15398 /* UIViewController+Operation.swift */; };
 		0A2738D62303148800BB615E /* WeakReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2738D52303148800BB615E /* WeakReference.swift */; };
 		0A2DA27222FBB71300E03B8A /* UIScrollView+Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DA27122FBB71300E03B8A /* UIScrollView+Insets.swift */; };
+		0A32976C230E3D5D00195C5F /* SystemVolumeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A32976B230E3D5D00195C5F /* SystemVolumeControl.swift */; };
 		0A51C90322FC6B3800DC3179 /* MediaTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51C90222FC6B3800DC3179 /* MediaTransitionAnimator.swift */; };
 		0A51C90522FC6BB900DC3179 /* MyMediaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51C90422FC6BB900DC3179 /* MyMediaPlayerViewController.swift */; };
 		0A51C90722FC6BDE00DC3179 /* CompatibleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51C90622FC6BDE00DC3179 /* CompatibleViewController.swift */; };
@@ -56,6 +57,7 @@
 		0A222C482303AC3600D15398 /* UIViewController+Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Operation.swift"; sourceTree = "<group>"; };
 		0A2738D52303148800BB615E /* WeakReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakReference.swift; sourceTree = "<group>"; };
 		0A2DA27122FBB71300E03B8A /* UIScrollView+Insets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Insets.swift"; sourceTree = "<group>"; };
+		0A32976B230E3D5D00195C5F /* SystemVolumeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemVolumeControl.swift; sourceTree = "<group>"; };
 		0A51C90222FC6B3800DC3179 /* MediaTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTransitionAnimator.swift; sourceTree = "<group>"; };
 		0A51C90422FC6BB900DC3179 /* MyMediaPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMediaPlayerViewController.swift; sourceTree = "<group>"; };
 		0A51C90622FC6BDE00DC3179 /* CompatibleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		0A05574E22D32011005F3D93 /* MyMediaPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				0A32976A230E3D3B00195C5F /* VolumeControl */,
 				0AA1987F22E0548D00FB9FA6 /* Example */,
 				0AA1987622E0423B00FB9FA6 /* MMTabBarController */,
 				0A05576122D32035005F3D93 /* MMPlayer */,
@@ -131,6 +134,14 @@
 				0A05576522D32035005F3D93 /* MMQueuePlayer.swift */,
 			);
 			path = MMPlayer;
+			sourceTree = "<group>";
+		};
+		0A32976A230E3D3B00195C5F /* VolumeControl */ = {
+			isa = PBXGroup;
+			children = (
+				0A32976B230E3D5D00195C5F /* SystemVolumeControl.swift */,
+			);
+			path = VolumeControl;
 			sourceTree = "<group>";
 		};
 		0AA1987622E0423B00FB9FA6 /* MMTabBarController */ = {
@@ -304,6 +315,7 @@
 			files = (
 				0AA1989022E055CE00FB9FA6 /* ThirdViewController.swift in Sources */,
 				0A2DA27222FBB71300E03B8A /* UIScrollView+Insets.swift in Sources */,
+				0A32976C230E3D5D00195C5F /* SystemVolumeControl.swift in Sources */,
 				0AA1987522E0423600FB9FA6 /* MMTabBarController.swift in Sources */,
 				0AA1987A22E0455C00FB9FA6 /* MMTabBarItem.swift in Sources */,
 				0AA1988F22E055CE00FB9FA6 /* FirstViewController.swift in Sources */,
