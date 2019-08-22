@@ -13,12 +13,23 @@ open class MMPlayer: NSObject {
     
     // MARK: - 播放状态
     /// 播放器状态
-    open private(set) var status: MMPlayerStatus = .unknown
+    open private(set) var status: MMPlayerStatus = .unknown {
+        didSet {
+            DispatchQueue.runOnMainThreadSafely {
+                self.delegate?.player(self, playerStatusDidSet: self.status, oldStatus: oldValue)
+            }
+        }
+    }
     /// 播放状态
     open private(set) var playbackState: MMPlaybackState = .stopped {
         didSet {
             DispatchQueue.runOnMainThreadSafely {
-                self.delegate?.player(self, playbackStateDidChanged: self.playbackState, oldState: oldValue)
+                self.delegate?.player(self, playbackStateDidSet: self.playbackState, oldState: oldValue)
+                if self.playbackState == .playing {
+                    self.beginBackgroundTaskIfNeeded()
+                } else {
+                    self.endBackgroundTaskIfNeeded()
+                }
             }
         }
     }
@@ -27,7 +38,23 @@ open class MMPlayer: NSObject {
         return playbackState == .playing
     }
     /// 播放模式
-    open var playMode: MMPlayMode = .listCycle
+    open var playMode: MMPlayMode = .listCycle {
+        didSet {
+            DispatchQueue.runOnMainThreadSafely {
+                self.delegate?.player(self, playModeDidSet: self.playMode, oldModel: oldValue)
+            }
+        }
+    }
+    
+    /// 播放速率
+    open var playbackRate: Float = 1 {
+        didSet {
+            if let player = self.avPlayer, player.rate != self.playbackRate && self.isPlaying {
+                setRate(self.playbackRate)
+            }
+        }
+    }
+    
     /// 播放器发生的错误
     open private(set) var error: Error?
     
@@ -116,7 +143,7 @@ open class MMPlayer: NSObject {
         initAVPlayerIfNeeded()
         reloadAVPlayerItemIfNeeded()
         resumeLoading()
-        setRate(1)
+        setRate(playbackRate)
         self.playbackState = .playing
         updateNowPlayingInfoCenter()
     }
@@ -297,10 +324,32 @@ open class MMPlayer: NSObject {
         self.avPlayer?.replaceCurrentItem(with: playerItem)
     }
     
+    // MARK: - Seek
+    /// 开始Seeking
+    open func beginSeeking() {
+        isSeeking = true
+    }
     
+    /// 结束Seeking
+    open func endSeeking() {
+        isSeeking = false
+    }
+    
+    /// 用interval（秒）的方式Seek
+    open func seek(interval: TimeInterval, completionHandler: ((Bool) -> Void)? = nil) {
+        guard !interval.isNaN && interval >= 0 else { return }
+        let scale = CMTimeScale(NSEC_PER_SEC)
+        let seekTime = CMTime(seconds: interval, preferredTimescale: scale)
+        seekSafely(to: seekTime, completionHandler: completionHandler)
+    }
+    
+    open func seekSafely(to time: CMTime, completionHandler: ((Bool) -> Void)? = nil) {
+        guard let playerItem = self.avPlayerItem, time.isValid else { return }
+        playerItem.seekSafely(to: time, completionHandler: completionHandler)
+    }
     
     // MARK: - 播放错误
-    func failedToPlayWithError(_ error: Error?) {
+    open func failedToPlayWithError(_ error: Error?) {
         self.error = error
         self.status = .error
     }
@@ -340,7 +389,7 @@ open class MMPlayer: NSObject {
     func resumeIfNeeded() {
         if let playerItem = self.avPlayer?.currentItem,
             playerItem.status != .failed && self.isPlaying {
-            setRate(1)
+            setRate(playbackRate)
         }
     }
     
@@ -483,7 +532,6 @@ open class MMPlayer: NSObject {
     
     open func cleanNowPlayingInfo() {
         self.nowPlayingInfo = [:]
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
     }
     
     
@@ -902,5 +950,22 @@ extension MPRemoteCommandCenter {
             commands.append(changePlaybackPositionCommand)
         }
         return commands
+    }
+}
+
+private extension AVPlayerItem {
+    func seekSafely(to time: CMTime, tolerance: CMTime = CMTime(seconds: 1, preferredTimescale: CMTimeScale(1)), completionHandler: ((Bool) -> Void)? = nil) {
+        // 预防：
+        // Fatal Exception: NSInvalidArgumentException
+        // AVPlayerItem cannot service a seek request with a completion handler until its status is AVPlayerItemStatusReadyToPlay.
+        guard self.status == .readyToPlay && time.isValid && !time.isIndefinite else {
+            return
+        }
+        if let completion = completionHandler {
+            self.seek(to: time, toleranceBefore: tolerance, toleranceAfter: tolerance, completionHandler: completion)
+        } else {
+            self.seek(to: time, toleranceBefore: tolerance, toleranceAfter: tolerance)
+        }
+
     }
 }

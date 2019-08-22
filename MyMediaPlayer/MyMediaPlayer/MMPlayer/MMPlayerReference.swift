@@ -114,8 +114,9 @@ public struct AudioSessionRouteChangeContext {
 
 public protocol MMPlayerDelegate: AnyObject {
     func player(_ player: MMPlayer, mediaItemDidSet newItem: MMItemType?, oldItem: MMItemType?)
-    func player(_ player: MMPlayer, playerStatusDidChanged newStatus: MMPlayerStatus, oldStatus: MMPlayerStatus)
-    func player(_ player: MMPlayer, playbackStateDidChanged newState: MMPlaybackState, oldState: MMPlaybackState)
+    func player(_ player: MMPlayer, playerStatusDidSet newStatus: MMPlayerStatus, oldStatus: MMPlayerStatus)
+    func player(_ player: MMPlayer, playbackStateDidSet newState: MMPlaybackState, oldState: MMPlaybackState)
+    func player(_ player: MMPlayer, playModeDidSet newMode: MMPlayMode, oldModel: MMPlayMode)
     func player(_ player: MMPlayer, currentTimeDidChanged currentTime: CMTime, duration: CMTime)
     func player(_ player: MMPlayer, loadedTimeRangesDidChanged timeRanges: [CMTimeRange])
     func player(_ player: MMPlayer, retriveArtworkImageWithURL url: URL, completion: @escaping (UIImage?) -> Void)
@@ -138,13 +139,15 @@ public protocol MMPlayerDelegate: AnyObject {
 
 extension MMPlayerDelegate {
     func player(_ player: MMPlayer, mediaItemDidSet newItem: MMItemType?, oldItem: MMItemType?) {}
-    func player(_ player: MMPlayer, playerStatusDidChanged newStatus: MMPlayerStatus, oldStatus: MMPlayerStatus) {}
-    func player(_ player: MMPlayer, playbackStateDidChanged newState: MMPlaybackState, oldState: MMPlaybackState) {}
+    func player(_ player: MMPlayer, playerStatusDidSet newStatus: MMPlayerStatus, oldStatus: MMPlayerStatus) {}
+    func player(_ player: MMPlayer, playbackStateDidSet newState: MMPlaybackState, oldState: MMPlaybackState) {}
+    func player(_ player: MMPlayer, playModeDidSet newMode: MMPlayMode, oldModel: MMPlayMode) {}
     func player(_ player: MMPlayer, currentTimeDidChanged currentTime: CMTime, duration: CMTime) {}
     func player(_ player: MMPlayer, loadedTimeRangesDidChanged timeRanges: [CMTimeRange]) {}
     func player(_ player: MMPlayer, retrieveArtworkImageWithURL url: URL, completion: @escaping (UIImage?) -> Void) {
         completion(nil)
     }
+    func player(_ player: MMPlayer, failedToPlayWith error: Error) {}
     func playerDidPlayToEndTime(_ player: MMPlayer) {}
     func player(_ player: MMPlayer, handleRemoteCommandEvent event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus? {
         return nil
