@@ -76,9 +76,6 @@ open class MMPlayer: NSObject {
     /// 播放器发生的错误
     open private(set) var error: Error?
     
-    // 是否应该从音频中断中恢复播放 (修复5s 9.0截屏使得在暂停中的音频开始播放)
-    private var shouldResumeFromAudioSessionInterruption: Bool = false
-    
     open var keysOfAVURLAssetLoadValuesAsynchronously: [String] {
         return ["playable"]
     }
@@ -110,15 +107,6 @@ open class MMPlayer: NSObject {
     @objc dynamic open private(set) var isWaitingForPlayback: Bool = false
     /// 媒体是否已经加载完成
     @objc dynamic open private(set) var isMediaLoadCompleted: Bool = false
-    
-    // MARK: - 监听相关
-    private var periodicTimerObserverToken: Any?
-    open private(set) var avPlayerItemObserverContext: Void = ()
-    
-    /// 保存当前的进度（用于从错误中恢复播放）
-    private var pendingSeekTime: CMTime?
-    /// The backgroundTaskIdentifier for media buffering in background
-    private var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
     
     public override init() {
         super.init()
@@ -169,47 +157,6 @@ open class MMPlayer: NSObject {
             player.rate = rate
         }
     }
-    
-    
-    // MARK: - 准备工作
-    // 惰性初始化AVPlayer
-    func initAVPlayerIfNeeded() {
-        let session = AVAudioSession.sharedInstance()
-        defer {
-            do {
-                try session.setActive(true)
-            } catch {
-                #if DEBUG
-                print(error)
-                #endif
-            }
-        }
-        guard self.avPlayer == nil else {
-            return
-        }
-        
-        let player = AVPlayer()
-        self.avPlayer = player
-        
-        player.actionAtItemEnd = .pause
-        if #available(iOS 10.0, *) {
-            player.automaticallyWaitsToMinimizeStalling = false
-        }
-        
-        do {
-            if #available(iOS 10.0, *) {
-                try session.setCategory(.playback, mode: .default, options: [.defaultToSpeaker, .allowBluetooth, .allowBluetoothA2DP])
-            } else {
-                try session.setCategory(.playback, options: [.defaultToSpeaker, .allowBluetooth])
-                try session.setMode(.default)
-            }
-        } catch {
-            #if DEBUG
-            print(error)
-            #endif
-        }
-    }
-    
     
     /// 替换当前正在播放的媒体源
     ///
@@ -269,47 +216,6 @@ open class MMPlayer: NSObject {
         player.replaceCurrentItem(with: playerItem)
     }
     
-    /// 检查是否有必要重新加载AVPlayerItem
-    private func reloadAVPlayerItemIfNeeded() {
-        guard let mediaItem = self.mediaItem else {
-            return
-        }
-        let playerItem = self.avPlayerItem
-        if self.status != .unknown && (playerItem == nil || playerItem?.status == .failed) {
-            self.avPlayer?.replaceCurrentItem(with: nil)
-            self.replaceCurrentItem(with: mediaItem)
-        }
-    }
-    
-    private func prepareToPlayAsset(_ urlAsset: AVURLAsset, withKeys keys: [String]) {
-        // 保证已经切换掉的AVURLAsset不会执行以下逻辑
-        guard urlAsset == self.avURLAsset else {
-            return
-        }
-        var outError: NSError?
-        let keyOfFailToLoad = keys.first { (key) -> Bool in
-            return urlAsset.statusOfValue(forKey: key, error: &outError) == .failed
-        }
-        guard keyOfFailToLoad == nil else {
-            failedToPlayWithError(outError)
-            return
-        }
-        
-        guard urlAsset.isPlayable else {
-            let localizedDescription = NSLocalizedString("Item cannot be played",
-                                                         comment: "Item cannot be played description")
-            let localizedFailureReason = NSLocalizedString("The assets tracks were loaded, but could not be made playable.",
-                                                           comment: "Item cannot be played failure reason")
-            let userInfo = [NSLocalizedDescriptionKey: localizedDescription,
-                            NSLocalizedFailureReasonErrorKey: localizedFailureReason]
-            failedToPlayWithError(AVError(.unknown, userInfo: userInfo))
-            return
-        }
-        let playerItem = AVPlayerItem(asset: urlAsset)
-        self.avPlayerItem = playerItem
-//        self.avPlayer?.replaceCurrentItem(with: playerItem)
-    }
-    
     // MARK: - Seek
     open func seekSafely(to time: CMTime, tolerance: CMTime = CMTime(seconds: 1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), completionHandler: ((Bool) -> Void)? = nil) {
         guard let playerItem = self.avPlayerItem, time.isValid && !time.isIndefinite else {
@@ -336,25 +242,6 @@ open class MMPlayer: NSObject {
         self.status = .error
     }
     
-    /// 从出错的情况下恢复播放 (一般处理收到mediaServicesWereResetNotification)
-    /// 调试方法：系统Settings -> Development -> Reset Media Services
-    /// 相关介绍：https://developer.apple.com/library/archive/qa/qa1749/_index.html
-    @objc
-    func recoverPlaybackFromError() {
-        guard let player = self.avPlayer, self.avURLAsset != nil else {
-            return
-        }
-        self.pendingSeekTime = self.avPlayerItem?.currentTime()
-        self.avPlayer = nil
-        self.avPlayerItem = nil
-        player.replaceCurrentItem(with: nil)
-        if isPlaying {
-            play()
-        } else {
-            pause()
-        }
-    }
-    
     // MARK: - 相关状态的处理
     /// 尝试加载数据 (一般判断网络环境)
     @discardableResult
@@ -366,96 +253,6 @@ open class MMPlayer: NSObject {
         detectWaitingForPlayback()
         return true
     }
-    
-    /// 处理偶尔当AVPlayerItem的isPlaybackLikelyToKeepUp为true的时候无法自动进行播放
-    func resumeIfNeeded() {
-        if let playerItem = self.avPlayer?.currentItem,
-            playerItem.status != .failed && self.isPlaying {
-            setRate(playbackRate)
-        }
-    }
-    
-    /// 用于在播放中，在需要的时候（结合卡顿、isPlaybackLikelyToKeepUp和isPlaybackBufferEmpty和isPlaybackBufferFulll状态）询问网络环境
-    func tryToRetrieveDataWhenPlaying() {
-        guard isPlaying else { return }
-        tryToRetrieveData()
-    }
-    
-    /// 检测是否等待播放
-    func detectWaitingForPlayback() {
-        guard self.isPlaying else {
-            self.isWaitingForPlayback = false
-            return
-        }
-        
-        if let playerItem = self.avPlayerItem,
-            let timebase = playerItem.timebase {
-            if CMTimebaseGetRate(timebase) == 0 {
-                // wait for playback
-                self.isWaitingForPlayback = !playerItem.isPlaybackLikelyToKeepUp
-            } else {
-                self.isWaitingForPlayback = false
-            }
-        } else {
-            self.isWaitingForPlayback = true
-        }
-    }
-    
-    // MARK: - 后台在线加载音频支持(支持后台处理mediaServicesWereResetNotification)
-    
-    /// 根据需要启用backgroundTask
-    /// 条件：（防止滥用）
-    /// 1、播放中
-    /// 2、处于后台
-    func beginBackgroundTaskIfNeeded() {
-        guard UIApplication.shared.applicationState != .active && self.isPlaying else {
-            endBackgroundTaskIfNeeded()
-            return
-        }
-        
-        if self.backgroundTaskIdentifier == nil || self.backgroundTaskIdentifier == .invalid {
-            self.backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: { [weak self] in
-                self?.endBackgroundTaskIfNeeded()
-            })
-        }
-    }
-    
-    /// 结束backgroundTask
-    func endBackgroundTaskIfNeeded() {
-        guard let backgroundTaskIdentifier = self.backgroundTaskIdentifier else {
-            return
-        }
-        defer {
-            self.backgroundTaskIdentifier = nil
-        }
-        if backgroundTaskIdentifier != .invalid {
-            UIApplication.shared.endBackgroundTask(backgroundTaskIdentifier)
-        }
-    }
-    
-    // Time Observer Management
-    private func addPeriodicTimerObserver(for player: AVPlayer) {
-        let timescale = CMTimeScale(NSEC_PER_SEC)
-        let interval = CMTime(seconds: 1, preferredTimescale: timescale)
-        self.periodicTimerObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main, using: { [weak self] (time) in
-            guard let strongSelf = self,
-                let avPlayerItem = strongSelf.avPlayerItem,
-                strongSelf.avPlayer?.currentItem == avPlayerItem else {
-                return
-            }
-            strongSelf.delegate?.player(strongSelf,
-                                        currentTimeDidChanged: time,
-                                        duration: avPlayerItem.duration)
-        })
-    }
-    
-    private func removePeriodicTimerObserver(forPlayer player: AVPlayer) {
-        if let timeObserverToken = self.periodicTimerObserverToken {
-            player.removeTimeObserver(timeObserverToken)
-            self.periodicTimerObserverToken = nil
-        }
-    }
-    
     
     // MARK: - 控制中心
     open func setupNowPlayingInfoCenter(with mediaItem: MMItemType) {
@@ -512,16 +309,12 @@ open class MMPlayer: NSObject {
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
     
-    open func cleanNowPlayingInfo() {
+    open func cleanNowPlayingInfo(_ center: MPNowPlayingInfoCenter? = nil) {
         self.nowPlayingInfo = [:]
+        center?.nowPlayingInfo = nil
     }
     
-    
-    /// MARK: - 远程命令
-    func shouldReceiveRemoteEventsAdjustment() {
-        setRemoteCommandEventsEnabled(self.shouldReceiveRemoteEvents)
-    }
-    
+    /// MARK: - 远程命令    
     open var supportedRemoteCommands: [MPRemoteCommand] {
         let center = MPRemoteCommandCenter.shared()
         var commands = [center.playCommand,
@@ -560,16 +353,6 @@ open class MMPlayer: NSObject {
         }
     }
     
-    /// 收到远程控制命令的回调
-    @objc
-    private func didReceiveRemoteCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
-        guard self.shouldReceiveRemoteEvents else { return .commandFailed }
-        if let status = delegate?.player(self, handleRemoteCommandEvent: event) {
-            return status
-        }
-        return handleRemoteCommandEvent(event)
-    }
-    
     /// 处理远程控制命令
     /// 注意：只有delegate的handleRemoteCommandEvent方法
     /// 返回nil时，才会调用该方法
@@ -590,64 +373,6 @@ open class MMPlayer: NSObject {
             return .commandFailed
         }
         return .success
-    }
-    
-    
-    // MARK: - KVO & Notification Observers
-    func addNotifications() {
-        addNotification(name: AVAudioSession.interruptionNotification,
-                        selector: #selector(audioSessionInterruption(_:)),
-                        object: nil)
-        addNotification(name: AVAudioSession.routeChangeNotification,
-                        selector: #selector(audioSessionRouteChange(_:)),
-                        object: nil)
-        addNotification(name: AVAudioSession.mediaServicesWereLostNotification,
-                        selector: #selector(recoverPlaybackFromError),
-                        object: nil)
-        addNotification(name: Notification.Name(rawValue: kCMTimebaseNotification_EffectiveRateChanged as String),
-                        selector: #selector(effectiveRateChanged(_:)),
-                        object: nil)
-        addNotification(name: UIApplication.didEnterBackgroundNotification,
-                        selector: #selector(applicationLifeCycleHandler(_:)),
-                        object: nil)
-        addNotification(name: UIApplication.didBecomeActiveNotification,
-                        selector: #selector(applicationLifeCycleHandler(_:)),
-                        object: nil)
-    }
-    
-    func removeNotifications() {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    func addObserversForAVPlayerItem(_ playerItem: AVPlayerItem) {
-        addKVOObserver(for: playerItem, with: #keyPath(AVPlayerItem.status))
-        addKVOObserver(for: playerItem, with: #keyPath(AVPlayerItem.isPlaybackBufferEmpty))
-        addKVOObserver(for: playerItem, with: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp))
-        addKVOObserver(for: playerItem, with: #keyPath(AVPlayerItem.loadedTimeRanges))
-        
-        addNotification(name: .AVPlayerItemDidPlayToEndTime,
-                        selector: #selector(playerItemDidPlayToEndTime(_:)),
-                        object: playerItem)
-        addNotification(name: .AVPlayerItemFailedToPlayToEndTime,
-                        selector: #selector(playerItemOthersNotifier(_:)),
-                        object: playerItem)
-        addNotification(name: .AVPlayerItemPlaybackStalled,
-                        selector: #selector(playerItemOthersNotifier(_:)),
-                        object: playerItem)
-    }
-    
-    func removeObserversForAVPlayerItem(_ playerItem: AVPlayerItem) {
-        removeKVOObserver(for: playerItem, with: #keyPath(AVPlayerItem.status))
-        removeKVOObserver(for: playerItem, with: #keyPath(AVPlayerItem.isPlaybackBufferEmpty))
-        removeKVOObserver(for: playerItem, with: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp))
-        removeKVOObserver(for: playerItem, with: #keyPath(AVPlayerItem.loadedTimeRanges))
-        
-        removeNotification(name: .AVPlayerItemDidPlayToEndTime,
-                           object: playerItem)
-        removeNotification(name: .AVPlayerItemFailedToPlayToEndTime,
-                           object: playerItem)
-        removeNotification(name: .AVPlayerItemPlaybackStalled,
-                           object: playerItem)
     }
     
     open func didReceiveAudioSessionInterruption(_ context: AudioSessionInterruptionContext) {
@@ -692,107 +417,6 @@ open class MMPlayer: NSObject {
     ///
     /// - Parameter playerItem: 播放完成的AVPlayerItem
     open func didPlayToEndTime(_ playerItem: AVPlayerItem) {}
-    
-    /// 音频中断通知
-    @objc
-    private func audioSessionInterruption(_ notification: Notification) {
-        guard let userInfo = notification.userInfo,
-            let rawValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
-            let type = AVAudioSession.InterruptionType(rawValue: rawValue) else { return }
-        let options: AVAudioSession.InterruptionOptions?
-        if let rawValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
-            options = AVAudioSession.InterruptionOptions(rawValue: rawValue)
-        } else {
-            options = nil
-        }
-        let context: AudioSessionInterruptionContext
-        if #available(iOS 10.3, *) {
-            let wasSuspened = userInfo[AVAudioSessionInterruptionWasSuspendedKey] as? Bool ?? false
-            context = AudioSessionInterruptionContext(type: type, options: options, wasSuspened: wasSuspened)
-        } else {
-            context = AudioSessionInterruptionContext(type: type, options: options)
-        }
-        DispatchQueue.runOnMainThreadSafely {
-            self.delegate?.player(self, didReceiveAudioSessionInterruption: context)
-            self.didReceiveAudioSessionInterruption(context)
-        }
-    }
-    
-    /// 音频输入输出改变通知
-    @objc
-    private func audioSessionRouteChange(_ notification: Notification) {
-        guard let userInfo = notification.userInfo,
-            let rawValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
-            let reason = AVAudioSession.RouteChangeReason(rawValue: rawValue) else {
-                return
-        }
-        let previousRouteDescription: AVAudioSessionRouteDescription?
-        if let previousRoute = userInfo[AVAudioSessionRouteChangePreviousRouteKey] as? AVAudioSessionRouteDescription {
-            previousRouteDescription = previousRoute
-        } else {
-            previousRouteDescription = nil
-        }
-        let context = AudioSessionRouteChangeContext(reason: reason, previousRouteDescription: previousRouteDescription)
-        DispatchQueue.runOnMainThreadSafely {
-            self.delegate?.player(self, didReceiveAudioSessionRouteChange: context)
-            self.didReceiveAudioSessionRouteChange(context)
-        }
-    }
-    
-    /// 监听AVPlayerItem的其他通知
-    /// 1. 播放失败
-    /// 2. 卡顿问题
-    @objc
-    private func playerItemOthersNotifier(_ notification: Notification) {
-        guard let playerItem = notification.object as? AVPlayerItem,
-            playerItem.isEqual(self.avPlayerItem) else { return }
-        
-        switch notification.name {
-        case .AVPlayerItemFailedToPlayToEndTime:
-            tryToRetrieveDataWhenPlaying()
-        case .AVPlayerItemPlaybackStalled:
-            tryToRetrieveDataWhenPlaying()
-        default: break
-        }
-    }
-    
-    /// 该通知用于监听真正处于播放或等待状态
-    /// CMTimebaseGetRate(AVPlayerItem.timebase) == 1: AVPlayer真正处于播放状态
-    /// CMTimebaseGetRate(AVPlayerItem.timebase) == 0: AVPlayer并未播放(处于Waiting/Paused状态)
-    @objc
-    private func effectiveRateChanged(_ notification: Notification) {
-        DispatchQueue.runOnMainThreadSafely {
-            self.detectWaitingForPlayback()
-        }
-    }
-    
-    @objc
-    private func playerItemDidPlayToEndTime(_ notification: Notification) {
-        guard let playerItem = notification.object as? AVPlayerItem,
-            playerItem.isEqual(self.avPlayerItem) else {
-                return
-        }
-        
-        self.pause()
-        DispatchQueue.runOnMainThreadSafely {
-            self.delegate?.playerDidPlayToEndTime(self)
-        }
-        
-        didPlayToEndTime(playerItem)
-    }
-    
-    /// UIApplication生命周期事件处理
-    @objc
-    private func applicationLifeCycleHandler(_ notification: Notification) {
-        switch notification.name {
-        case UIApplication.didEnterBackgroundNotification:
-            beginBackgroundTaskIfNeeded()
-        case UIApplication.didBecomeActiveNotification:
-            endBackgroundTaskIfNeeded()
-        default:
-            break
-        }
-    }
     
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &avPlayerItemObserverContext,
@@ -872,22 +496,151 @@ open class MMPlayer: NSObject {
     deinit {
         removeNotifications()
     }
-}
-
-extension MMPlayer {
-    @inline(__always) func addKVOObserver(for playerItem: AVPlayerItem, with keyPath: String) {
-        playerItem.addObserver(self, forKeyPath: keyPath, options: [.old, .new], context: &avPlayerItemObserverContext)
+    
+    // 是否应该从音频中断中恢复播放 (修复5s 9.0截屏使得在暂停中的音频开始播放)
+    var shouldResumeFromAudioSessionInterruption: Bool = false
+    /// 保存当前的进度（用于从错误中恢复播放）
+    var pendingSeekTime: CMTime?
+    /// The backgroundTaskIdentifier for media buffering in background
+    var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
+    // MARK: - 监听相关
+    var periodicTimerObserverToken: Any?
+    var avPlayerItemObserverContext: Void = ()
+    
+    // MARK: - 准备工作
+    // 惰性初始化AVPlayer
+    private func initAVPlayerIfNeeded() {
+        let session = AVAudioSession.sharedInstance()
+        defer {
+            do {
+                try session.setActive(true)
+            } catch {
+                #if DEBUG
+                print(error)
+                #endif
+            }
+        }
+        guard self.avPlayer == nil else {
+            return
+        }
+        
+        let player = AVPlayer()
+        self.avPlayer = player
+        
+        player.actionAtItemEnd = .pause
+        if #available(iOS 10.0, *) {
+            player.automaticallyWaitsToMinimizeStalling = false
+        }
+        
+        do {
+            if #available(iOS 10.0, *) {
+                try session.setCategory(.playback, mode: .default, options: [.defaultToSpeaker, .allowBluetooth, .allowBluetoothA2DP])
+            } else {
+                try session.setCategory(.playback, options: [.defaultToSpeaker, .allowBluetooth])
+                try session.setMode(.default)
+            }
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+        }
     }
     
-    @inline(__always) func removeKVOObserver(for playerItem: AVPlayerItem, with keyPath: String) {
-        playerItem.removeObserver(self, forKeyPath: keyPath, context: &avPlayerItemObserverContext)
+    /// 检查是否有必要重新加载AVPlayerItem
+    private func reloadAVPlayerItemIfNeeded() {
+        guard let mediaItem = self.mediaItem else {
+            return
+        }
+        let playerItem = self.avPlayerItem
+        if self.status != .unknown && (playerItem == nil || playerItem?.status == .failed) {
+            self.avPlayer?.replaceCurrentItem(with: nil)
+            self.replaceCurrentItem(with: mediaItem)
+        }
     }
     
-    @inline(__always) func addNotification(name: Notification.Name, selector: Selector, object: Any?) {
-        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: object)
+    private func prepareToPlayAsset(_ urlAsset: AVURLAsset, withKeys keys: [String]) {
+        // 保证已经切换掉的AVURLAsset不会执行以下逻辑
+        guard urlAsset == self.avURLAsset else {
+            return
+        }
+        var outError: NSError?
+        let keyOfFailToLoad = keys.first { (key) -> Bool in
+            return urlAsset.statusOfValue(forKey: key, error: &outError) == .failed
+        }
+        guard keyOfFailToLoad == nil else {
+            failedToPlayWithError(outError)
+            return
+        }
+        
+        guard urlAsset.isPlayable else {
+            let localizedDescription = NSLocalizedString("Item cannot be played",
+                                                         comment: "Item cannot be played description")
+            let localizedFailureReason = NSLocalizedString("The assets tracks were loaded, but could not be made playable.",
+                                                           comment: "Item cannot be played failure reason")
+            let userInfo = [NSLocalizedDescriptionKey: localizedDescription,
+                            NSLocalizedFailureReasonErrorKey: localizedFailureReason]
+            failedToPlayWithError(AVError(.unknown, userInfo: userInfo))
+            return
+        }
+        let playerItem = AVPlayerItem(asset: urlAsset)
+        self.avPlayerItem = playerItem
+        //        self.avPlayer?.replaceCurrentItem(with: playerItem)
     }
     
-    @inline(__always) func removeNotification(name: Notification.Name, object: Any?) {
-        NotificationCenter.default.removeObserver(self, name: name, object: object)
+    /// 处理偶尔当AVPlayerItem的isPlaybackLikelyToKeepUp为true的时候无法自动进行播放
+    func resumeIfNeeded() {
+        if let playerItem = self.avPlayer?.currentItem,
+            playerItem.status != .failed && self.isPlaying {
+            setRate(playbackRate)
+        }
+    }
+    
+    /// 用于在播放中，在需要的时候（结合卡顿、isPlaybackLikelyToKeepUp和isPlaybackBufferEmpty和isPlaybackBufferFulll状态）询问网络环境
+    func tryToRetrieveDataWhenPlaying() {
+        guard isPlaying else { return }
+        tryToRetrieveData()
+    }
+    
+    /// 检测是否等待播放
+    func detectWaitingForPlayback() {
+        guard self.isPlaying else {
+            self.isWaitingForPlayback = false
+            return
+        }
+        
+        if let playerItem = self.avPlayerItem,
+            let timebase = playerItem.timebase {
+            if CMTimebaseGetRate(timebase) == 0 {
+                // wait for playback
+                self.isWaitingForPlayback = !playerItem.isPlaybackLikelyToKeepUp
+            } else {
+                self.isWaitingForPlayback = false
+            }
+        } else {
+            self.isWaitingForPlayback = true
+        }
+    }
+    
+    /// 从出错的情况下恢复播放 (一般处理收到mediaServicesWereResetNotification)
+    /// 调试方法：系统Settings -> Development -> Reset Media Services
+    /// 相关介绍：https://developer.apple.com/library/archive/qa/qa1749/_index.html
+    @objc
+    func recoverPlaybackFromError() {
+        guard let player = self.avPlayer, self.avURLAsset != nil else {
+            return
+        }
+        self.pendingSeekTime = self.avPlayerItem?.currentTime()
+        self.avPlayer = nil
+        self.avPlayerItem = nil
+        player.replaceCurrentItem(with: nil)
+        if isPlaying {
+            play()
+        } else {
+            pause()
+        }
+    }
+    
+    private func shouldReceiveRemoteEventsAdjustment() {
+        setRemoteCommandEventsEnabled(self.shouldReceiveRemoteEvents)
     }
 }

@@ -9,8 +9,16 @@
 import AVFoundation
 
 open class MMQueuePlayer: MMPlayer {
-    open private(set) var mediaItems: [MMItemType] = []
-    open private(set) var currentIndex: Int = 0
+    open private(set) var mediaItems: [MMItemType] = [] {
+        didSet {
+            self.queuePlayerDelegate?.player(self, mediaItemsDidSet: mediaItems, oldItems: oldValue)
+        }
+    }
+    open private(set) var currentIndex: Int = 0 {
+        didSet {
+            self.queuePlayerDelegate?.player(self, currentIndexDidSet: self.currentIndex, oldIndex: oldValue)
+        }
+    }
     
     var queuePlayerDelegate: MMQueuePlayerDelegate? {
         return self.delegate as? MMQueuePlayerDelegate
@@ -19,9 +27,7 @@ open class MMQueuePlayer: MMPlayer {
     /// 播放模式
     open var playMode: MMPlayMode = .listCycle {
         didSet {
-            DispatchQueue.runOnMainThreadSafely {
-                self.queuePlayerDelegate?.player(self, playModeDidSet: self.playMode, oldModel: oldValue)
-            }
+            self.queuePlayerDelegate?.player(self, playModeDidSet: self.playMode, oldModel: oldValue)
         }
     }
     
@@ -67,8 +73,13 @@ open class MMQueuePlayer: MMPlayer {
     
     /// 重播
     open func replay() {
+        guard let mediaItem = self.mediaItem else {
+            return
+        }
+        self.queuePlayerDelegate?.player(self, willReplay: mediaItem)
         seekSafely(to: .zero, completionHandler: nil)
         play()
+        self.queuePlayerDelegate?.player(self, didReplay: mediaItem)
     }
     
     open override func didPlayToEndTime(_ playerItem: AVPlayerItem) {
@@ -91,7 +102,7 @@ open class MMQueuePlayer: MMPlayer {
         return mediaItems[index]
     }
     
-    private func play(at index: Int, isAutoPlay: Bool = true, forceToReplay: Bool = false) {
+    public func play(at index: Int, isAutoPlay: Bool = true, forceToReplay: Bool = false) {
         guard let mediaItem = mediaItem(at: index) else {
             return stop()
         }

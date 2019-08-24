@@ -156,10 +156,18 @@ extension MMPlayerDelegate {
 }
 
 public protocol MMQueuePlayerDelegate: MMPlayerDelegate {
-    func player(_ player: MMPlayer, playModeDidSet newMode: MMPlayMode, oldModel: MMPlayMode)
+    func player(_ player: MMQueuePlayer, mediaItemsDidSet newItems: [MMItemType], oldItems: [MMItemType])
+    func player(_ player: MMQueuePlayer, currentIndexDidSet newIndex: Int, oldIndex: Int)
+    func player(_ player: MMQueuePlayer, willReplay item: MMItemType)
+    func player(_ player: MMQueuePlayer, didReplay item: MMItemType)
+    func player(_ player: MMQueuePlayer, playModeDidSet newMode: MMPlayMode, oldModel: MMPlayMode)
 }
 
 extension MMQueuePlayerDelegate {
+    func player(_ player: MMQueuePlayer, mediaItemsDidSet newItems: [MMItemType], oldItems: [MMItemType]) {}
+    func player(_ player: MMQueuePlayer, currentIndexDidSet newIndex: Int, oldIndex: Int) {}
+    func player(_ player: MMQueuePlayer, willReplay item: MMItemType) {}
+    func player(_ player: MMQueuePlayer, didReplay item: MMItemType) {}
     func player(_ player: MMPlayer, playModeDidSet newMode: MMPlayMode, oldModel: MMPlayMode) {}
 }
 
