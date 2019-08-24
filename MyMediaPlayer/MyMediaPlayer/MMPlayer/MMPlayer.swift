@@ -37,26 +37,6 @@ open class MMPlayer: NSObject {
     open var isPlaying: Bool {
         return playbackState == .playing
     }
-    /// 播放模式
-    open var playMode: MMPlayMode = .listCycle {
-        didSet {
-            DispatchQueue.runOnMainThreadSafely {
-                self.delegate?.player(self, playModeDidSet: self.playMode, oldModel: oldValue)
-            }
-        }
-    }
-    
-    /// 播放速率
-    open var playbackRate: Float = 1 {
-        didSet {
-            if let player = self.avPlayer, player.rate != self.playbackRate && self.isPlaying {
-                setRate(self.playbackRate)
-            }
-        }
-    }
-    
-    /// 播放器发生的错误
-    open private(set) var error: Error?
     
     // MARK: 内部播放播放器
     /// 用于播放的AVPlayer
@@ -84,6 +64,17 @@ open class MMPlayer: NSObject {
     /// 用于播放的AVURLAsset
     open private(set) var avURLAsset: AVURLAsset?
     
+    /// 播放速率
+    open var playbackRate: Float = 1 {
+        didSet {
+            if let player = self.avPlayer, player.rate != self.playbackRate && self.isPlaying {
+                setRate(self.playbackRate)
+            }
+        }
+    }
+    
+    /// 播放器发生的错误
+    open private(set) var error: Error?
     
     // 是否应该从音频中断中恢复播放 (修复5s 9.0截屏使得在暂停中的音频开始播放)
     private var shouldResumeFromAudioSessionInterruption: Bool = false
@@ -117,8 +108,6 @@ open class MMPlayer: NSObject {
     // MARK: - 其他
     /// 是否正在等待播放 (根据需要显示加载中样式)
     @objc dynamic open private(set) var isWaitingForPlayback: Bool = false
-    /// 是否处于Seek中 (防止在拖动进度条时受到影响)
-    @objc dynamic open private(set) var isSeeking: Bool = false
     /// 媒体是否已经加载完成
     @objc dynamic open private(set) var isMediaLoadCompleted: Bool = false
     
@@ -183,8 +172,8 @@ open class MMPlayer: NSObject {
         }
     }
     
-    func setRate(_ rate: Float, force: Bool = false) {
-        guard let player = self.avPlayer, !isSeeking || force else { return }
+    open func setRate(_ rate: Float, force: Bool = false) {
+        guard let player = self.avPlayer else { return }
         if player.rate != rate {
             player.rate = rate
         }
@@ -327,27 +316,23 @@ open class MMPlayer: NSObject {
     }
     
     // MARK: - Seek
-    /// 开始Seeking
-    open func beginSeeking() {
-        isSeeking = true
-    }
-    
-    /// 结束Seeking
-    open func endSeeking() {
-        isSeeking = false
-    }
-    
-    /// 用interval（秒）的方式Seek
-    open func seek(interval: TimeInterval, completionHandler: ((Bool) -> Void)? = nil) {
-        guard !interval.isNaN && interval >= 0 else { return }
-        let scale = CMTimeScale(NSEC_PER_SEC)
-        let seekTime = CMTime(seconds: interval, preferredTimescale: scale)
-        seekSafely(to: seekTime, completionHandler: completionHandler)
-    }
-    
-    open func seekSafely(to time: CMTime, completionHandler: ((Bool) -> Void)? = nil) {
-        guard let playerItem = self.avPlayerItem, time.isValid else { return }
-        playerItem.seekSafely(to: time, completionHandler: completionHandler)
+    open func seekSafely(to time: CMTime, tolerance: CMTime = CMTime(seconds: 1, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), completionHandler: ((Bool) -> Void)? = nil) {
+        guard let playerItem = self.avPlayerItem, time.isValid && !time.isIndefinite else {
+            return
+        }
+        
+        // 预防：
+        // Fatal Exception: NSInvalidArgumentException
+        // AVPlayerItem cannot service a seek request with a completion handler until its status is AVPlayerItemStatusReadyToPlay.
+        guard playerItem.status == .readyToPlay else {
+            self.pendingSeekTime = time
+            return
+        }
+        if let completion = completionHandler {
+            playerItem.seek(to: time, toleranceBefore: tolerance, toleranceAfter: tolerance, completionHandler: completion)
+        } else {
+            playerItem.seek(to: time, toleranceBefore: tolerance, toleranceAfter: tolerance)
+        }
     }
     
     // MARK: - 播放错误
@@ -789,6 +774,7 @@ open class MMPlayer: NSObject {
                 return
         }
         
+        self.pause()
         DispatchQueue.runOnMainThreadSafely {
             self.delegate?.playerDidPlayToEndTime(self)
         }
@@ -875,6 +861,7 @@ open class MMPlayer: NSObject {
         }
         stop()
         cleanNowPlayingInfo()
+        self.pendingSeekTime = nil
         self.mediaItem = nil
         self.avURLAsset = nil
         self.avPlayerItem = nil
@@ -903,75 +890,5 @@ extension MMPlayer {
     
     @inline(__always) func removeNotification(name: Notification.Name, object: Any?) {
         NotificationCenter.default.removeObserver(self, name: name, object: object)
-    }
-}
-
-
-extension DispatchQueue {
-    class func runOnMainThreadSafely(_ execute: @escaping () -> Void) {
-        if Thread.current.isMainThread {
-            execute()
-        } else {
-            DispatchQueue.main.async(execute: execute)
-        }
-    }
-    
-    @inlinable class func checkOnMainThread(_ aSelector: Selector = #function) {
-        if !Thread.current.isMainThread {
-            fatalError(NSStringFromSelector(aSelector) + " should be on main thread!")
-        }
-    }
-}
-
-
-extension AVPlayerItem {
-    var isLoadCompleted: Bool {
-        guard duration.isValid, let timeRange = loadedTimeRanges.first?.timeRangeValue else { return false }
-        return timeRange.isValid && timeRange.start == .zero && timeRange.end == duration
-    }
-    
-    func isContainsTimeInLoadedTimeRanges(_ time: CMTime) -> Bool {
-        guard time.isValid else { return false }
-        return self.loadedTimeRanges.contains {
-            let timeRange = $0.timeRangeValue
-            return timeRange.containsTime(time) && (timeRange.end - time).seconds > 1
-        }
-    }
-}
-
-extension MPRemoteCommandCenter {
-    var commonCommands: [MPRemoteCommand] {
-        var commands: [MPRemoteCommand] = [pauseCommand,
-                                           playCommand,
-                                           stopCommand,
-                                           togglePlayPauseCommand,
-                                           changePlaybackRateCommand,
-                                           nextTrackCommand,
-                                           previousTrackCommand,
-                                           skipForwardCommand,
-                                           skipBackwardCommand,
-                                           seekForwardCommand,
-                                           seekBackwardCommand]
-        if #available(iOS 9.1, *) {
-            commands.append(changePlaybackPositionCommand)
-        }
-        return commands
-    }
-}
-
-private extension AVPlayerItem {
-    func seekSafely(to time: CMTime, tolerance: CMTime = CMTime(seconds: 1, preferredTimescale: CMTimeScale(1)), completionHandler: ((Bool) -> Void)? = nil) {
-        // 预防：
-        // Fatal Exception: NSInvalidArgumentException
-        // AVPlayerItem cannot service a seek request with a completion handler until its status is AVPlayerItemStatusReadyToPlay.
-        guard self.status == .readyToPlay && time.isValid && !time.isIndefinite else {
-            return
-        }
-        if let completion = completionHandler {
-            self.seek(to: time, toleranceBefore: tolerance, toleranceAfter: tolerance, completionHandler: completion)
-        } else {
-            self.seek(to: time, toleranceBefore: tolerance, toleranceAfter: tolerance)
-        }
-
     }
 }

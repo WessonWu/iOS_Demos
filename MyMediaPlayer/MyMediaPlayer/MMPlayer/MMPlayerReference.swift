@@ -116,7 +116,6 @@ public protocol MMPlayerDelegate: AnyObject {
     func player(_ player: MMPlayer, mediaItemDidSet newItem: MMItemType?, oldItem: MMItemType?)
     func player(_ player: MMPlayer, playerStatusDidSet newStatus: MMPlayerStatus, oldStatus: MMPlayerStatus)
     func player(_ player: MMPlayer, playbackStateDidSet newState: MMPlaybackState, oldState: MMPlaybackState)
-    func player(_ player: MMPlayer, playModeDidSet newMode: MMPlayMode, oldModel: MMPlayMode)
     func player(_ player: MMPlayer, currentTimeDidChanged currentTime: CMTime, duration: CMTime)
     func player(_ player: MMPlayer, loadedTimeRangesDidChanged timeRanges: [CMTimeRange])
     func player(_ player: MMPlayer, retriveArtworkImageWithURL url: URL, completion: @escaping (UIImage?) -> Void)
@@ -141,7 +140,6 @@ extension MMPlayerDelegate {
     func player(_ player: MMPlayer, mediaItemDidSet newItem: MMItemType?, oldItem: MMItemType?) {}
     func player(_ player: MMPlayer, playerStatusDidSet newStatus: MMPlayerStatus, oldStatus: MMPlayerStatus) {}
     func player(_ player: MMPlayer, playbackStateDidSet newState: MMPlaybackState, oldState: MMPlaybackState) {}
-    func player(_ player: MMPlayer, playModeDidSet newMode: MMPlayMode, oldModel: MMPlayMode) {}
     func player(_ player: MMPlayer, currentTimeDidChanged currentTime: CMTime, duration: CMTime) {}
     func player(_ player: MMPlayer, loadedTimeRangesDidChanged timeRanges: [CMTimeRange]) {}
     func player(_ player: MMPlayer, retrieveArtworkImageWithURL url: URL, completion: @escaping (UIImage?) -> Void) {
@@ -155,4 +153,66 @@ extension MMPlayerDelegate {
     func player(_ player: MMPlayer, didReceiveAudioSessionInterruption context: AudioSessionInterruptionContext) {}
     func player(_ player: MMPlayer, didReceiveAudioSessionRouteChange context: AudioSessionRouteChangeContext) {}
     func playerWasReset(_ player: MMPlayer) {}
+}
+
+public protocol MMQueuePlayerDelegate: MMPlayerDelegate {
+    func player(_ player: MMPlayer, playModeDidSet newMode: MMPlayMode, oldModel: MMPlayMode)
+}
+
+extension MMQueuePlayerDelegate {
+    func player(_ player: MMPlayer, playModeDidSet newMode: MMPlayMode, oldModel: MMPlayMode) {}
+}
+
+
+
+extension DispatchQueue {
+    class func runOnMainThreadSafely(_ execute: @escaping () -> Void) {
+        if Thread.current.isMainThread {
+            execute()
+        } else {
+            DispatchQueue.main.async(execute: execute)
+        }
+    }
+    
+    @inlinable class func checkOnMainThread(_ aSelector: Selector = #function) {
+        if !Thread.current.isMainThread {
+            fatalError(NSStringFromSelector(aSelector) + " should be on main thread!")
+        }
+    }
+}
+
+
+extension AVPlayerItem {
+    var isLoadCompleted: Bool {
+        guard duration.isValid, let timeRange = loadedTimeRanges.first?.timeRangeValue else { return false }
+        return timeRange.isValid && timeRange.start == .zero && timeRange.end == duration
+    }
+    
+    func isContainsTimeInLoadedTimeRanges(_ time: CMTime) -> Bool {
+        guard time.isValid else { return false }
+        return self.loadedTimeRanges.contains {
+            let timeRange = $0.timeRangeValue
+            return timeRange.containsTime(time) && (timeRange.end - time).seconds > 1
+        }
+    }
+}
+
+extension MPRemoteCommandCenter {
+    var commonCommands: [MPRemoteCommand] {
+        var commands: [MPRemoteCommand] = [pauseCommand,
+                                           playCommand,
+                                           stopCommand,
+                                           togglePlayPauseCommand,
+                                           changePlaybackRateCommand,
+                                           nextTrackCommand,
+                                           previousTrackCommand,
+                                           skipForwardCommand,
+                                           skipBackwardCommand,
+                                           seekForwardCommand,
+                                           seekBackwardCommand]
+        if #available(iOS 9.1, *) {
+            commands.append(changePlaybackPositionCommand)
+        }
+        return commands
+    }
 }
