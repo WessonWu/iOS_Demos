@@ -163,15 +163,6 @@ open class MMPlayer: NSObject {
         detectWaitingForPlayback()
     }
     
-    /// 播放/暂停
-    open func togglePlay() {
-        if isPlaying {
-            pause()
-        } else {
-            play()
-        }
-    }
-    
     open func setRate(_ rate: Float, force: Bool = false) {
         guard let player = self.avPlayer else { return }
         if player.rate != rate {
@@ -223,14 +214,16 @@ open class MMPlayer: NSObject {
     /// 替换当前正在播放的媒体源
     ///
     /// - Parameter mediaItem: 媒体源
-    open func replaceCurrentItem(with mediaItem: MMItemType?) {
+    /// - Returns: 是否成功设置
+    @discardableResult
+    open func replaceCurrentItem(with mediaItem: MMItemType?) -> Bool {
         // reset the player to initial state for preparing for playback next item.
         reset()
         
         // set the media item and check if exists.
         self.mediaItem = mediaItem
         guard let item = self.mediaItem else {
-            return
+            return false
         }
         
         // check url is not nil.
@@ -242,7 +235,7 @@ open class MMPlayer: NSObject {
             let userInfo: [String: Any] = [NSLocalizedDescriptionKey: localizedDescription,
                                            NSLocalizedFailureReasonErrorKey: localizedFailureReason]
             failedToPlayWithError(URLError(.badURL, userInfo: userInfo))
-            return
+            return false
         }
         
         
@@ -261,6 +254,8 @@ open class MMPlayer: NSObject {
         setupNowPlayingInfoCenter(with: item)
         // Adjusts remote control center button state.
         shouldReceiveRemoteEventsAdjustment()
+        
+        return true
     }
     
     /// 恢复AVPlayerItem缓存数据
@@ -312,7 +307,7 @@ open class MMPlayer: NSObject {
         }
         let playerItem = AVPlayerItem(asset: urlAsset)
         self.avPlayerItem = playerItem
-        self.avPlayer?.replaceCurrentItem(with: playerItem)
+//        self.avPlayer?.replaceCurrentItem(with: playerItem)
     }
     
     // MARK: - Seek
@@ -586,7 +581,11 @@ open class MMPlayer: NSObject {
         case center.pauseCommand:
             pause()
         case center.togglePlayPauseCommand:
-            togglePlay()
+            if isPlaying {
+                pause()
+            } else {
+                play()
+            }
         default:
             return .commandFailed
         }

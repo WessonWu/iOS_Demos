@@ -8,7 +8,6 @@
 
 import AVFoundation
 
-
 open class MMQueuePlayer: MMPlayer {
     open private(set) var mediaItems: [MMItemType] = []
     open private(set) var currentIndex: Int = 0
@@ -26,54 +25,50 @@ open class MMQueuePlayer: MMPlayer {
         }
     }
     
+    
+    /// 替换播放队列
+    ///
+    /// - Parameters:
+    ///   - mediaItems: 播放队列
+    ///   - index: 想要播放的队列中的index
+    ///   - isAutoPlay: 是否自动播放
+    ///   - forceToReplay: 当要播放的item与之前的item一致时，是否重新播放
+    open func replaceMediaItems(_ mediaItems: [MMItemType], index: Int, isAutoPlay: Bool = false, forceToReplay: Bool = false) {
+        self.mediaItems = mediaItems
+        play(at: index, isAutoPlay: isAutoPlay, forceToReplay: forceToReplay)
+    }
+    
     /// 前一首
-    public func previous() {
+    open func previous() {
         let count = mediaItems.count
         guard count > 0 else { return }
         
         let index = (currentIndex - 1 + count) % count
-        play(at: index, force: true)
+        play(at: index, isAutoPlay: true, forceToReplay: true)
     }
     
     /// 下一首
-    public func next() {
+    open func next() {
         let count = mediaItems.count
         guard count > 0 else { return }
         
         let index = (currentIndex + 1) % count
-        play(at: index, force: true)
+        play(at: index, isAutoPlay: true, forceToReplay: true)
     }
     
-    public func random() {
+    /// 随机播放
+    open func random() {
         let count = mediaItems.count
         guard count > 0 else { return }
         
         let index = Int(arc4random()) % count
-        play(at: index, force: true)
+        play(at: index, isAutoPlay: true, forceToReplay: true)
     }
     
     /// 重播
-    public func replay() {
+    open func replay() {
         seekSafely(to: .zero, completionHandler: nil)
-    }
-    
-    public func play(at index: Int, force: Bool) {
-        guard let mediaItem = mediaItem(at: index) else {
-            return stop()
-        }
-        
-        if self.currentIndex == index
-            && self.mediaItem?.uniqueID == mediaItem.uniqueID
-            && self.avURLAsset != nil {
-            seekSafely(to: .zero) { [weak self] (_) in
-                self?.play()
-            }
-        } else if self.avURLAsset == nil {
-            self.currentIndex = index
-            self.replaceCurrentItem(with: mediaItem)
-        } else {
-            
-        }
+        play()
     }
     
     open override func didPlayToEndTime(_ playerItem: AVPlayerItem) {
@@ -88,12 +83,34 @@ open class MMQueuePlayer: MMPlayer {
         }
     }
     
-    
-    public func mediaItem(at index: Int) -> MMItemType? {
+    public final func mediaItem(at index: Int) -> MMItemType? {
         guard index >= 0 && index < mediaItems.count else {
             return nil
         }
         
         return mediaItems[index]
+    }
+    
+    private func play(at index: Int, isAutoPlay: Bool = true, forceToReplay: Bool = false) {
+        guard let mediaItem = mediaItem(at: index) else {
+            return stop()
+        }
+        
+        let tryToPlayTheSameMediaItem = self.mediaItem?.uniqueID == mediaItem.uniqueID
+            && self.avURLAsset?.url == mediaItem.assetURL
+            && self.avPlayerItem?.asset == self.avURLAsset
+        self.currentIndex = index
+        if tryToPlayTheSameMediaItem {
+            if forceToReplay {
+                seekSafely(to: .zero)
+            }
+            if isAutoPlay {
+                play()
+            }
+        } else {
+            if self.replaceCurrentItem(with: mediaItem) && isAutoPlay {
+                play()
+            }
+        }
     }
 }
