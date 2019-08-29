@@ -59,6 +59,9 @@
     });
     CFRunLoopAddObserver(CFRunLoopGetCurrent(), observer, mode);
 }
+- (IBAction)onSetNeedsLayoutClick:(UIButton *)sender {
+    [sender setNeedsUpdateConstraints];
+}
 
 #pragma MARK - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -14,12 +14,12 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="CustomWrapperView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1aI-IP-Dbs">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1aI-IP-Dbs" customClass="CustomTableView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="409"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BasicCell" textLabel="hSd-rY-PR3" style="IBUITableViewCellStyleDefault" id="EVq-wq-DjY">
@@ -45,13 +45,32 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="mwp-6K-ksK"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gh0-Ay-wKL" userLabel="Spacer">
+                                <rect key="frame" x="0.0" y="453" width="50" height="409"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="fL9-Ch-vAg"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tmf-eV-TGm">
+                                <rect key="frame" x="151" y="642.5" width="112" height="30"/>
+                                <state key="normal" title="setNeedsLayout"/>
+                                <connections>
+                                    <action selector="onSetNeedsLayoutClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4VS-lL-TWN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Gh0-Ay-wKL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7m2-24-WGB"/>
                             <constraint firstItem="1aI-IP-Dbs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Cme-Rx-sag"/>
+                            <constraint firstItem="Tmf-eV-TGm" firstAttribute="centerY" secondItem="Gh0-Ay-wKL" secondAttribute="centerY" id="JqS-yA-2rd"/>
                             <constraint firstItem="1aI-IP-Dbs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RnS-VZ-JDJ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1aI-IP-Dbs" secondAttribute="bottom" id="iVr-Ec-19n"/>
+                            <constraint firstItem="Tmf-eV-TGm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="act-Do-WLk"/>
+                            <constraint firstItem="Gh0-Ay-wKL" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="50 %" id="cIE-9p-ouH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1aI-IP-Dbs" secondAttribute="trailing" id="ilb-Fk-jvH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Gh0-Ay-wKL" secondAttribute="bottom" id="wXP-u4-UTu"/>
+                            <constraint firstItem="1aI-IP-Dbs" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="50 %" id="zcv-UB-nsp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

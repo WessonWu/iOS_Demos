@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AB331572318242F002D44C9 /* CustomWrapperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB331562318242F002D44C9 /* CustomWrapperView.m */; };
 		0AFC0FC522B74DF9004C39F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC0FC422B74DF9004C39F7 /* AppDelegate.m */; };
 		0AFC0FC822B74DF9004C39F7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC0FC722B74DF9004C39F7 /* ViewController.m */; };
 		0AFC0FCB22B74DF9004C39F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC0FC922B74DF9004C39F7 /* Main.storyboard */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0AB331552318242F002D44C9 /* CustomWrapperView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomWrapperView.h; sourceTree = "<group>"; };
+		0AB331562318242F002D44C9 /* CustomWrapperView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomWrapperView.m; sourceTree = "<group>"; };
 		0AFC0FC022B74DF9004C39F7 /* RunLoopTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunLoopTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AFC0FC322B74DF9004C39F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0AFC0FC422B74DF9004C39F7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -69,6 +72,8 @@
 				0AFC0FD122B74DFA004C39F7 /* Info.plist */,
 				0AFC0FD222B74DFA004C39F7 /* main.m */,
 				0AFC0FDC22B7958E004C39F7 /* RunLoop.playground */,
+				0AB331552318242F002D44C9 /* CustomWrapperView.h */,
+				0AB331562318242F002D44C9 /* CustomWrapperView.m */,
 			);
 			path = RunLoopTest;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AFC0FC822B74DF9004C39F7 /* ViewController.m in Sources */,
+				0AB331572318242F002D44C9 /* CustomWrapperView.m in Sources */,
 				0AFC0FD322B74DFA004C39F7 /* main.m in Sources */,
 				0AFC0FC522B74DF9004C39F7 /* AppDelegate.m in Sources */,
 			);
