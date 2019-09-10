@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A00EF71232773E300522F8A /* Father.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A00EF70232773E300522F8A /* Father.m */; };
+		0A00EF782327748200522F8A /* Son.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A00EF772327748200522F8A /* Son.m */; };
 		0AB331572318242F002D44C9 /* CustomWrapperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB331562318242F002D44C9 /* CustomWrapperView.m */; };
 		0AFC0FC522B74DF9004C39F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC0FC422B74DF9004C39F7 /* AppDelegate.m */; };
 		0AFC0FC822B74DF9004C39F7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC0FC722B74DF9004C39F7 /* ViewController.m */; };
@@ -17,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A00EF6F232773E300522F8A /* Father.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Father.h; sourceTree = "<group>"; };
+		0A00EF70232773E300522F8A /* Father.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Father.m; sourceTree = "<group>"; };
+		0A00EF762327748200522F8A /* Son.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Son.h; sourceTree = "<group>"; };
+		0A00EF772327748200522F8A /* Son.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Son.m; sourceTree = "<group>"; };
 		0AB331552318242F002D44C9 /* CustomWrapperView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomWrapperView.h; sourceTree = "<group>"; };
 		0AB331562318242F002D44C9 /* CustomWrapperView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomWrapperView.m; sourceTree = "<group>"; };
 		0AFC0FC022B74DF9004C39F7 /* RunLoopTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunLoopTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +49,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A00EF72232773E700522F8A /* Runtime */ = {
+			isa = PBXGroup;
+			children = (
+				0A00EF6F232773E300522F8A /* Father.h */,
+				0A00EF70232773E300522F8A /* Father.m */,
+				0A00EF762327748200522F8A /* Son.h */,
+				0A00EF772327748200522F8A /* Son.m */,
+			);
+			path = Runtime;
+			sourceTree = "<group>";
+		};
 		0AFC0FB722B74DF9004C39F7 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +79,7 @@
 		0AFC0FC222B74DF9004C39F7 /* RunLoopTest */ = {
 			isa = PBXGroup;
 			children = (
+				0A00EF72232773E700522F8A /* Runtime */,
 				0AFC0FC322B74DF9004C39F7 /* AppDelegate.h */,
 				0AFC0FC422B74DF9004C39F7 /* AppDelegate.m */,
 				0AFC0FC622B74DF9004C39F7 /* ViewController.h */,
@@ -148,10 +166,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A00EF782327748200522F8A /* Son.m in Sources */,
 				0AFC0FC822B74DF9004C39F7 /* ViewController.m in Sources */,
 				0AB331572318242F002D44C9 /* CustomWrapperView.m in Sources */,
 				0AFC0FD322B74DFA004C39F7 /* main.m in Sources */,
 				0AFC0FC522B74DF9004C39F7 /* AppDelegate.m in Sources */,
+				0A00EF71232773E300522F8A /* Father.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

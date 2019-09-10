@@ -7,6 +7,26 @@
 //
 
 #import "ViewController.h"
+#import "Son.h"
+
+@interface NSObject (Sark)
++ (void)foo;
+@end
+@implementation NSObject (Sark)
+- (void)foo {
+    NSLog(@"IMP: - [NSObject (Sark) foo]");
+}
+@end
+
+@interface Sark : NSObject
+@property(nonatomic, copy) NSString *name;
+@end
+
+@implementation Sark
+- (void)speak {
+    NSLog(@"my name's %@", self.name);
+}
+@end
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -18,8 +38,27 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self addRunLoopObserverWithTag:@"Default" mode:kCFRunLoopDefaultMode];
+//    [self addRunLoopObserverWithTag:@"Default" mode:kCFRunLoopDefaultMode];
 //    [self addRunLoopObserverWithTag:@"Common" mode:kCFRunLoopCommonModes];
+    
+    // runtime
+    
+    id cls = [Sark class];
+    void *obj = &cls;
+    [(__bridge id)obj speak];
+    
+    // [self class] == [super class]
+    [[Son alloc] init];
+    //
+    BOOL res1 = [[NSObject class] isKindOfClass:[NSObject class]];
+    BOOL res2 = [[NSObject class] isMemberOfClass:[NSObject class]];
+    BOOL res3 = [[Sark class] isKindOfClass:[Sark class]];
+    BOOL res4 = [[Sark class] isMemberOfClass:[Sark class]];
+    
+    [NSObject foo];
+    [[NSObject new] foo];
+    
+    
 }
 
 
