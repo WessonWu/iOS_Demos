@@ -146,30 +146,38 @@ open class PagerContainerController: UIViewController, UIScrollViewDelegate {
     
     open func updateContent() {
         if lastSize.width != containerView.bounds.size.width {
-            lastSize = containerView.frame.size
+            lastSize = containerView.bounds.size
             containerView.contentOffset = CGPoint(x: pageOffsetForChild(at: currentIndex), y: 0)
         }
-        lastSize = containerView.frame.size
+        lastSize = containerView.bounds.size
         
         let pagerViewControllers = self.viewControllers
-        containerView.contentSize = CGSize(width: containerView.frame.width * CGFloat(pagerViewControllers.count),
-                                           height: containerView.frame.height)
+        containerView.contentSize = CGSize(width: containerView.bounds.width * CGFloat(pagerViewControllers.count),
+                                           height: containerView.contentSize.height)
         
         for (index, childController) in pagerViewControllers.enumerated() {
             if childController.parent != nil {
                 childController.view.frame = CGRect(x: offsetForChild(at: index),
                                                     y: 0,
                                                     width: view.bounds.width,
-                                                    height: containerView.frame.height)
+                                                    height: containerView.bounds.height)
                 childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             } else {
                 addChild(childController)
-                childController.view.frame = CGRect(x: offsetForChild(at: index), y: 0, width: view.bounds.width, height: containerView.bounds.height)
+                childController.view.frame = CGRect(x: offsetForChild(at: index),
+                                                    y: 0,
+                                                    width: view.bounds.width,
+                                                    height: containerView.bounds.height)
                 childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
                 containerView.addSubview(childController.view)
                 childController.didMove(toParent: self)
             }
         }
+        
+        let virtualPage = virtualPageFor(contentOffset: containerView.contentOffset.x)
+        let newCurrentIndex = pageFor(virtualPage: virtualPage)
+        currentIndex = newCurrentIndex
+        preCurrentIndex = currentIndex
     }
     
     // MARK: - UIScrollViewDelegate
