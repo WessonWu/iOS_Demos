@@ -139,6 +139,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
      */
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         print(#function, response.notification.request.content.userInfo)
+//        center.removeAllDeliveredNotifications()
         completionHandler()
     }
     
@@ -149,10 +150,19 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 
 extension AppDelegate {
-    func handleUserInfo(_ userInfo: [AnyHashable: Any]?) {
+    func handleUserInfo(_ userInfo: [AnyHashable: Any]) {
         guard let vc = self.window?.rootViewController as? ViewController else {
             return
         }
-        vc.userInfo = userInfo
+        
+        if JSONSerialization.isValidJSONObject(userInfo) {
+            do {
+                let data = try JSONSerialization.data(withJSONObject: userInfo, options: [.fragmentsAllowed, .prettyPrinted])
+                let jsonString = String(data: data, encoding: .utf8)
+                vc.text = jsonString
+            } catch {
+                print(error)
+            }
+        }
     }
 }
