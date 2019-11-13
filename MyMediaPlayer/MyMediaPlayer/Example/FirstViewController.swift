@@ -22,6 +22,7 @@ class FirstViewController: CompatibleTableViewController {
         
         self.mtd.navigationView.backButton.isHidden = true
         
+        UIImage().imageAsset
         
 //        if let tabBarController = self.rdv_tabBarController, tabBarController.tabBar.isTranslucent {
 //            let tabBar = tabBarController.tabBar

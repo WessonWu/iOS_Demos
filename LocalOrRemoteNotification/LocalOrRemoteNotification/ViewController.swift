@@ -11,9 +11,9 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     
-    var userInfo: [AnyHashable: Any]? {
+    var text: String? = nil {
         didSet {
-            textView?.text = userInfo?.description
+            textView?.text = text
         }
     }
     
@@ -21,7 +21,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        textView.text = userInfo?.description
+        textView.text = text
+        
+        URLSession.shared.downloadTask(with: URL(string: "https://img2.woyaogexing.com/2019/10/23/df564e7c3589473088b6ea3a7176b5a4!400x400.jpeg")!) { (tempURL, resp, error) in
+            print(tempURL, resp, error)
+        }.resume()
     }
 }
 
