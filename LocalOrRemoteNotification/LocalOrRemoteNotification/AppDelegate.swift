@@ -19,11 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         registerNotifications()
         
-        if let remoteNotification = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
+        if var remoteNotification = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
+            remoteNotification["from"] = "Launch Remote Notification"
             handleUserInfo(remoteNotification)
         }
         
-        if let localNotification = launchOptions?[UIApplication.LaunchOptionsKey.localNotification] as? [AnyHashable: Any] {
+        if var localNotification = launchOptions?[UIApplication.LaunchOptionsKey.localNotification] as? [AnyHashable: Any] {
+            localNotification["from"] = "Launch Local Notification"
             handleUserInfo(localNotification)
         }
         return true
@@ -105,7 +107,8 @@ extension AppDelegate {
      如果App在前台收到推送通知，则会直接回调该方法，但系统不会进行提醒
     */
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        print("didReceiveRemoteNotification: \(userInfo)")
+        var userInfo = userInfo
+        userInfo["from"] = "didReceiveRemoteNotification"
         handleUserInfo(userInfo)
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
@@ -125,8 +128,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
      如果您没有为UNUserNotificationCenter对象提供委托，系统将使用原始的通知方式(iOS 10.0以下)的来提醒用户。
      */
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print(#function, notification.request.content.userInfo)
-        handleUserInfo(notification.request.content.userInfo)
 //        completionHandler([]) // 在前台将不会弹窗通知
         completionHandler([.alert, .sound]) // 即使在前台也会alert提醒用户
     }
@@ -138,8 +139,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
      如果您未实施此方法，则您的应用永远不会响应自定义Action。
      */
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print(#function, response.notification.request.content.userInfo)
 //        center.removeAllDeliveredNotifications()
+        var userInfo = response.notification.request.content.userInfo
+        userInfo["from"] = "userNotificationCenter:didReceiveResponse"
+        handleUserInfo(userInfo)
         completionHandler()
     }
     
@@ -159,7 +162,11 @@ extension AppDelegate {
             do {
                 let data = try JSONSerialization.data(withJSONObject: userInfo, options: [.fragmentsAllowed, .prettyPrinted])
                 let jsonString = String(data: data, encoding: .utf8)
-                vc.text = jsonString
+                if let text = vc.text {
+                    vc.text = "\(text)\n\(jsonString ?? "")"
+                } else {
+                    vc.text = jsonString
+                }
             } catch {
                 print(error)
             }
