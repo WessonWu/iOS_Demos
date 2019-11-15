@@ -92,6 +92,12 @@ extension AppDelegate {
             }
             center.delegate = self
             UIApplication.shared.registerForRemoteNotifications()
+        } else if #available(iOS 8.0, *) {
+            let userSettings = UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(userSettings)
+            UIApplication.shared.registerForRemoteNotifications()
+        } else {
+            UIApplication.shared.registerForRemoteNotifications(matching: [.alert, .sound, .badge])
         }
     }
     
