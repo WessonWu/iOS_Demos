@@ -8,6 +8,9 @@
 
 import UIKit
 import UserNotifications
+#if DEBUG
+import CocoaDebug
+#endif
 
 extension UIApplication.State: CustomStringConvertible {
     public var description: String {
@@ -24,6 +27,12 @@ extension UIApplication.State: CustomStringConvertible {
     }
 }
 
+public func print<T>(file: String = #file, function: String = #function, line: Int = #line, _ message: T, color: UIColor = .white) {
+    #if DEBUG
+        swiftLog(file, function, line, message, color, false)
+    #endif
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -31,9 +40,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        #if DEBUG
+            CocoaDebug.enable()
+        #endif
         // Override point for customization after application launch.
         registerNotifications()
         
+        
+        /// 注意：iOS以上通过通知启动应用，在launchOptions中有记录，然后UNUserNotificationCenterDelegate中的userNotificationCenter: didReceiveNotificationResponse:withCompletionHandler:也会调用，所以处理时要额外注意，防止重复处理
         if var remoteNotification = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
             remoteNotification["from"] = "Launch Remote Notification"
             handleUserInfo(remoteNotification)
@@ -126,12 +140,23 @@ extension AppDelegate {
      iOS 10.0之后废弃
      如果App在后台收到推送通知，则系统会进行提醒但不会调用该方法，需要用户手动点击通知栏中对应的通知进入app才能回调该方法。
      如果App在前台收到推送通知，则会直接回调该方法，但系统不会进行提醒
+     
+     API_DEPRECATED("使用UserNotifications框架的-[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] 或 -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:] for user visible notifications and -[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:] for silent remote notifications", ios(3.0, 10.0))
     */
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         var userInfo = userInfo
         userInfo["from"] = "didReceiveRemoteNotification"
         handleUserInfo(userInfo)
         UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+    
+    /*
+     */
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        var userInfo = userInfo
+        userInfo["from"] = "didReceiveRemoteNotification:fetchCompletionHandler:"
+        handleUserInfo(userInfo)
+        completionHandler(.noData)
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
@@ -158,6 +183,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
      （响应还可以指示用户在不选择自定义Action的情况下关闭了通知界面或启动了应用程序。）
      在实现结束时，调用completionHandler块让系统知道您已完成处理用户的响应。
      如果您未实施此方法，则您的应用永远不会响应自定义Action。
+     
+     iOS10.0及以上点击通知栏的通知启动应用也会调用该方法
      */
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 //        center.removeAllDeliveredNotifications()

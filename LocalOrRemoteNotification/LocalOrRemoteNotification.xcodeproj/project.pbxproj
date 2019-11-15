@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,7 @@
 		0A375B8022CA34A20095DAEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A375B7E22CA34A20095DAEF /* Main.storyboard */; };
 		0A375B8222CA34A50095DAEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A375B8122CA34A50095DAEF /* Assets.xcassets */; };
 		0A375B8522CA34A50095DAEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A375B8322CA34A50095DAEF /* LaunchScreen.storyboard */; };
+		B815946443302B50E8CBF287 /* Pods_LocalOrRemoteNotification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8472E3A3F880782878179039 /* Pods_LocalOrRemoteNotification.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,9 @@
 		0A375B8422CA34A50095DAEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A375B8622CA34A50095DAEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A375B8C22CA34CD0095DAEF /* LocalOrRemoteNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LocalOrRemoteNotification.entitlements; sourceTree = "<group>"; };
+		8472E3A3F880782878179039 /* Pods_LocalOrRemoteNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LocalOrRemoteNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C13739F996F693F403F478D5 /* Pods-LocalOrRemoteNotification.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalOrRemoteNotification.release.xcconfig"; path = "Target Support Files/Pods-LocalOrRemoteNotification/Pods-LocalOrRemoteNotification.release.xcconfig"; sourceTree = "<group>"; };
+		FCF15D6C5A74459205EC80F1 /* Pods-LocalOrRemoteNotification.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalOrRemoteNotification.debug.xcconfig"; path = "Target Support Files/Pods-LocalOrRemoteNotification/Pods-LocalOrRemoteNotification.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B815946443302B50E8CBF287 /* Pods_LocalOrRemoteNotification.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +110,7 @@
 			children = (
 				0A078A9C236090F100BAA691 /* UserNotifications.framework */,
 				0A078A9E236090F100BAA691 /* UserNotificationsUI.framework */,
+				8472E3A3F880782878179039 /* Pods_LocalOrRemoteNotification.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -136,6 +142,7 @@
 				0A078AB32360979A00BAA691 /* NotificationServiceExtension */,
 				0A078A9B236090F100BAA691 /* Frameworks */,
 				0A375B7822CA34A20095DAEF /* Products */,
+				6166818B8B36C67DE401A174 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,6 +168,15 @@
 				0A375B8622CA34A50095DAEF /* Info.plist */,
 			);
 			path = LocalOrRemoteNotification;
+			sourceTree = "<group>";
+		};
+		6166818B8B36C67DE401A174 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FCF15D6C5A74459205EC80F1 /* Pods-LocalOrRemoteNotification.debug.xcconfig */,
+				C13739F996F693F403F478D5 /* Pods-LocalOrRemoteNotification.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,10 +220,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A375B8922CA34A50095DAEF /* Build configuration list for PBXNativeTarget "LocalOrRemoteNotification" */;
 			buildPhases = (
+				5DD027041EDEDEA6EEAEA96F /* [CP] Check Pods Manifest.lock */,
 				0A375B7322CA34A20095DAEF /* Sources */,
 				0A375B7422CA34A20095DAEF /* Frameworks */,
 				0A375B7522CA34A20095DAEF /* Resources */,
 				0A078AAA236090F100BAA691 /* Embed App Extensions */,
+				306A847322C65E7B6E78138F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -296,6 +314,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		306A847322C65E7B6E78138F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LocalOrRemoteNotification/Pods-LocalOrRemoteNotification-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LocalOrRemoteNotification/Pods-LocalOrRemoteNotification-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LocalOrRemoteNotification/Pods-LocalOrRemoteNotification-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5DD027041EDEDEA6EEAEA96F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LocalOrRemoteNotification-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0A078A96236090F100BAA691 /* Sources */ = {
@@ -449,6 +509,7 @@
 		0A375B8722CA34A50095DAEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -510,6 +571,7 @@
 		0A375B8822CA34A50095DAEF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -564,8 +626,9 @@
 		};
 		0A375B8A22CA34A50095DAEF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCF15D6C5A74459205EC80F1 /* Pods-LocalOrRemoteNotification.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = LocalOrRemoteNotification/LocalOrRemoteNotification.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -585,8 +648,9 @@
 		};
 		0A375B8B22CA34A50095DAEF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C13739F996F693F403F478D5 /* Pods-LocalOrRemoteNotification.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = LocalOrRemoteNotification/LocalOrRemoteNotification.entitlements;
 				CODE_SIGN_STYLE = Automatic;
