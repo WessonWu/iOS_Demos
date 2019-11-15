@@ -9,6 +9,21 @@
 import UIKit
 import UserNotifications
 
+extension UIApplication.State: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .active:
+            return "active"
+        case .background:
+            return "background"
+        case .inactive:
+            return "inactive"
+        @unknown default:
+            return "unknown"
+        }
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -157,6 +172,9 @@ extension AppDelegate {
         guard let vc = self.window?.rootViewController as? ViewController else {
             return
         }
+        
+        var userInfo = userInfo
+        userInfo["applicationState"] = UIApplication.shared.applicationState.description
         
         if JSONSerialization.isValidJSONObject(userInfo) {
             do {
