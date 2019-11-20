@@ -32,6 +32,13 @@ class StickyHeaderViewController: UIViewController {
         stickyBinder.scrollUpwardEdgeInsetTop = navigationView.frame.height
     }
 
+    @IBAction func popOrDismiss(_ sender: Any) {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
     deinit {
         print(#file, #function)

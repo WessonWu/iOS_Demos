@@ -11,9 +11,10 @@ import XLPagerTabStrip
 class StickyHeaderTabViewController: PagerContainerController {
     
     @IBOutlet var headerView: UIImageView!
+    @IBOutlet var dismissButton: UIButton!
     
-    lazy var firstVC: TabDetailTableViewController = TabDetailTableViewController()
-    lazy var secondVC: TabDetailTableViewController = TabDetailTableViewController()
+    lazy var firstVC: TabDetailTableViewController = TabDetailTableViewController(numberOfRows: 5)
+    lazy var secondVC: TabDetailTableViewController = TabDetailTableViewController(numberOfRows: 50)
     
     
     var fixedHeaderHeight: CGFloat = 160
@@ -52,6 +53,11 @@ class StickyHeaderTabViewController: PagerContainerController {
         headerView.autoresizingMask = [.flexibleWidth]
         self.view.addSubview(headerView)
         
+        
+        self.view.addSubview(dismissButton)
+        dismissButton.translatesAutoresizingMaskIntoConstraints = false
+        dismissButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 64).isActive = true
+        dismissButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
 
         
         detailVCs.forEach { (detail) in
@@ -59,14 +65,18 @@ class StickyHeaderTabViewController: PagerContainerController {
             if #available(iOS 11.0, *) {
                 scrollView.contentInsetAdjustmentBehavior = .never
             }
+            scrollView.alwaysBounceVertical = true
             scrollView.contentInset.top = headerHeight
             scrollView.contentInset.bottom = additionalContentInset.bottom
             scrollView.scrollIndicatorInsets.top = headerHeight
             scrollView.scrollIndicatorInsets.bottom = additionalContentInset.bottom
-            let observer = scrollView.observe(\.contentOffset, changeHandler: { [weak self] (sv, _) in
+            let ob1 = scrollView.observe(\.contentOffset, changeHandler: { [weak self] (sv, _) in
                 self?.childScrollViewDidScroll(sv)
             })
-            self.observers.append(observer)
+            let ob2 = scrollView.observe(\.contentSize) { [weak self] (sv, _) in
+                self?.childScrollViewContentSizeDidChange(scrollView)
+            }
+            self.observers.append(contentsOf: [ob1, ob2])
         }
     }
     
@@ -111,6 +121,23 @@ class StickyHeaderTabViewController: PagerContainerController {
                 temp.contentOffset.y = -remainHeight
             }
         }
+    }
+    
+    /// 修复显示不足一屏时(不可滚动&页面消失后自动滚动到顶部问题)
+    func childScrollViewContentSizeDidChange(_ scrollView: UIScrollView) {
+        let remainHeight = self.tabViewHeight
+        let containerHeight = scrollView.bounds.height
+        let minimumContentHeight = containerHeight - remainHeight
+        let contentHeight = scrollView.contentSize.height
+        if contentHeight < minimumContentHeight {
+            scrollView.contentInset.bottom = minimumContentHeight - contentHeight
+        } else {
+            scrollView.contentInset.bottom = 0
+        }
+    }
+    
+    @IBAction func dismiss(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     deinit {

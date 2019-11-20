@@ -11,6 +11,13 @@ import UIKit
 import XLPagerTabStrip
 
 class TabDetailTableViewController: UITableViewController {
+    
+    var numberOfRows: Int = 0
+    
+    convenience init(numberOfRows: Int) {
+        self.init()
+        self.numberOfRows = numberOfRows
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +36,7 @@ class TabDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        return numberOfRows
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,6 +47,8 @@ class TabDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.popViewController(animated: true)
+        let sb = UIStoryboard(name: "Main", bundle: .main)
+        let vc = sb.instantiateViewController(withIdentifier: "StickyHeaderViewController")
+        self.present(vc, animated: true, completion: nil)
     }
 }

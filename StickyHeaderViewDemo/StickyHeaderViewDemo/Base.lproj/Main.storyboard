@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EAZ-wy-KBm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EAZ-wy-KBm">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,6 +19,7 @@
                         <viewLayoutGuide key="safeArea" id="gcH-Ye-b91"/>
                     </view>
                     <connections>
+                        <outlet property="dismissButton" destination="3r7-d7-mC3" id="6ED-79-93w"/>
                         <outlet property="headerView" destination="DI7-RZ-4cu" id="lWY-2f-LnX"/>
                     </connections>
                 </viewController>
@@ -27,13 +28,21 @@
                     <rect key="frame" x="0.0" y="0.0" width="330" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3r7-d7-mC3" userLabel="Pop">
+                    <rect key="frame" x="0.0" y="0.0" width="154" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Dismiss"/>
+                    <connections>
+                        <action selector="dismiss:" destination="3bY-4t-uhJ" eventType="touchUpInside" id="4hX-bU-7Tk"/>
+                    </connections>
+                </button>
             </objects>
             <point key="canvasLocation" x="2025" y="791"/>
         </scene>
         <!--Sticky Header View Controller-->
         <scene sceneID="oMz-KD-Cp1">
             <objects>
-                <viewController id="l09-rL-N9P" customClass="StickyHeaderViewController" customModule="StickyHeaderViewDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StickyHeaderViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l09-rL-N9P" customClass="StickyHeaderViewController" customModule="StickyHeaderViewDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Wm-cH-yLb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,10 +80,10 @@
                                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hb-G1-oPh">
-                                                <rect key="frame" x="192" y="7" width="30" height="30"/>
-                                                <state key="normal" title="Pop"/>
+                                                <rect key="frame" x="158.5" y="7" width="97" height="30"/>
+                                                <state key="normal" title="PopOrDismiss"/>
                                                 <connections>
-                                                    <segue destination="BIO-CY-l7e" kind="unwind" unwindAction="unwindToVC:" id="8E8-ai-8zJ"/>
+                                                    <action selector="popOrDismiss:" destination="l09-rL-N9P" eventType="touchUpInside" id="tgc-t0-bw0"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -201,7 +210,6 @@
                     <navigationItem key="navigationItem" id="z9z-0H-foC"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dW5-16-uas" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="BIO-CY-l7e" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1190" y="115"/>
         </scene>
