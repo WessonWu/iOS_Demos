@@ -40,10 +40,10 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="upk-Pd-2lM" secondAttribute="trailing" id="0OP-u0-bxz"/>
-                                                <constraint firstAttribute="bottom" secondItem="upk-Pd-2lM" secondAttribute="bottom" id="E4Y-hq-CFN"/>
-                                                <constraint firstItem="upk-Pd-2lM" firstAttribute="leading" secondItem="egC-rX-1W7" secondAttribute="leading" id="sqc-3Z-n8w"/>
-                                                <constraint firstItem="upk-Pd-2lM" firstAttribute="top" secondItem="egC-rX-1W7" secondAttribute="top" id="tKP-Pg-NLA"/>
+                                                <constraint firstItem="upk-Pd-2lM" firstAttribute="top" secondItem="egC-rX-1W7" secondAttribute="top" id="Kbu-E9-Lvh"/>
+                                                <constraint firstItem="upk-Pd-2lM" firstAttribute="leading" secondItem="egC-rX-1W7" secondAttribute="leading" id="Sux-46-N1A"/>
+                                                <constraint firstItem="upk-Pd-2lM" firstAttribute="width" secondItem="egC-rX-1W7" secondAttribute="width" id="iy0-zo-5eQ"/>
+                                                <constraint firstItem="upk-Pd-2lM" firstAttribute="height" secondItem="egC-rX-1W7" secondAttribute="height" id="x3C-xe-Qek"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="97" height="92"/>

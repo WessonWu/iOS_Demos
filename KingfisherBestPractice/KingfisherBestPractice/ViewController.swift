@@ -25,6 +25,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        
+        KingfisherManager.shared.cache.maxMemoryCost = 1024 * 1024 * 40
+        KingfisherManager.shared.cache.maxDiskCacheSize = 1024 * 1024 * 300
     }
 }
 
@@ -41,8 +45,14 @@ extension ViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
         let count = urls.count
         let url = urls[indexPath.item % count]
+        /*
         // 第一个版本
         cell.imageView.kf.setImage(with: url, placeholder: nil, options: [], progressBlock: nil, completionHandler: nil)
+        */
+        
+        // 优化后
+        let imageView: UIImageView = cell.imageView
+        imageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
         return cell
     }
 }
