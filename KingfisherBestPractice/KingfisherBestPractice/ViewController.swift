@@ -46,3 +46,12 @@ extension ViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // 优化网络性能
+        if let imageCell = cell as? ImageCell {
+            imageCell.imageView.kf.cancelDownloadTask()
+        }
+    }
+}
