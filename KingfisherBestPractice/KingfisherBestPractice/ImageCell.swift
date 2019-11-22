@@ -15,7 +15,12 @@ final class ImageCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        // set isOpaque = true
+        self.backgroundColor = UIColor.white
+        contentView.backgroundColor = UIColor.white
+        
         imageView.frame = self.bounds
+        imageView.backgroundColor = UIColor.white
         imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // 第一个版本

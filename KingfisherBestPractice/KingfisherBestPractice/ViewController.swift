@@ -19,6 +19,7 @@ import Kingfisher
  4、尽量降低页面中gif图的使用，最好更多的使用静态图片(降低内存&提升滚动性能)
  5、使用DownsamplingImageProcessor加载缩略图的方式，降低内存占用(推荐options = [.scaleFactor(scale), .processor(processor), .backgroundDecode, .cacheOriginalImage])
  6、然后布局的时候，尽量减少视图层级；优先级：设置frame > autoresizingMask > AutoLayout (降低CPU利用率)
+ 7、图片文件的格式最好为jpg，降低CPU利用率
  */
 
 class ViewController: UIViewController {
@@ -46,18 +47,20 @@ class ViewController: UIViewController {
                        URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1910/bd157791e3909e9.jpg")!,
                        URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1910/759_square_pic_649baae999.jpg")!,
                        URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1910/759_square_pic_bf9214ba80.jpg")!,
-                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1910/759_square_pic_9e3e8d9454.png")!,
                        URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1909/433053ceef82189.jpg")!,
-                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1909/759_square_pic_aaeb2c1c50.png")!,
                        URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1909/785_square_pic_cb4e2e2c34.jpg")!,
-                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1811/594_square_pic_f304d1a47d.png")!,
-                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1811/594_square_pic_b36a84ba86.png")!,
-                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1811/594_logo_2fab09cf2b.png")!]
+                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1811/1f7bb7e47391e27.jpg")!,
+                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1809/95fe7f23fbdea39.jpg")!,
+                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1903/594_square_pic_e843ad4df1.jpg")!,
+                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1810/594_square_pic_c57ccf9933.jpg")!,
+                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1901/594_logo_d082c2ee13.jpg")!,
+                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1901/091cbbb1c3a2623.jpg")!,
+                       URL(string: "http://mobi.4399tech.com/redirect/tuer/otres/source/pic/1712/d4b1e7dd1813361.jpg")!]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        collectionView.backgroundColor = UIColor.white
         
         KingfisherManager.shared.cache.maxMemoryCost = 1024 * 1024 * 40
         KingfisherManager.shared.cache.maxDiskCacheSize = 1024 * 1024 * 300
