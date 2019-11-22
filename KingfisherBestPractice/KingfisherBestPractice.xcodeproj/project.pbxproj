@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1806782387776200D304B4 /* ImagePlaceholderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1806772387776200D304B4 /* ImagePlaceholderManager.swift */; };
+		0A18067A2387C67800D304B4 /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1806792387C67800D304B4 /* RoundImageView.swift */; };
+		0A5015A72387D11D0059F1B7 /* DownsamplingImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5015A62387D11D0059F1B7 /* DownsamplingImageProcessor.swift */; };
 		0A8746E02386279A009ED2CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8746DF2386279A009ED2CD /* AppDelegate.swift */; };
 		0A8746E22386279A009ED2CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8746E12386279A009ED2CD /* SceneDelegate.swift */; };
 		0A8746E42386279A009ED2CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8746E32386279A009ED2CD /* ViewController.swift */; };
@@ -41,6 +44,9 @@
 
 /* Begin PBXFileReference section */
 		063A6D256F43FCA501CCA9F6 /* Pods-KingfisherBestPractice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KingfisherBestPractice.release.xcconfig"; path = "Target Support Files/Pods-KingfisherBestPractice/Pods-KingfisherBestPractice.release.xcconfig"; sourceTree = "<group>"; };
+		0A1806772387776200D304B4 /* ImagePlaceholderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePlaceholderManager.swift; sourceTree = "<group>"; };
+		0A1806792387C67800D304B4 /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
+		0A5015A62387D11D0059F1B7 /* DownsamplingImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownsamplingImageProcessor.swift; sourceTree = "<group>"; };
 		0A8746DC2386279A009ED2CD /* KingfisherBestPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KingfisherBestPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8746DF2386279A009ED2CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A8746E12386279A009ED2CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +135,9 @@
 				0A8746ED2386279D009ED2CD /* Info.plist */,
 				0A87470F238629E3009ED2CD /* ImageCell.swift */,
 				0AD66B0E23863B530082392E /* ImageFlowLayout.swift */,
+				0A1806772387776200D304B4 /* ImagePlaceholderManager.swift */,
+				0A1806792387C67800D304B4 /* RoundImageView.swift */,
+				0A5015A62387D11D0059F1B7 /* DownsamplingImageProcessor.swift */,
 			);
 			path = KingfisherBestPractice;
 			sourceTree = "<group>";
@@ -415,9 +424,12 @@
 			files = (
 				0A8746E42386279A009ED2CD /* ViewController.swift in Sources */,
 				0AD66B0F23863B530082392E /* ImageFlowLayout.swift in Sources */,
+				0A5015A72387D11D0059F1B7 /* DownsamplingImageProcessor.swift in Sources */,
+				0A18067A2387C67800D304B4 /* RoundImageView.swift in Sources */,
 				0A874710238629E3009ED2CD /* ImageCell.swift in Sources */,
 				0A8746E02386279A009ED2CD /* AppDelegate.swift in Sources */,
 				0A8746E22386279A009ED2CD /* SceneDelegate.swift in Sources */,
+				0A1806782387776200D304B4 /* ImagePlaceholderManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

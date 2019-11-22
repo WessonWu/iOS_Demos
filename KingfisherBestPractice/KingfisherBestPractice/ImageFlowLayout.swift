@@ -16,6 +16,6 @@ final class ImageFlowLayout: UICollectionViewFlowLayout {
         minimumLineSpacing = 10
         minimumInteritemSpacing = 10
         sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        itemSize = CGSize(width: 60, height: 60)
+        itemSize = CGSize(width: 80, height: 80)
     }
 }
