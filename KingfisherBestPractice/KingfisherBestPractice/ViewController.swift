@@ -61,7 +61,7 @@ class ViewController: UIViewController {
         
         KingfisherManager.shared.cache.maxMemoryCost = 1024 * 1024 * 40
         KingfisherManager.shared.cache.maxDiskCacheSize = 1024 * 1024 * 300
-//        KingfisherManager.shared.defaultOptions = [.onlyLoadFirstFrame]
+        KingfisherManager.shared.defaultOptions = [.scaleFactor(UIScreen.main.scale), .backgroundDecode, .cacheOriginalImage]
     }
 }
 
@@ -86,12 +86,11 @@ extension ViewController: UICollectionViewDataSource {
         */
         
         // 优化后
-        let scale = UIScreen.main.scale
         /// 如果要加载gif时，不能使用ImageProcessor(会变成静态图片)，然后backgroundDecode也不起作用，加载gif不宜过多，因为会影响滚动性能
         // 高版本的Kingfisher使用DownsamplingImageProcessor降低内存占用
         let processor = DownsamplingImageProcessor(size: CGSize(width: 80, height: 80))
 //        let processor = ResizingImageProcessor(referenceSize: CGSize(width: 80, height: 80), mode: .aspectFill) >> CroppingImageProcessor(size: CGSize(width: 80, height: 80))
-        let options: KingfisherOptionsInfo = [.scaleFactor(scale), .processor(processor), .backgroundDecode, .cacheOriginalImage]
+        let options: KingfisherOptionsInfo = [.processor(processor)]
 //        let options: KingfisherOptionsInfo = []
         let imageView: UIImageView = cell.imageView
         imageView.kf.setImage(with: url,
