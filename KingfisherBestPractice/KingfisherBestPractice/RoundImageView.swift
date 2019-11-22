@@ -119,5 +119,8 @@ open class RoundImageView: UIImageView {
     open override func layoutSubviews() {
         super.layoutSubviews()
         cropingView.frame = self.bounds
+        if cropingView.superview == self {
+            self.bringSubviewToFront(cropingView)
+        }
     }
 }
