@@ -8,7 +8,7 @@
 
 import UIKit
 
-fileprivate final class RoundingCornersCropingView: UIView {
+fileprivate final class RoundingCornersCroppingView: UIView {
     override class var layerClass: AnyClass {
         return CAShapeLayer.self
     }
@@ -34,7 +34,7 @@ fileprivate final class RoundingCornersCropingView: UIView {
         }
     }
     
-    var isCropingEnabled: Bool {
+    var isCroppingEnabled: Bool {
         return roundingCorners != [] && cornerRadii != .zero
     }
     
@@ -62,7 +62,7 @@ fileprivate final class RoundingCornersCropingView: UIView {
     }
     
     private func drawPaths() {
-        let isCropingEnabled = self.isCropingEnabled
+        let isCropingEnabled = self.isCroppingEnabled
         self.isHidden = !isCropingEnabled
         guard isCropingEnabled && self.bounds != .zero else {
             shapeLayer.path = nil
@@ -76,32 +76,32 @@ fileprivate final class RoundingCornersCropingView: UIView {
 }
 
 open class RoundImageView: UIImageView {
-    private lazy var cropingView = RoundingCornersCropingView()
+    private lazy var croppingView = RoundingCornersCroppingView()
     
     open var cornerRadii: CGSize {
         get {
-            return cropingView.cornerRadii
+            return croppingView.cornerRadii
         }
         set {
-            cropingView.cornerRadii = newValue
+            croppingView.cornerRadii = newValue
         }
     }
     
     open var roundingCorners: UIRectCorner {
         get {
-            return cropingView.roundingCorners
+            return croppingView.roundingCorners
         }
         set {
-            cropingView.roundingCorners = newValue
+            croppingView.roundingCorners = newValue
         }
     }
     
     open var roundingCornersColor: UIColor {
         get {
-            return cropingView.roundingCornersColor
+            return croppingView.roundingCornersColor
         }
         set {
-            cropingView.roundingCornersColor = newValue
+            croppingView.roundingCornersColor = newValue
         }
     }
     
@@ -110,17 +110,17 @@ open class RoundImageView: UIImageView {
         super.willMove(toSuperview: newSuperview)
         
         if newSuperview != nil {
-            if cropingView.superview == nil {
-                self.addSubview(cropingView)
+            if croppingView.superview == nil {
+                self.addSubview(croppingView)
             }
         }
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        cropingView.frame = self.bounds
-        if cropingView.superview == self {
-            self.bringSubviewToFront(cropingView)
+        croppingView.frame = self.bounds
+        if croppingView.superview == self {
+            self.bringSubviewToFront(croppingView)
         }
     }
 }
