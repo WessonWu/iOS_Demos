@@ -7,15 +7,25 @@
 //
 
 import UIKit
+import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
+    lazy var iapObserver = InAppPurchasesObserver()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        SKPaymentQueue.default().add(iapObserver)
+        
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        SKPaymentQueue.default().remove(iapObserver)
     }
 
     // MARK: UISceneSession Lifecycle

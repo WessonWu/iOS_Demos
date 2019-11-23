@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ItemsViewController.swift
 //  TestAppStore
 //
 //  Created by wuweixin on 2019/11/13.
@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ItemsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        IAPService.shared.getProducts()
     }
 
 
