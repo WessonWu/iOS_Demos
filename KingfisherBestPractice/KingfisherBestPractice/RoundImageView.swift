@@ -111,6 +111,7 @@ open class RoundImageView: UIImageView {
         
         if newSuperview != nil {
             if croppingView.superview == nil {
+                self.clipsToBounds = true
                 self.addSubview(croppingView)
             }
         }
