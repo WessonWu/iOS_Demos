@@ -1,0 +1,13 @@
+//
+//  Online.xcconfig
+//  MultiXcodeConfiguration
+//
+//  Created by wuweixin on 2019/12/16.
+//  Copyright © 2019 wuweixin. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+
+NETWORK_ENV = Online

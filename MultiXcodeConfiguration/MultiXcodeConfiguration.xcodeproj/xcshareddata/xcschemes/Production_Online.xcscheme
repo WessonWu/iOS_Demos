@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1120"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0A030DAC23A73F0400310391"
+               BuildableName = "MultiXcodeConfiguration.app"
+               BlueprintName = "MultiXcodeConfiguration"
+               ReferencedContainer = "container:MultiXcodeConfiguration.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Production_Online_Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0A030DC223A73F0500310391"
+               BuildableName = "MultiXcodeConfigurationTests.xctest"
+               BlueprintName = "MultiXcodeConfigurationTests"
+               ReferencedContainer = "container:MultiXcodeConfiguration.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0A030DCD23A73F0500310391"
+               BuildableName = "MultiXcodeConfigurationUITests.xctest"
+               BlueprintName = "MultiXcodeConfigurationUITests"
+               ReferencedContainer = "container:MultiXcodeConfiguration.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Production_Online_Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0A030DAC23A73F0400310391"
+            BuildableName = "MultiXcodeConfiguration.app"
+            BlueprintName = "MultiXcodeConfiguration"
+            ReferencedContainer = "container:MultiXcodeConfiguration.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Production_Online_Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0A030DAC23A73F0400310391"
+            BuildableName = "MultiXcodeConfiguration.app"
+            BlueprintName = "MultiXcodeConfiguration"
+            ReferencedContainer = "container:MultiXcodeConfiguration.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Production_Online_Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Production_Online_Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

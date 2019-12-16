@@ -1,0 +1,22 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+project 'MultiXcodeConfiguration', 'Debug' => :debug, 'Release' => :release, 'Development_Test_Debug' => :debug, 'Production_Online_Debug' => :debug, 'Development_Test_Release' => :release, 'Production_Online_Release' => :release
+
+target 'MultiXcodeConfiguration' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for MultiXcodeConfiguration
+  pod 'Alamofire'
+
+  target 'MultiXcodeConfigurationTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'MultiXcodeConfigurationUITests' do
+    # Pods for testing
+  end
+
+end

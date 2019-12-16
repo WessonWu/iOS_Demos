@@ -1,5 +1,5 @@
 //
-//  Common_Debug.xcconfig
+//  Production_Online_Release.xcconfig
 //  MultiXcodeConfiguration
 //
 //  Created by wuweixin on 2019/12/16.
@@ -8,3 +8,8 @@
 
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
+
+#include "ProductEnv/Production.xcconfig"
+#include "NetworkEnv/Online.xcconfig"
+
+OTHER_SWIFT_FLAGS = $(inherited) -D PRODUCTION -D ONLINE
