@@ -27,6 +27,9 @@
 		0A51C90722FC6BDE00DC3179 /* CompatibleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51C90622FC6BDE00DC3179 /* CompatibleViewController.swift */; };
 		0A51C90922FC718800DC3179 /* CompatibleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A51C90822FC718800DC3179 /* CompatibleTableViewController.swift */; };
 		0A5C491222FFF7EF0057CE9D /* UIScrollView+AdjustsContentInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C491122FFF7EF0057CE9D /* UIScrollView+AdjustsContentInset.swift */; };
+		0A5DA14223B44CEC00E5CF16 /* MMPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5DA14123B44CEC00E5CF16 /* MMPlayerView.swift */; };
+		0A5DA14423B44F3F00E5CF16 /* MMPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5DA14323B44F3F00E5CF16 /* MMPlayerManager.swift */; };
+		0A5DA14623B4507C00E5CF16 /* MMPlayerResourceLoaderProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5DA14523B4507C00E5CF16 /* MMPlayerResourceLoaderProxy.swift */; };
 		0AA1987522E0423600FB9FA6 /* MMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987422E0423600FB9FA6 /* MMTabBarController.swift */; };
 		0AA1987822E0447A00FB9FA6 /* MMTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987722E0447A00FB9FA6 /* MMTabBar.swift */; };
 		0AA1987A22E0455C00FB9FA6 /* MMTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1987922E0455C00FB9FA6 /* MMTabBarItem.swift */; };
@@ -65,6 +68,9 @@
 		0A51C90622FC6BDE00DC3179 /* CompatibleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleViewController.swift; sourceTree = "<group>"; };
 		0A51C90822FC718800DC3179 /* CompatibleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleTableViewController.swift; sourceTree = "<group>"; };
 		0A5C491122FFF7EF0057CE9D /* UIScrollView+AdjustsContentInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+AdjustsContentInset.swift"; sourceTree = "<group>"; };
+		0A5DA14123B44CEC00E5CF16 /* MMPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMPlayerView.swift; sourceTree = "<group>"; };
+		0A5DA14323B44F3F00E5CF16 /* MMPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMPlayerManager.swift; sourceTree = "<group>"; };
+		0A5DA14523B4507C00E5CF16 /* MMPlayerResourceLoaderProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMPlayerResourceLoaderProxy.swift; sourceTree = "<group>"; };
 		0AA1987422E0423600FB9FA6 /* MMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBarController.swift; sourceTree = "<group>"; };
 		0AA1987722E0447A00FB9FA6 /* MMTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBar.swift; sourceTree = "<group>"; };
 		0AA1987922E0455C00FB9FA6 /* MMTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMTabBarItem.swift; sourceTree = "<group>"; };
@@ -135,6 +141,9 @@
 				0A05576422D32035005F3D93 /* MMPlayerReference.swift */,
 				0A05576522D32035005F3D93 /* MMQueuePlayer.swift */,
 				0A31D22D2310D96D003E7159 /* MMPlayer+Internal.swift */,
+				0A5DA14123B44CEC00E5CF16 /* MMPlayerView.swift */,
+				0A5DA14323B44F3F00E5CF16 /* MMPlayerManager.swift */,
+				0A5DA14523B4507C00E5CF16 /* MMPlayerResourceLoaderProxy.swift */,
 			);
 			path = MMPlayer;
 			sourceTree = "<group>";
@@ -328,11 +337,13 @@
 				0AA1987E22E0512400FB9FA6 /* UIViewController+MMTabBarItem.swift in Sources */,
 				0AA1987C22E049AD00FB9FA6 /* MMTabBarRootViewController.swift in Sources */,
 				0A51C90922FC718800DC3179 /* CompatibleTableViewController.swift in Sources */,
+				0A5DA14623B4507C00E5CF16 /* MMPlayerResourceLoaderProxy.swift in Sources */,
 				0A222C492303AC3600D15398 /* UIViewController+Operation.swift in Sources */,
 				0A05576722D32035005F3D93 /* MMItem.swift in Sources */,
 				0AA1989322E0681100FB9FA6 /* MMToolBar.swift in Sources */,
 				0AA1989522E0689500FB9FA6 /* MMBottomBar.swift in Sources */,
 				0A05575022D32011005F3D93 /* AppDelegate.swift in Sources */,
+				0A5DA14423B44F3F00E5CF16 /* MMPlayerManager.swift in Sources */,
 				0A222C442302B26200D15398 /* AudioPlayerController.swift in Sources */,
 				0AA1988D22E055CE00FB9FA6 /* SecondViewController.swift in Sources */,
 				0A222C3F2301974300D15398 /* SwipeDismissInteractiveTransition.swift in Sources */,
@@ -345,6 +356,7 @@
 				0A05576822D32035005F3D93 /* MMPlayerReference.swift in Sources */,
 				0A51C90322FC6B3800DC3179 /* MediaTransitionAnimator.swift in Sources */,
 				0AA1987822E0447A00FB9FA6 /* MMTabBar.swift in Sources */,
+				0A5DA14223B44CEC00E5CF16 /* MMPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
