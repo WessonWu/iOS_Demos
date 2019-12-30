@@ -1,0 +1,37 @@
+PODS:
+  - Alamofire (4.9.1)
+  - HandyJSON (5.0.1)
+  - Moya (13.0.1):
+    - Moya/Core (= 13.0.1)
+  - Moya/Core (13.0.1):
+    - Alamofire (~> 4.1)
+    - Result (~> 4.1)
+  - Result (4.1.0)
+  - Thor (0.1.0):
+    - HandyJSON (~> 5.0.1)
+    - Moya (~> 13.0.1)
+
+DEPENDENCIES:
+  - Thor (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - HandyJSON
+    - Moya
+    - Result
+
+EXTERNAL SOURCES:
+  Thor:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  HandyJSON: d45b8415c501e3affc59ca9762c1197ff0feb646
+  Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
+  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
+  Thor: 05344d9bd95d8bbfd7b610cd911fc777d103af6f
+
+PODFILE CHECKSUM: bdd2f4e96695c4778d8a21dd0d78723065839778
+
+COCOAPODS: 1.8.4
