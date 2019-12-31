@@ -30,16 +30,22 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
   s.swift_version =  '5.0'
-
-  s.source_files = 'Thor/Classes/**/*'
   
   # s.resource_bundles = {
   #   'Thor' => ['Thor/Assets/*.png']
   # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
-  s.dependency 'Moya', '~> 13.0.1'
-  s.dependency 'HandyJSON', '~> 5.0.1'
+  
+  s.subspec 'Core' do |sp|
+    sp.source_files = 'Thor/Classes/Core/**/*'
+    sp.dependency 'Moya', '~> 13.0'
+    sp.dependency 'HandyJSON', '~> 5.0'
+  end
+  
+  s.subspec 'RxThor' do |sp|
+    sp.source_files = 'Thor/Classes/RxThor/**/*'
+    sp.dependency 'Thor/Core'
+    sp.dependency 'Moya/RxSwift', '~> 13.0'
+  end
+  
+  s.default_subspecs = 'Core'
 end

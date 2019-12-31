@@ -11,7 +11,7 @@ import Moya
 public struct AnyThorAPI {
     public let target: ThorAPI
     
-    public init(target: ThorAPI) {
+    public init(_ target: ThorAPI) {
         self.target = target
     }
 }
@@ -57,13 +57,27 @@ extension AnyThorAPI: ThorAPI {
     }
     
     // MARK: - ThorAPI
-    // 建议还是使用task，灵活性更强
+    public var url: URL {
+        return target.url
+    }
+    
     public var parameters: [String: Any]? {
         return target.parameters
     }
-    
-    // 约定合法的code(自动处理) 如果返回nil则自行处理
+
     public var validCodes: Set<Int>? {
         return target.validCodes
+    }
+}
+
+
+// MARK: - Deprecated
+@available(*, deprecated)
+public typealias SimpleThorAPIWrapper = AnyThorAPI
+
+@available(*, deprecated)
+public extension SimpleThorAPIWrapper {
+    init<API: ThorAPI>(api: API) {
+        self.init(api)
     }
 }

@@ -7,11 +7,11 @@
 
 import Foundation
 
-public protocol Cacheable {
+public protocol ThorRequestCacheable {
     var needCache: Bool { get } // 是否需要缓存
 }
 
-public extension Cacheable {
+public extension ThorRequestCacheable {
     var needCache: Bool {
         return false
     }

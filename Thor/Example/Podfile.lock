@@ -6,13 +6,26 @@ PODS:
   - Moya/Core (13.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 4.1)
+  - Moya/RxSwift (13.0.1):
+    - Moya/Core
+    - RxSwift (~> 4.0)
   - Result (4.1.0)
-  - Thor (0.1.0):
-    - HandyJSON (~> 5.0.1)
-    - Moya (~> 13.0.1)
+  - RxCocoa (4.5.0):
+    - RxSwift (>= 4.4.2, ~> 4.4)
+  - RxSwift (4.5.0)
+  - Thor/Core (0.1.0):
+    - HandyJSON (~> 5.0)
+    - Moya (~> 13.0)
+  - Thor/RxThor (0.1.0):
+    - Moya/RxSwift (~> 13.0)
+    - Thor/Core
 
 DEPENDENCIES:
-  - Thor (from `../`)
+  - HandyJSON
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
+  - Thor/Core (from `../`)
+  - Thor/RxThor (from `../`)
 
 SPEC REPOS:
   trunk:
@@ -20,6 +33,8 @@ SPEC REPOS:
     - HandyJSON
     - Moya
     - Result
+    - RxCocoa
+    - RxSwift
 
 EXTERNAL SOURCES:
   Thor:
@@ -30,8 +45,10 @@ SPEC CHECKSUMS:
   HandyJSON: d45b8415c501e3affc59ca9762c1197ff0feb646
   Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
-  Thor: 05344d9bd95d8bbfd7b610cd911fc777d103af6f
+  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
+  Thor: 06b45367b2ecba441c80222e9b6bd571f1586c05
 
-PODFILE CHECKSUM: bdd2f4e96695c4778d8a21dd0d78723065839778
+PODFILE CHECKSUM: afa3b2092f656a1af09a4011fe501db2692d3454
 
 COCOAPODS: 1.8.4
