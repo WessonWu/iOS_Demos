@@ -15,6 +15,7 @@
 		0A004CA0237B9C4C00602B32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A004C9E237B9C4C00602B32 /* LaunchScreen.storyboard */; };
 		0A004CAB237B9C4C00602B32 /* TestAppStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A004CAA237B9C4C00602B32 /* TestAppStoreTests.swift */; };
 		0A004CB6237B9C4C00602B32 /* TestAppStoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A004CB5237B9C4C00602B32 /* TestAppStoreUITests.swift */; };
+		0A17C99E23D6D18000E0D34F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A17C99D23D6D18000E0D34F /* CloudKit.framework */; };
 		0A5015AA2388D3020059F1B7 /* InAppPurchasesObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5015A92388D3020059F1B7 /* InAppPurchasesObserver.swift */; };
 		0A5015AD2388E1C80059F1B7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5015AC2388E1C80059F1B7 /* StoreKit.framework */; };
 		0A5015AF23891AB50059F1B7 /* IAPProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5015AE23891AB50059F1B7 /* IAPProduct.swift */; };
@@ -53,6 +54,8 @@
 		0A004CB1237B9C4C00602B32 /* TestAppStoreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestAppStoreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A004CB5237B9C4C00602B32 /* TestAppStoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppStoreUITests.swift; sourceTree = "<group>"; };
 		0A004CB7237B9C4C00602B32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A17C99C23D69C3300E0D34F /* TestAppStore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestAppStore.entitlements; sourceTree = "<group>"; };
+		0A17C99D23D6D18000E0D34F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		0A5015A92388D3020059F1B7 /* InAppPurchasesObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchasesObserver.swift; sourceTree = "<group>"; };
 		0A5015AC2388E1C80059F1B7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0A5015AE23891AB50059F1B7 /* IAPProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPProduct.swift; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A5015AD2388E1C80059F1B7 /* StoreKit.framework in Frameworks */,
+				0A17C99E23D6D18000E0D34F /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +113,7 @@
 		0A004C92237B9C4A00602B32 /* TestAppStore */ = {
 			isa = PBXGroup;
 			children = (
+				0A17C99C23D69C3300E0D34F /* TestAppStore.entitlements */,
 				0A5015A82388D2AC0059F1B7 /* In-App Purchases */,
 				0A004C93237B9C4A00602B32 /* AppDelegate.swift */,
 				0A004C95237B9C4A00602B32 /* SceneDelegate.swift */,
@@ -152,6 +157,7 @@
 		0A5015AB2388E1C80059F1B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A17C99D23D6D18000E0D34F /* CloudKit.framework */,
 				0A5015AC2388E1C80059F1B7 /* StoreKit.framework */,
 			);
 			name = Frameworks;
@@ -466,7 +472,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = TestAppStore/TestAppStore.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = S5VDKR9N5R;
 				INFOPLIST_FILE = TestAppStore/Info.plist;
@@ -478,6 +486,7 @@
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.wessonwu.app.TestAppStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development cn.wessonwu.app.TestAppStore";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -487,7 +496,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = TestAppStore/TestAppStore.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = S5VDKR9N5R;
 				INFOPLIST_FILE = TestAppStore/Info.plist;
@@ -499,6 +510,7 @@
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.wessonwu.app.TestAppStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development cn.wessonwu.app.TestAppStore";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -509,8 +521,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S5VDKR9N5R;
+				DEVELOPMENT_TEAM = 8FU3A4G4GZ;
 				INFOPLIST_FILE = TestAppStoreTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -520,6 +534,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.wessonwu.app.TestAppStoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestAppStore.app/TestAppStore";
@@ -531,8 +547,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S5VDKR9N5R;
+				DEVELOPMENT_TEAM = 8FU3A4G4GZ;
 				INFOPLIST_FILE = TestAppStoreTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -542,6 +560,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.wessonwu.app.TestAppStoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestAppStore.app/TestAppStore";
@@ -553,7 +573,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S5VDKR9N5R;
+				DEVELOPMENT_TEAM = C43WDD97U5;
 				INFOPLIST_FILE = TestAppStoreUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -573,7 +593,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S5VDKR9N5R;
+				DEVELOPMENT_TEAM = C43WDD97U5;
 				INFOPLIST_FILE = TestAppStoreUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
