@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='TestAppStoreTests.xctest' tests='2' failures='0'>
+  <testsuite name='TestAppStoreTests.TestAppStoreTests' tests='2' failures='0'>
+    <testcase classname='TestAppStoreTests.TestAppStoreTests' name='testExample' time='0.001'/>
+    <testcase classname='TestAppStoreTests.TestAppStoreTests' name='testPerformanceExample' time='0.258'/>
+  </testsuite>
+</testsuites>
