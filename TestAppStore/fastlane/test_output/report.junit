@@ -2,6 +2,6 @@
 <testsuites name='TestAppStoreTests.xctest' tests='2' failures='0'>
   <testsuite name='TestAppStoreTests.TestAppStoreTests' tests='2' failures='0'>
     <testcase classname='TestAppStoreTests.TestAppStoreTests' name='testExample' time='0.001'/>
-    <testcase classname='TestAppStoreTests.TestAppStoreTests' name='testPerformanceExample' time='0.258'/>
+    <testcase classname='TestAppStoreTests.TestAppStoreTests' name='testPerformanceExample' time='0.260'/>
   </testsuite>
 </testsuites>

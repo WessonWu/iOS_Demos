@@ -29,13 +29,20 @@ platform :ios do
     UI.message "#{name}, #{abc}"
   end
 
-  lane :test_cert do
-    cert
+  lane :alpha do
+    gym(
+      scheme: "TestAppStore",
+      export_method: "development"
+    )
   end
 
-  lane :test_sigh do
-    sigh
-  end
+  # lane :test_cert do
+  #   cert
+  # end
+
+  # lane :test_sigh do
+  #   sigh
+  # end
 
   lane :test do
     run_tests(scheme: "TestAppStoreTests", devices: ["iPhone 11 Pro Max"])

@@ -159,6 +159,7 @@ PLATFORMS
 DEPENDENCIES
   fastlane
   mail
+  xcodeproj
 
 BUNDLED WITH
    2.1.4

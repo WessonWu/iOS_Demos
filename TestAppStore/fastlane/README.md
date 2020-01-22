@@ -21,14 +21,9 @@ or alternatively using `brew cask install fastlane`
 fastlane ios read_env
 ```
 Read Env
-### ios test_cert
+### ios alpha
 ```
-fastlane ios test_cert
-```
-
-### ios test_sigh
-```
-fastlane ios test_sigh
+fastlane ios alpha
 ```
 
 ### ios test
