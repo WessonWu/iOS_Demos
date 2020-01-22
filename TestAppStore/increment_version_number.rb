@@ -23,6 +23,7 @@ if project_path
       current_version = config.build_settings[marketing_version_key]
       puts current_version
     end
+    project.save
   end
 else
   puts "No project path."
