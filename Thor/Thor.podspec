@@ -37,14 +37,14 @@ TODO: Add long description of the pod here.
   
   s.subspec 'Core' do |sp|
     sp.source_files = 'Thor/Classes/Core/**/*'
-    sp.dependency 'Moya', '~> 13.0'
+    sp.dependency 'Moya', '~> 13.0.1-private'
     sp.dependency 'HandyJSON', '~> 5.0'
   end
   
   s.subspec 'RxThor' do |sp|
     sp.source_files = 'Thor/Classes/RxThor/**/*'
     sp.dependency 'Thor/Core'
-    sp.dependency 'Moya/RxSwift', '~> 13.0'
+    sp.dependency 'Moya/RxSwift', '~> 13.0.1-private'
   end
   
   s.default_subspecs = 'Core'

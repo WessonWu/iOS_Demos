@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://gitlab.4399doc.com/CocoaPods/CocoaPodsRepos.git'
 use_frameworks!
 
 platform :ios, '9.3'
@@ -5,8 +7,8 @@ platform :ios, '9.3'
 target 'Thor_Example' do
   pod 'Thor', :subspecs => ['Core', 'RxThor'], :path => '../'
   
-  pod 'RxCocoa', '~> 4.0'
-  pod 'RxSwift', '~> 4.0'
+  pod 'RxCocoa', '~> 5.0'
+  pod 'RxSwift', '~> 5.0'
   pod 'HandyJSON'
 
   target 'Thor_Tests' do

@@ -1,40 +1,45 @@
 PODS:
   - Alamofire (4.9.1)
   - HandyJSON (5.0.1)
-  - Moya (13.0.1):
-    - Moya/Core (= 13.0.1)
-  - Moya/Core (13.0.1):
-    - Alamofire (~> 4.1)
-    - Result (~> 4.1)
-  - Moya/RxSwift (13.0.1):
+  - Moya (13.0.1-private):
+    - Moya/Core (= 13.0.1-private)
+  - Moya/Core (13.0.1-private):
+    - Alamofire (~> 4.9)
+    - Result (~> 5.0)
+  - Moya/RxSwift (13.0.1-private):
     - Moya/Core
-    - RxSwift (~> 4.0)
-  - Result (4.1.0)
-  - RxCocoa (4.5.0):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxSwift (4.5.0)
+    - RxSwift (~> 5.0)
+  - Result (5.0.0)
+  - RxCocoa (5.0.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.0.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.1)
   - Thor/Core (0.1.0):
     - HandyJSON (~> 5.0)
-    - Moya (~> 13.0)
+    - Moya (~> 13.0.1-private)
   - Thor/RxThor (0.1.0):
-    - Moya/RxSwift (~> 13.0)
+    - Moya/RxSwift (~> 13.0.1-private)
     - Thor/Core
 
 DEPENDENCIES:
   - HandyJSON
-  - RxCocoa (~> 4.0)
-  - RxSwift (~> 4.0)
+  - RxCocoa (~> 5.0)
+  - RxSwift (~> 5.0)
   - Thor/Core (from `../`)
   - Thor/RxThor (from `../`)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - HandyJSON
-    - Moya
     - Result
     - RxCocoa
+    - RxRelay
     - RxSwift
+  https://gitlab.4399doc.com/CocoaPods/CocoaPodsRepos.git:
+    - Moya
 
 EXTERNAL SOURCES:
   Thor:
@@ -43,12 +48,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   HandyJSON: d45b8415c501e3affc59ca9762c1197ff0feb646
-  Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
-  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
-  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
-  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
-  Thor: 06b45367b2ecba441c80222e9b6bd571f1586c05
+  Moya: 5fce8cdc357d877de8954fb345a10e12848e690c
+  Result: ed341d2f236af425b803e690e9bd8fd0a0cb7c5a
+  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
+  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
+  Thor: dd99151aa14b3173b3b29a078ebf3e56f6b0da1a
 
-PODFILE CHECKSUM: afa3b2092f656a1af09a4011fe501db2692d3454
+PODFILE CHECKSUM: 98542005c75d7baa49f3c164f5060c3d4ca6bcc4
 
 COCOAPODS: 1.8.4

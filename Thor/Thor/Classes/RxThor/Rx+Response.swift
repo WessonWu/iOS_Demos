@@ -9,7 +9,7 @@ extension PrimitiveSequence where Trait == SingleTrait, Element: ResponseType & 
     }
 }
 
-extension ObservableType where E: ResponseType & ResponseConvertible {
+extension ObservableType where Element: ResponseType & ResponseConvertible {
     public func mapThorValue() -> Observable<ThorValue> {
         return flatMap({ (response) -> Observable<ThorValue> in
             return Observable.just(try response.mapThorValue())
