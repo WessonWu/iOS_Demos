@@ -1,15 +1,8 @@
-//
-//  ThorAPI.swift
-//  Thor
-//
-//  Created by wuweixin on 2019/12/30.
-//
-
 import Foundation
 import Moya
 import Alamofire
 
-public protocol ThorAPI: TargetType, ThorRequestTimeoutable, ThorRequestCacheable {
+public protocol ThorAPI: ThorTargetType {
     var url: URL { get }
     // 建议还是使用task，灵活性更强
     var parameters: [String: Any]? { get }

@@ -16,17 +16,20 @@ PODS:
   - RxRelay (5.0.1):
     - RxSwift (~> 5)
   - RxSwift (5.0.1)
-  - Thor/Core (0.1.0):
+  - Thor/APIExtension (0.1.0):
     - HandyJSON (~> 5.0)
+    - Thor/Core
+  - Thor/Core (0.1.0):
     - Moya (~> 13.0.1-private)
   - Thor/RxThor (0.1.0):
     - Moya/RxSwift (~> 13.0.1-private)
-    - Thor/Core
+    - Thor/APIExtension
 
 DEPENDENCIES:
   - HandyJSON
   - RxCocoa (~> 5.0)
   - RxSwift (~> 5.0)
+  - Thor/APIExtension (from `../`)
   - Thor/Core (from `../`)
   - Thor/RxThor (from `../`)
 
@@ -53,8 +56,8 @@ SPEC CHECKSUMS:
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
-  Thor: dd99151aa14b3173b3b29a078ebf3e56f6b0da1a
+  Thor: 8ad7755881534601d6c5ba4c06dd49a15eebe267
 
-PODFILE CHECKSUM: 98542005c75d7baa49f3c164f5060c3d4ca6bcc4
+PODFILE CHECKSUM: 8bdb8f1211f3d341cdb59ad53eec13d3135fd1e3
 
 COCOAPODS: 1.8.4

@@ -1,18 +1,12 @@
-//
-//  AnyThorProvider.swift
-//  Thor
-//
-//  Created by wuweixin on 2019/12/30.
-//
-
 import Foundation
 import Moya
 import Result
 
 public typealias ThorCompletion = (_ result: Result<ThorResponse, ThorError>) -> Void
 
-public final class AnyThorProvider: Moya.MoyaProvider<AnyThorAPI> {
-    public static let `default` = AnyThorProvider(plugins: [ThorRequestTimeoutPlugin(), ThorRequestCachePlugin()])
+public final class AnyThorProvider: AnyThorTargetProvider {
+    public static let `default` = AnyThorProvider()
+    
     @discardableResult
     public func thorRequest(_ target: ThorAPI, callbackQueue: DispatchQueue? = nil, progress: ProgressBlock? = nil, completion: @escaping ThorCompletion) -> Cancellable {
         return internalThorRequest(target, callbackQueue: callbackQueue, progress: progress, completion: completion)
@@ -69,7 +63,7 @@ internal extension AnyThorProvider {
             }
             completion(finalResult)
         }
-        return super.request(AnyThorAPI(target), callbackQueue: callbackQueue, progress: progress, completion: completionHandler)
+        return super.request(AnyThorTarget(target), callbackQueue: callbackQueue, progress: progress, completion: completionHandler)
     }
 }
 

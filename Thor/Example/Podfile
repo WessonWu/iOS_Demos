@@ -5,7 +5,7 @@ use_frameworks!
 platform :ios, '9.3'
 
 target 'Thor_Example' do
-  pod 'Thor', :subspecs => ['Core', 'RxThor'], :path => '../'
+  pod 'Thor', :subspecs => ['Core', 'APIExtension', 'RxThor'], :path => '../'
   
   pod 'RxCocoa', '~> 5.0'
   pod 'RxSwift', '~> 5.0'

@@ -1,26 +1,9 @@
-//
-//  ThorPlugin.swift
-//  Thor
-//
-//  Created by wuweixin on 2019/12/31.
-//
-
 import Foundation
 import Moya
 import Result
 
-final class ThorRequestTimeoutPlugin: PluginType {
-    func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
-        var result = request
-        if let timeout = target as? ThorRequestTimeoutable, timeout.timeoutInterval > 0 {
-            result.timeoutInterval = timeout.timeoutInterval
-        }
-        return result
-    }
-}
-
-final class ThorRequestCachePlugin: PluginType {
-    func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
+open class RequestCachePlugin: PluginType {
+    open func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
         var result = request
         // 除了get之外，不支持缓存
         if target.isCacheEnabled {
@@ -31,7 +14,7 @@ final class ThorRequestCachePlugin: PluginType {
         return result
     }
     
-    func process(_ result: Result<Response, MoyaError>, target: TargetType) -> Result<Response, MoyaError> {
+    open func process(_ result: Result<Response, MoyaError>, target: TargetType) -> Result<Response, MoyaError> {
         guard target.isCacheEnabled else {
             return result
         }
@@ -56,7 +39,7 @@ final class ThorRequestCachePlugin: PluginType {
 
 fileprivate extension TargetType {
     var isCacheEnabled: Bool {
-        return method == .get && ((self as? ThorRequestCacheable)?.needCache ?? false)
+        return method == .get && ((self as? RequestCacheable)?.needCache ?? false)
     }
 }
 
