@@ -13,6 +13,9 @@
 		0ADDB635245563E900CD152A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ADDB633245563E900CD152A /* Main.storyboard */; };
 		0ADDB637245563EA00CD152A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ADDB636245563EA00CD152A /* Assets.xcassets */; };
 		0ADDB63A245563EA00CD152A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ADDB638245563EA00CD152A /* LaunchScreen.storyboard */; };
+		0ADDB6462455738F00CD152A /* WebPURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDB6452455738F00CD152A /* WebPURLProtocol.swift */; };
+		0ADDB64924557D3600CD152A /* webp.html in Resources */ = {isa = PBXBuildFile; fileRef = 0ADDB64824557D3600CD152A /* webp.html */; };
+		0ADDB64B245580A400CD152A /* WKWebView+URLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADDB64A245580A400CD152A /* WKWebView+URLProtocol.swift */; };
 		0F5175CA9194E1B16CD4FBA9 /* Pods_WebPDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D3C027711E516ED031FFA3 /* Pods_WebPDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +28,9 @@
 		0ADDB636245563EA00CD152A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0ADDB639245563EA00CD152A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0ADDB63B245563EA00CD152A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ADDB6452455738F00CD152A /* WebPURLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPURLProtocol.swift; sourceTree = "<group>"; };
+		0ADDB64824557D3600CD152A /* webp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = webp.html; sourceTree = "<group>"; };
+		0ADDB64A245580A400CD152A /* WKWebView+URLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebView+URLProtocol.swift"; sourceTree = "<group>"; };
 		1CC1979E3DCAEBE8D5A59067 /* Pods-WebPDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebPDemo.release.xcconfig"; path = "Target Support Files/Pods-WebPDemo/Pods-WebPDemo.release.xcconfig"; sourceTree = "<group>"; };
 		30BB2A2C0A471507B79B86B6 /* Pods-WebPDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebPDemo.debug.xcconfig"; path = "Target Support Files/Pods-WebPDemo/Pods-WebPDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		31D3C027711E516ED031FFA3 /* Pods_WebPDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebPDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +69,8 @@
 		0ADDB62C245563E900CD152A /* WebPDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0ADDB64724557A7D00CD152A /* Resource */,
+				0ADDB6442455738F00CD152A /* URLProtocol */,
 				0ADDB62D245563E900CD152A /* AppDelegate.swift */,
 				0ADDB62F245563E900CD152A /* SceneDelegate.swift */,
 				0ADDB631245563E900CD152A /* ViewController.swift */,
@@ -72,6 +80,23 @@
 				0ADDB63B245563EA00CD152A /* Info.plist */,
 			);
 			path = WebPDemo;
+			sourceTree = "<group>";
+		};
+		0ADDB6442455738F00CD152A /* URLProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				0ADDB6452455738F00CD152A /* WebPURLProtocol.swift */,
+				0ADDB64A245580A400CD152A /* WKWebView+URLProtocol.swift */,
+			);
+			path = URLProtocol;
+			sourceTree = "<group>";
+		};
+		0ADDB64724557A7D00CD152A /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				0ADDB64824557D3600CD152A /* webp.html */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		6CF69D88696F6D0AC927597D /* Pods */ = {
@@ -153,6 +178,7 @@
 			files = (
 				0ADDB63A245563EA00CD152A /* LaunchScreen.storyboard in Resources */,
 				0ADDB637245563EA00CD152A /* Assets.xcassets in Resources */,
+				0ADDB64924557D3600CD152A /* webp.html in Resources */,
 				0ADDB635245563E900CD152A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,7 +234,9 @@
 			files = (
 				0ADDB632245563E900CD152A /* ViewController.swift in Sources */,
 				0ADDB62E245563E900CD152A /* AppDelegate.swift in Sources */,
+				0ADDB64B245580A400CD152A /* WKWebView+URLProtocol.swift in Sources */,
 				0ADDB630245563E900CD152A /* SceneDelegate.swift in Sources */,
+				0ADDB6462455738F00CD152A /* WebPURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
