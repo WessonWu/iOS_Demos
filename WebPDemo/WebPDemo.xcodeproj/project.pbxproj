@@ -13,6 +13,7 @@
 		0ADDB635245563E900CD152A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ADDB633245563E900CD152A /* Main.storyboard */; };
 		0ADDB637245563EA00CD152A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ADDB636245563EA00CD152A /* Assets.xcassets */; };
 		0ADDB63A245563EA00CD152A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ADDB638245563EA00CD152A /* LaunchScreen.storyboard */; };
+		0F5175CA9194E1B16CD4FBA9 /* Pods_WebPDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D3C027711E516ED031FFA3 /* Pods_WebPDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,9 @@
 		0ADDB636245563EA00CD152A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0ADDB639245563EA00CD152A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0ADDB63B245563EA00CD152A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CC1979E3DCAEBE8D5A59067 /* Pods-WebPDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebPDemo.release.xcconfig"; path = "Target Support Files/Pods-WebPDemo/Pods-WebPDemo.release.xcconfig"; sourceTree = "<group>"; };
+		30BB2A2C0A471507B79B86B6 /* Pods-WebPDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebPDemo.debug.xcconfig"; path = "Target Support Files/Pods-WebPDemo/Pods-WebPDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		31D3C027711E516ED031FFA3 /* Pods_WebPDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebPDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F5175CA9194E1B16CD4FBA9 /* Pods_WebPDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				0ADDB62C245563E900CD152A /* WebPDemo */,
 				0ADDB62B245563E900CD152A /* Products */,
+				6CF69D88696F6D0AC927597D /* Pods */,
+				F008EFDD02F4F7782645D36F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,24 @@
 			path = WebPDemo;
 			sourceTree = "<group>";
 		};
+		6CF69D88696F6D0AC927597D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				30BB2A2C0A471507B79B86B6 /* Pods-WebPDemo.debug.xcconfig */,
+				1CC1979E3DCAEBE8D5A59067 /* Pods-WebPDemo.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F008EFDD02F4F7782645D36F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31D3C027711E516ED031FFA3 /* Pods_WebPDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0ADDB63E245563EA00CD152A /* Build configuration list for PBXNativeTarget "WebPDemo" */;
 			buildPhases = (
+				76B3D1D4BA14EB4A3E85C065 /* [CP] Check Pods Manifest.lock */,
 				0ADDB626245563E900CD152A /* Sources */,
 				0ADDB627245563E900CD152A /* Frameworks */,
 				0ADDB628245563E900CD152A /* Resources */,
+				4AB818ECBB29BD5AB756F982 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4AB818ECBB29BD5AB756F982 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WebPDemo/Pods-WebPDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WebPDemo/Pods-WebPDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WebPDemo/Pods-WebPDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76B3D1D4BA14EB4A3E85C065 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WebPDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0ADDB626245563E900CD152A /* Sources */ = {
@@ -282,6 +351,7 @@
 		};
 		0ADDB63F245563EA00CD152A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30BB2A2C0A471507B79B86B6 /* Pods-WebPDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +370,7 @@
 		};
 		0ADDB640245563EA00CD152A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CC1979E3DCAEBE8D5A59067 /* Pods-WebPDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
